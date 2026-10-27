@@ -268,6 +268,21 @@ input[type=range].tlscrub{width:100%;accent-color:var(--gold);margin-top:6px}
 @media(min-width:760px){.offcard.bookcard{grid-column:1/-1}}
 .offcard.bookcard img.bookcover{width:132px;flex:0 0 132px;object-fit:cover;border-right:1px solid var(--gold-dim)}
 @media(max-width:560px){.offcard.bookcard img.bookcover{width:104px;flex:0 0 104px}}
+/* ---------- supreme law digest (reference, added Oct 27) ---------- */
+.digest{margin-top:36px}
+.digest .digtitle{text-align:center;font-family:var(--serif);color:var(--gold2);font-size:clamp(20px,5vw,27px);letter-spacing:2px}
+.digest .digsub{text-align:center;color:var(--muted);font-size:13.5px;max-width:640px;margin:6px auto 4px}
+.dighead{font-family:var(--serif);color:var(--gold2);letter-spacing:2px;font-size:17px;margin:24px 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.diggrid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:640px){.diggrid{grid-template-columns:1fr 1fr}}
+.digcard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px 16px;animation:riseIn .7s ease both}
+.digcard .dterm{font-family:var(--serif);color:var(--gold2);letter-spacing:1.5px;font-size:16.5px;margin-bottom:6px}
+.digcard .dsum{font-size:14px;color:var(--cream);margin-bottom:10px}
+.digcard .dquote{font-style:italic;font-size:14px;color:var(--paper);border-left:3px solid var(--gold);padding-left:10px}
+.digcard .dsrc{font-size:11.5px;color:var(--muted);margin-top:8px}
+.digcard .sumtag{font-size:10px;letter-spacing:2px;color:var(--bad);text-transform:uppercase;display:block;margin-bottom:6px}
+.digest .factbox,.digest .readbox{margin-top:14px}
+.digest .digfoot{font-size:12px;color:var(--muted);text-align:center;margin-top:14px}
 /* ---------- email gate (added Oct 27) ---------- */
 body.gatelocked{overflow:hidden}
 .gatewrap{position:fixed;inset:0;z-index:999;background:rgba(4,3,2,.94);display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
@@ -295,6 +310,99 @@ body.gatelocked{overflow:hidden}
 <div class="goldframe" id="app">
 
   <div id="views"></div>
+
+  <!-- ============ SUPREME LAW DIGEST — reference shelf (added Oct 27) ============ -->
+  <div class="digest" id="digest">
+    <h2 class="digtitle">SUPREME LAW DIGEST</h2>
+    <p class="digsub">The Writs, Standing &amp; the Ground Rules — a reference shelf, not a module. The six modules teach the map; this digest is what you reach for when a case, a courtroom, or a viral post throws a term at you. Every Black's definition below is verbatim from the course's dictionary of record — the same standard as the Term Cards. Cards without a Black's quote are labeled course summaries.</p>
+
+    <h3 class="dighead">THE FIVE WRITS</h3>
+    <div class="diggrid">
+      <article class="digcard">
+        <div class="dterm">WRIT OF HABEAS CORPUS</div>
+        <p class="dsum">The great writ: it orders whoever holds a person to bring the body before the court, so the court can test whether the holding is lawful.</p>
+        <p class="dquote">&ldquo;Lat. (You have the body.) The name given to a variety of writs, (of which these were anciently the emphatic words,) having for their object to bring a party before a court or judge. In common usage, and whenever these words are used alone, they are understood to mean the habeas corpus ad subjiciendum, (see infra.)&rdquo;</p>
+        <p class="dsrc">— Black's Law Dictionary, 4th Edition Revised, p. 837 &middot; Dancy v. Owens, 126 Okl. 37, 258 P. 879, 884</p>
+      </article>
+      <article class="digcard">
+        <div class="dterm">WRIT OF MANDAMUS</div>
+        <p class="dsum">&ldquo;We command&rdquo; — a court's order compelling an official, a corporation, or a lower court to perform a duty the law already lays on them.</p>
+        <p class="dquote">&ldquo;Lat. We command. This is the name of a writ (formerly a high prerogative writ) which issues from a court of superior jurisdiction, and is directed to a private or municipal corporation, or any of its officers, or to an executive, administrative or judicial officer, or to an inferior court, commanding the performance of a particular act therein specified, and belonging to his or their public, official, or ministerial duty, or directing the restoration of the complainant to rights or privileges of which he has been illegally deprived.&rdquo;</p>
+        <p class="dsrc">— Black's Law Dictionary, 4th Edition Revised, p. 1113 &middot; Lahiff v. St. Joseph, etc., Soc., 76 Conn. 648, 57 A. 692</p>
+      </article>
+      <article class="digcard">
+        <div class="dterm">WRIT OF PROHIBITION</div>
+        <p class="dsum">The stop writ: a superior court orders an inferior court to halt a case that does not belong to its jurisdiction — it acts before the lower court finishes, not after.</p>
+        <p class="dquote">&ldquo;In practice. The name of a writ issued by a superior court, directed to the judge and parties of a suit in an inferior court, commanding them to cease from the prosecution of the same, upon a suggestion that the cause originally, or some collateral matter arising therein, does not belong to that jurisdiction, but to the cognizance of some other court.&rdquo;</p>
+        <p class="dsrc">— Black's Law Dictionary, 4th Edition Revised, p. 1377 &middot; 3 Bl. Comm. 112</p>
+      </article>
+      <article class="digcard">
+        <div class="dterm">WRIT OF CERTIORARI</div>
+        <p class="dsum">The review writ: a higher court calls the record up from the court below to be informed of it — and to correct what went wrong. This is the writ by which most cases reach the U.S. Supreme Court.</p>
+        <p class="dquote">&ldquo;Lat. (To be informed of, to be made certain in regard to.) The name of a writ of review or inquiry.&rdquo;</p>
+        <p class="dsrc">— Black's Law Dictionary, 4th Edition Revised, p. 287 &middot; Leonard v. Willcox, 101 Vt. 195, 142 A. 762, 766</p>
+      </article>
+      <article class="digcard">
+        <div class="dterm">QUO WARRANTO</div>
+        <p class="dsum">&ldquo;By what warrant?&rdquo; — the proceeding that demands a person or body show the authority by which they hold an office or exercise a franchise. Today it usually proceeds as an &ldquo;information in the nature of a quo warranto,&rdquo; the method for trying title to an office or franchise.</p>
+        <p class="dquote">&ldquo;In old English practice. A writ, in the nature of a writ of right for the king, against him who claimed or usurped any office, franchise, or liberty, to inquire by what authority he supported his claim, in order to determine the right.&rdquo;</p>
+        <p class="dsrc">— Black's Law Dictionary, 4th Edition Revised, p. 1417 &middot; 3 Bl. Comm. 262</p>
+      </article>
+    </div>
+
+    <div class="factbox"><span class="bh">Who can file? — on the record</span>Habeas corpus may be filed by the person held — or by another on their behalf, a &ldquo;next friend,&rdquo; when the prisoner cannot file for themselves. United States courts have entertained habeas petitions from noncitizens held in United States custody: the writ tests the detention itself. Quo warranto ordinarily runs in the name of the state, or by a relator with the court's leave. And every filing in an American court must first clear standing — a real injury, caused by the other side, that the court can remedy. The key to the courthouse door is detention, injury, and authority — not the filer's passport.</div>
+
+    <h3 class="dighead">THE GROUND RULES — DOCTRINES</h3>
+    <div class="diggrid">
+      <article class="digcard">
+        <div class="dterm">RES JUDICATA</div>
+        <p class="dsum">A thing decided stays decided: a final judgment on the merits closes the same points between the same parties — the rule that keeps litigation from running forever.</p>
+        <p class="dquote">&ldquo;A matter adjudged; a thing judicially acted upon or decided; a thing or matter settled by judgment. A phrase of the civil law, constantly quoted in the books. &hellip; Rule that final judgment or decree on merits by court of competent jurisdiction is conclusive of rights of parties or their privies in all later suits on points and matters determined in former suit.&rdquo;</p>
+        <p class="dsrc">— Black's Law Dictionary, 4th Edition Revised, p. 1470 &middot; American S. S. Co. v. Wickwire Spencer Steel Co., 8 F.Supp. 562, 566</p>
+      </article>
+      <article class="digcard">
+        <div class="dterm">LOCUS STANDI</div>
+        <p class="dsum">Standing — the right to be in the courtroom at all. Before any court reaches the merits, it asks whether this party holds a place to stand on this question.</p>
+        <p class="dquote">&ldquo;A place of standing; standing in court. A right of appearance in a court of justice, or before a legislative body, on a given question.&rdquo;</p>
+        <p class="dsrc">— Black's Law Dictionary, 4th Edition Revised, p. 1090</p>
+      </article>
+      <article class="digcard">
+        <div class="dterm">SEPARATION OF POWERS</div>
+        <span class="sumtag">Course summary</span>
+        <p class="dsum">The American frame: legislative, executive, and judicial power are divided among distinct branches, each able to check the others. The writs above are part of the machinery — they are how a court keeps a case, an official, or a whole branch inside its own lane.</p>
+      </article>
+      <article class="digcard">
+        <div class="dterm">FEDERALISM</div>
+        <span class="sumtag">Course summary</span>
+        <p class="dsum">Power-sharing between the Union and the states: two levels of government over one people, each supreme in its own sphere. It is why the first question in this course is never just &ldquo;what happened&rdquo; but &ldquo;whose court, whose law.&rdquo;</p>
+      </article>
+      <article class="digcard">
+        <div class="dterm">RULE OF LAW</div>
+        <span class="sumtag">Course summary</span>
+        <p class="dsum">Government under standing law rather than under men: equality before the law, and no one above it — officials included. Every writ in this digest exists to hold power to a rule that was written down before the dispute began.</p>
+      </article>
+      <article class="digcard">
+        <div class="dterm">NATURAL JUSTICE</div>
+        <span class="sumtag">Course summary</span>
+        <p class="dsum">The fairness minimums older than any statute: hear the other side before you decide, and let no one judge his own case. In American law they live on as procedural due process — notice, and a real opportunity to be heard, before the government acts against life, liberty, or property.</p>
+      </article>
+      <article class="digcard">
+        <div class="dterm">JUDICIAL ACTIVISM</div>
+        <span class="sumtag">Course summary</span>
+        <p class="dsum">A contested label for courts that reach past the text and the record to protect rights as the judges see them — guardianship to its defenders, legislation from the bench to its critics. This course's habit applies before the label does: read what the court actually held, then argue about what to call it.</p>
+      </article>
+      <article class="digcard">
+        <div class="dterm">PUBLIC INTEREST LITIGATION</div>
+        <span class="sumtag">Course summary</span>
+        <p class="dsum">Litigation brought to protect a public or group interest, not only the filer's own. In the United States it runs through class actions, organizational plaintiffs, and the taxpayer or citizen suits a constitution or statute expressly allows — and it still enters through the standing door: an American court asks who was injured before it asks anything else.</p>
+      </article>
+    </div>
+
+    <div class="readbox"><span class="bh">Read the digest right</span>Digests of this kind travel the world faster than they are checked — the parchment version of this list that circulates online carries two entries from a different constitution. <b>Fundamental Duties</b> and <b>Directive Principles of State Policy</b> are chapters of the Constitution of India (Parts IVA and IV): duties laid on Indian citizens, and guidelines for the Indian state that its courts do not enforce as law. They have no direct counterpart in the United States Constitution. The nearest American echoes are the civic duties U.S. law does impose — jury service, taxes, obedience to law — and the general-welfare purposes named in the Preamble, which American courts do not treat as enforceable commands. Nothing reaches this shelf until it has been checked against the record; this note is that check, left in the open.</div>
+
+    <p class="digfoot">Reference only — this shelf is not a module and carries no lessons or checks. Educational study material — not legal advice. For a live legal matter, consult a lawyer if you don't have the knowledge of a lawyer.</p>
+  </div>
+
   <div class="offers noprint" id="offers">
     <h2 class="offtitle">GO DEEPER — THE FULL LIBRARY</h2>
     <p class="offsub">This course is the map. These are the books and the platform it comes from — the full library behind L.A.W.</p>
