@@ -150,6 +150,33 @@ input[type=range].tlscrub{width:100%;accent-color:var(--gold);margin-top:6px}
 .tback .qsrc{font-size:11px;color:var(--muted);margin-top:8px}
 .tback .sumtag{font-size:10px;letter-spacing:2px;color:var(--bad);text-transform:uppercase}
 
+/* ---------- hebrew roots ---------- */
+.hebword{font-size:30px;color:var(--gold2);font-family:"Times New Roman",serif;line-height:1.25}
+.hebentry{border-top:1px solid var(--line);padding:14px 2px 6px}
+.hebentry:first-child{border-top:none}
+.hebhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.hebtit{font-family:var(--serif);color:var(--cream);letter-spacing:1px;font-size:15px}
+.hebmean{font-size:14px;color:var(--paper);margin:8px 0}
+.hebmean b{color:var(--gold2)}
+.hebpic .bh{display:block;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);margin:10px 0 6px}
+.pictorow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pchip{background:var(--panel2);border:1px solid var(--gold-dim);border-radius:7px;padding:5px 9px;font-size:13px;color:var(--cream)}
+.pchip .pl{font-size:19px;color:var(--gold2)}
+.pchip i{color:var(--muted);font-style:normal;font-size:12px}
+.parrow{color:var(--gold-dim)}
+.hebcomb{font-size:13.5px;color:var(--cream);margin-top:9px}
+.hebcomb b{color:var(--gold2)}
+.hebbox{background:#0d0a04;border:1px solid var(--gold-dim);border-left:3px solid var(--gold);border-radius:8px;padding:14px 16px;margin:0 0 14px}
+.hebpanel{border:1px solid var(--gold-dim);border-radius:10px;background:linear-gradient(160deg,#141007,#0b0906);margin-top:12px;padding:0 14px 8px}
+.hebpanel summary{cursor:pointer;font-family:var(--serif);color:var(--gold2);letter-spacing:1.5px;font-size:14.5px;padding:12px 0;list-style:none}
+.hebpanel summary::-webkit-details-marker{display:none}
+.hebpanel .hebintroline{font-size:13.5px;color:var(--muted);margin:0 0 4px}
+.hebintro{margin:16px 0 4px}
+.tback .hebsec{border-top:1px solid var(--gold-dim);margin-top:12px;padding-top:10px}
+.tback .hebsect{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);margin-bottom:6px}
+.tback .hebword{font-size:24px}
+.tback .hebmean{font-size:12.5px;margin:6px 0}
+
 /* ---------- checks / sorter ---------- */
 .qbox{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px}
 .qbox .q{font-size:16px;color:var(--cream);margin-bottom:10px}
@@ -242,20 +269,75 @@ input[type=range].tlscrub{width:100%;accent-color:var(--gold);margin-top:6px}
 /* ============================== DATA ============================== */
 var BLACKS_SRC = "Black's Law Dictionary, 4th Edition Revised";
 var TERMS = {
-  "SUI JURIS":{mod:5,quote:"Lat. Of his own right; possessing full social and civil rights; not under any legal disability, or the power of another, or guardianship. Having capacity to manage one's own affairs; not under legal disability to act for one's self.",cite:"Story, Ag. § 2"},
+  "SUI JURIS":{mod:5,heb:"MISHPAT",quote:"Lat. Of his own right; possessing full social and civil rights; not under any legal disability, or the power of another, or guardianship. Having capacity to manage one's own affairs; not under legal disability to act for one's self.",cite:"Story, Ag. § 2"},
   "NON SUI JURIS":{mod:5,quote:"Lat. Not his own master. The opposite of sui juris (q. v.).",cite:""},
-  "COMMON LAW":{mod:2,quote:"As distinguished from the Roman law, the modern civil law, the canon law, and other systems, the common law is that body of law and juristic theory which was originated, developed, and formulated and is administered in England, and has obtained among most of the states and peoples of Anglo-Saxon stock.",cite:"Lux v. Haggin, 69 Cal. 255, 10 P. 674"},
+  "COMMON LAW":{mod:2,heb:"TORAH",quote:"As distinguished from the Roman law, the modern civil law, the canon law, and other systems, the common law is that body of law and juristic theory which was originated, developed, and formulated and is administered in England, and has obtained among most of the states and peoples of Anglo-Saxon stock.",cite:"Lux v. Haggin, 69 Cal. 255, 10 P. 674"},
   "JURY":{mod:2,quote:"In practice. A certain number of men, selected according to law, and sworn (jurati) to inquire of certain matters of fact, and declare the truth upon evidence to be laid before them.",cite:""},
-  "FEE SIMPLE":{mod:2,quote:"A fee simple absolute is an estate limited absolutely to a man and his heirs and assigns forever without limitation or condition.",cite:"Rathbun v. State, 284 Mich. 521, 280 N.W. 35, 40"},
-  "EQUITY":{mod:3,quote:"In its broadest and most general signification, this term denotes the spirit and the habit of fairness, justness, and right dealing which would regulate the intercourse of men with men, — the rule of doing to all others as we desire them to do to us; or, as it is expressed by Justinian, “to live honestly, to harm nobody, to render to every man his due.”",cite:"Inst. 1, 1, 3"},
-  "CESTUI QUE USE":{mod:3,quote:"He for whose use and benefit lands or tenements are held by another. The cestui que use has the right to receive the profits and benefits of the estate, but the legal title and possession (as well as the duty of defending the same) reside in the other.",cite:"2 Bla. Comm. 330; 2 Washb. Real Prop. 95"},
+  "FEE SIMPLE":{mod:2,heb:"ERETZ",quote:"A fee simple absolute is an estate limited absolutely to a man and his heirs and assigns forever without limitation or condition.",cite:"Rathbun v. State, 284 Mich. 521, 280 N.W. 35, 40"},
+  "EQUITY":{mod:3,heb:"MISHPAT",quote:"In its broadest and most general signification, this term denotes the spirit and the habit of fairness, justness, and right dealing which would regulate the intercourse of men with men, — the rule of doing to all others as we desire them to do to us; or, as it is expressed by Justinian, “to live honestly, to harm nobody, to render to every man his due.”",cite:"Inst. 1, 1, 3"},
+  "CESTUI QUE USE":{mod:3,heb:"BERIT",quote:"He for whose use and benefit lands or tenements are held by another. The cestui que use has the right to receive the profits and benefits of the estate, but the legal title and possession (as well as the duty of defending the same) reside in the other.",cite:"2 Bla. Comm. 330; 2 Washb. Real Prop. 95"},
   "CESTUI QUE VIE":{mod:3,quote:"He whose life is the measure of the duration of an estate. The person for whose life any lands, tenements, or hereditaments are held.",cite:"1 Washb. Real Prop."},
-  "FIDUCIARY":{mod:3,quote:"The term is derived from the Roman law, and means (as a noun) a person holding the character of a trustee, or a character analogous to that of a trustee, in respect to the trust and confidence involved in it and the scrupulous good faith and candor which it requires. A person having duty, created by his undertaking, to act primarily for another's benefit in matters connected with such undertaking.",cite:""},
-  "ADMIRALTY":{mod:4,quote:"A court which has a very extensive jurisdiction of maritime causes, civil and criminal, controversies arising out of acts done upon or relating to the sea, and questions of prize. Also, the system of jurisprudence relating to and growing out of the jurisdiction and practice of the admiralty courts.",cite:""},
+  "FIDUCIARY":{mod:3,heb:"BERIT",quote:"The term is derived from the Roman law, and means (as a noun) a person holding the character of a trustee, or a character analogous to that of a trustee, in respect to the trust and confidence involved in it and the scrupulous good faith and candor which it requires. A person having duty, created by his undertaking, to act primarily for another's benefit in matters connected with such undertaking.",cite:""},
+  "ADMIRALTY":{mod:4,heb:"MAYIM",quote:"A court which has a very extensive jurisdiction of maritime causes, civil and criminal, controversies arising out of acts done upon or relating to the sea, and questions of prize. Also, the system of jurisprudence relating to and growing out of the jurisdiction and practice of the admiralty courts.",cite:""},
   "IN REM":{mod:4,quote:"A technical term used to designate proceedings or actions instituted against the thing, in contradistinction to personal actions, which are said to be in personam.",cite:""},
   "BILL OF LADING":{mod:4,quote:"A bill of lading is an instrument in writing, signed by a carrier or his agent, describing the freight so as to identify it, stating the name of the consignor, the terms of the contract for carriage, and agreeing or directing that the freight be delivered to the order or assigns of a specified person at a specified place.",cite:""},
-  "IN PROPRIA PERSONA":{mod:5,quote:"In one's own proper person.",cite:""},
+  "IN PROPRIA PERSONA":{mod:5,heb:"SHEM",quote:"In one's own proper person.",cite:""},
   "CAPACITY":{mod:5,quote:"A word having many meanings, dependent on its relationship to the subject-matter. “Capacity to sue” consists in right to come into court.",cite:""}
+};
+/* ================= HEBREW ROOTS DATA =================
+   (b) is the standard lexical meaning. (c) the letter-by-letter Paleo-Hebrew
+   pictograph reading is the traditional study-tradition reading, labeled as
+   such wherever it renders — it is not the lexical meaning. */
+var HEB = {
+  "TORAH":{mod:1,name:"LAW",word:"תּוֹרָה",translit:"Torah",strongs:"H8451",
+    meaning:"Instruction, teaching, direction — the Law given to Israel through Moses. From a root that pictures pointing the way, as a teacher points or an archer aims: Torah is first “teaching that shows the road,” and only then “rules.”",
+    picto:[["Tav","ת","sign / mark / cross"],["Vav","ו","nail / peg — what secures"],["Resh","ר","head / man"],["Hey","ה","behold / reveal"]],
+    combined:"Read together, the study tradition hears: instruction revealed (Hey) — a sign (Tav) nailed fast (Vav) before the head of man (Resh). The law as a mark secured in the open, not a secret kept in a shrine."},
+  "ERETZ":{mod:2,name:"LAND — the territory",word:"אֶרֶץ",translit:"Eretz",strongs:"H776",
+    meaning:"Earth; land; a country or territory. The ground as a whole and as a defined possession — the soil a people stands on, inherits, and is buried in.",
+    picto:[["Aleph","א","ox / strength / leader"],["Resh","ר","head / man"],["Tsade","ץ","fishhook / desire (final form)"]],
+    combined:"Read together: the strength (Aleph) of the head (Resh), hooked and held by desire (Tsade) — a people's power fastened to its land. Whoever holds the eretz holds the standing."},
+  "ADAMAH":{mod:2,name:"LAND — the soil",word:"אֲדָמָה",translit:"Adamah",strongs:"H127",
+    meaning:"Ground, soil — the arable earth itself. Adam (man) is named from adamah: the groundling, formed from the dust of the ground. Where eretz is territory, adamah is the dirt under the fingernails.",
+    picto:[["Aleph","א","ox / strength / leader"],["Dalet","ד","door"],["Mem","מ","water / chaos"],["Hey","ה","behold / reveal"]],
+    combined:"Read together: behold (Hey) the strength (Aleph) that entered by the door (Dalet) out of the waters (Mem) — the soil the first man was drawn from, and the soil every estate on the LAND is measured from."},
+  "RUACH":{mod:3,name:"AIR — the mover",word:"רוּחַ",translit:"Ruach",strongs:"H7307",
+    meaning:"Wind, breath, spirit. Moving air — invisible, known by its effects. The breath in a man, the spirit of a man, and the Spirit of God share this one word.",
+    picto:[["Resh","ר","head / man"],["Vav","ו","nail / peg — what secures"],["Chet","ח","fence / the private inner place"]],
+    combined:"Read together: the head of man (Resh), secured (Vav) inside the fence (Chet) — the breath fenced inside a man, unseen, moving him from within. The AIR jurisdiction governs exactly this: what cannot be seen, only witnessed by its effects."},
+  "SHAMAYIM":{mod:3,name:"AIR — the realm",word:"שָׁמַיִם",translit:"Shamayim",strongs:"H8064",
+    meaning:"Heaven, the heavens, the sky. Written in dual (“pair”) form. The expanse above the earth — sun, stars and weather, and the throne-language of the oldest texts.",
+    picto:[["Shin","ש","teeth / fire / consume"],["Mem","מ","water / chaos"],["Yod","י","hand / work"],["Mem","ם","water / chaos (final form)"]],
+    combined:"Read together: fire (Shin) over the waters (Mem), a hand (Yod) working between them, waters (final Mem) below — the heavens as the hand-wrought space between the waters above and the waters below, which is how the dual “pair” form of the word is traditionally explained."},
+  "BERIT":{mod:3,name:"COVENANT / TRUST",word:"בְּרִית",translit:"Berit",strongs:"H1285",
+    meaning:"Covenant, treaty, alliance. A binding agreement between two parties, solemnized with oath and sign — covenants in the record are “cut.” The arrangement the entire idea of trust grows out of.",
+    picto:[["Bet","ב","house / family"],["Resh","ר","head / man"],["Yod","י","hand / work"],["Tav","ת","sign / mark / cross"]],
+    combined:"Read together: the house (Bet) under its head (Resh), bound by the hand at work (Yod), sealed with the mark (Tav) — a covenant makes two parties one household and signs the joining. Every trust in Module 3 is this word in English dress."},
+  "MAYIM":{mod:4,name:"WATER",word:"מַיִם",translit:"Mayim",strongs:"H4325",
+    meaning:"Water, waters — also written in dual form. The deep, the sea, the flood; the element that carries trade, judgment and life in the Hebrew record.",
+    picto:[["Mem","מ","water / chaos"],["Yod","י","hand / work"],["Mem","ם","water / chaos (final form)"]],
+    combined:"Read together: waters (Mem), a hand at work (Yod), waters (final Mem) — order drawn by a working hand out of the deep, and the sea-road on which every cargo, contract and claim in Module 4 still travels."},
+  "SHEM":{mod:5,name:"NAME",word:"שֵׁם",translit:"Shem",strongs:"H8034",
+    meaning:"Name — and everything a name carries: reputation, renown, character made known. A man's shem is his standing wherever his name is spoken.",
+    picto:[["Shin","ש","teeth / fire / consume"],["Mem","ם","water / chaos (final form)"]],
+    combined:"Read together: fire (Shin) laid upon the waters (final Mem) — a name travels like fire and spreads like water: it carries a man's breath, character and standing into rooms his body never enters. That is why capacity in Module 5 turns on the name."},
+  "MISHPAT":{mod:5,name:"RIGHT / JUDGMENT",word:"מִשְׁפָּט",translit:"Mishpat",strongs:"H4941",
+    meaning:"Judgment, justice, a legal decision; also an ordinance, and a right or due — what belongs to a party by judgment. The word under Black's phrase “of his own right.”",
+    picto:[["Mem","מ","water / chaos"],["Shin","ש","teeth / fire / consume"],["Peh","פ","mouth / speak"],["Tet","ט","basket / contain"]],
+    combined:"Read together: the case flows in like water (Mem), is tried by fire (Shin), is spoken by the mouth (Peh), and is kept in the basket (Tet) — judgment rendered, recorded and preserved. “Of his own right” means a man holds his own mishpat: his judgment, his due, in his own hand."},
+  "OT":{mod:6,name:"SEAL / SIGN / MARK",word:"אוֹת",translit:"Ot",strongs:"H226",
+    meaning:"Sign, mark, token, signal — a visible proof that an unseen agreement stands. The rainbow is called an ot; so is the covenant sign in the flesh. Evidence made visible.",
+    picto:[["Aleph","א","ox / strength / leader"],["Vav","ו","nail / peg — what secures"],["Tav","ת","sign / mark / cross"]],
+    combined:"Read together: strength (Aleph) nailed (Vav) to the mark (Tav) — a sign fastened down where it cannot be moved or denied. In the oldest Hebrew script the letter Tav was itself drawn as a cross (×) — the first signature: the mark a man made when the name could not be written. The gold seal on this course's certificate is an ot."}
+};
+var HEBORDER = ["TORAH","ERETZ","ADAMAH","RUACH","SHAMAYIM","BERIT","MAYIM","SHEM","MISHPAT","OT"];
+var HEB_INTRO = {
+  1:"Under every code in this module stands one Hebrew word for law itself — the received name of the template.",
+  2:"The LAND speaks two Hebrew words for ground, and they are not interchangeable: one is territory, one is soil.",
+  3:"AIR is the unseen jurisdiction. Hebrew names its mover, its realm, and the instrument that binds it.",
+  4:"One word carries the whole WATER jurisdiction — the same word from the first chapter of Genesis to the last bill of lading.",
+  5:"Standing “of his own right” turns on two Hebrew words: the name you stand in, and the judgment that is your due.",
+  6:"The course ends where all paper begins: with the sign. The certificate you earn in this module is sealed with one."
 };
 var TIMELINE = [
   {y:-2400,mod:1,lab:"c. 2400 BC",t:"Urukagina of Lagash",d:"The first lawgiver known by reference — his reforms are described by later writers, but his code itself did not survive. Lesson 1.1."},
@@ -356,6 +438,9 @@ LESSONSETS[1] = [
 ["lead","A template is proven by its copies. Within two centuries of Ur-Nammu, the if/then code was being issued by kingdom after kingdom — the Sumerian form had become simply what law looked like."],
 ["p","The Laws of Eshnunna (c. 1930 BC), from a kingdom on the Diyala river, open with prices and wages fixed in silver and grain, then move through theft, assault and runaway slaves — all in the conditional form. The Code of Lipit-Ishtar (c. 1930 BC), written in Sumerian by a king of Isin, covers inheritance, marriage, hired labor and false accusation in the same grammar, five hundred years before Moses is traditionally placed and a thousand before Rome."],
 ["p","After Babylon, the line runs on: Hittite laws, the Middle Assyrian laws, the covenant codes of Israel — different gods, different kings, one inherited shape: a stated case, a stated consequence, a written record. When Greece and then Rome take up written law, they are standing at the end of a conveyor belt that starts in Sumer."],
+["p","One heir of the template deserves its own moment, because this course returns to it in every module: the Hebrews. Israel received the if/then form and filled it with covenant — law as a binding agreement between the Most High and a people, its terms written on tablets, witnessed, and carried in an ark the way Sumer carried tablets into temple archives. The received form has a name of its own: Torah."],
+["heb","TORAH"],
+["point","Study point: Torah is the received form of the ancient template — instruction written, witnessed and kept. Module 3 shows what grew from it: covenant, trust and conscience. Every time this course says “law,” this is the root under the word — and every module from here on carries a Hebrew Roots panel so you can watch the roots run under the branches."],
 ["fact","On the record: Lipit-Ishtar's prologue says the king established justice 'in the land of Sumer and Akkad' by the word of the god Enlil — the claim that law descends from a divine source, with the king as its publisher, is already fully formed c. 1930 BC. Watch for that same claim when you meet the papal bulls in Module 3."],
 ["p","You now hold the root system. The rest of this course follows the three great branches that grew from it: the law of the LAND in Module 2, the law of the AIR in Module 3, and the law of the WATER in Module 4."],
 ["point","Study point: Ur-Nammu invents the form → Eshnunna & Lipit-Ishtar spread it → Hammurabi monumentalizes it. Origins complete. The timeline at the top of this course now has its first pins — they stay with you to the end."]]}
@@ -635,13 +720,14 @@ function showHome(){
     if(m.terms.length) extras += '<button class="chipbtn" data-terms="'+m.n+'">🂡 Term Cards ('+m.terms.length+')'+(m.n===5?' · core':'')+'</button>';
     if(m.check){ var cp = state.checks[m.n]; extras += '<button class="chipbtn" data-check="'+m.n+'">✔ Module Check'+(m.n===5?' (double weight)':'')+(typeof cp==="number"?' <span class="st">best '+cp+'%</span>':'')+'</button>'; }
     var mdone = LESSONSETS[m.n].filter(function(l,li){ return state.done[m.n+"."+(li+1)]; }).length;
-    return '<div class="modcard"><div class="hero"><img src="'+m.img+'" alt="'+esc(m.title)+'"><div class="shade"></div><span class="mnum">MODULE '+m.n+'</span><h3>'+esc(m.title)+'</h3></div><div class="mbody"><p class="mdesc">'+esc(m.desc)+' <span style="color:var(--gold2)">'+mdone+'/'+LESSONSETS[m.n].length+' lessons</span></p><ul class="lessonlist">'+lessons+'</ul><div class="mtools">'+tools+extras+'</div></div></div>';
+    return '<div class="modcard"><div class="hero"><img src="'+m.img+'" alt="'+esc(m.title)+'"><div class="shade"></div><span class="mnum">MODULE '+m.n+'</span><h3>'+esc(m.title)+'</h3></div><div class="mbody"><p class="mdesc">'+esc(m.desc)+' <span style="color:var(--gold2)">'+mdone+'/'+LESSONSETS[m.n].length+' lessons</span></p><ul class="lessonlist">'+lessons+'</ul><div class="mtools">'+tools+extras+'</div>'+hebPanel(m.n)+'</div></div>';
   }).join("");
   go('<div class="view"><div class="crest">⚜</div><div class="kicker">UCC Talk24 · Sovereign Terms · The Study Course</div>'
     + '<h1 class="title">LAND <span class="amp">·</span> AIR <span class="amp">·</span> WATER</h1>'
     + '<div class="subtitle">L.A.W. — The Jurisdictions &amp; Their History</div>'
     + '<p class="payoff">Know which one you\'re standing in — <b>before you answer to it.</b></p>'
     + tri
+    + '<details class="hebpanel hebintro" open><summary>✡ The Hebrew Root of the Whole Course — Torah</summary><p class="hebintroline">Before the branches, the root word. Every jurisdiction in this course is a form of “law” — and the oldest received form of law in the West carries this name. Each module below opens its own Hebrew Roots panel; the pictograph readings there are the traditional study-tradition readings, kept distinct from the lexical meanings.</p><div class="hebentry">'+hebFull(HEB.TORAH)+'</div></details>'
     + '<div class="progresswrap"><div class="row"><span class="lbl">Course progress</span><span class="pct">'+pct+'%</span></div><div class="bar"><i style="width:'+pct+'%"></i></div><div class="row" style="margin-top:8px"><span class="grade">'+doneCount()+' of '+totalLessons()+' lessons complete</span><span class="grade">'+(grade===null?'Checks pending — your standing appears here':('Course standing (checks, Module 5 double): <b>'+grade+'%</b>'))+'</span></div></div>'
     + renderTimeline(function(ev){ return LESSONSETS[ev.mod].some(function(l,li){ return state.done[ev.mod+"."+(li+1)]; }); })
     + '<div class="modhead"><h2>The Six Modules</h2><span class="tag">Sumerians first · Sui Juris is the core</span></div><div class="modules">'+mods+'</div>'
@@ -662,6 +748,7 @@ function blockHTML(b){
   if(t==="reading") return '<div class="readbox"><span class="bh">The lane\'s reading</span>'+esc(x)+'</div>';
   if(t==="point") return '<div class="pointbox"><span class="bh">Study point</span>'+esc(x)+'</div>';
   if(t==="quote"){ var term = TERMS[x]; if(!term) return ""; return '<div class="quoteblock"><div class="qterm">'+esc(x)+'</div><div class="qtext">'+esc(term.quote)+'</div><div class="qsrc">— '+BLACKS_SRC+(term.cite?(" · "+esc(term.cite)):"")+'</div></div>'; }
+  if(t==="heb"){ var h = HEB[x]; if(!h) return ""; return '<div class="hebbox">'+hebFull(h)+'</div>'; }
   return '<p>'+esc(x)+'</p>';
 }
 function showLesson(mn, li){
@@ -683,10 +770,27 @@ function showLesson(mn, li){
   var fn = document.getElementById("fin"); if(fn) fn.addEventListener("click", showHome);
   document.getElementById("mkdone").addEventListener("click", function(){ if(state.done[id]){ delete state.done[id]; } else { state.done[id]=true; } save(); showLesson(mn, li); });
 }
+/* ================= HEBREW ROOTS ================= */
+function pictoRow(h){ return h.picto.map(function(p){ return '<span class="pchip"><span class="pl" dir="rtl" lang="he">'+p[1]+'</span> <b>'+esc(p[0])+'</b> <i>'+esc(p[2])+'</i></span>'; }).join('<span class="parrow">→</span>'); }
+function hebFull(h){
+  return '<div class="hebhead"><span class="hebword" dir="rtl" lang="he">'+h.word+'</span><span class="hebtit">'+esc(h.name)+' · '+esc(h.translit)+' · Strong\'s '+h.strongs+'</span></div>'
+  + '<p class="hebmean"><b>Hebrew meaning:</b> '+esc(h.meaning)+'</p>'
+  + '<div class="hebpic"><span class="bh">Paleo-Hebrew pictographs — the traditional reading (study tradition, kept distinct from the lexical meaning above)</span><div class="pictorow">'+pictoRow(h)+'</div>'
+  + '<p class="hebcomb"><b>Read together:</b> '+esc(h.combined)+'</p></div>';
+}
+function hebMini(h){
+  return '<div class="hebhead"><span class="hebword" dir="rtl" lang="he">'+h.word+'</span><span class="hebtit">'+esc(h.translit)+' · Strong\'s '+h.strongs+'</span></div>'
+  + '<p class="hebmean">'+esc(h.meaning)+'</p><div class="pictorow">'+pictoRow(h)+'</div>';
+}
+function hebPanel(mn){
+  var list = HEBORDER.map(function(k){ return HEB[k]; }).filter(function(h){ return h.mod===mn; });
+  if(!list.length) return "";
+  return '<details class="hebpanel"><summary>✡ Hebrew Roots — Module '+mn+'</summary><p class="hebintroline">'+esc(HEB_INTRO[mn]||"")+'</p>'+ list.map(function(h){ return '<div class="hebentry">'+hebFull(h)+'</div>'; }).join("") +'</details>';
+}
 /* ================= TERM CARDS ================= */
 function showTerms(mn){
   var m = MODULES[mn-1];
-  var cards = m.terms.map(function(name){ var t = TERMS[name]; return '<div class="tcard" tabindex="0" role="button" aria-label="Flip card for '+esc(name)+'"><div class="inner"><div class="tface tfront"><div class="term">'+esc(name)+'</div><div class="tap">Tap to flip · Black\'s verbatim</div></div><div class="tface tback"><div class="qtext">“'+esc(t.quote)+'”</div><div class="qsrc">— '+BLACKS_SRC+(t.cite?(" · "+esc(t.cite)):"")+'</div></div></div></div>'; }).join("");
+  var cards = m.terms.map(function(name){ var t = TERMS[name]; return '<div class="tcard" tabindex="0" role="button" aria-label="Flip card for '+esc(name)+'"><div class="inner"><div class="tface tfront"><div class="term">'+esc(name)+'</div><div class="tap">Tap to flip · Black\'s verbatim</div></div><div class="tface tback"><div class="qtext">“'+esc(t.quote)+'”</div><div class="qsrc">— '+BLACKS_SRC+(t.cite?(" · "+esc(t.cite)):"")+'</div>'+(t.heb&&HEB[t.heb]?'<div class="hebsec"><div class="hebsect">✡ Hebrew Roots</div>'+hebMini(HEB[t.heb])+'</div>':'')+'</div></div></div>'; }).join("");
   go('<div class="view"><div class="topbar"><button class="backbtn" id="bk">← All modules</button><span class="grade">Module '+mn+' · Term Cards</span></div><h2 class="vtitle">Term Cards — Module '+mn+'</h2><div class="vsub">Every definition below is quoted verbatim from '+BLACKS_SRC+'. Tap a card to flip it.</div><div class="termgrid">'+cards+'</div></div>');
   document.getElementById("bk").addEventListener("click", showHome);
   Array.prototype.forEach.call(document.querySelectorAll(".tcard"), function(c){ c.addEventListener("click", function(){ c.classList.toggle("flipped"); }); });
@@ -898,7 +1002,7 @@ function toolCert(){
 }
 /* ================= INIT ================= */
 showHome();
-window.LAW = {showHome:showHome, showLesson:showLesson, showCheck:showCheck, showTerms:showTerms, showTool:showTool, state:state, MODULES:MODULES, LESSONSETS:LESSONSETS, CHECKS:CHECKS, TERMS:TERMS, SORTER:SORTER};
+window.LAW = {showHome:showHome, showLesson:showLesson, showCheck:showCheck, showTerms:showTerms, showTool:showTool, state:state, MODULES:MODULES, LESSONSETS:LESSONSETS, CHECKS:CHECKS, TERMS:TERMS, SORTER:SORTER, HEB:HEB, HEBORDER:HEBORDER};
 </script>
 </body>
 </html>
