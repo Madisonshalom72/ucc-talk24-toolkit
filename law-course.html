@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L.A.W. — Land · Air · Water | The Jurisdictions &amp; Their History — Study Course</title>
+<meta name="description" content="An interactive study course on the three jurisdictions — Land (common law), Air (canon law, equity & trusts), Water (admiralty & commerce) — and the history of where each came from, from the Sumerians to Sui Juris.">
+<meta property="og:title" content="L.A.W. — Land · Air · Water: The Jurisdictions & Their History">
+<meta property="og:description" content="Know which one you're standing in — before you answer to it. An interactive study course: Sumerians to Sui Juris.">
+<meta property="og:image" content="law-m1-sumer.jpg">
+<style>
+:root{
+  --black:#070604; --ink:#0d0b07; --panel:#14110a; --panel2:#1a160d;
+  --gold:#c9a227; --gold2:#e8c766; --gold-dim:#8a6d1f; --cream:#f2e8cf;
+  --paper:#efe6cc; --muted:#b7a97f; --line:#3a3016; --good:#7fc46a; --bad:#e06c5a;
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --body:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--gold2)}
+button{font-family:inherit;cursor:pointer}
+img{max-width:100%;display:block}
+
+/* ---------- frame ---------- */
+.frame{max-width:1060px;margin:0 auto;padding:14px 14px 60px;position:relative}
+.goldframe{border:2px solid var(--gold);outline:1px solid var(--gold-dim);outline-offset:5px;background:linear-gradient(180deg,#0a0805,#070604);padding:22px 16px 30px;position:relative;animation:frameIn 1.1s ease both}
+@keyframes frameIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.crest{text-align:center;font-size:26px;color:var(--gold);letter-spacing:6px;animation:glowPulse 4s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{text-shadow:0 0 6px rgba(201,162,39,.35)}50%{text-shadow:0 0 18px rgba(201,162,39,.75)}}
+.kicker{text-align:center;letter-spacing:4px;font-size:11px;color:var(--muted);text-transform:uppercase;margin-top:8px}
+h1.title{text-align:center;font-family:var(--serif);font-weight:800;font-size:clamp(30px,7vw,54px);letter-spacing:2px;color:var(--gold2);line-height:1.12;margin:8px 0 4px}
+h1.title .amp{color:var(--cream)}
+.subtitle{text-align:center;font-family:var(--serif);font-style:italic;color:var(--cream);font-size:clamp(15px,3.6vw,20px)}
+.payoff{text-align:center;color:var(--gold2);font-family:var(--serif);font-size:clamp(15px,4vw,19px);margin:14px auto 4px;max-width:640px}
+.payoff b{color:#fff}
+.disclaimer{max-width:680px;margin:12px auto 0;text-align:center;font-size:12px;color:var(--muted);border:1px dashed var(--line);padding:8px 12px;border-radius:6px}
+
+/* ---------- triptych ---------- */
+.triptych{display:grid;grid-template-columns:1fr;gap:10px;margin:20px 0 6px}
+@media(min-width:720px){.triptych{grid-template-columns:1fr 1fr 1fr}}
+.panel{position:relative;border:1px solid var(--gold-dim);overflow:hidden;border-radius:4px;min-height:190px;animation:riseIn .8s ease both}
+.panel:nth-child(2){animation-delay:.12s}.panel:nth-child(3){animation-delay:.24s}
+@keyframes riseIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.panel img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:saturate(.92);transform:scale(1.02);transition:transform 6s ease}
+.panel:hover img{transform:scale(1.1)}
+.panel .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.82))}
+.panel .pcap{position:absolute;inset:auto 0 0 0;padding:12px 14px}
+.panel h3{font-family:var(--serif);color:var(--gold2);font-size:24px;letter-spacing:3px}
+.panel p{font-size:12.5px;color:var(--cream);line-height:1.45}
+.panel p b{color:var(--gold2);font-weight:600}
+
+/* ---------- progress ---------- */
+.progresswrap{margin:18px 0 4px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.progresswrap .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.progresswrap .lbl{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.progresswrap .pct{font-family:var(--serif);color:var(--gold2);font-size:20px}
+.bar{height:10px;background:#241d0e;border-radius:6px;margin-top:8px;overflow:hidden}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold-dim),var(--gold2));border-radius:6px;transition:width .8s ease;box-shadow:0 0 12px rgba(201,162,39,.5)}
+.grade{font-size:13px;color:var(--muted)}
+.grade b{color:var(--gold2)}
+
+/* ---------- timeline ---------- */
+.tlwrap{margin:18px 0;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px}
+.tlwrap h2{font-family:var(--serif);color:var(--gold2);font-size:19px;letter-spacing:1px}
+.tlwrap .hint{font-size:12px;color:var(--muted);margin-bottom:6px}
+.tltrack{position:relative;height:86px;margin-top:8px}
+.tlline{position:absolute;left:0;right:0;top:40px;height:2px;background:linear-gradient(90deg,var(--gold-dim),var(--gold),var(--gold-dim))}
+.tlpin{position:absolute;top:40px;transform:translate(-50%,-50%);width:15px;height:15px;border-radius:50%;background:#2c2410;border:2px solid var(--gold-dim);cursor:pointer;transition:all .25s;padding:0}
+.tlpin:hover{transform:translate(-50%,-50%) scale(1.3)}
+.tlpin.lit{background:var(--gold2);border-color:#fff2c4;box-shadow:0 0 12px rgba(232,199,102,.85)}
+.tllab{position:absolute;top:56px;transform:translateX(-50%);font-size:9.5px;color:var(--muted);white-space:nowrap;letter-spacing:.4px}
+input[type=range].tlscrub{width:100%;accent-color:var(--gold);margin-top:6px}
+.tlcard{margin-top:10px;background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:6px;padding:10px 12px;font-size:14px;min-height:58px}
+.tlcard b{color:var(--gold2);font-family:var(--serif)}
+
+/* ---------- modules ---------- */
+.modhead{display:flex;align-items:baseline;gap:10px;margin:26px 0 10px}
+.modhead h2{font-family:var(--serif);color:var(--gold2);font-size:22px;letter-spacing:1px}
+.modhead .tag{font-size:11px;letter-spacing:2px;color:#0a0805;background:var(--gold);border-radius:3px;padding:2px 8px;font-weight:700;text-transform:uppercase}
+.modules{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:760px){.modules{grid-template-columns:1fr 1fr}}
+.modcard{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;animation:riseIn .7s ease both;transition:border-color .3s, transform .3s}
+.modcard:hover{border-color:var(--gold-dim);transform:translateY(-3px)}
+.modcard .hero{position:relative;height:150px;overflow:hidden}
+.modcard .hero img{width:100%;height:100%;object-fit:cover}
+.modcard .hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(7,6,4,.88))}
+.modcard .hero .mnum{position:absolute;top:10px;left:12px;background:rgba(0,0,0,.65);border:1px solid var(--gold);color:var(--gold2);font-family:var(--serif);padding:2px 10px;border-radius:20px;font-size:13px;letter-spacing:1px}
+.modcard .hero h3{position:absolute;left:14px;right:14px;bottom:8px;font-family:var(--serif);color:#fff;font-size:19px;line-height:1.25;text-shadow:0 2px 8px #000}
+.modcard .mbody{padding:12px 14px 14px}
+.modcard .mdesc{font-size:13.5px;color:var(--muted);margin-bottom:10px}
+.lessonlist{list-style:none}
+.lessonlist li{display:flex;gap:9px;align-items:flex-start;padding:7px 8px;border-radius:6px;cursor:pointer;border:1px solid transparent}
+.lessonlist li:hover{background:var(--panel2);border-color:var(--line)}
+.lessonlist .dot{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--gold-dim);color:var(--gold2);font-size:11px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.lessonlist li.done .dot{background:var(--gold);color:#0a0805;border-color:var(--gold);font-weight:700}
+.lessonlist .lt{font-size:14px;color:var(--cream)}
+.lessonlist .le{font-size:11px;color:var(--muted)}
+.mtools{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chipbtn{background:transparent;border:1px solid var(--gold);color:var(--gold2);border-radius:20px;padding:6px 13px;font-size:12.5px;letter-spacing:.4px;transition:all .25s}
+.chipbtn:hover{background:var(--gold);color:#0a0805}
+.chipbtn .st{opacity:.75;font-size:11px}
+
+/* ---------- views ---------- */
+.view{display:none}
+.view.active{display:block;animation:riseIn .45s ease both}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.backbtn{background:transparent;border:1px solid var(--gold-dim);color:var(--gold2);border-radius:6px;padding:7px 14px;font-size:13px}
+.backbtn:hover{border-color:var(--gold)}
+.view h2.vtitle{font-family:var(--serif);color:var(--gold2);font-size:clamp(21px,5vw,30px);line-height:1.25}
+.view .vsub{color:var(--muted);font-size:13px;margin:2px 0 14px}
+.lessonhero{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:16px}
+.lessonhero img{width:100%;height:170px;object-fit:cover}
+.lbody p{margin:0 0 13px;font-size:16px;color:#e9dfc2}
+.lbody p.lead{font-size:17.5px;color:var(--cream)}
+.lbody p.lead::first-letter{font-family:var(--serif);font-size:30px;color:var(--gold2);line-height:1}
+.factbox,.readbox,.pointbox{border-radius:8px;padding:12px 14px;margin:0 0 14px;font-size:14.5px}
+.factbox{background:#101408;border:1px solid #33401c;border-left:3px solid var(--good)}
+.factbox .bh,.readbox .bh,.pointbox .bh{display:block;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px}
+.factbox .bh{color:var(--good)}
+.readbox{background:#140f04;border:1px solid var(--line);border-left:3px solid var(--gold)}
+.readbox .bh{color:var(--gold2)}
+.pointbox{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--cream)}
+.pointbox .bh{color:var(--cream)}
+.quoteblock{background:#0a0805;border:1px solid var(--gold-dim);border-radius:8px;padding:16px;margin:0 0 14px;position:relative}
+.quoteblock:before{content:"“";position:absolute;top:-6px;left:10px;font-family:var(--serif);font-size:52px;color:var(--gold)}
+.quoteblock .qterm{font-family:var(--serif);color:var(--gold2);letter-spacing:2px;font-size:15px;margin-bottom:6px}
+.quoteblock .qtext{font-style:italic;font-size:15.5px;color:var(--paper)}
+.quoteblock .qsrc{margin-top:8px;font-size:12px;color:var(--muted);font-style:normal}
+.navrow{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap}
+.goldbtn{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#171106;border:none;border-radius:7px;padding:11px 20px;font-size:14.5px;font-weight:700;letter-spacing:.4px;box-shadow:0 3px 14px rgba(201,162,39,.35);transition:transform .2s}
+.goldbtn:hover{transform:translateY(-2px)}
+.goldbtn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.ghostbtn{background:transparent;border:1px solid var(--gold-dim);color:var(--gold2);border-radius:7px;padding:11px 18px;font-size:14px}
+.ghostbtn:hover{border-color:var(--gold)}
+
+/* ---------- term cards ---------- */
+.termgrid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:640px){.termgrid{grid-template-columns:1fr 1fr}}
+.tcard{perspective:1100px;height:230px;cursor:pointer}
+.tcard .inner{position:relative;width:100%;height:100%;transition:transform .65s cubic-bezier(.2,.7,.3,1);transform-style:preserve-3d}
+.tcard.flipped .inner{transform:rotateY(180deg)}
+.tface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;padding:16px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.tfront{background:linear-gradient(150deg,#1c1708,#0d0b07);border:1px solid var(--gold-dim)}
+.tfront .term{font-family:var(--serif);font-size:21px;color:var(--gold2);letter-spacing:1px}
+.tfront .tap{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:8px}
+.tback{background:#0a0805;border:1px solid var(--gold);transform:rotateY(180deg);justify-content:flex-start;overflow-y:auto;text-align:left;align-items:stretch}
+.tback .qtext{font-style:italic;font-size:13.5px;color:var(--paper)}
+.tback .qsrc{font-size:11px;color:var(--muted);margin-top:8px}
+.tback .sumtag{font-size:10px;letter-spacing:2px;color:var(--bad);text-transform:uppercase}
+
+/* ---------- checks / sorter ---------- */
+.qbox{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px}
+.qbox .q{font-size:16px;color:var(--cream);margin-bottom:10px}
+.qbox .q .qn{color:var(--gold2);font-family:var(--serif)}
+.opt{display:block;width:100%;text-align:left;background:var(--panel2);border:1px solid var(--line);color:var(--cream);border-radius:7px;padding:10px 13px;margin:0 0 8px 0;margin-bottom:8px;font-size:14.5px;transition:all .2s}
+.opt:hover{border-color:var(--gold)}
+.opt.right{border-color:var(--good);background:#14230f;color:#d9f2cd}
+.opt.wrong{border-color:var(--bad);background:#2a110c;color:#f5cdc5}
+.opt:disabled{cursor:default;opacity:.92}
+.why{font-size:13.5px;color:var(--muted);margin-top:8px;display:none}
+.why.show{display:block}
+.why b{color:var(--gold2)}
+.scorebanner{text-align:center;font-family:var(--serif);font-size:19px;color:var(--gold2);padding:14px;border:1px solid var(--gold-dim);border-radius:10px;background:var(--panel);margin-bottom:14px;display:none}
+.scorebanner.show{display:block;animation:riseIn .5s ease both}
+.sortstage{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center;margin-bottom:14px;min-height:170px;display:flex;flex-direction:column;justify-content:center}
+.sortstage .scen{font-size:17px;color:var(--cream);line-height:1.5}
+.sortstage .sprog{font-size:11.5px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.sortbtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:12px}
+.sortbtn{border-radius:9px;padding:14px 6px;font-family:var(--serif);font-size:16px;letter-spacing:1px;border:1.5px solid var(--gold-dim);background:var(--panel2);color:var(--gold2);transition:all .2s}
+.sortbtn:hover{border-color:var(--gold);transform:translateY(-2px)}
+.sortbtn:disabled{opacity:.55;transform:none}
+.sortfb{font-size:14.5px;min-height:44px}
+.sortfb .ok{color:var(--good)} .sortfb .no{color:var(--bad)}
+
+/* ---------- write-a-law / splitter / ga ---------- */
+.tablet{background:linear-gradient(145deg,#4a3a22,#3a2c17 60%,#2e2210);border:2px solid #6b5327;border-radius:14px;padding:22px 18px;color:#f5e7bd;box-shadow:inset 0 0 40px rgba(0,0,0,.5);font-family:var(--serif)}
+.tablet .wedges{color:rgba(245,231,189,.35);letter-spacing:5px;font-size:13px;text-align:center;margin-bottom:10px}
+.tablet .lawtext{font-size:clamp(17px,4.6vw,22px);text-align:center;line-height:1.5;min-height:66px}
+.fld{margin-bottom:12px}
+.fld label{display:block;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.fld select,.fld input[type=text],.fld input[type=number]{width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--cream);border-radius:7px;padding:11px 12px;font-size:15px;font-family:inherit}
+.splitcols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.splitcol{border:1.5px dashed var(--gold-dim);border-radius:10px;padding:12px;min-height:130px;background:rgba(201,162,39,.04)}
+.splitcol h4{font-family:var(--serif);color:var(--gold2);text-align:center;letter-spacing:2px;font-size:14px;margin-bottom:4px}
+.splitcol .who{font-size:11px;color:var(--muted);text-align:center;margin-bottom:9px}
+.pcard{display:block;width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--cream);border-radius:7px;padding:9px 10px;font-size:13.5px;margin-bottom:7px;text-align:left}
+.pcard.sel{border-color:var(--gold2);box-shadow:0 0 0 1px var(--gold2)}
+.pcard.right{border-color:var(--good)} .pcard.wrong{border-color:var(--bad)}
+.poolbox{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--panel)}
+.garesult{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;font-size:14.5px}
+.garesult table{width:100%;border-collapse:collapse;margin-top:8px}
+.garesult td,.garesult th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;font-size:14px}
+.garesult th{color:var(--gold2);font-family:var(--serif);font-weight:600}
+
+/* ---------- route map ---------- */
+.routemap{background:#0a0f14;border:1px solid #274b5a;border-radius:10px;padding:10px}
+.portbtn{fill:#12242e;stroke:var(--gold-dim);stroke-width:1.5;cursor:pointer}
+.portbtn:hover{stroke:var(--gold2)}
+.portdot{fill:var(--gold);pointer-events:none}
+.portlab{fill:var(--cream);font-size:12.5px;font-family:Georgia,serif;pointer-events:none}
+.portinfo{margin-top:12px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:13px 15px;font-size:14.5px}
+.portinfo b{color:var(--gold2);font-family:var(--serif)}
+
+/* ---------- map / certificate ---------- */
+.mapgrid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:720px){.mapgrid{grid-template-columns:1fr 1fr 1fr}}
+.cert{border:3px double var(--gold);background:linear-gradient(160deg,#100d06,#0a0805);border-radius:6px;padding:30px 20px;text-align:center;position:relative;overflow:hidden}
+.cert:before{content:"⚜";position:absolute;font-size:300px;color:rgba(201,162,39,.05);top:50%;left:50%;transform:translate(-50%,-50%)}
+.cert .seal{width:92px;height:92px;margin:12px auto;border-radius:50%;border:2px solid var(--gold);background:radial-gradient(circle at 35% 30%,#e8c766,#8a6d1f);color:#241a02;display:flex;align-items:center;justify-content:center;font-size:34px;box-shadow:0 0 24px rgba(201,162,39,.45);animation:glowPulse 4s infinite}
+.cert h3{font-family:var(--serif);letter-spacing:3px;color:var(--gold2);font-size:14px;text-transform:uppercase}
+.cert .cname{font-family:var(--serif);font-size:clamp(26px,6.5vw,38px);color:#fff;margin:10px 0 2px;border-bottom:1px solid var(--gold-dim);display:inline-block;padding:0 22px 6px}
+.cert .ctitle{font-family:var(--serif);font-style:italic;color:var(--cream);font-size:16px}
+.cert .cmeta{font-size:12.5px;color:var(--muted);margin-top:12px}
+.footer{margin-top:26px;text-align:center;font-size:12px;color:var(--muted)}
+.footer .fl{color:var(--gold2);letter-spacing:2px;font-family:var(--serif);font-size:13px}
+@media print{
+  body{background:#fff}
+  .goldframe{border:none;outline:none;padding:0}
+  .noprint{display:none !important}
+  .view{display:none !important}
+  .view.printshow{display:block !important}
+  .cert{border-color:#8a6d1f}
+}
+</style>
+</head>
+<body>
+<div class="frame">
+<div class="goldframe" id="app">
+
+  <div id="views"></div>
+  <div class="footer noprint">
+    <div class="fl">L.A.W. — LAND · AIR · WATER</div>
+    <div>UCC Talk24 · Gold Series study course · Educational only — not legal advice.</div>
+  </div>
+</div>
+</div>
+<noscript><p style="text-align:center;padding:20px">This course needs JavaScript enabled to run its lessons and interactive tools.</p></noscript>
+<script>
+"use strict";
+/* ============================== DATA ============================== */
+var BLACKS_SRC = "Black's Law Dictionary, 4th Edition Revised";
+var TERMS = {
+  "SUI JURIS":{mod:5,quote:"Lat. Of his own right; possessing full social and civil rights; not under any legal disability, or the power of another, or guardianship. Having capacity to manage one's own affairs; not under legal disability to act for one's self.",cite:"Story, Ag. § 2"},
+  "NON SUI JURIS":{mod:5,quote:"Lat. Not his own master. The opposite of sui juris (q. v.).",cite:""},
+  "COMMON LAW":{mod:2,quote:"As distinguished from the Roman law, the modern civil law, the canon law, and other systems, the common law is that body of law and juristic theory which was originated, developed, and formulated and is administered in England, and has obtained among most of the states and peoples of Anglo-Saxon stock.",cite:"Lux v. Haggin, 69 Cal. 255, 10 P. 674"},
+  "JURY":{mod:2,quote:"In practice. A certain number of men, selected according to law, and sworn (jurati) to inquire of certain matters of fact, and declare the truth upon evidence to be laid before them.",cite:""},
+  "FEE SIMPLE":{mod:2,quote:"A fee simple absolute is an estate limited absolutely to a man and his heirs and assigns forever without limitation or condition.",cite:"Rathbun v. State, 284 Mich. 521, 280 N.W. 35, 40"},
+  "EQUITY":{mod:3,quote:"In its broadest and most general signification, this term denotes the spirit and the habit of fairness, justness, and right dealing which would regulate the intercourse of men with men, — the rule of doing to all others as we desire them to do to us; or, as it is expressed by Justinian, “to live honestly, to harm nobody, to render to every man his due.”",cite:"Inst. 1, 1, 3"},
+  "CESTUI QUE USE":{mod:3,quote:"He for whose use and benefit lands or tenements are held by another. The cestui que use has the right to receive the profits and benefits of the estate, but the legal title and possession (as well as the duty of defending the same) reside in the other.",cite:"2 Bla. Comm. 330; 2 Washb. Real Prop. 95"},
+  "CESTUI QUE VIE":{mod:3,quote:"He whose life is the measure of the duration of an estate. The person for whose life any lands, tenements, or hereditaments are held.",cite:"1 Washb. Real Prop."},
+  "FIDUCIARY":{mod:3,quote:"The term is derived from the Roman law, and means (as a noun) a person holding the character of a trustee, or a character analogous to that of a trustee, in respect to the trust and confidence involved in it and the scrupulous good faith and candor which it requires. A person having duty, created by his undertaking, to act primarily for another's benefit in matters connected with such undertaking.",cite:""},
+  "ADMIRALTY":{mod:4,quote:"A court which has a very extensive jurisdiction of maritime causes, civil and criminal, controversies arising out of acts done upon or relating to the sea, and questions of prize. Also, the system of jurisprudence relating to and growing out of the jurisdiction and practice of the admiralty courts.",cite:""},
+  "IN REM":{mod:4,quote:"A technical term used to designate proceedings or actions instituted against the thing, in contradistinction to personal actions, which are said to be in personam.",cite:""},
+  "BILL OF LADING":{mod:4,quote:"A bill of lading is an instrument in writing, signed by a carrier or his agent, describing the freight so as to identify it, stating the name of the consignor, the terms of the contract for carriage, and agreeing or directing that the freight be delivered to the order or assigns of a specified person at a specified place.",cite:""},
+  "IN PROPRIA PERSONA":{mod:5,quote:"In one's own proper person.",cite:""},
+  "CAPACITY":{mod:5,quote:"A word having many meanings, dependent on its relationship to the subject-matter. “Capacity to sue” consists in right to come into court.",cite:""}
+};
+var TIMELINE = [
+  {y:-2400,mod:1,lab:"c. 2400 BC",t:"Urukagina of Lagash",d:"The first lawgiver known by reference — his reforms are described by later writers, but his code itself did not survive. Lesson 1.1."},
+  {y:-2100,mod:1,lab:"c. 2100 BC",t:"Code of Ur-Nammu",d:"The oldest law code that still exists — some 57 laws on clay, in the if/then form, fines of silver over vengeance. Lesson 1.2."},
+  {y:-1930,mod:1,lab:"c. 1930 BC",t:"Eshnunna & Lipit-Ishtar",d:"Later Mesopotamian codes copy the Sumerian template — proof the form had become the standard. Lesson 1.5."},
+  {y:-1754,mod:1,lab:"c. 1754 BC",t:"Hammurabi's Stele",d:"Babylon's famous black stone — law as public monument, some 300 years AFTER Ur-Nammu. Lesson 1.3."},
+  {y:-800,mod:4,lab:"c. 800s BC",t:"Rhodian Sea Law",d:"The oldest commercial code of the sea — cargo, collision and jettison rules, including general average. Lesson 4.1."},
+  {y:1066,mod:2,lab:"1066",t:"The King's Courts",d:"After the Norman Conquest, royal courts begin making one law 'common' to all England. Lesson 2.2."},
+  {y:1160,mod:4,lab:"c. 1160s",t:"Laws of Oleron",d:"Sea law climbs Europe's Atlantic coast from the island of Oleron. Lesson 4.2."},
+  {y:1215,mod:2,lab:"1215",t:"Magna Carta",d:"'The law of the land' is written down: no free man taken except by judgment of his peers or the law of the land. Lesson 2.3."},
+  {y:1302,mod:3,lab:"1302",t:"Unam Sanctam",d:"Boniface VIII's bull — read in this lane as a trust instrument over the world. Lesson 3.6."},
+  {y:1370,mod:4,lab:"c. 1370",t:"Consulate of the Sea",d:"Barcelona's Consolat de Mar systematizes Mediterranean sea law. Lesson 4.2."},
+  {y:1455,mod:3,lab:"1455",t:"Romanus Pontifex",d:"Nicholas V's bull granting lands and dominion — the second of the lane's 'bulls as deeds.' Lesson 3.6."},
+  {y:1536,mod:3,lab:"1536",t:"Statute of Uses",d:"Henry VIII strikes at the use to restore feudal revenue — and the trust survives him. Lesson 3.4."},
+  {y:1540,mod:3,lab:"1540",t:"Cestui Que Vie Act 1540",d:"The first of the Cestui Que Vie Acts — estates measured by a life. Lesson 3.5."},
+  {y:1666,mod:3,lab:"1666",t:"Cestui Que Vie Act 1666",d:"Those 'lost beyond the seas' presumed dead after seven years — the Act this whole lane turns on. Lesson 3.5."},
+  {y:1765,mod:2,lab:"1765",t:"Blackstone's Commentaries",d:"The common law is systematized in print — and carried to America. Lesson 2.5."},
+  {y:1789,mod:4,lab:"1789",t:"Admiralty in the Constitution",d:"The new republic gives its federal courts the admiralty and maritime jurisdiction. Lesson 4.5."},
+  {y:1835,mod:6,lab:"c. 1835",t:"Fringe on the Colors",d:"Gold fringe appears on U.S. military colors — a custom the Institute of Heraldry calls 'an honorable enrichment only.' Lesson 6.2."},
+  {y:1952,mod:1,lab:"1952",t:"Ur-Nammu Translated",d:"The Nippur tablet of Ur-Nammu's code is translated — the oldest code is readable again. Lesson 1.2."},
+  {y:2026,mod:6,lab:"Today",t:"You Are Here",d:"Three jurisdictions, one map — and the question of where you stand in each. Module 5 and the capstone."}
+];
+var SORTER = [
+  {s:"A neighbor's fence crosses your property line. You sue in the county court and ask for a jury of neighbors to decide the facts of the boundary.",a:"LAND",w:"A dispute over soil and boundaries, tried by a jury — the common law of the land at work."},
+  {s:"A trustee refuses to hand over the income of a trust to the beneficiary named in the trust deed.",a:"AIR",w:"Trusts live in equity — the court of conscience enforces the trustee's duty. Title and benefit are split; this is AIR."},
+  {s:"Two cargo ships collide in the harbor and both owners claim damages.",a:"WATER",w:"A maritime collision — admiralty has judged collisions since the Rhodian Sea Law."},
+  {s:"A man's will is challenged: did he truly intend his nephew to inherit the farm?",a:"AIR",w:"Wills and estates were the business of the church courts and then of equity — the property of the dead, on paper."},
+  {s:"In a storm, a captain throws one merchant's cargo overboard to save the ship. That merchant claims a share of his loss from all the others.",a:"WATER",w:"General average — the Rhodian rule: a loss deliberately taken for all is borne by all."},
+  {s:"You are accused of theft and demand judgment by a jury of your peers, under the law of the land.",a:"LAND",w:"Magna Carta's promise — judgment of peers or the law of the land. Common-law criminal trial: LAND."},
+  {s:"A guardian is appointed to manage the land of a minor heir who is not yet of full capacity.",a:"AIR",w:"Guardianship and estates of those under disability were administered in equity — the AIR watches over the non sui juris."},
+  {s:"A bill of lading is signed for a shipment of cotton. At the destination port, the buyer presents the document and demands the goods.",a:"WATER",w:"Negotiable sea paper — the bill of lading is receipt, contract and evidence of title in one instrument."},
+  {s:"Two families dispute a field their grandfathers farmed. The custom of the village, remembered by the elders, is called as evidence.",a:"LAND",w:"Custom of the people is the root of the common law — law grown from the soil up."},
+  {s:"A cleric is accused of breaking a sworn oath and is called before the church court.",a:"AIR",w:"Oaths belonged to canon law — the church courts governed oaths, marriages and clergy."},
+  {s:"Salvors tow a stranded vessel off the rocks and claim a salvage award.",a:"WATER",w:"Salvage is pure admiralty — a reward earned on the water, judged by sea law."},
+  {s:"A feoffee refuses to return the land he held 'to the use' of a crusader's widow and children.",a:"AIR",w:"The original case of the use: the land court sees only title, so the Chancellor enforces the promise in conscience."},
+  {s:"Land is granted 'to my son for the life of my brother.' The family asks whose life measures how long the estate lasts.",a:"AIR",w:"An estate measured by a life — the cestui que vie. Estates and lives on paper: AIR."},
+  {s:"A shipowner takes a loan on the hull of his vessel before a voyage, the ship itself standing as the security.",a:"WATER",w:"Bottomry and ship finance are maritime commerce — the vessel as the paper's subject."},
+  {s:"A freeholder claims his land is his absolutely — his to pass to his heirs forever, free of any lord's conditions.",a:"LAND",w:"A fee simple absolute: the fullest estate on the land, 'to a man and his heirs and assigns forever.'"},
+  {s:"An injured sailor sues the vessel itself — the ship is named as the defendant.",a:"WATER",w:"An action in rem: in admiralty, the proceeding can be instituted against the thing — the ship."},
+  {s:"A marriage is disputed, and witnesses who swore oaths before the church are called to testify.",a:"AIR",w:"Marriages and oaths were canon-law territory for centuries — AIR."},
+  {s:"The sheriff gathers twelve men of the county to declare the truth on the evidence at a trial for arson.",a:"LAND",w:"The petit jury — sworn neighbors declaring the truth on the evidence. Black's definition of JURY, in action."}
+];
+var CAPSTONE_SORT = [
+  {s:"A squatter claims a field by long possession under the village custom. The freeholder sues to eject him.",a:"LAND",w:"Possession, custom and ejectment — a common-law land action."},
+  {s:"A beneficiary asks the court to remove a trustee who mixed the trust's money with his own.",a:"AIR",w:"A fiduciary's breach is equity's business — the court of conscience polices trustees."},
+  {s:"A sailor is declared lost beyond the seas. Seven years pass with no word; his family asks the court to treat the estate as if he had died.",a:"AIR",w:"The Cestui Que Vie Act 1666 fact pattern — a life that measures an estate, a man lost beyond the seas."},
+  {s:"Two ships in one storm each jettison cargo. The owners argue over how the losses are shared.",a:"WATER",w:"General average again — deliberate loss, shared by all who were saved by it."},
+  {s:"A defendant in the king's court insists the case be heard by twelve of his neighbors, not by the king's officer alone.",a:"LAND",w:"Judgment of peers — the jury stands between the Crown and the accused."},
+  {s:"A charter-party is broken and the charterer sues in the admiralty court, where no jury is seated.",a:"WATER",w:"A maritime contract in admiralty's own procedure — no jury on the water."},
+  {s:"A widow petitions the Chancellor: the rigid forms of the land court give her no remedy, though everyone knows the promise was made.",a:"AIR",w:"That petition IS the birth of equity — conscience over form."},
+  {s:"At the destination port, a consignee presents an order bill of lading and takes delivery of the freight.",a:"WATER",w:"The bill of lading delivers — documentary title traveling the sea lanes."},
+  {s:"The cestui que use claims the rents and profits of land whose legal title stands in another man's name.",a:"AIR",w:"Black's CESTUI QUE USE word for word: profits to the beneficiary, legal title in the other."},
+  {s:"After a collision, the damaged ship is arrested in port — the case proceeds against the vessel itself.",a:"WATER",w:"In rem: the proceeding instituted against the thing."},
+  {s:"An old deed of 1810, and the custom of the parish, are read aloud to settle where a boundary has run for two hundred years.",a:"LAND",w:"Title, custom and the soil — the common law's home ground."},
+  {s:"A man accused in court is asked in what capacity he answers — and replies that he stands in his own proper person, of his own right.",a:"LAND",w:"On the land the living answer in their own name — sui juris, in propria persona. The common-law court presumes the living standing."}
+];
+var CAPSTONE_TERMS = [
+  {q:"Black's defines SUI JURIS as…",opts:["“Of his own right; possessing full social and civil rights”","“Not his own master”","“Against the thing”","“In one's own proper person”"],a:0,w:"Word for word: 'Of his own right; possessing full social and civil rights; not under any legal disability… — Story, Ag. § 2."},
+  {q:"NON SUI JURIS means…",opts:["“Of his own right”","“Not his own master”","“By the law of the land”","“For the life of another”"],a:1,w:"'Lat. Not his own master. The opposite of sui juris.' The mirror entry, same page spread."},
+  {q:"An action IN REM is a proceeding instituted against…",opts:["A person","A corporation","The thing","The Crown"],a:2,w:"Black's: 'proceedings or actions instituted against the thing, in contradistinction to personal actions…in personam.'"},
+  {q:"The CESTUI QUE VIE is…",opts:["The trustee holding title","He whose life is the measure of the duration of an estate","The buyer of a cargo","The Chancellor's clerk"],a:1,w:"'He whose life is the measure of the duration of an estate.'"},
+  {q:"A BILL OF LADING is signed by…",opts:["The consignee","The port judge","A carrier or his agent","The insurer"],a:2,w:"'An instrument in writing, signed by a carrier or his agent, describing the freight so as to identify it…'"},
+  {q:"IN PROPRIA PERSONA means…",opts:["“In one's own proper person”","“By operation of law”","“Against the vessel”","“Of full age only”"],a:0,w:"Black's gives it in five words: 'In one's own proper person.'"}
+];
+var LESSONSETS = {}; var CHECKS = {};
+
+/* ================= MODULE 1 — ORIGINS ================= */
+LESSONSETS[1] = [
+{n:"1.1",t:"Law Before It Survived: Urukagina of Lagash",era:"c. 2400 BC · Sumer",mins:5,body:[
+["lead","Every map in this course starts in the same place: a river plain in what is now southern Iraq, where the first cities on earth invented writing — and almost immediately started writing down law."],
+["p","Around 2400 BC, a ruler named Urukagina took power in Lagash, one of the Sumerian city-states. The texts that describe his reign credit him with a sweeping reform: he cut the fees officials charged for marriages, burials and divorces, stopped the powerful from seizing the houses and fields of the weak, and declared that the widow and the orphan would no longer be delivered up to the man of power."],
+["p","Here is the honest problem, and this course will never hide it from you: Urukagina's code itself did not survive. No tablet of it has been found. We know his reforms the way we know a fire from its smoke — through references, boasts inscribed on clay cones, and the complaints of the officials he restrained. He is the first lawgiver we can name, but his law reaches us second-hand."],
+["fact","What 'first' honestly means: Urukagina (c. 2400 BC) is the earliest reformer whose measures are described in writing. The earliest law CODE whose text you can still read is younger — it belongs to Ur-Nammu, next lesson. Keep those two claims separate and no one can knock either one down."],
+["p","Why start here at all? Because the pattern Urukagina shows is the seed of everything in this course: a written rule, published to the city, standing above the strength of the man who happens to hold office. Before law was a courtroom, it was an inscription."],
+["point","Study point: the difference between 'known by reference' and 'surviving' is the difference between Lesson 1.1 and Lesson 1.2 — and honest history keeps them apart."]]},
+{n:"1.2",t:"Ur-Nammu's Code: The Oldest Law That Still Exists",era:"c. 2100 BC · Ur",mins:6,body:[
+["lead","Three centuries after Urukagina, a king of Ur named Ur-Nammu (reigned c. 2112–2094 BC) did something whose evidence you can still hold: he published a code, and pieces of it are still here."],
+["p","Tablets of the Code of Ur-Nammu were dug up at Nippur and at Ur. The Nippur tablet reached scholars in the 20th century and was translated in 1952 — which is why this king, unknown to textbooks for four thousand years, suddenly became unavoidable. Some 57 laws survive in whole or in part."],
+["p","Look at the shape of them, because the shape is the invention. The laws are written as conditions: IF a man does this, THEN that follows. Casuistic law — case by case, act and consequence locked together in one sentence. Nearly every code after this one, for four thousand years, is written in Ur-Nammu's grammar."],
+["fact","On the record — an actual law of Ur-Nammu: 'If a man knocks out the eye of another man, he shall weigh out ½ a mina of silver.' A mina was a weight of silver — money. For a bodily injury, the oldest surviving code on earth chose a fine over vengeance."],
+["p","That surprises people who know the next lesson. The Sumerian code punished many injuries with weighed silver, scaled to the harm. It was not soft — it had death penalties for grave crimes like murder and robbery — but its instinct for ordinary injury was compensation: make the injured party whole, in metal, on a scale."],
+["point","Study point: the if/then form + a weighed fine. When you reach the Write-a-Law tablet in this module's tools, you will build a law in exactly this 4,100-year-old shape."]]},
+{n:"1.3",t:"Hammurabi's Stele: The Famous Copy",era:"c. 1754 BC · Babylon",mins:5,body:[
+["lead","Ask a classroom to name an ancient lawgiver and one name comes back: Hammurabi. His code is real, magnificent — and roughly three hundred years younger than Ur-Nammu's."],
+["p","Hammurabi of Babylon (reigned 1792–1750 BC) had his laws carved on a pillar of black diorite stone over two meters tall, topped by a relief of the king standing before Shamash, god of justice. Some 282 laws cover prices, wages, trade, family, injury and property. Copies and extracts were set up in cities across his empire: law as a public monument, meant to be seen."],
+["p","Its penalties made it famous. Where Ur-Nammu fined silver for an eye, Hammurabi's code answers in kind — an eye for an eye, the lex talionis. And the code graded its justice by rank: the same injury cost differently depending on whether the victim was a free man, a dependent, or a slave."],
+["fact","On the record: the stele was carried off as war loot to Susa, in modern Iran, where French excavators found it in 1901. The most famous law code in the world spent its afterlife as a trophy in a foreign capital — a reminder that even monuments are property in somebody's war."],
+["p","So why does Hammurabi get the fame? Because his monument survived whole, in stone, with his picture on it. Ur-Nammu's code survived in broken clay. Fame follows preservation, not priority — the first lesson this course teaches about every record you will ever read."],
+["point","Study point: Hammurabi = the famous copy (c. 1754 BC, stone, talion). Ur-Nammu = the original (c. 2100 BC, clay, fines). The 300-year gap is the hook nobody else in this lane is teaching."]]},
+{n:"1.4",t:"Temples, Tablets & Contracts: The First Record Office",era:"Sumer · 3rd millennium BC",mins:6,body:[
+["lead","A law code is the headline. The real machine of Sumerian law was quieter: the contract, the seal, the archive — paperwork, four thousand years before paper."],
+["p","Sumerians wrote everything on wet clay with a cut reed: sales, loans, marriages, adoptions, court decisions. A finished tablet was often baked or sun-dried, then — for important agreements — wrapped in a thin clay envelope, a second tablet folded around the first, with the text repeated on the outside. If a dispute arose, the envelope was broken open in front of witnesses and the inner tablet read. Tamper with the outside, and the inside convicts you. It is an anti-fraud device older than the wheel's second millennium."],
+["p","Each party and witness pressed or rolled a cylinder seal into the clay — a carved stone cylinder whose rolling left a unique patterned signature. Your seal was your identity, your credit and your mark, all in one object you carried on a cord."],
+["p","And the tablets went somewhere: into archives, very often temple archives. The great temples were banks, warehouses, courts and record offices in one complex. The oath was sworn there too — before the god, on the record."],
+["reading","The lane's reading: notice what is already present at the birth of law — written instruments, sealed identity, a record office, and an oath binding a living person to paper. Land, Air and Water all run on that same machinery to this day. The jurisdictions differ; the paperwork instinct is one."],
+["point","Study point: envelope + seal + archive = anti-fraud paperwork, identity, and the record office. Every later module is this lesson wearing different clothes."]]},
+{n:"1.5",t:"The Template Travels: Eshnunna, Lipit-Ishtar & After",era:"c. 1930 BC →",mins:5,body:[
+["lead","A template is proven by its copies. Within two centuries of Ur-Nammu, the if/then code was being issued by kingdom after kingdom — the Sumerian form had become simply what law looked like."],
+["p","The Laws of Eshnunna (c. 1930 BC), from a kingdom on the Diyala river, open with prices and wages fixed in silver and grain, then move through theft, assault and runaway slaves — all in the conditional form. The Code of Lipit-Ishtar (c. 1930 BC), written in Sumerian by a king of Isin, covers inheritance, marriage, hired labor and false accusation in the same grammar, five hundred years before Moses is traditionally placed and a thousand before Rome."],
+["p","After Babylon, the line runs on: Hittite laws, the Middle Assyrian laws, the covenant codes of Israel — different gods, different kings, one inherited shape: a stated case, a stated consequence, a written record. When Greece and then Rome take up written law, they are standing at the end of a conveyor belt that starts in Sumer."],
+["fact","On the record: Lipit-Ishtar's prologue says the king established justice 'in the land of Sumer and Akkad' by the word of the god Enlil — the claim that law descends from a divine source, with the king as its publisher, is already fully formed c. 1930 BC. Watch for that same claim when you meet the papal bulls in Module 3."],
+["p","You now hold the root system. The rest of this course follows the three great branches that grew from it: the law of the LAND in Module 2, the law of the AIR in Module 3, and the law of the WATER in Module 4."],
+["point","Study point: Ur-Nammu invents the form → Eshnunna & Lipit-Ishtar spread it → Hammurabi monumentalizes it. Origins complete. The timeline at the top of this course now has its first pins — they stay with you to the end."]]}
+];
+CHECKS[1] = [
+{q:"Which law code is the oldest that still exists today?",opts:["The Code of Hammurabi","The Code of Ur-Nammu","The Laws of Eshnunna","The Twelve Tables"],a:1,w:"Ur-Nammu, c. 2100 BC — tablets from Nippur and Ur. Hammurabi's stele is ~300 years younger."},
+{q:"How do we know about Urukagina's reforms (c. 2400 BC)?",opts:["His complete code was found on a stele","Through references and inscriptions — his code itself did not survive","From Roman historians","From the Code of Hammurabi's prologue"],a:1,w:"Known by reference only — the distinction Lesson 1.1 insists on: earliest named reformer, but no surviving code."},
+{q:"Under Ur-Nammu's code, knocking out a man's eye cost the offender…",opts:["His own eye","½ a mina of silver","Ten years of labor","Banishment"],a:1,w:"A weighed fine of silver — compensation over vengeance, in the oldest surviving code on earth."},
+{q:"What was the clay envelope around a contract tablet for?",opts:["Decoration for the temple","A mailing wrapper","Anti-fraud protection — the sealed inner text settled disputes","A tax receipt"],a:2,w:"The envelope was broken before witnesses; if the outer text was altered, the inner tablet convicted the tamperer."},
+{q:"Eshnunna and Lipit-Ishtar matter to this course because they…",opts:["Abolished written law","Copied the Sumerian if/then template, proving it spread","Were written in Latin","Governed sea trade"],a:1,w:"Copies prove the template: case → consequence, in writing, kingdom after kingdom."}
+];
+/* ================= MODULE 2 — LAND ================= */
+LESSONSETS[2] = [
+{n:"2.1",t:"Custom of the People: Law From the Soil Up",era:"Anglo-Saxon England · before 1066",mins:6,body:[
+["lead","Before England had kings strong enough to impose law, it had something older: the custom of the people — law that lived in memory, spoken at gatherings, enforced by neighbors. This is the LAND jurisdiction at its root."],
+["p","Anglo-Saxon communities settled their disputes at local assemblies — the moot, the hundred court — where the 'dooms' (judgments) were declared from remembered custom. Early kings began writing those customs down: the laws of Æthelberht of Kent (c. 602) are among the oldest surviving English texts, and Alfred the Great's Doom Book (late 800s) gathered the customs of centuries into one collection."],
+["p","The system's instinct was compensation — the same instinct you met in Sumer. Injuries carried price tags: a bot (amends) for the harm, a wergild ('man-price') for a life, scaled by the victim's rank. The point was to settle the feud before it burned the village down: pay the price, restore the peace, on the record of the community."],
+["fact","On the record: the folk courts were open-air, local and public. Law was not yet a profession — it was a memory the community kept together, and a judgment was what the assembled people declared the custom to be."],
+["reading","The lane's reading: on the LAND, authority rises from the soil — from the living people who work it and remember its customs. No priest, no admiral, no distant office creates it. That bottom-up source is what makes Land the first jurisdiction in the map."],
+["point","Study point: custom → doom → written doom-book. The common law begins as the people's memory, not the king's command."]]},
+{n:"2.2",t:"1066 & the King's Courts: How 'Common' Got Common",era:"1066 – 1200s",mins:6,body:[
+["lead","In 1066 a Norman duke conquered England — and, without meaning to, set the common law in motion. One king over one realm created the demand for one law over the whole of it."],
+["p","William kept the local customs and the shire courts, but his successors sent royal justices riding circuit through the counties. Under Henry II (reigned 1154–1189), those itinerant justices, the royal writ system, and reforms like the Assize of Clarendon (1166) began pulling serious cases into the king's courts — where a judgment in one county started to count in the next."],
+["p","That is what 'common' means in common law: not 'ordinary', but common to the whole realm — one law for all England, declared by the king's judges out of the customs they found, case by case, precedent by precedent. The judges did not invent it from nothing; they harvested the folk customs of Lesson 2.1 and made them uniform."],
+["quote","COMMON LAW"],
+["p","Notice the company the definition keeps: it stands 'as distinguished from the Roman law… the canon law, and other systems.' From the start, the common law knew it was one jurisdiction among rivals. This course is the story of those rivals."],
+["point","Study point: 'common' = common to the realm. Circuit judges + writs + precedent turned local custom into national law."]]},
+{n:"2.3",t:"Magna Carta 1215: 'The Law of the Land'",era:"1215 · Runnymede",mins:6,body:[
+["lead","In June 1215, at Runnymede meadow, England's barons forced King John to seal a charter. Most of it is feudal housekeeping. One clause outlived the century — and the millennium."],
+["p","Clause 39 of the 1215 charter (Clause 29 in the later reissue) reads: 'No free man shall be seized or imprisoned, or stripped of his rights or possessions, or outlawed or exiled, or deprived of his standing in any other way, nor will we proceed with force against him, or send others to do so, except by the lawful judgment of his equals or by the law of the land.'"],
+["fact","On the record: two phrases in that clause became load-bearing for eight centuries — 'the lawful judgment of his equals' (the seed of trial by jury) and 'the law of the land' (the phrase that later generations, including America's founders, read as due process of law)."],
+["p","Magna Carta did not create the jury or the common law; both were older. What it did was chain the king to them. The highest power in the LAND jurisdiction was made answerable to the law of the land itself — and the barons created a council to enforce the chain."],
+["reading","The lane's reading: this is the LAND panel of the map in one document. Authority on the land belongs to the law the people live under — and even the Crown stands inside it, not above it."],
+["point","Study point: 1215 · clause 39 · two phrases to carry forever: 'judgment of his equals' and 'the law of the land.'"]]},
+{n:"2.4",t:"The Jury of Neighbors: Twelve Who Stand Between",era:"12th century →",mins:5,body:[
+["lead","The common law's strangest and strongest device is not a judge or a code. It is twelve ordinary people, sworn, standing between the accuser and the accused."],
+["p","The jury grew out of sworn local inquests — neighbors put under oath to report facts they already knew: who held which field, who owed which debt. Over the centuries the role turned: from witnesses of fact into judges of fact. By the later Middle Ages, the trial jury had become the common law's centerpiece — the community itself, inserted into the machinery of judgment."],
+["quote","JURY"],
+["p","Read the definition closely: the jury inquires of matters of fact and declares the truth upon the evidence laid before it. Questions of law belong to the judge; the truth of facts belongs to the sworn neighbors. That division is the living standing in judgment over power — on the land, the people are not spectators of justice; they are one of its organs."],
+["fact","On the record: Magna Carta's 'judgment of his equals' (1215) and the jury's rise are cousins, not twins — but together they fixed the idea that a free person is answered by peers, under the law of the land, not by the pleasure of an official."],
+["point","Study point: jury = sworn neighbors deciding fact. In the Module 5 Sorter, every scenario with twelve neighbors deciding is LAND — every time."]]},
+{n:"2.5",t:"Blackstone Crosses the Atlantic: The Commentaries and America",era:"1765 – 1769",mins:6,body:[
+["lead","By the 1700s the common law was a thousand years of cases, customs and statutes — a library no colonist could carry. Then one Oxford professor compressed it into four volumes, and America learned its law from them."],
+["p","William Blackstone's Commentaries on the Laws of England (1765–1769) organized the whole system — rights of persons, rights of things, private wrongs, public wrongs — in clear, confident prose. In the American colonies the Commentaries were everywhere: the best-selling law book of the founding generation, the text from which lawyers, judges and constitution-writers absorbed what the common law was."],
+["p","Independence changed the sovereign, not the soil. The new states received the common law as their baseline — its property rules, its juries, its fee simple estates — and built statute and constitution on top of it. When Black's Law Dictionary (whose 4th Edition Revised is this course's dictionary of record) defines an estate, it is describing Blackstone's world:"],
+["quote","FEE SIMPLE"],
+["p","An estate 'limited absolutely to a man and his heirs and assigns forever, without limitation or condition' — that is the fullest ownership the LAND knows: no lord's leave, no expiry, no strings. Hold this definition in mind when Module 3 splits title from benefit — because only a system that first made ownership this solid would need a second court to divide it."],
+["point","Study point: Blackstone (1765) systematized the LAND; America received it; Black's still defines its estates. Next module: the jurisdiction of the AIR — where ownership learned to split in two."]]}
+];
+CHECKS[2] = [
+{q:"In 'common law,' the word 'common' means…",opts:["Ordinary or everyday","Common to the whole realm — one law for all England","Owned in common by the people","Unwritten"],a:1,w:"The king's circuit judges made local customs into one law common to the realm."},
+{q:"Magna Carta was sealed in…",opts:["1066","1166","1215","1536"],a:2,w:"1215, at Runnymede — clause 39: judgment of his equals, or the law of the land."},
+{q:"Clause 39's two load-bearing phrases are…",opts:["“Habeas corpus” and “due process”","“Judgment of his equals” and “the law of the land”","“Trial by combat” and “ordeal”","“Fee simple” and “fee tail”"],a:1,w:"Those two phrases carried the charter's weight for eight centuries."},
+{q:"Under Black's definition, a JURY is sworn to…",opts:["Decide questions of law","Inquire of matters of fact and declare the truth upon the evidence","Punish the guilty","Advise the king"],a:1,w:"'Selected according to law, and sworn (jurati) to inquire of certain matters of fact, and declare the truth upon evidence to be laid before them.'"},
+{q:"What carried the common law to the American colonies in book form?",opts:["The Domesday Book","Blackstone's Commentaries (1765–1769)","The Statute of Uses","The Rhodian Sea Law"],a:1,w:"Four volumes that compressed a millennium of law — the founding generation's law library."}
+];
+
+/* ================= MODULE 3 — AIR ================= */
+LESSONSETS[3] = [
+{n:"3.1",t:"The Church Courts: The First 'Paper People' Law",era:"Medieval Europe · c. 1100s – 1500s",mins:6,body:[
+["lead","While the king's courts judged the land, another system of courts sat in every cathedral town — and it claimed the subjects the land could not touch: the soul, the oath, the marriage, and the dead."],
+["p","Canon law — the law of the Church, gathered in collections like Gratian's Decretum (c. 1140) — ran its own courts with its own judges, procedure and appeals to Rome. In England the church courts (the 'courts Christian') heard cases of clergy discipline, morality, defamation — and two jurisdictions that matter enormously to this course: matrimony, and testaments."],
+["p","If you married, the Church defined whether it counted. If you died, the Church's court proved your will (probate) and oversaw the distribution of your goods. Swear an oath — the era's master key for binding a person — and you swore it into the Church's jurisdiction, for perjury was a sin before it was a crime."],
+["fact","On the record: in England, probate of wills stayed with the ecclesiastical courts until 1858 — six centuries in which the property of the dead moved through the AIR, not the LAND. Estates were administered on paper, by officers, for people who could no longer stand in any court at all."],
+["reading","The lane's reading: this is why the AIR panel of the map 'governs trusts, estates, oaths — the dead on paper.' Long before the modern trust, the Church's courts were the machinery that administered people who existed only as documents: the unborn heir, the absent crusader, the corpse with a will."],
+["point","Study point: canon law's turf = oaths · marriages · wills · estates. If a Module 5 scenario runs on an oath or a will, it sorts to AIR."]]},
+{n:"3.2",t:"The Court of Conscience: Equity Is Born",era:"1300s – 1500s · England",mins:6,body:[
+["lead","The common law was strong, and strength made it stiff. Its writs came in fixed forms; if your case fit no form, the king's courts had no door for you. So the wronged went over the courts' heads — to the king himself."],
+["p","Petitions begging the king's grace were referred to his Chancellor — often a bishop, the 'keeper of the king's conscience.' The Chancellor did not ask what the forms allowed. He asked what conscience required: he summoned the defendant to answer on oath (the subpoena), examined the facts, and decreed what fairness demanded — acting on the person, in personam, not on things. Out of those petitions grew the Court of Chancery, and out of the Chancellor's decrees grew Equity: a second, parallel system of justice sitting beside the common law."],
+["quote","EQUITY"],
+["p","Equity's classic work was relief against the common law's own hardness: penalties and forfeitures softened, frauds undone, and — critically for this course — promises enforced that the law courts could not see. It did not abolish the law courts; it corrected them, in conscience, case by case, until its corrections hardened into doctrines of their own."],
+["fact","On the record: the two systems ran side by side in England for nearly 500 years, sometimes colliding — under James I, the Chancellor's equity was confirmed to prevail where the two conflicted. They were not merged administratively until the Judicature Acts of 1873–1875."],
+["point","Study point: LAND = form and title. AIR = conscience and fairness. The Chancellor is the hinge between the church courts of Lesson 3.1 and the trust of Lesson 3.3."]]},
+{n:"3.3",t:"The Use: Title Splits From Benefit",era:"1200s – 1500s · England",mins:7,body:[
+["lead","Here is the invention the whole AIR jurisdiction turns on — born, fittingly, from a man about to leave his land behind and sail to war."],
+["p","A knight departing on Crusade faced a problem: land law recognized only the name on the title, and he would be gone for years — perhaps forever. The solution was the feoffment to uses: he conveyed his land to a trusted friend — the feoffee to uses — directing him to hold it 'to the use' of the knight's wife and children, and to hand it back if the knight returned. Franciscan friars, vowed to own nothing, used the same device: others held title; the friars had the use."],
+["p","Now watch the split. At common law, the feoffee IS the owner — the land court sees only his title. If he turns faithless and keeps the land, the law court shrugs. But the Chancellor does not shrug: in conscience, the feoffee bound himself, and Chancery will enforce the use. One piece of land, two kinds of ownership, two courts that each see only one of them: legal title in the feoffee; the benefit — the equitable interest — in the one for whose use it is held:"],
+["quote","CESTUI QUE USE"],
+["p","That is a trust in embryo. Rename the feoffee 'trustee' and the cestui que use 'beneficiary' and you are reading modern law. The Title/Benefit Splitter in this module's tools lets you sort the pieces yourself — and shows you which court, the law court or the Chancellor, can see each one."],
+["quote","FIDUCIARY"],
+["point","Study point: TITLE (legal, seen by LAND courts) vs. BENEFIT (equitable, seen by the Chancellor). Every trust since is this split with paperwork."]]},
+{n:"3.4",t:"The Crown Strikes Back: The Statute of Uses 1536",era:"1536 · England",mins:6,body:[
+["lead","Uses were convenient for families — and ruinous for the Crown's income. Land held in use escaped the feudal dues owed when land passed at death. Henry VIII decided to kill the device outright."],
+["p","The Statute of Uses (1535, in force 1536) 'executed' the use: wherever land was held to another's use, the statute instantly converted the beneficiary's equitable interest into full legal title. No more split — the cestui que use became the legal owner, feudal dues attached again, and the Crown's revenue was restored. On paper, the trust died in 1536."],
+["p","On paper. Conveyancers found the seams within a generation: the statute did not execute a use upon a use ('to A to the use of B to the use of C' — the second use survived as enforceable in Chancery), and it did not reach uses of personal property or active uses where the feoffee had real duties to perform. Through those seams the modern trust walked out of the wreckage — now with a name that would outlive the king who tried to kill it."],
+["fact","On the record: the statute backfired so politically that it helped provoke the Pilgrimage of Grace (1536), the largest rebellion of Henry's reign — and Parliament had to soften the blow with the Statute of Wills (1540), letting landholders devise land by will for the first time."],
+["point","Study point: 1536 — the Crown strikes at the split; the split survives. Remember the pattern: every later attack on the trust teaches it a new shape."]]},
+{n:"3.5",t:"The Cestui Que Vie Acts: Estates Measured by a Life",era:"1540 · 1666",mins:6,body:[
+["lead","Land could be granted not forever, but for a life — 'to hold during the life of X.' While X lived, the tenant held. When X died, the estate ended. But what if nobody could prove whether X was alive?"],
+["p","That person — the one whose life measures the estate — has a name in Black's:"],
+["quote","CESTUI QUE VIE"],
+["p","Parliament had to answer the practical question twice. The Cestui Que Vie Act of 1540 (32 Hen. 8) took up estates measured by another's life where the measuring life could not be accounted for. Then, in 1666, the better-known Cestui Que Vie Act (18 & 19 Car. 2, c. 11) addressed the age of sail's signature problem: the cestui que vie who had gone 'beyond the seas.' If such a person stayed absent seven years with no proof of life, the law would treat them as dead — 'persons… beyond the seas… not heard of for seven years' — so the estate could move on, with a safeguard: if the 'dead' person returned alive, the remedy restored them."],
+["fact","On the record: the 1666 Act is a real statute with a narrow, practical job — settling land titles when the measuring life vanished overseas. Its machinery is evidentiary: absence + seven years + no proof of life = a legal presumption of death, reversible if the person reappears."],
+["reading","The lane's reading: this Act is the hinge the whole modern reading turns on — the claim that a living person can be treated in law as absent or dead on paper while their estate is administered by others. This course teaches the Act as it reads, and teaches the lane's reading as the lane's reading. You are entitled to know exactly which is which — that honesty is the course's backbone."],
+["point","Study point: cestui que vie = the measuring life. 1666 Act = seven years beyond the seas, presumed dead, return restores. This is Episode 7's ground — and the single most-open keyword gap in the lane."]]},
+{n:"3.6",t:"The Bulls as Deeds: 1302 & 1455",era:"1302 · 1455 · Rome",mins:6,body:[
+["lead","Two documents, issued a century and a half apart by two popes, are the largest claims ever made on parchment. This lesson reads them as documents — what they actually say — and then gives you the lane's reading of them, labeled as such."],
+["p","Unam Sanctam (1302), issued by Boniface VIII amid his war of words with Philip IV of France, declares the pope's authority over both spiritual and temporal swords, and concludes that subjection to the Roman pontiff is 'altogether necessary for salvation for every human creature.' Romanus Pontifex (1455), issued by Nicholas V to King Afonso V of Portugal, granted Portugal's crown the right to invade, conquer and subdue pagans and enemies of Christ, seize their lands and goods, and reduce their persons to perpetual servitude — a deed of dominion over lands not yet even found, along and beyond the African coast."],
+["p","What is documented: these bulls were instruments — written acts by which a grantor purported to convey rights over peoples and territories, to named grantees, on stated conditions. They were used, cited and fought over for centuries; Romanus Pontifex and its companions stand at the head of the legal paper trail of the age of 'discovery.'"],
+["reading","The lane's reading: the bulls are read as trust deeds on a world scale — the pope as grantor and trustee, the crowns as administrators, the peoples and lands as the estate — the cestui que trust structure of Lesson 3.3 written across the whole earth. Scholars debate the bulls' legal force and meaning; the trust structure reading is this lane's frame, presented here as a frame — the documents above are the facts it frames."],
+["point","Study point: documents = grants, conditions, named parties (fact). Reading = trust instruments at world scale (the lane's frame). Hold both, labeled."]]}
+];
+CHECKS[3] = [
+{q:"For centuries, the church courts held jurisdiction over…",opts:["Sea collisions","Oaths, marriages, wills and estates","Coinage","Roads and bridges"],a:1,w:"Canon law's turf — including probate of wills in England until 1858."},
+{q:"Equity was born when petitioners went over the common-law courts' heads to…",opts:["The admiral","The Chancellor — the keeper of the king's conscience","The jury","The mayor"],a:1,w:"Petitions to the king were referred to the Chancellor; his court became the Court of Chancery — the court of conscience."},
+{q:"In a feoffment to uses, the common-law (land) court recognized…",opts:["The beneficiary's interest","Only the feoffee's legal title","The knight's will","The Church's seal"],a:1,w:"Title only. The benefit was invisible at law — which is why Chancery had to enforce the use in conscience."},
+{q:"The Statute of Uses, Henry VIII's strike at the use, took effect in…",opts:["1215","1302","1536","1666"],a:2,w:"1536. It 'executed' the use — and conveyancers routed around it within a generation; the trust survived."},
+{q:"Under the Cestui Que Vie Act 1666, a cestui que vie gone beyond the seas and unheard of could be presumed dead after…",opts:["One year","Three years","Seven years","Thirty years"],a:2,w:"Seven years' absence with no proof of life — a reversible presumption, so the estate could move on."}
+];
+/* ================= MODULE 4 — WATER ================= */
+LESSONSETS[4] = [
+{n:"4.1",t:"The Rhodian Sea Law: The Oldest Law of Commerce",era:"c. 800s BC roots · Byzantine code",mins:6,body:[
+["lead","The WATER jurisdiction is older than most nations. A thousand years before England existed, the sea already had a law of its own — because it had to. A ship crosses every border; its law had to work in every port."],
+["p","The Rhodian Sea Law takes its name from Rhodes, the Aegean island whose merchants and jurists were famous in the ancient world. The surviving text is a Byzantine-era compilation (roughly 7th–9th century AD) preserving much older custom: rules for cargo, collision, salvage, wages of sailors, and the master's authority at sea."],
+["p","Its most famous rule outlived the empire that wrote it down. When a storm threatens the ship and cargo is deliberately thrown overboard to save the vessel — jettison — the loss is not left on the one merchant whose goods went over. It is shared, in proportion, by everyone whose property was saved: general average. Justinian's Digest preserves the Rhodian jettison rule ('Lex Rhodia de iactu'), and general average is still adjusted in world shipping today — a 2,500-year-old doctrine riding on modern container ships."],
+["quote","ADMIRALTY"],
+["fact","On the record: Black's calls the admiralty court 'the successor of the consular courts… established in the principal maritime cities on the revival of commerce.' Sea law's courts were merchants' courts before they were kings' courts — commerce built its own tribunal."],
+["point","Study point: Rhodian line = cargo · collision · jettison · general average. Run the General Average calculator in this module's tools and split a jettison loss yourself."]]},
+{n:"4.2",t:"Oleron, Wisby & the Consulate: Sea Law Climbs the Coasts",era:"c. 1160s – 1400s",mins:6,body:[
+["lead","Sea law did not spread by conquest. It spread port by port, the way cargo did — each harbor adopting the code that the ships arriving in it already obeyed."],
+["p","The Rolls (Laws) of Oleron, compiled around the 1160s–1180s and named for the island of Oleron off France's Atlantic coast, set the rules for the wine trade's sea lanes: the master's duties, pilots, wreck, jettison, and the crew's rights. Tradition ties their promulgation to Eleanor of Aquitaine; what is certain is their reach — adopted up the Atlantic coast into England and the northern ports."],
+["p","In the Baltic, the Sea Laws of Wisby (from Visby, on the island of Gotland) carried the same body of rules into Hanseatic trade. In the Mediterranean, Barcelona's Consulate of the Sea (Consolat de Mar, compiled in the 14th century) systematized maritime custom for the western Mediterranean — procedure, consuls, prizes, and commerce."],
+["fact","On the record: three coasts, three codes, one family. A merchant could load in Bordeaux, transship in London and sell in Lübeck under recognizably the same law — centuries before anyone dreamed of a uniform commercial code. Click the ports on this module's Route Map to walk the line yourself."],
+["point","Study point: Oleron (Atlantic) · Wisby (Baltic) · Consulate (Mediterranean). One law of the water, regional editions."]]},
+{n:"4.3",t:"Admiralty Courts: Suing the Ship",era:"1300s → England & America",mins:6,body:[
+["lead","Sea law kept its own courts — and its own procedure, which looks upside-down to a land lawyer: civil-law style, judges instead of juries, and cases that can name a thing as the defendant."],
+["p","In England, the Lord High Admiral's court grew into a standing admiralty court with jurisdiction over maritime contracts, torts and crimes on the sea. It proceeded without a jury, on written evidence, following the civil-law tradition of the sea codes rather than the common law of the land. The common-law judges fought it for centuries with writs of prohibition — turf war between LAND and WATER on English soil."],
+["p","Admiralty's signature device is the action against the vessel herself:"],
+["quote","IN REM"],
+["p","Arrest the ship, and the court has its defendant — the owner's interest is bound through the thing. For commerce this is genius: a vessel from anywhere can be answered for in the port where she sits, whatever flag she flies. Keep this device in mind; the Sorter will test it."],
+["point","Study point: admiralty = no jury · civil procedure · in rem against the thing. Three tells that separate WATER from LAND in any scenario."]]},
+{n:"4.4",t:"Paper That Sails: Bills of Lading & Negotiable Instruments",era:"1500s – 1800s",mins:6,body:[
+["lead","The sea's greatest export was not a spice. It was a kind of paper: documents that carry value in themselves, that can be sold, pledged and transferred while the goods they describe are still on the water."],
+["quote","BILL OF LADING"],
+["p","One document, three jobs: it is the carrier's receipt for the goods; it is the contract of carriage; and it is documentary evidence of title — whoever lawfully holds the bill can claim the freight. Sell the bill in a coffee house in London, and you have sold cotton still mid-Atlantic. Around the bill of lading grew a whole family: bills of exchange (orders to pay across distance), promissory notes, and the law merchant's rules for endorsing and transferring them — negotiable paper."],
+["fact","On the record: negotiability is the sea-gift to all later commerce: value that moves by transferring the document, 'to order or assigns,' without moving the goods. When this paper walked off the docks into inland trade, it carried the WATER's habits with it — which is Episode 9's bridge into Module 6."],
+["point","Study point: bill of lading = receipt + contract + title. If the scenario's power sits in a document, you are probably standing in the WATER."]]},
+{n:"4.5",t:"The Shoreline Today: Admiralty in the Constitution, the UCC in Commerce",era:"1789 → today",mins:6,body:[
+["lead","The young United States did not leave sea law to the states. It wrote the WATER straight into its founding document."],
+["p","Article III of the U.S. Constitution extends the federal judicial power 'to all Cases of admiralty and maritime Jurisdiction,' and the Judiciary Act of 1789 vested that jurisdiction in the federal district courts — where maritime cases are still tried, mostly without juries, two and a half centuries on. The Rhodian line — Rhodes, Oleron, Wisby, the Admiral's court — empties into a federal courthouse."],
+["p","And the commerce the sea taught now runs on uniform paper far inland: the Uniform Commercial Code, adopted across the United States in the 20th century, codifies sales, negotiable instruments (Article 3), documents of title (Article 7) and secured transactions (Article 9) — the descendants of the law merchant, standardized for a continental economy."],
+["reading","The lane's reading: the UCC is the modern shoreline — the place where the law of commerce, born on the water, now governs daily life on land: every check, note, registration and secured filing a small tide of the old sea law. Read the code as a student of history and the shoreline is unmistakable."],
+["point","Study point: 1789 — admiralty federalized. 1900s — the UCC uniforms commerce's paper. Module 5 now turns the whole map on the question that matters: where do YOU stand in it?"]]}
+];
+CHECKS[4] = [
+{q:"General average means…",opts:["The average speed of the fleet","A loss deliberately taken to save the ship is shared by all whose property was saved","The captain decides all losses alone","Cargo is insured by the Crown"],a:1,w:"The Rhodian rule: jettison to save the whole → the loss is borne proportionally by all who benefited."},
+{q:"The Laws of Oleron spread sea law along…",opts:["The Silk Road","Europe's Atlantic coast","The Mississippi","The Pacific islands"],a:1,w:"From the island of Oleron up the Atlantic coast — adopted port by port, as cargo moved."},
+{q:"An action IN REM is instituted against…",opts:["The owner personally","The thing — e.g., the vessel itself","The jury","The cargo's buyer"],a:1,w:"Black's: 'proceedings or actions instituted against the thing, in contradistinction to personal actions… in personam.'"},
+{q:"A bill of lading does three jobs. Which set is right?",opts:["Receipt, contract of carriage, document of title","Tax receipt, passport, insurance policy","Charter, mortgage, will","Summons, verdict, sentence"],a:0,w:"Receipt for the goods + contract for their carriage + documentary evidence of title — the paper that sails."},
+{q:"In the United States, admiralty jurisdiction belongs to…",opts:["State small-claims courts","Federal courts, under Article III and the Judiciary Act of 1789","The Coast Guard alone","County juries"],a:1,w:"'All Cases of admiralty and maritime Jurisdiction' — federal, and still largely jury-less today."}
+];
+
+/* ================= MODULE 5 — SUI JURIS (CORE) ================= */
+LESSONSETS[5] = [
+{n:"5.1",t:"The Definition, Word for Word",era:"Black's · 4th Ed. Revised",mins:7,body:[
+["lead","Every module so far has been building the ground. This one reads a single dictionary entry the way lawyers are supposed to read things: word by word, because each word is load-bearing."],
+["quote","SUI JURIS"],
+["p","Take it in pieces. 'Of his own right' — the right is his; it is not rented from an office. 'Possessing full social and civil rights' — the complete set, not a reduced schedule. 'Not under any legal disability' — nothing in his legal condition dims his standing. 'Or the power of another, or guardianship' — no one answers in his place; he is not a ward. Then the sentence that repeats the point as action: 'Having capacity to manage one's own affairs; not under legal disability to act for one's self.' Status and capacity, stated twice so it cannot be misread."],
+["p","And then the citation: 'Story, Ag. § 2' — Joseph Story's Commentaries on the Law of Agency. A dictionary entry with a pedigree: the definition comes out of the law of agency, the branch of law that asks who may act, and for whom, and with what authority. Sui juris is, at bottom, the opposite of being represented by necessity: you are your own principal."],
+["fact","On the record: this is the entry exactly as it stands in Madison's source of record — Black's Law Dictionary, 4th Edition Revised. The course quotes Black's only from that edition, and the Term Cards in this module carry this entry verbatim."],
+["point","Study point: memorize the skeleton — own right · full rights · no disability · no guardian · capacity to act for one's self. The Sorter and the capstone both grade from this page."]]},
+{n:"5.2",t:"The Mirror: NON SUI JURIS — 'Not His Own Master'",era:"Black's · 4th Ed. Revised",mins:6,body:[
+["lead","Entries in a law dictionary often come in facing pairs, and this pair faces each other across the whole course:"],
+["quote","NON SUI JURIS"],
+["p","'Not his own master.' Five words, and a whole human category. The law calls non sui juris those who cannot fully act for themselves: minors, whose contracts are voidable because judgment is still forming; persons under guardianship after a court finds incapacity; persons under other legal disabilities recognized by the forum. For each, the system appoints or recognizes another to act: parent, guardian, committee, next friend."],
+["p","Understand why the category exists before you judge it. It does protective work: a child cannot be bound hand and foot by a bargain he could not weigh. And it does certainty work: everyone dealing with a person must know whether that person's act will bind. Capacity is the hinge between a signature and a consequence."],
+["fact","On the record: the categories are creatures of each legal system — ages of majority, guardianship procedures and disability definitions vary by place and era — but the architectural point never changes: where capacity is absent, the law supplies a substitute actor, and acts done without capacity are weakened or void."],
+["reading","The lane's reading: the pair teaches a standing lesson — systems sort people by capacity, and the sorting decides whose word binds. The study question this course presses is not whether the category exists (it does, everywhere) but whether you know which side of it any given paper presumes you to be on."],
+["point","Study point: sui juris ↔ non sui juris: master of one's acts ↔ another answers. Module 3's guardianship and Module 5's sorter both run on this pair."]]},
+{n:"5.3",t:"Capacity vs. Action: Sui Juris, In Propria Persona, Pro Se",era:"Status vs. conduct",mins:6,body:[
+["lead","Three phrases get tangled together in this lane until they look like one. Untangle them now and you will read papers more clearly than most."],
+["quote","CAPACITY"],
+["p","SUI JURIS is a status: what you are in the law's eyes — of full capacity, under no disability. IN PROPRIA PERSONA is a posture: how you appear in a proceeding — in your own proper person:"],
+["quote","IN PROPRIA PERSONA"],
+["p","And PRO SE — 'for oneself' — is the modern courtroom's everyday term for the same posture: a party conducting their own case without counsel. Now the untangling: status and posture are different axes. A person sui juris may hire a lawyer (capacity intact, posture represented). A person may appear pro se — the appearance does not create the status, and the status does not require the appearance. Capacity answers 'can this person's acts bind?'; appearance answers 'who is speaking for them in this room?'"],
+["fact","On the record: Black's CAPACITY entry opens by warning that the word has 'many meanings, dependent on its relationship to the subject-matter,' and lists among them 'the attribute of persons which enables them to perform civil or juristic acts.' Whenever a paper says 'capacity,' ask: capacity to do what, in which system, proved how?"],
+["point","Study point: status (sui juris) ≠ posture (in propria persona / pro se). Confusing them is the most common reading error in the lane — and the easiest to stop making."]]},
+{n:"5.4",t:"Three Jurisdictions, Three Presumptions",era:"The map, applied to a person",mins:6,body:[
+["lead","Now turn the whole map of this course onto a single human being standing in a doorway, holding a document. Each jurisdiction behind that door presumes something different about who is standing there."],
+["p","On the LAND, the common law's presumption is the living person himself: sui juris, answering in his own name, judged by the law of the land and by his peers. Standing is personal, factual, and present — the man is the party."],
+["p","In the AIR, the presumptions run through estates and offices: trustee and beneficiary, executor and heir, guardian and ward. The party before the court is frequently a capacity — someone acting for an estate, a trust, the dead, the absent, the not-yet-capable. The paper defines the person it needs: the cestui que vie whose life measures, the fiduciary who must answer, the non sui juris who must be answered for."],
+["p","On the WATER, the presumption is the person in commerce: a party bound by instruments — signer, endorser, debtor, secured party — where identity follows the document and liability follows the signature. The ship can be sued in rem because in commerce the thing and its paper are answerable whether or not any living person appears."],
+["reading","The lane's reading: forums presume. A court does not begin from zero about who you are; its form of law supplies a default standing, and the paper in front of it — caption, signature, capacity — argues with that default. 'Know which one you're standing in — before you answer to it' is this lesson, compressed to a sentence."],
+["point","Study point: LAND presumes the living · AIR presumes the estate's parties · WATER presumes the person in commerce. The Jurisdiction Sorter, next in this module's tools, grades exactly this."]]},
+{n:"5.5",t:"Standing on Paper: Captions, Certificates & Signature Blocks",era:"Reading real documents",mins:7,body:[
+["lead","Jurisdictions are abstract until they are printed. This lesson walks three real document types and shows you where standing hides in each — because it always hides in the same places: the caption, the names, and the signature block."],
+["p","First, a caption page: the heading of a court filing. It names the court (which jurisdiction's house you are in), the parties (in what order, styled how), and often a party's capacity in parentheses or a suffix — 'as Trustee,' 'as Executor,' 'individually.' The caption is the map's legend printed on the case itself."],
+["p","Second, a trust certificate or certificate of beneficial interest: it names the trust, the trustee, and the holder of the beneficial interest — title and benefit, Module 3's split, in a single page. Whoever signs it signs as trustee: a capacity, not as the private person. Read the word after the signature before you read the signature."],
+["p","Third, a UCC-1 financing statement — commerce's registry paper: it names a DEBTOR and a SECURED PARTY, in the exact name formats the filing office requires, to perfect an interest in collateral. It is pure WATER paperwork: no court, no jury, just names, a registry, and consequences that follow the filing."],
+["fact","On the record: in all three documents the mechanics are identical — the same human name can appear as an individual, as a fiduciary, or as a commercial party, and the document's consequences follow the capacity stated, not the reader's assumptions. 'By:' lines, 'its:' lines and capacity suffixes are not decoration; they are the standing, printed."],
+["reading","The lane's reading: if standing is presumed by forums, it is negotiated on paper. This is an educational walk-through of how documents work — not advice about any live matter. For a live matter, the course's standing instruction holds: consult a lawyer if you don't have the knowledge of a lawyer."],
+["point","Study point: read every document in this order — court/form → names → capacity words → signature block. Four stops, in that order, every time."]]}
+];
+CHECKS[5] = [
+{q:"Black's defines SUI JURIS as…",opts:["“Licensed by the state to practice law”","“Of his own right; possessing full social and civil rights; not under any legal disability”","“Free of all debts”","“A citizen of two countries”"],a:1,w:"Word for word — with the capstone: 'Having capacity to manage one's own affairs.' Story, Ag. § 2."},
+{q:"Which phrase is NOT part of Black's SUI JURIS definition?",opts:["“Not under… guardianship”","“Capacity to manage one's own affairs”","“Licensed and bonded by the state”","“Full social and civil rights”"],a:2,w:"No license appears anywhere in the entry. The definition runs on rights, disability and capacity — not permission."},
+{q:"NON SUI JURIS means…",opts:["“Not his own master”","“Against the state”","“Without a jury”","“Beyond the seas”"],a:0,w:"'Lat. Not his own master. The opposite of sui juris.'"},
+{q:"Sui juris and in propria persona differ how?",opts:["They are identical","Sui juris is a status (capacity); in propria persona is a posture (appearing in one's own person)","In propria persona is the status; sui juris is the posture","One is Greek, one is Latin"],a:1,w:"Status vs. conduct — Lesson 5.3's whole point. Capacity answers 'can his acts bind?'; appearance answers 'who speaks for him here?'"},
+{q:"A signature reading 'Jane Roe, Trustee' tells you…",opts:["Her middle name","The capacity in which she signs — as fiduciary for the trust, not as a private person","That she owns the trust property outright","Nothing at all"],a:1,w:"Capacity words after a name are the standing, printed. Read them before the signature."}
+];
+/* ================= MODULE 6 — THE MODERN MAP (CAPSTONE) ================= */
+LESSONSETS[6] = [
+{n:"6.1",t:"Reading a Courtroom: Which Court, Which Law, What Caption",era:"Method lesson",mins:6,body:[
+["lead","You now own a method. This lesson turns it into a checklist you can run on any legal paper put in front of you — the same four stops as Lesson 5.5, expanded into the room itself."],
+["p","Stop one — the forum: whose house is it? A common-law court of the land, a court sitting in equity, an admiralty side of a federal court, an administrative tribunal of commerce? The courthouse door already narrows the presumptions. Stop two — the form: is there a jury box, and is it used? (Land's signature.) Is the case styled against a thing? (Water's.) Is a trustee, executor or guardian the moving party? (Air's.)"],
+["p","Stop three — the caption and parties: who is named, in what order, with what capacity words. Stop four — the relief: what is being asked — damages at law, a decree in conscience, arrest of a vessel, enforcement of a filing? The remedy requested usually betrays the jurisdiction being invoked more honestly than any label."],
+["fact","On the record: American federal courts historically sat in distinct 'sides' — law, equity, admiralty — with different procedure on each; the 20th century merged law and equity procedure, but admiralty retains its separate rules and its jury-less bench trials to this day. The forms blurred; the presumptions did not entirely follow."],
+["point","Study point: forum → form → caption → relief. Four stops; the paper answers each in order. The capstone exam grades this method, not memory alone."]]},
+{n:"6.2",t:"The Gold Fringe, Documented — and Why the Paper Matters More",era:"1835 → today",mins:6,body:[
+["lead","Every student of this subject eventually asks about the gold fringe on the courtroom flag. This lesson answers it the only way this course answers anything: with the documented record, and then with the point the record is usually used to dodge."],
+["p","The documented history: gold fringe is an ornament of military colors. The U.S. Army used fringe on its regimental colors from the 1830s (the practice is documented from 1835), and the Army's Institute of Heraldry, asked directly, calls fringe 'an honorable enrichment only' — a decoration, governed by military custom, with no rule attaching legal meaning to its presence on a flag in any room. No statute makes a fringed flag an admiralty flag; courts that have been asked to rule on the claim have dismissed it — repeatedly, in print — as without merit."],
+["fact","On the record: that is the whole of the reliable record on the fringe. Anyone who tells you a court converted its jurisdiction because of a fringe is telling you something no document in this lesson's file supports — and this course does not teach what it cannot show you."],
+["reading","The lane's reading: the fringe was never the mechanism — the paper is. What actually moves in a courtroom is presumption, capacity, caption and filing: Modules 5.4 and 5.5. The fringe question survives because it points, clumsily, at a real intuition — that the room may not be running the jurisdiction you assumed. The intuition deserves the paper method, not the decoration."],
+["point","Study point: fringe = documented ornament, 'an honorable enrichment only' (Institute of Heraldry). Mechanism = paper and presumption. Don't watch the fringe — watch the paper."]]},
+{n:"6.3",t:"The Map, Whole: One Page to Keep",era:"Synthesis",mins:5,body:[
+["lead","Below is the course on one page — the same three panels as Madison's original post, now carrying everything you have studied. The printable study sheet in this module's tools is this page; print it, keep it, test yourself against it."],
+["p","LAND — Common Law, the law of the land. AUTHORITY: the living men and women, the people. GOVERNS: life, liberty, land and property, inherited rights. WHO STANDS: the living, on the soil, in their own name — sui juris, judged by peers. Its root: Sumer's compensation tables → folk custom → the king's courts → Magna Carta → Blackstone."],
+["p","AIR — Ecclesiastical & Trust Law, Equity. AUTHORITY: spiritual authority over trusts and estates, administered by conscience. GOVERNS: trusts, estates, oaths — the dead on paper. WHO STANDS: trustees, fiduciaries, beneficiaries, guardians — capacities, not just persons. Its root: canon law's courts → the Chancellor's conscience → the use → the trust that survived 1536."],
+["p","WATER — Admiralty / Maritime, the law of commerce. AUTHORITY: the Crown and the corporate state, by statute, over commerce. GOVERNS: contracts, commerce, the UCC, negotiable paper. WHO STANDS: debtors and secured parties in commerce — and things themselves, in rem. Its root: Rhodes → Oleron → Wisby → the Admiral's court → Article III → the UCC shoreline."],
+["fact","The course's payoff, one last time: 'Know which one you're standing in — before you answer to it.' You can now name the three, date their roots within centuries, quote their dictionary, and sort their cases. Remains only the examination."],
+["point","Study point: print the Map from the tools below. If you can narrate each panel's root-line without looking, you are ready for the capstone."]]},
+{n:"6.4",t:"Capstone Examination",era:"The final gate",mins:10,body:[
+["lead","The capstone mixes everything: twelve scenarios through the Jurisdiction Sorter engine — traffic of land, air and water, unlabeled — followed by six term questions graded word-for-word against Black's."],
+["p","Pass mark: 70% across the eighteen. There is no timer and no penalty for retaking it after restudy — the modules stay open below, and the Sorter in Module 5 is your practice ground. But the certificate does not print on a fail: it is a certificate of completion, and completion is the thing being certified."],
+["fact","On the record: everything on this examination was taught in the open text of this course — every scenario echoes a lesson, every term question is answered verbatim in the Term Cards. If a question feels unfamiliar, the lesson it came from is the one to reread."],
+["p","When you pass, the certificate page opens: your name, in proper case, over the gold seal — 'Completed L.A.W. — Land · Air · Water.' Print it. Frame it if you like. You hold the map now."],
+["point","Study point: begin when ready — the exam opens from the button in this module's tools, and your result is recorded on this device."]]}
+];
+
+/* ================= MODULE META ================= */
+var MODULES = [
+ {n:1,tag:"Origins",title:"Origins: The Sumerians & the First Written Law",img:"law-m1-sumer.jpg",desc:"Where law begins — clay, seals, archives and the first codes. The root system of everything after.",terms:[],tools:[["tablet","✒ Write-a-Law Tablet"]],check:true},
+ {n:2,tag:"Land",title:"LAND: Common Law & the Law of the Land",img:"law-m2-land.jpg",desc:"Custom of the people, the king's courts, Magna Carta, the jury of neighbors, Blackstone. The living stand here.",terms:["COMMON LAW","JURY","FEE SIMPLE"],tools:[],check:true},
+ {n:3,tag:"Air",title:"AIR: Canon Law, Equity & the Trust",img:"law-m3-air.jpg",desc:"Church courts, the Chancellor's conscience, the use, and the trust that survived a king. Estates, oaths — the dead on paper.",terms:["EQUITY","CESTUI QUE USE","CESTUI QUE VIE","FIDUCIARY"],tools:[["splitter","⚖ Title / Benefit Splitter"]],check:true},
+ {n:4,tag:"Water",title:"WATER: Admiralty, Maritime & the Law of Commerce",img:"law-m4-water.jpg",desc:"The Rhodian line, sea codes port to port, suing the ship, and the paper that sails. Commerce's own law.",terms:["ADMIRALTY","IN REM","BILL OF LADING"],tools:[["routemap","🗺 Port-to-Port Route Map"],["ga","🧮 General Average Toy"]],check:true},
+ {n:5,tag:"Core Module",title:"SUI JURIS: Of His Own Right",img:"law-m5-suijuris.jpg",desc:"The core module. Black's definition word for word, its mirror, capacity vs. appearance, and the three presumptions — then the Jurisdiction Sorter.",terms:["SUI JURIS","NON SUI JURIS","IN PROPRIA PERSONA","CAPACITY"],tools:[["sorter","⚖ The Jurisdiction Sorter"]],check:true},
+ {n:6,tag:"Capstone",title:"The Modern Map: Courts & Paper Today",img:"law-m6-modern.jpg",desc:"Reading a courtroom, the gold fringe documented, the map whole — and the capstone examination.",terms:[],tools:[["exam","🎓 Capstone Examination"],["map","🖨 Printable Jurisdiction Map"],["cert","📜 Completion Certificate"]],check:false}
+];
+/* ================= STATE ================= */
+var SKEY = "lawCourseV1";
+var state = {done:{},checks:{},sorterBest:-1,exam:{passed:false,pct:0},examBest:-1};
+try{ var raw = localStorage.getItem(SKEY); if(raw){ var p = JSON.parse(raw); if(p && typeof p==="object"){ state = Object.assign(state,p); } } }catch(e){}
+function save(){ try{ localStorage.setItem(SKEY, JSON.stringify(state)); }catch(e){} }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function totalLessons(){ return MODULES.reduce(function(a,m){ return a + LESSONSETS[m.n].length; },0); }
+function doneCount(){ return Object.keys(state.done).length; }
+function courseGrade(){ var tw=0, ts=0; MODULES.forEach(function(m){ if(!m.check) return; var pct = state.checks[m.n]; if(typeof pct==="number"){ var w = (m.n===5)?2:1; ts += pct*w; tw += w; } }); return tw? Math.round(ts/tw) : null; }
+var viewsEl = document.getElementById("views");
+function go(html){ viewsEl.innerHTML = html; window.scrollTo(0,0); var v = viewsEl.firstElementChild; if(v) v.classList.add("active"); }
+/* ================= HOME ================= */
+function pinPct(y){ return ((y + 2400) / (2026 + 2400)) * 100; }
+function renderTimeline(litFn){
+  var pins = TIMELINE.map(function(ev,i){ var lit = litFn(ev); return '<button class="tlpin'+(lit?" lit":"")+'" data-pin="'+i+'" style="left:'+pinPct(ev.y)+'%" aria-label="'+esc(ev.lab+" "+ev.t)+'"></button><span class="tllab" style="left:'+pinPct(ev.y)+'%">'+esc(ev.lab)+'</span>'; }).join("");
+  return '<div class="tlwrap"><h2>⏳ The 4,100-Year Timeline</h2><div class="hint">Every pin is a lesson in this course. Pins light up gold as you complete their module. Tap a pin — or scrub.</div><div class="tltrack"><div class="tlline"></div>'+pins+'</div><input type="range" class="tlscrub" id="tlscrub" min="-2400" max="2026" step="1" value="-2400" aria-label="Scrub the timeline"><div class="tlcard" id="tlcard"><b>Begin at the beginning.</b> Scrub to c. 2400 BC — the first lawgiver known by name — or tap any pin.</div></div>';
+}
+function wireTimeline(){
+  var card = document.getElementById("tlcard");
+  function show(i){ var ev = TIMELINE[i]; if(card) card.innerHTML = "<b>"+esc(ev.lab)+" — "+esc(ev.t)+".</b> "+esc(ev.d); }
+  Array.prototype.forEach.call(document.querySelectorAll(".tlpin"), function(b){ b.addEventListener("click", function(){ show(parseInt(b.getAttribute("data-pin"),10)); }); });
+  var sc = document.getElementById("tlscrub");
+  if(sc){ sc.addEventListener("input", function(){ var y = parseInt(sc.value,10), best=0, bd=1e9; TIMELINE.forEach(function(ev,i){ var d = Math.abs(ev.y-y); if(d<bd){bd=d;best=i;} }); show(best); }); }
+}
+function showHome(){
+  var pct = Math.round(doneCount()/totalLessons()*100);
+  var grade = courseGrade();
+  var tri = '<div class="triptych">'
+    + '<div class="panel"><img src="law-m2-land.jpg" alt="Golden wheat field under a storm sky — the Land"><div class="shade"></div><div class="pcap"><h3>LAND</h3><p><b>Common Law — the Law of the Land.</b><br>Authority: the living. Governs: life, liberty, land &amp; property. Who stands: the living, on the soil, in their own name.</p></div></div>'
+    + '<div class="panel"><img src="law-m3-air.jpg" alt="Storm clouds parting with light over cathedral spires — the Air"><div class="shade"></div><div class="pcap"><h3>AIR</h3><p><b>Ecclesiastical &amp; Trust Law — Equity.</b><br>Authority: conscience over trusts &amp; estates. Governs: trusts, estates, oaths. Who stands: trustees, fiduciaries, beneficiaries.</p></div></div>'
+    + '<div class="panel"><img src="law-m4-water.jpg" alt="A towering ocean wave with a golden crest — the Water"><div class="shade"></div><div class="pcap"><h3>WATER</h3><p><b>Admiralty / Maritime — the Law of Commerce.</b><br>Authority: statute over commerce. Governs: contracts, the UCC, negotiable paper. Who stands: debtors &amp; secured parties in commerce.</p></div></div></div>';
+  var mods = MODULES.map(function(m){
+    var lessons = LESSONSETS[m.n].map(function(l,li){
+      var id = m.n+"."+(li+1); var done = !!state.done[id];
+      return '<li data-lesson="'+m.n+":"+li+'" class="'+(done?"done":"")+'"><span class="dot">'+(done?"✓":(li+1))+'</span><span><span class="lt">'+esc(l.t)+'</span><br><span class="le">'+esc(l.n)+' · '+esc(l.era)+' · ~'+l.mins+' min</span></span></li>';
+    }).join("");
+    var tools = m.tools.map(function(t){ return '<button class="chipbtn" data-tool="'+t[0]+'" data-mod="'+m.n+'">'+t[1]+'</button>'; }).join("");
+    var extras = "";
+    if(m.terms.length) extras += '<button class="chipbtn" data-terms="'+m.n+'">🂡 Term Cards ('+m.terms.length+')'+(m.n===5?' · core':'')+'</button>';
+    if(m.check){ var cp = state.checks[m.n]; extras += '<button class="chipbtn" data-check="'+m.n+'">✔ Module Check'+(m.n===5?' (double weight)':'')+(typeof cp==="number"?' <span class="st">best '+cp+'%</span>':'')+'</button>'; }
+    var mdone = LESSONSETS[m.n].filter(function(l,li){ return state.done[m.n+"."+(li+1)]; }).length;
+    return '<div class="modcard"><div class="hero"><img src="'+m.img+'" alt="'+esc(m.title)+'"><div class="shade"></div><span class="mnum">MODULE '+m.n+'</span><h3>'+esc(m.title)+'</h3></div><div class="mbody"><p class="mdesc">'+esc(m.desc)+' <span style="color:var(--gold2)">'+mdone+'/'+LESSONSETS[m.n].length+' lessons</span></p><ul class="lessonlist">'+lessons+'</ul><div class="mtools">'+tools+extras+'</div></div></div>';
+  }).join("");
+  go('<div class="view"><div class="crest">⚜</div><div class="kicker">UCC Talk24 · Sovereign Terms · The Study Course</div>'
+    + '<h1 class="title">LAND <span class="amp">·</span> AIR <span class="amp">·</span> WATER</h1>'
+    + '<div class="subtitle">L.A.W. — The Jurisdictions &amp; Their History</div>'
+    + '<p class="payoff">Know which one you\'re standing in — <b>before you answer to it.</b></p>'
+    + tri
+    + '<div class="progresswrap"><div class="row"><span class="lbl">Course progress</span><span class="pct">'+pct+'%</span></div><div class="bar"><i style="width:'+pct+'%"></i></div><div class="row" style="margin-top:8px"><span class="grade">'+doneCount()+' of '+totalLessons()+' lessons complete</span><span class="grade">'+(grade===null?'Checks pending — your standing appears here':('Course standing (checks, Module 5 double): <b>'+grade+'%</b>'))+'</span></div></div>'
+    + renderTimeline(function(ev){ return LESSONSETS[ev.mod].some(function(l,li){ return state.done[ev.mod+"."+(li+1)]; }); })
+    + '<div class="modhead"><h2>The Six Modules</h2><span class="tag">Sumerians first · Sui Juris is the core</span></div><div class="modules">'+mods+'</div>'
+    + '<div class="disclaimer">⚠ Educational study course only — not legal advice. Documented history is taught as documented history; where this lane holds a particular reading of that history, it is labeled “the lane\'s reading.” Quotations from Black\'s Law Dictionary are verbatim from the 4th Edition Revised. For a live legal matter, consult a lawyer if you don\'t have the knowledge of a lawyer.</div>'
+    + '</div>');
+  wireTimeline();
+  Array.prototype.forEach.call(document.querySelectorAll("[data-lesson]"), function(li){ li.addEventListener("click", function(){ var p = li.getAttribute("data-lesson").split(":"); showLesson(parseInt(p[0],10), parseInt(p[1],10)); }); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-tool]"), function(b){ b.addEventListener("click", function(){ showTool(b.getAttribute("data-tool"), parseInt(b.getAttribute("data-mod"),10)); }); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-terms]"), function(b){ b.addEventListener("click", function(){ showTerms(parseInt(b.getAttribute("data-terms"),10)); }); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-check]"), function(b){ b.addEventListener("click", function(){ showCheck(parseInt(b.getAttribute("data-check"),10)); }); });
+}
+/* ================= LESSON ================= */
+function blockHTML(b){
+  var t = b[0], x = b[1];
+  if(t==="lead") return '<p class="lead">'+esc(x)+'</p>';
+  if(t==="p") return '<p>'+esc(x)+'</p>';
+  if(t==="fact") return '<div class="factbox"><span class="bh">On the record</span>'+esc(x)+'</div>';
+  if(t==="reading") return '<div class="readbox"><span class="bh">The lane\'s reading</span>'+esc(x)+'</div>';
+  if(t==="point") return '<div class="pointbox"><span class="bh">Study point</span>'+esc(x)+'</div>';
+  if(t==="quote"){ var term = TERMS[x]; if(!term) return ""; return '<div class="quoteblock"><div class="qterm">'+esc(x)+'</div><div class="qtext">'+esc(term.quote)+'</div><div class="qsrc">— '+BLACKS_SRC+(term.cite?(" · "+esc(term.cite)):"")+'</div></div>'; }
+  return '<p>'+esc(x)+'</p>';
+}
+function showLesson(mn, li){
+  var m = MODULES[mn-1], l = LESSONSETS[mn][li], id = mn+"."+(li+1);
+  var isDone = !!state.done[id];
+  var html = '<div class="view"><div class="topbar"><button class="backbtn" id="bk">← All modules</button><span class="grade">Module '+mn+' · Lesson '+esc(l.n)+' of '+LESSONSETS[mn].length+'</span></div>'
+    + '<div class="lessonhero"><img src="'+m.img+'" alt="'+esc(m.title)+'"></div>'
+    + '<h2 class="vtitle">'+esc(l.t)+'</h2><div class="vsub">'+esc(l.era)+' · ~'+l.mins+' min read</div>'
+    + '<div class="lbody">'+ l.body.map(blockHTML).join("") +'</div>'
+    + '<div class="navrow">'
+    + (li>0 ? '<button class="ghostbtn" id="prev">← Previous lesson</button>' : '<span></span>')
+    + '<button class="goldbtn" id="mkdone">'+(isDone?'✓ Completed — tap to undo':'Mark lesson complete ✓')+'</button>'
+    + (li<LESSONSETS[mn].length-1 ? '<button class="ghostbtn" id="next">Next lesson →</button>' : '<button class="ghostbtn" id="fin">Finish module →</button>')
+    + '</div></div>';
+  go(html);
+  document.getElementById("bk").addEventListener("click", showHome);
+  var pv = document.getElementById("prev"); if(pv) pv.addEventListener("click", function(){ showLesson(mn, li-1); });
+  var nx = document.getElementById("next"); if(nx) nx.addEventListener("click", function(){ showLesson(mn, li+1); });
+  var fn = document.getElementById("fin"); if(fn) fn.addEventListener("click", showHome);
+  document.getElementById("mkdone").addEventListener("click", function(){ if(state.done[id]){ delete state.done[id]; } else { state.done[id]=true; } save(); showLesson(mn, li); });
+}
+/* ================= TERM CARDS ================= */
+function showTerms(mn){
+  var m = MODULES[mn-1];
+  var cards = m.terms.map(function(name){ var t = TERMS[name]; return '<div class="tcard" tabindex="0" role="button" aria-label="Flip card for '+esc(name)+'"><div class="inner"><div class="tface tfront"><div class="term">'+esc(name)+'</div><div class="tap">Tap to flip · Black\'s verbatim</div></div><div class="tface tback"><div class="qtext">“'+esc(t.quote)+'”</div><div class="qsrc">— '+BLACKS_SRC+(t.cite?(" · "+esc(t.cite)):"")+'</div></div></div></div>'; }).join("");
+  go('<div class="view"><div class="topbar"><button class="backbtn" id="bk">← All modules</button><span class="grade">Module '+mn+' · Term Cards</span></div><h2 class="vtitle">Term Cards — Module '+mn+'</h2><div class="vsub">Every definition below is quoted verbatim from '+BLACKS_SRC+'. Tap a card to flip it.</div><div class="termgrid">'+cards+'</div></div>');
+  document.getElementById("bk").addEventListener("click", showHome);
+  Array.prototype.forEach.call(document.querySelectorAll(".tcard"), function(c){ c.addEventListener("click", function(){ c.classList.toggle("flipped"); }); });
+}
+/* ================= MODULE CHECK ================= */
+function showCheck(mn){
+  var qs = CHECKS[mn]; var answered = {}, score = 0, total = qs.length;
+  var html = '<div class="view"><div class="topbar"><button class="backbtn" id="bk">← All modules</button><span class="grade">Module '+mn+' · Check</span></div><h2 class="vtitle">Module '+mn+' Check</h2><div class="vsub">Five questions, graded on the spot.'+(mn===5?' This is the core module — it counts double in your course standing.':'')+'</div><div class="scorebanner" id="sbanner"></div>'
+    + qs.map(function(q,qi){ return '<div class="qbox" data-q="'+qi+'"><div class="q"><span class="qn">Q'+(qi+1)+'.</span> '+esc(q.q)+'</div>'+ q.opts.map(function(o,oi){ return '<button class="opt" data-q="'+qi+'" data-o="'+oi+'">'+esc(o)+'</button>'; }).join("") + '<div class="why" id="why'+qi+'"></div></div>'; }).join("")
+    + '</div>';
+  go(html);
+  document.getElementById("bk").addEventListener("click", showHome);
+  Array.prototype.forEach.call(document.querySelectorAll(".opt"), function(btn){
+    btn.addEventListener("click", function(){
+      var qi = parseInt(btn.getAttribute("data-q"),10), oi = parseInt(btn.getAttribute("data-o"),10);
+      if(answered[qi]) return; answered[qi]=true;
+      var q = qs[qi]; var box = btn.parentElement;
+      Array.prototype.forEach.call(box.querySelectorAll(".opt"), function(b2){ b2.disabled = true; var o2 = parseInt(b2.getAttribute("data-o"),10); if(o2===q.a) b2.classList.add("right"); else if(b2===btn) b2.classList.add("wrong"); });
+      if(oi===q.a) score++;
+      var w = document.getElementById("why"+qi); w.innerHTML = "<b>"+(oi===q.a?"Correct.":"Not quite.")+"</b> "+esc(q.w); w.classList.add("show");
+      if(Object.keys(answered).length===total){ var pct = Math.round(score/total*100); var prev = state.checks[mn]; if(typeof prev!=="number" || pct>prev){ state.checks[mn]=pct; } save(); var sb = document.getElementById("sbanner"); sb.innerHTML = "Module "+mn+" check: "+score+" / "+total+" — "+pct+"%"+(mn===5?" (double weight recorded)":"")+'. <button class="chipbtn" id="again">Retake</button> <button class="chipbtn" id="home2">Back to modules</button>'; sb.classList.add("show"); document.getElementById("again").addEventListener("click", function(){ showCheck(mn); }); document.getElementById("home2").addEventListener("click", showHome); sb.scrollIntoView && sb.scrollIntoView({behavior:"smooth",block:"center"}); }
+    });
+  });
+}
+
+/* ================= TOOLS ================= */
+function toolShell(mn, title, sub, inner){
+  go('<div class="view"><div class="topbar"><button class="backbtn" id="bk">← All modules</button><span class="grade">Module '+mn+' · Tool</span></div><h2 class="vtitle">'+title+'</h2><div class="vsub">'+sub+'</div>'+inner+'</div>');
+  document.getElementById("bk").addEventListener("click", showHome);
+}
+function showTool(id, mn){
+  if(id==="tablet") return toolTablet();
+  if(id==="splitter") return toolSplitter();
+  if(id==="routemap") return toolRoute();
+  if(id==="ga") return toolGA();
+  if(id==="sorter") return toolSorter();
+  if(id==="exam") return toolExam();
+  if(id==="map") return toolMap();
+  if(id==="cert") return toolCert();
+}
+/* ---- Write-a-Law tablet ---- */
+function toolTablet(){
+  var acts = ["knocks out the eye of another man","breaks the bone of another man","steals an ox from the temple storehouse","lets his canal water flood his neighbor's field","bears false witness before the elders","fails to return a borrowed plow"];
+  var cons = ["he shall weigh out ½ a mina of silver","he shall weigh out one mina of silver","he shall pay tenfold its value in silver","he shall make good the loss in grain, measure for measure","he shall swear the great oath and pay two shekels of silver"];
+  var inner = '<div class="fld"><label>Preset — an actual law of Ur-Nammu (c. 2100 BC)</label><button class="chipbtn" id="preset1">Load the Eye Law</button> <button class="chipbtn" id="preset2">Start blank, in the same style</button></div>'
+    + '<div class="fld"><label>Who acts?</label><select id="twho"><option>a man</option><option>a merchant</option><option>a shepherd</option><option>a boatman</option><option>a son</option></select></div>'
+    + '<div class="fld"><label>If he… (pick one, or type your own below)</label><select id="tact">'+acts.map(function(a){return "<option>"+a+"</option>";}).join("")+'</select></div>'
+    + '<div class="fld"><label>Your own act (optional — overrides the pick)</label><input type="text" id="tcustom" placeholder="e.g. diverts the river from his neighbor\'s field"></div>'
+    + '<div class="fld"><label>Then… (the consequence)</label><select id="tcons">'+cons.map(function(a){return "<option>"+a+"</option>";}).join("")+'</select></div>'
+    + '<div class="tablet"><div class="wedges">𒀭 𒂖 𒈬 𒀭 𒂖 𒈬</div><div class="lawtext" id="lawtext"></div><div style="text-align:center;font-size:12px;opacity:.75;margin-top:8px">— in the if/then form of Ur-Nammu, c. 2100 BC —</div></div>'
+    + '<div class="pointbox" style="margin-top:14px"><span class="bh">Why this matters</span>Four thousand years of codes copy this exact grammar: a stated case, a stated consequence, weighed and written. You have just drafted law the way the first legislators on earth did.</div>';
+  toolShell(1,"✒ Write-a-Law Tablet","Compose a law in Ur-Nammu's if/then form — the template every later code copied.",inner);
+  function render(){ var who = document.getElementById("twho").value; var act = document.getElementById("tcustom").value.trim() || document.getElementById("tact").value; var c = document.getElementById("tcons").value; document.getElementById("lawtext").textContent = "If "+who+" "+act+", "+c+"."; }
+  ["twho","tact","tcons"].forEach(function(i){ document.getElementById(i).addEventListener("change", render); });
+  document.getElementById("tcustom").addEventListener("input", render);
+  document.getElementById("preset1").addEventListener("click", function(){ document.getElementById("twho").value="a man"; document.getElementById("tcustom").value=""; document.getElementById("tact").value=acts[0]; document.getElementById("tcons").value=cons[0]; render(); });
+  document.getElementById("preset2").addEventListener("click", function(){ document.getElementById("tcustom").value=""; render(); });
+  render();
+}
+/* ---- Title/Benefit splitter ---- */
+var SPLIT_CARDS = [
+  {t:"The legal title to the knight's manor",col:"TITLE"},
+  {t:"The rents and profits, for the knight's children",col:"BENEFIT"},
+  {t:"The duty of defending the land in the law court",col:"TITLE"},
+  {t:"The use of the house and lands for the widow, for her life",col:"BENEFIT"},
+  {t:"The name recorded as owner at common law",col:"TITLE"},
+  {t:"The equitable interest the Chancellor protects in conscience",col:"BENEFIT"}
+];
+function toolSplitter(){
+  var placed = {}; var selected = null; var graded = false;
+  var pool = SPLIT_CARDS.map(function(c,i){ return '<button class="pcard" data-card="'+i+'">'+esc(c.t)+'</button>'; }).join("");
+  var inner = '<div class="poolbox"><div style="font-size:12px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px">The pieces of the knight\'s estate — tap a card, then tap a column</div><div id="pool">'+pool+'</div></div>'
+    + '<div class="splitcols"><div class="splitcol" id="colTITLE"><h4>TITLE</h4><div class="who">held by the feoffee (trustee)</div><div class="colcards"></div></div><div class="splitcol" id="colBENEFIT"><h4>BENEFIT</h4><div class="who">held by the cestui que use</div><div class="colcards"></div></div></div>'
+    + '<div class="navrow"><button class="goldbtn" id="grade">Check my split</button><button class="ghostbtn" id="reset">Reset</button></div><div class="sortfb" id="splitfb" style="margin-top:10px"></div>'
+    + '<div class="factbox" id="courtsbox" style="display:none"><span class="bh">Which court sees which?</span>The common-law court of the LAND sees only the TITLE column — the feoffee is the owner as far as the law is concerned. The Chancellor, in the AIR, sees the BENEFIT column — and compels the title-holder, in conscience, to honor it. One estate, two courts, each blind to half. That blindness is why equity exists.</div>';
+  toolShell(3,"⚖ Title / Benefit Splitter","A crusader leaves his land with a feoffee 'to the use' of his family. Sort the estate the way the two courts see it.",inner);
+  function refresh(){
+    var poolEl = document.getElementById("pool"); poolEl.innerHTML = "";
+    SPLIT_CARDS.forEach(function(c,i){ if(!placed[i]){ var b = document.createElement("button"); b.className = "pcard"+(selected===i?" sel":""); b.textContent = c.t; b.addEventListener("click", function(){ selected = (selected===i? null : i); refresh(); }); poolEl.appendChild(b); } });
+    ["TITLE","BENEFIT"].forEach(function(col){ var zone = document.querySelector("#col"+col+" .colcards"); zone.innerHTML = ""; SPLIT_CARDS.forEach(function(c,i){ if(placed[i]===col){ var d = document.createElement("button"); d.className = "pcard"; d.textContent = c.t; if(graded) d.classList.add(c.col===col?"right":"wrong"); d.addEventListener("click", function(){ if(!graded){ delete placed[i]; refresh(); } }); zone.appendChild(d); } }); });
+  }
+  ["TITLE","BENEFIT"].forEach(function(col){ document.getElementById("col"+col).addEventListener("click", function(e){ if(selected!==null && (e.target.id==="col"+col || e.target.classList.contains("splitcol") || e.target.tagName==="H4" || e.target.classList.contains("who"))){ placed[selected]=col; selected=null; refresh(); } }); });
+  document.getElementById("grade").addEventListener("click", function(){
+    if(Object.keys(placed).length < SPLIT_CARDS.length){ document.getElementById("splitfb").innerHTML = '<span class="no">Place every card first — '+Object.keys(placed).length+' of '+SPLIT_CARDS.length+' placed.</span>'; return; }
+    graded = true; var right = SPLIT_CARDS.filter(function(c,i){ return placed[i]===c.col; }).length;
+    document.getElementById("splitfb").innerHTML = '<span class="'+(right===SPLIT_CARDS.length?"ok":"no")+'">'+right+' / '+SPLIT_CARDS.length+' correct.</span> '+(right===SPLIT_CARDS.length?"A perfect split — title to the feoffee, benefit to the family. Black's, word for word: the cestui que use 'has the right to receive the profits and benefits of the estate, but the legal title and possession… reside in the other.'":"Tap Reset and think like two courts: what the law sees (title) vs. what conscience sees (benefit).");
+    document.getElementById("courtsbox").style.display = "block"; refresh();
+  });
+  document.getElementById("reset").addEventListener("click", function(){ placed={}; selected=null; graded=false; document.getElementById("splitfb").innerHTML=""; document.getElementById("courtsbox").style.display="none"; refresh(); });
+  refresh();
+}
+/* ---- Route map ---- */
+var PORTS = {
+  rhodes:{x:480,y:215,n:"RHODES",d:"<b>RHODES — the Rhodian Sea Law</b> (roots c. 800s BC). The start of the line: rules for cargo, collision, salvage — and jettison, where a loss taken for all is borne by all (general average). Preserved later in Byzantine compilations and quoted into Justinian's Digest."},
+  barcelona:{x:205,y:180,n:"BARCELONA",d:"<b>BARCELONA — the Consulate of the Sea</b> (Consolat de Mar, compiled 1300s). The Mediterranean system: maritime consuls, procedure, prizes and commerce, organized for the western Mediterranean's ports."},
+  oleron:{x:105,y:95,n:"OLERON",d:"<b>OLERON — the Rolls of Oleron</b> (c. 1160s). Atlantic wine-trade rules from the island of Oleron: the master's duties, pilots, wreck and jettison. Adopted up the coast into England."},
+  london:{x:150,y:38,n:"LONDON",d:"<b>LONDON — the Admiral's Court.</b> Sea law on English soil: the Lord High Admiral's court, civil-law procedure, no jury, and actions in rem — the vessel herself arrested and answering."},
+  wisby:{x:345,y:52,n:"WISBY",d:"<b>WISBY (Visby, Gotland) — the Sea Laws of Wisby.</b> The Baltic edition of the same family: Hanseatic ports judging by recognizably the same rules as Rhodes and Oleron."}
+};
+function toolRoute(){
+  var portsSvg = Object.keys(PORTS).map(function(k){ var p = PORTS[k]; return '<g data-port="'+k+'"><circle class="portbtn" cx="'+p.x+'" cy="'+p.y+'" r="14"></circle><circle class="portdot" cx="'+p.x+'" cy="'+p.y+'" r="5"></circle><text class="portlab" x="'+(p.x+19)+'" y="'+(p.y+4)+'">'+p.n+'</text></g>'; }).join("");
+  var inner = '<div class="routemap"><svg viewBox="0 0 600 260" width="100%" role="img" aria-label="Schematic sea chart of the sea-law route">'
+    + '<path d="M480,215 C400,205 300,195 205,180 C150,168 118,130 105,95 C118,66 132,50 150,38 C210,18 290,30 345,52" fill="none" stroke="#c9a227" stroke-width="2" stroke-dasharray="6 7" opacity="0.75"><animate attributeName="stroke-dashoffset" from="130" to="0" dur="6s" repeatCount="indefinite"/></path>'
+    + '<circle cx="60" cy="230" r="26" fill="none" stroke="#274b5a"/><circle cx="545" cy="40" r="20" fill="none" stroke="#274b5a"/><circle cx="520" cy="120" r="12" fill="none" stroke="#274b5a"/>'
+    + portsSvg + '</svg><div style="font-size:11px;color:var(--muted);text-align:center">Schematic chart — the route of the codes, not to navigational scale. Tap a port.</div></div>'
+    + '<div class="portinfo" id="portinfo"><b>THE ROUTE</b> — Sea law traveled with cargo: Rhodes → the Mediterranean Consulate → Oleron on the Atlantic → London → Wisby in the Baltic. Tap each port for its code.</div>';
+  toolShell(4,"🗺 Port-to-Port Route Map","One family of law, five ports. Follow the dotted line the way the merchants did.",inner);
+  Array.prototype.forEach.call(document.querySelectorAll("[data-port]"), function(g){ g.addEventListener("click", function(){ var p = PORTS[g.getAttribute("data-port")]; document.getElementById("portinfo").innerHTML = p.d; }); });
+}
+/* ---- General average toy ---- */
+function toolGA(){
+  var inner = '<p style="font-size:14.5px;color:var(--muted);margin-bottom:12px">A storm rises. To save the ship, the captain jettisons (throws overboard) one merchant\'s cargo. Under the Rhodian rule — <b style="color:var(--gold2)">general average</b> — that loss is shared by everyone whose property the sacrifice saved, in proportion to its value. Run the numbers:</p>'
+    + '<div class="fld"><label>Value of cargo jettisoned ($)</label><input type="number" id="gaJ" value="12000" min="0"></div>'
+    + '<div class="fld"><label>Value of the ship ($)</label><input type="number" id="gaS" value="60000" min="0"></div>'
+    + '<div class="fld"><label>Merchant A — cargo saved ($)</label><input type="number" id="gaA" value="30000" min="0"></div>'
+    + '<div class="fld"><label>Merchant B — cargo saved ($)</label><input type="number" id="gaB" value="20000" min="0"></div>'
+    + '<div class="fld"><label>Merchant C — cargo saved ($)</label><input type="number" id="gaC" value="10000" min="0"></div>'
+    + '<button class="goldbtn" id="gacalc">Split the loss</button><div id="gaout" style="margin-top:14px"></div>';
+  toolShell(4,"🧮 General Average Toy","The Rhodian rule, run by hand: a loss taken for all is borne by all.",inner);
+  document.getElementById("gacalc").addEventListener("click", function(){
+    function v(id){ var n = parseFloat(document.getElementById(id).value); return isNaN(n)||n<0?0:n; }
+    var J=v("gaJ"), rows=[["The ship",v("gaS")],["Merchant A",v("gaA")],["Merchant B",v("gaB")],["Merchant C",v("gaC")]];
+    var total = rows.reduce(function(a,r){return a+r[1];},0);
+    var out = document.getElementById("gaout");
+    if(total<=0 || J<=0){ out.innerHTML = '<div class="garesult">Enter a jettison value and at least one saved value to split.</div>'; return; }
+    var trs = rows.map(function(r){ var share = J*r[1]/total; return "<tr><td>"+r[0]+"</td><td>$"+r[1].toLocaleString()+"</td><td>"+(100*r[1]/total).toFixed(1)+"%</td><td>$"+share.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})+"</td></tr>"; }).join("");
+    out.innerHTML = '<div class="garesult"><b style="color:var(--gold2)">The split</b> — total value saved: $'+total.toLocaleString()+' · loss to share: $'+J.toLocaleString()+'<table><tr><th>Interest</th><th>Value saved</th><th>Share</th><th>Contributes</th></tr>'+trs+'</table><p style="margin-top:8px;font-size:13px;color:var(--muted)">Each interest pays in proportion to what the jettison saved for it — including the shipowner. The merchant whose cargo went over receives the fund (less his own contribution on any of his other saved goods). Toy version of the rule adjusted by average adjusters to this day — a doctrine older than Rome, still working every week in world shipping.</p></div>';
+  });
+}
+/* ---- Sorter engine ---- */
+function runSorter(deck, mount, onDone){
+  var i=0, score=0, locked=false;
+  function render(){
+    if(i>=deck.length){ mount.innerHTML = '<div class="sortstage"><div class="scen">Sorting complete: <b style="color:var(--gold2)">'+score+' / '+deck.length+'</b></div><div class="sprog" style="margin-top:8px">'+(score===deck.length?"A perfect sort. You read forums the way this course taught you.":(score/deck.length>=0.7?"Strong. The misses are the lessons to reread — the feedback named them.":"Restudy Modules 2–4, then sort again. The pattern: soil & juries = LAND · trusts, estates & oaths = AIR · sea, ships & paper = WATER."))+'</div></div>'; if(onDone) onDone(score, deck.length); return; }
+    var c = deck[i];
+    mount.innerHTML = '<div class="sortstage"><div class="sprog">Scenario '+(i+1)+' of '+deck.length+' · Score '+score+'</div><div class="scen">'+esc(c.s)+'</div></div>'
+      + '<div class="sortbtns"><button class="sortbtn" data-a="LAND">🌾 LAND</button><button class="sortbtn" data-a="AIR">☁ AIR</button><button class="sortbtn" data-a="WATER">🌊 WATER</button></div>'
+      + '<div class="sortfb" id="sfb"></div><div style="text-align:right"><button class="goldbtn" id="snext" style="display:none">Next →</button></div>';
+    locked = false;
+    Array.prototype.forEach.call(mount.querySelectorAll(".sortbtn"), function(b){ b.addEventListener("click", function(){
+      if(locked) return; locked = true;
+      var pick = b.getAttribute("data-a"); var ok = pick===c.a; if(ok) score++;
+      Array.prototype.forEach.call(mount.querySelectorAll(".sortbtn"), function(b2){ b2.disabled = true; });
+      document.getElementById("sfb").innerHTML = '<span class="'+(ok?"ok":"no")+'">'+(ok?"✓ Correct — "+c.a+".":"✗ That sorts to "+c.a+".")+'</span> '+esc(c.w);
+      var nx = document.getElementById("snext"); nx.style.display = "inline-block"; nx.addEventListener("click", function(){ i++; render(); });
+    }); });
+  }
+  render();
+}
+function toolSorter(){
+  toolShell(5,"⚖ The Jurisdiction Sorter","Eighteen scenarios. For each: which jurisdiction's world does it belong to — LAND, AIR, or WATER? Read for the tells: soil & juries → LAND · trusts, estates & oaths → AIR · sea, ships & commercial paper → WATER.",'<div id="sortmount"></div><div class="pointbox"><span class="bh">How to play</span>Tap a scenario\'s jurisdiction. Feedback tells you the why immediately. Your best full-deck score is remembered on this device.</div>');
+  runSorter(SORTER, document.getElementById("sortmount"), function(score,total){ if(score>state.sorterBest){ state.sorterBest = score; save(); } });
+}
+/* ---- Capstone exam ---- */
+function toolExam(){
+  toolShell(6,"🎓 Capstone Examination","Phase 1: twelve scenarios through the Sorter. Phase 2: six term questions against Black's, word for word. Pass mark: 70% of 18.",'<div id="exammount"></div>');
+  var mount = document.getElementById("exammount");
+  runSorter(CAPSTONE_SORT, mount, function(sScore){
+    var answered = {}, tScore = 0, total = CAPSTONE_TERMS.length;
+    mount.innerHTML = '<div class="scorebanner show">Phase 1 complete: '+sScore+' / 12 scenarios. Phase 2 — the terms.</div>'
+      + CAPSTONE_TERMS.map(function(q,qi){ return '<div class="qbox"><div class="q"><span class="qn">T'+(qi+1)+'.</span> '+esc(q.q)+'</div>'+ q.opts.map(function(o,oi){ return '<button class="opt" data-q="'+qi+'" data-o="'+oi+'">'+esc(o)+'</button>'; }).join("") + '<div class="why" id="ewhy'+qi+'"></div></div>'; }).join("")
+      + '<div style="text-align:center"><button class="goldbtn" id="efinish" disabled>Finish the examination</button></div><div id="eresult" style="margin-top:14px"></div>';
+    Array.prototype.forEach.call(mount.querySelectorAll(".opt"), function(btn){ btn.addEventListener("click", function(){
+      var qi = parseInt(btn.getAttribute("data-q"),10), oi = parseInt(btn.getAttribute("data-o"),10);
+      if(answered[qi]) return; answered[qi]=true; var q = CAPSTONE_TERMS[qi]; var box = btn.parentElement;
+      Array.prototype.forEach.call(box.querySelectorAll(".opt"), function(b2){ b2.disabled=true; var o2=parseInt(b2.getAttribute("data-o"),10); if(o2===q.a) b2.classList.add("right"); else if(b2===btn) b2.classList.add("wrong"); });
+      if(oi===q.a) tScore++;
+      var w = document.getElementById("ewhy"+qi); w.innerHTML = "<b>"+(oi===q.a?"Correct.":"Not quite.")+"</b> "+esc(q.w); w.classList.add("show");
+      if(Object.keys(answered).length===total) document.getElementById("efinish").disabled = false;
+    }); });
+    document.getElementById("efinish").addEventListener("click", function(){
+      var pct = Math.round((sScore + tScore) / 18 * 100); var passed = pct >= 70;
+      if(pct > state.examBest) state.examBest = pct;
+      if(passed){ state.exam.passed = true; state.exam.pct = pct; }
+      save();
+      document.getElementById("eresult").innerHTML = '<div class="scorebanner show">'+(passed?("🎓 PASSED — "+pct+"% ("+(sScore+tScore)+" / 18). The map is yours. Your certificate is unlocked below."):("Not yet — "+pct+"% ("+(sScore+tScore)+" / 18). Pass mark is 70%. Reread the lessons the feedback pointed to, then retake it — the modules stay open."))+'<div style="margin-top:10px"><button class="chipbtn" id="etocert">Go to my certificate</button> <button class="chipbtn" id="eretake">Retake the exam</button> <button class="chipbtn" id="ehome">Back to modules</button></div></div>';
+      document.getElementById("etocert").addEventListener("click", function(){ toolCert(); });
+      document.getElementById("eretake").addEventListener("click", function(){ toolExam(); });
+      document.getElementById("ehome").addEventListener("click", showHome);
+    });
+  });
+}
+/* ---- Printable map ---- */
+function toolMap(){
+  var rows = [["LAND","law-m2-land.jpg","Common Law — the Law of the Land","Living men & women — the people","Life, liberty, land & property, inherited rights","The living, on the soil, in their own name"],
+              ["AIR","law-m3-air.jpg","Ecclesiastical & Trust Law — Equity","Conscience, over trusts & estates","Trusts, estates, oaths — the dead on paper","Trustees, fiduciaries & the legal fiction"],
+              ["WATER","law-m4-water.jpg","Admiralty / Maritime — Law of Commerce","The Crown & the corporate state, by statute","Contracts, commerce, the UCC, negotiable paper","Debtors & secured parties in commerce"]];
+  var inner = '<div class="mapgrid">' + rows.map(function(r){ return '<div class="panel" style="min-height:230px"><img src="'+r[1]+'" alt="'+r[0]+' panel art"><div class="shade"></div><div class="pcap"><h3>'+r[0]+'</h3><p><b>'+r[2]+'</b><br>AUTHORITY — '+r[3]+'<br>GOVERNS — '+r[4]+'<br>WHO STANDS — '+r[5]+'</p></div></div>'; }).join("") + '</div>'
+    + '<p class="payoff">Know which one you\'re standing in — before you answer to it.</p>'
+    + '<div class="navrow noprint"><span></span><button class="goldbtn" id="printmap">🖨 Print this study sheet</button><span></span></div>';
+  toolShell(6,"🖨 The Jurisdiction Map — Printable Study Sheet","The whole course on one page: the three jurisdictions, their authority, what they govern, and who stands in each.",inner);
+  document.getElementById("printmap").addEventListener("click", function(){ var v = viewsEl.firstElementChild; if(v) v.classList.add("printshow"); window.print(); if(v) v.classList.remove("printshow"); });
+}
+/* ---- Certificate ---- */
+function properCase(s){ return s.toLowerCase().replace(/(^|[\s\-'])(\p{L})/gu, function(m,p,c){ return p + c.toUpperCase(); }); }
+function toolCert(){
+  if(!state.exam.passed){
+    toolShell(6,"📜 Completion Certificate","The certificate unlocks when you pass the capstone examination (70%).",'<div class="scorebanner show">Not yet unlocked — your best exam score so far: '+(state.examBest>=0? state.examBest+"%" : "no attempt recorded")+'.<div style="margin-top:10px"><button class="chipbtn" id="gotoexam">Take the capstone examination</button></div></div>');
+    document.getElementById("gotoexam").addEventListener("click", function(){ toolExam(); });
+    return;
+  }
+  toolShell(6,"📜 Completion Certificate","You passed the capstone at "+state.exam.pct+"%. Enter your name as you want it to appear — it prints in proper case, over the gold seal.",'<div class="fld"><label>Your name</label><input type="text" id="certname" placeholder="e.g. Madison Edward Hoskins"></div><button class="goldbtn" id="gencert">Generate my certificate</button><div id="certout" style="margin-top:16px"></div>');
+  document.getElementById("gencert").addEventListener("click", function(){
+    var nm = document.getElementById("certname").value.trim(); if(!nm){ document.getElementById("certname").focus(); return; }
+    var d = new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+    document.getElementById("certout").innerHTML = '<div class="cert"><h3>Certificate of Completion</h3><div class="seal">⚖</div><div style="font-size:13px;color:var(--muted);letter-spacing:2px">AWARDED TO</div><div class="cname">'+esc(properCase(nm))+'</div><div class="ctitle">Completed L.A.W. — Land · Air · Water</div><div style="font-size:14px;color:var(--cream);margin-top:6px">The Jurisdictions &amp; Their History — from the Sumerians to Sui Juris</div><div class="cmeta">Capstone examination passed at '+state.exam.pct+'% · '+esc(d)+' · UCC Talk24 Study Course</div></div><div class="navrow noprint"><span></span><button class="goldbtn" id="printcert">🖨 Print my certificate</button><span></span></div>';
+    document.getElementById("printcert").addEventListener("click", function(){ var out = document.getElementById("certout"); out.classList.add("printshow"); window.print(); out.classList.remove("printshow"); });
+  });
+}
+/* ================= INIT ================= */
+showHome();
+window.LAW = {showHome:showHome, showLesson:showLesson, showCheck:showCheck, showTerms:showTerms, showTool:showTool, state:state, MODULES:MODULES, LESSONSETS:LESSONSETS, CHECKS:CHECKS, TERMS:TERMS, SORTER:SORTER};
+</script>
+</body>
+</html>
