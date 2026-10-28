@@ -12,9 +12,9 @@
   gtag('js', new Date());
   gtag('config', 'G-E87VQNRC3G');
 </script>
-<title>Court Document Generator — Motions, Writs, Petitions &amp; Notices | UCC Talk24 Toolkit</title>
+<title>Document Generator — Motions, Writs, Petitions &amp; Notices | UCC Talk24 Toolkit</title>
 <meta name="description" content="Build court-formatted motions, writs, petitions, notices, affidavits and complaints from templates grounded in Black's Law Dictionary, 4th Edition Revised. Educational templates — not legal advice.">
-<meta property="og:title" content="Court Document Generator — UCC Talk24 Toolkit">
+<meta property="og:title" content="Document Generator — UCC Talk24 Toolkit">
 <meta property="og:description" content="Pick the document. Fill the guided form. Print a court-formatted filing built on Black's Law Dictionary, 4th Edition Revised.">
 <style>
 :root{
@@ -133,7 +133,7 @@ body.doclocked{overflow:hidden}
     <a class="backlink" href="law-course.html">&larr; Back to the L.A.W. study course</a>
     <div class="crest">&#10022;</div>
     <p class="kicker">UCC Talk24 &middot; The Toolkit &middot; Court Papers</p>
-    <h1 class="title">COURT DOCUMENT GENERATOR</h1>
+    <h1 class="title">DOCUMENT GENERATOR</h1>
     <p class="subtitle">Motions &middot; Writs &middot; Petitions &middot; Notices &middot; Affidavits &middot; Complaints</p>
     <p class="payoff">Pick the document. Answer the guided questions. Print a <b>court-formatted filing</b> whose definitions come straight out of <b>Black&rsquo;s Law Dictionary, 4th Edition Revised</b>.</p>
     <p style="text-align:center;margin-top:12px"><span class="pricechip">Members &middot; $10 / month</span></p>
@@ -180,12 +180,12 @@ body.doclocked{overflow:hidden}
 <div class="gatewrap noprint" id="docgate" hidden>
   <div class="gatecard">
     <div class="crest">&#10022;</div>
-    <h2 class="gatetitle">COURT DOCUMENT GENERATOR</h2>
+    <h2 class="gatetitle">DOCUMENT GENERATOR</h2>
     <p class="gatecopy">Motions, the five great writs, petitions, notices, affidavits, and complaints — built from guided forms, with every definition quoted verbatim from <b>Black&rsquo;s Law Dictionary, 4th Edition Revised</b>.</p>
     <div class="checkoutbox">
       <div class="cbprice">$10<span style="font-size:14px">/month</span></div>
       <p style="font-size:13px;color:var(--muted);margin:4px 0 12px">Member access to the full generator. Billed monthly &middot; cancel anytime.</p>
-      <!-- CHECKOUT LIVE: Whop "Court Document Generator Access" ($10/mo),
+      <!-- CHECKOUT LIVE: Whop "Document Generator Access" ($10/mo),
            checkout plan plan_ao2rdJja79i2u — set 2026-10-28. -->
       <a class="goldbtn" id="checkoutbtn" href="https://whop.com/checkout/plan_ao2rdJja79i2u">Get access — $10/mo</a>
       <p class="gatenote" id="checkoutnote">Subscribe, then enter your email and the member access code from your membership below to unlock.</p>
@@ -205,7 +205,7 @@ body.doclocked{overflow:hidden}
 <script>
 "use strict";
 /* =====================================================================
-   COURT DOCUMENT GENERATOR — UCC Talk24 Toolkit
+   DOCUMENT GENERATOR — UCC Talk24 Toolkit
    Definitions database: Madison's own Black's Law Dictionary,
    4th Edition Revised, quoted VERBATIM (extraction artifacts of the
    PDF text layer — line-break hyphenation and font-run splits — are
@@ -553,7 +553,7 @@ function certHTML(f){
     ', by ____________________________________ (first-class mail, hand delivery, or e-service), addressed to the party or counsel of record.</p>' +
     '<div class="sigblock"><div class="sigline"></div><p>' + esc(f.filer) + '</p></div>';
 }
-var DOCFOOT = '<div class="docfoot">EDUCATIONAL TEMPLATE — NOT LEGAL ADVICE. This document was generated from a study template in the UCC Talk24 Court Document Generator, with definitions quoted verbatim from Black\u2019s Law Dictionary, 4th Edition Revised. It is not legal advice and creates no attorney\u2013client relationship. If you do not have the knowledge of a lawyer, have a lawyer review this document before filing it. Court rules, forms, fees, and deadlines vary by court — verify them with the clerk of your court before you file.</div>';
+var DOCFOOT = '<div class="docfoot">EDUCATIONAL TEMPLATE — NOT LEGAL ADVICE. This document was generated from a study template in the UCC Talk24 Document Generator, with definitions quoted verbatim from Black\u2019s Law Dictionary, 4th Edition Revised. It is not legal advice and creates no attorney\u2013client relationship. If you do not have the knowledge of a lawyer, have a lawyer review this document before filing it. Court rules, forms, fees, and deadlines vary by court — verify them with the clerk of your court before you file.</div>';
 
 function buildBody(f){
   var t = f.tpl, N = esc(capName(f)), name = esc(f.filer), opp = esc(f.opp);
