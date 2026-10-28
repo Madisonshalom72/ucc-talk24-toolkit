@@ -137,7 +137,7 @@ body.doclocked{overflow:hidden}
     <p class="subtitle">Motions &middot; Writs &middot; Petitions &middot; Notices &middot; Affidavits &middot; Complaints</p>
     <p class="payoff">Pick the document. Answer the guided questions. Print a <b>court-formatted filing</b> whose definitions come straight out of <b>Black&rsquo;s Law Dictionary, 4th Edition Revised</b>.</p>
     <p style="text-align:center;margin-top:12px"><span class="pricechip">Members &middot; $10 / month</span></p>
-    <div class="disclaimer"><b>Educational templates only — not legal advice.</b> If you do not have the knowledge of a lawyer, have a lawyer review any document before you file it. Court rules, deadlines, and filing requirements vary by court — verify them with the clerk of your court.</div>
+    <div class="disclaimer"><b>Educational templates only — not legal advice.</b> If you do not have the knowledge of a lawyer, have a lawyer review any document before you file it. Court rules, deadlines, and filing requirements vary by court — verify them with the clerk of your court. Void where prohibited by law.</div>
   </div>
 
   <!-- ================= TILE PICKER ================= -->
@@ -171,7 +171,7 @@ body.doclocked{overflow:hidden}
     <div class="paper" id="paper"></div>
   </section>
 
-  <p class="disclaimer noprint" style="margin-top:34px">The generator&rsquo;s definitions database is Madison&rsquo;s own copy of <i>Black&rsquo;s Law Dictionary, 4th Edition Revised</i>, quoted verbatim with its printed page numbers. Templates are educational study material modeled on common pro se filings — filing rules differ from court to court, and nothing here is legal advice or a promise of any outcome.</p>
+  <p class="disclaimer noprint" style="margin-top:34px">The generator&rsquo;s definitions database is Madison&rsquo;s own copy of <i>Black&rsquo;s Law Dictionary, 4th Edition Revised</i>, quoted verbatim with its printed page numbers. Templates are educational study material modeled on common pro se filings — filing rules differ from court to court, and nothing here is legal advice or a promise of any outcome. Void where prohibited by law.</p>
 
  </div>
 </div>
@@ -193,7 +193,7 @@ body.doclocked{overflow:hidden}
     <form id="gateform" novalidate>
       <div class="fld"><label for="gateemail">Email address</label><input type="email" id="gateemail" autocomplete="email" placeholder="you@example.com"></div>
       <div class="fld"><label for="gatecode">Member access code</label><input type="text" id="gatecode" autocomplete="off" placeholder="Code from your membership email"></div>
-      <div class="gatedisc"><b>Disclaimer — read before you build.</b> These are educational templates only, not legal advice, and they create no attorney–client relationship. If you do not have the knowledge of a lawyer, have a lawyer review any document before you file it. You are responsible for your own filing, your court&rsquo;s rules, and your deadlines.</div>
+      <div class="gatedisc"><b>Disclaimer — read before you build.</b> These are educational templates only, not legal advice, and they create no attorney–client relationship. If you do not have the knowledge of a lawyer, have a lawyer review any document before you file it. You are responsible for your own filing, your court&rsquo;s rules, and your deadlines. Void where prohibited by law.</div>
       <label class="ackrow"><input type="checkbox" id="gateack"><span>I understand: educational templates only — not legal advice. If I do not have the knowledge of a lawyer, I will have a lawyer review my document before filing it.</span></label>
       <div class="gateerr" id="gateerr" role="alert"></div>
       <button type="submit" class="goldbtn" id="gatebtn">Unlock the generator</button>
@@ -553,7 +553,7 @@ function certHTML(f){
     ', by ____________________________________ (first-class mail, hand delivery, or e-service), addressed to the party or counsel of record.</p>' +
     '<div class="sigblock"><div class="sigline"></div><p>' + esc(f.filer) + '</p></div>';
 }
-var DOCFOOT = '<div class="docfoot">EDUCATIONAL TEMPLATE — NOT LEGAL ADVICE. This document was generated from a study template in the UCC Talk24 Document Generator, with definitions quoted verbatim from Black\u2019s Law Dictionary, 4th Edition Revised. It is not legal advice and creates no attorney\u2013client relationship. If you do not have the knowledge of a lawyer, have a lawyer review this document before filing it. Court rules, forms, fees, and deadlines vary by court — verify them with the clerk of your court before you file.</div>';
+var DOCFOOT = '<div class="docfoot">EDUCATIONAL TEMPLATE — NOT LEGAL ADVICE. This document was generated from a study template in the UCC Talk24 Document Generator, with definitions quoted verbatim from Black\u2019s Law Dictionary, 4th Edition Revised. It is not legal advice and creates no attorney\u2013client relationship. If you do not have the knowledge of a lawyer, have a lawyer review this document before filing it. Court rules, forms, fees, and deadlines vary by court — verify them with the clerk of your court before you file. Void where prohibited by law.</div>';
 
 function buildBody(f){
   var t = f.tpl, N = esc(capName(f)), name = esc(f.filer), opp = esc(f.opp);
