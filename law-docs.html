@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4295784512862093" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E87VQNRC3G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E87VQNRC3G');
+</script>
+<title>Court Document Generator — Motions, Writs, Petitions &amp; Notices | UCC Talk24 Toolkit</title>
+<meta name="description" content="Build court-formatted motions, writs, petitions, notices, affidavits and complaints from templates grounded in Black's Law Dictionary, 4th Edition Revised. Educational templates — not legal advice.">
+<meta property="og:title" content="Court Document Generator — UCC Talk24 Toolkit">
+<meta property="og:description" content="Pick the document. Fill the guided form. Print a court-formatted filing built on Black's Law Dictionary, 4th Edition Revised.">
+<style>
+:root{
+  --black:#070604; --ink:#0d0b07; --panel:#14110a; --panel2:#1a160d;
+  --gold:#c9a227; --gold2:#e8c766; --gold-dim:#8a6d1f; --cream:#f2e8cf;
+  --paper:#efe6cc; --muted:#b7a97f; --line:#3a3016; --good:#7fc46a; --bad:#e06c5a;
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --body:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--gold2)}
+button{font-family:inherit;cursor:pointer}
+img{max-width:100%;display:block}
+
+/* ---------- frame ---------- */
+.frame{max-width:1060px;margin:0 auto;padding:14px 14px 60px;position:relative}
+.goldframe{border:2px solid var(--gold);outline:1px solid var(--gold-dim);outline-offset:5px;background:linear-gradient(180deg,#0a0805,#070604);padding:22px 16px 30px;position:relative;animation:frameIn 1.1s ease both}
+@keyframes frameIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.crest{text-align:center;font-size:26px;color:var(--gold);letter-spacing:6px;animation:glowPulse 4s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{text-shadow:0 0 6px rgba(201,162,39,.35)}50%{text-shadow:0 0 18px rgba(201,162,39,.75)}}
+.kicker{text-align:center;letter-spacing:4px;font-size:11px;color:var(--muted);text-transform:uppercase;margin-top:8px}
+h1.title{text-align:center;font-family:var(--serif);font-weight:800;font-size:clamp(28px,6.6vw,50px);letter-spacing:2px;color:var(--gold2);line-height:1.12;margin:8px 0 4px}
+.subtitle{text-align:center;font-family:var(--serif);font-style:italic;color:var(--cream);font-size:clamp(15px,3.6vw,20px)}
+.payoff{text-align:center;color:var(--gold2);font-family:var(--serif);font-size:clamp(15px,4vw,19px);margin:14px auto 4px;max-width:680px}
+.payoff b{color:#fff}
+.disclaimer{max-width:720px;margin:12px auto 0;text-align:center;font-size:12px;color:var(--muted);border:1px dashed var(--line);padding:8px 12px;border-radius:6px}
+.goldbtn{display:inline-block;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#171106;border:none;border-radius:7px;padding:11px 20px;font-size:15px;font-weight:700;letter-spacing:.4px;box-shadow:0 3px 14px rgba(201,162,39,.35);text-decoration:none}
+.goldbtn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.ghostbtn{display:inline-block;background:transparent;color:var(--gold2);border:1px solid var(--gold-dim);border-radius:7px;padding:10px 16px;font-size:14px;font-weight:700;letter-spacing:.4px}
+.pricechip{display:inline-block;font-size:12px;letter-spacing:2px;color:#0a0805;background:var(--gold);border-radius:3px;padding:3px 10px;font-weight:700;text-transform:uppercase}
+.backlink{display:inline-block;margin-bottom:10px;font-size:13.5px}
+
+/* ---------- gate (mirrors the course gate pattern) ---------- */
+body.doclocked{overflow:hidden}
+.gatewrap{position:fixed;inset:0;z-index:999;background:rgba(4,3,2,.94);display:flex;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto}
+.gatewrap[hidden]{display:none}
+.gatecard{width:100%;max-width:470px;border:2px solid var(--gold);outline:1px solid var(--gold-dim);outline-offset:5px;background:linear-gradient(180deg,#0d0a05,#070604);border-radius:6px;padding:26px 22px;text-align:center;animation:frameIn .8s ease both;margin:auto}
+.gatecard .gatetitle{font-family:var(--serif);font-weight:800;color:var(--gold2);font-size:clamp(22px,5.6vw,30px);letter-spacing:2px;margin:6px 0 2px;line-height:1.2}
+.gatecard .gatecopy{font-size:14.5px;color:var(--cream);margin:8px 0 14px}
+.gatecard form{text-align:left;margin-top:16px}
+.fld{margin-bottom:12px}
+.fld label{display:block;font-size:12.5px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
+.fld input[type=email],.fld input[type=text],.fld input[type=date],.fld textarea,.fld select{width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--cream);border-radius:7px;padding:11px 12px;font-size:15px;font-family:inherit}
+.fld textarea{min-height:96px;resize:vertical}
+.gateerr{color:var(--bad);font-size:13px;min-height:19px;margin:2px 0 8px}
+.gatecard .goldbtn{width:100%}
+.gatenote{font-size:12px;color:var(--muted);margin-top:14px}
+.gatedisc{font-size:12.5px;color:var(--paper);border:1px solid var(--gold-dim);background:var(--panel);border-radius:7px;padding:10px 12px;text-align:left;margin:12px 0}
+.ackrow{display:flex;gap:10px;align-items:flex-start;text-align:left;font-size:13.5px;margin:12px 0}
+.ackrow input{margin-top:4px;flex:0 0 auto;width:18px;height:18px;accent-color:var(--gold)}
+.checkoutbox{border:1px solid var(--line);border-radius:8px;padding:14px;background:var(--panel);margin-top:6px}
+.checkoutbox .cbprice{font-family:var(--serif);color:var(--gold2);font-size:22px}
+
+/* ---------- tiles ---------- */
+.cathead{font-family:var(--serif);color:var(--gold2);letter-spacing:2px;font-size:19px;margin:30px 0 6px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.catsub{color:var(--muted);font-size:13.5px;margin-bottom:12px}
+.tilegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:14px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;text-align:left;padding:0;color:var(--cream);transition:border-color .3s,transform .3s;animation:riseIn .7s ease both;width:100%}
+.tile:hover{border-color:var(--gold);transform:translateY(-3px)}
+@keyframes riseIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.tile .art{background:radial-gradient(120% 120% at 50% 0%,#241c0d 0%,#100c06 70%);border-bottom:1px solid var(--line);padding:12px 10px 6px}
+.tile .art svg{width:100%;height:auto;display:block}
+.tile .tbody{padding:10px 12px 13px}
+.tile h3{font-family:var(--serif);color:var(--gold2);font-size:16.5px;line-height:1.25;letter-spacing:.5px}
+.tile p{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+.tile .tpage{display:inline-block;margin-top:8px;font-size:10.5px;letter-spacing:1.5px;color:#0a0805;background:var(--gold);border-radius:3px;padding:1px 7px;font-weight:700;text-transform:uppercase}
+
+/* ---------- builder ---------- */
+.defcard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px 16px;margin:14px 0}
+.defcard .dterm{font-family:var(--serif);color:var(--gold2);letter-spacing:1.5px;font-size:16.5px;margin-bottom:6px}
+.defcard .dquote{font-style:italic;font-size:14.5px;color:var(--paper);border-left:3px solid var(--gold);padding-left:10px}
+.defcard .dsrc{font-size:11.5px;color:var(--muted);margin-top:8px}
+.formgrid{display:grid;grid-template-columns:1fr;gap:2px}
+@media(min-width:720px){.formgrid{grid-template-columns:1fr 1fr}.formgrid .wide{grid-column:1/-1}}
+.optrow{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:10px 0}
+.optrow input{margin-top:4px;width:18px;height:18px;accent-color:var(--gold);flex:0 0 auto}
+.builderbar{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.formerr{color:var(--bad);font-size:13.5px;min-height:20px}
+
+/* ---------- the paper document ---------- */
+.paper{background:#fdfaf0;color:#141414;font-family:"Times New Roman",Times,serif;padding:44px 40px;border-radius:3px;box-shadow:0 10px 40px rgba(0,0,0,.6);font-size:15.5px;line-height:1.75}
+.paper .capwrap{display:flex;gap:0;border-bottom:2.5px solid #141414;padding-bottom:10px;margin-bottom:18px}
+.paper .capleft{flex:1.25;text-align:center;padding-right:14px}
+.paper .capright{flex:1;border-left:1.5px solid #141414;padding-left:14px;display:flex;align-items:center}
+.paper .courtline{font-weight:bold;text-transform:uppercase;letter-spacing:.5px}
+.paper h2.doctitle{text-align:center;font-size:18px;letter-spacing:1px;text-transform:uppercase;margin:16px 0 6px;text-decoration:underline}
+.paper .center{text-align:center}
+.paper p{margin:0 0 12px;text-align:justify}
+.paper p.indent{text-indent:36px}
+.paper h4{font-size:15.5px;text-transform:uppercase;letter-spacing:.5px;margin:18px 0 8px}
+.paper ol,.paper ul{margin:0 0 12px 26px}
+.paper li{margin-bottom:7px;text-align:justify}
+.paper .authq{font-style:italic;margin:0 0 4px 18px}
+.paper .authsrc{font-size:12.5px;color:#333;margin:0 0 14px 18px;font-style:normal}
+.paper .sigblock{margin-top:26px}
+.paper .sigline{border-bottom:1px solid #141414;width:280px;height:30px}
+.paper .docfoot{border-top:1px solid #888;margin-top:30px;padding-top:8px;font-size:11px;line-height:1.5;color:#333;text-align:justify}
+.paper .vs{margin:6px 0;font-style:italic}
+
+@media print{
+  body{background:#fff}
+  .goldframe{border:none;outline:none;padding:0;background:#fff}
+  .frame{padding:0;max-width:none}
+  .noprint{display:none !important}
+  .paper{box-shadow:none;border-radius:0;padding:10px 6px}
+}
+</style>
+</head>
+<body>
+<div class="frame">
+ <div class="goldframe">
+
+  <div class="noprint">
+    <a class="backlink" href="law-course.html">&larr; Back to the L.A.W. study course</a>
+    <div class="crest">&#10022;</div>
+    <p class="kicker">UCC Talk24 &middot; The Toolkit &middot; Court Papers</p>
+    <h1 class="title">COURT DOCUMENT GENERATOR</h1>
+    <p class="subtitle">Motions &middot; Writs &middot; Petitions &middot; Notices &middot; Affidavits &middot; Complaints</p>
+    <p class="payoff">Pick the document. Answer the guided questions. Print a <b>court-formatted filing</b> whose definitions come straight out of <b>Black&rsquo;s Law Dictionary, 4th Edition Revised</b>.</p>
+    <p style="text-align:center;margin-top:12px"><span class="pricechip">Members &middot; $10 / month</span></p>
+    <div class="disclaimer"><b>Educational templates only — not legal advice.</b> If you do not have the knowledge of a lawyer, have a lawyer review any document before you file it. Court rules, deadlines, and filing requirements vary by court — verify them with the clerk of your court.</div>
+  </div>
+
+  <!-- ================= TILE PICKER ================= -->
+  <main id="picker" class="noprint"></main>
+
+  <!-- ================= BUILDER ================= -->
+  <section id="builder" class="noprint" hidden>
+    <button class="ghostbtn" id="btnback">&larr; All documents</button>
+    <h2 class="cathead" id="buildertitle" style="margin-top:18px"></h2>
+    <div class="defcard" id="defcard"></div>
+    <form id="docform" novalidate>
+      <div class="formgrid" id="formgrid"></div>
+      <div id="extrafields"></div>
+      <label class="optrow"><input type="checkbox" id="opt308" checked><span><b>Reservation of rights on the signature block</b> — sign &ldquo;without prejudice, UCC 1-308 — all rights reserved.&rdquo;</span></label>
+      <label class="optrow" id="optestaterow"><input type="checkbox" id="optestate"><span><b>Caption under the ALL-CAPS estate name</b> — use the estate/trading name in the caption instead of the living name.</span></label>
+      <div class="formerr" id="formerr" role="alert"></div>
+      <div class="builderbar">
+        <button type="submit" class="goldbtn">Build my document</button>
+        <button type="button" class="ghostbtn" id="btnsample">Fill with a sample</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ================= DOCUMENT ================= -->
+  <section id="docview" hidden>
+    <div class="builderbar noprint">
+      <button class="goldbtn" id="btnprint">Print / Save as PDF</button>
+      <button class="ghostbtn" id="btnedit">&larr; Edit the answers</button>
+      <button class="ghostbtn" id="btnnew">Start another document</button>
+    </div>
+    <div class="paper" id="paper"></div>
+  </section>
+
+  <p class="disclaimer noprint" style="margin-top:34px">The generator&rsquo;s definitions database is Madison&rsquo;s own copy of <i>Black&rsquo;s Law Dictionary, 4th Edition Revised</i>, quoted verbatim with its printed page numbers. Templates are educational study material modeled on common pro se filings — filing rules differ from court to court, and nothing here is legal advice or a promise of any outcome.</p>
+
+ </div>
+</div>
+
+<!-- ================= ACCESS GATE ================= -->
+<div class="gatewrap noprint" id="docgate" hidden>
+  <div class="gatecard">
+    <div class="crest">&#10022;</div>
+    <h2 class="gatetitle">COURT DOCUMENT GENERATOR</h2>
+    <p class="gatecopy">Motions, the five great writs, petitions, notices, affidavits, and complaints — built from guided forms, with every definition quoted verbatim from <b>Black&rsquo;s Law Dictionary, 4th Edition Revised</b>.</p>
+    <div class="checkoutbox">
+      <div class="cbprice">$10<span style="font-size:14px">/month</span></div>
+      <p style="font-size:13px;color:var(--muted);margin:4px 0 12px">Member access to the full generator. Billed monthly &middot; cancel anytime.</p>
+      <!-- CHECKOUT LIVE: Whop "Court Document Generator Access" ($10/mo),
+           checkout plan plan_ao2rdJja79i2u — set 2026-10-28. -->
+      <a class="goldbtn" id="checkoutbtn" href="https://whop.com/checkout/plan_ao2rdJja79i2u">Get access — $10/mo</a>
+      <p class="gatenote" id="checkoutnote">Subscribe, then enter your email and the member access code from your membership below to unlock.</p>
+    </div>
+    <form id="gateform" novalidate>
+      <div class="fld"><label for="gateemail">Email address</label><input type="email" id="gateemail" autocomplete="email" placeholder="you@example.com"></div>
+      <div class="fld"><label for="gatecode">Member access code</label><input type="text" id="gatecode" autocomplete="off" placeholder="Code from your membership email"></div>
+      <div class="gatedisc"><b>Disclaimer — read before you build.</b> These are educational templates only, not legal advice, and they create no attorney–client relationship. If you do not have the knowledge of a lawyer, have a lawyer review any document before you file it. You are responsible for your own filing, your court&rsquo;s rules, and your deadlines.</div>
+      <label class="ackrow"><input type="checkbox" id="gateack"><span>I understand: educational templates only — not legal advice. If I do not have the knowledge of a lawyer, I will have a lawyer review my document before filing it.</span></label>
+      <div class="gateerr" id="gateerr" role="alert"></div>
+      <button type="submit" class="goldbtn" id="gatebtn">Unlock the generator</button>
+    </form>
+    <p class="gatenote">Members: your access code arrives with your $10/mo membership. Educational only — not legal advice.</p>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* =====================================================================
+   COURT DOCUMENT GENERATOR — UCC Talk24 Toolkit
+   Definitions database: Madison's own Black's Law Dictionary,
+   4th Edition Revised, quoted VERBATIM (extraction artifacts of the
+   PDF text layer — line-break hyphenation and font-run splits — are
+   rejoined; wording and punctuation are the book's). Printed page
+   numbers are the book's own folio numbers.
+   ===================================================================== */
+var BLACKS = {
+  MOTION: { term: "MOTION", entries: [
+    { head: "MOTION", page: 1164, text: "Practice. Primarily an application for a rule or order made viva voce to a court or judge, but the term is generally employed with reference to all such applications, whether written or oral. Irwin v. Gilson Realty Co., 117 Fla. 394, 158 So. 77." }
+  ]},
+  DISMISSAL: { term: "DISMISSAL", entries: [
+    { head: "DISMISSAL", page: 555, text: "An order or judgment finally disposing of an action, suit, motion, etc., by sending it out of court, though without a trial of the issues involved. Brackenridge v. State, 27 Tex. App. 513, 11 S.W. 630, 4 L.R.A. 360. The term is often used to indicate an adjudication on the merits." },
+    { head: "DISMISS", page: 555, text: "To send away; to discharge; to cause to be removed temporarily or permanently; to relieve from duty. To dismiss an action or suit is to send it out of court without any further consideration or hearing. School District No. 1 of Jefferson County v. Parker, 82 Colo. 385, 260 P. 521, 522." },
+    { head: "DISMISSAL WITHOUT PREJUDICE", page: 556, text: "Dismissal, as of a bill in equity, without prejudice to the right of the complainant to sue again on the same cause of action. The effect of the words \u201Cwithout prejudice\u201D is to prevent the decree of dismissal from operating as a bar to a subsequent suit. Northrup v. Jay, 262 Mich. 463, 247 N.W. 717, 718." }
+  ]},
+  HABEAS: { term: "HABEAS CORPUS", entries: [
+    { head: "HABEAS CORPUS", page: 837, text: "Lat. (You have the body.) The name given to a variety of writs, (of which these were anciently the emphatic words,) having for their object to bring a party before a court or judge. In common usage, and whenever these words are used alone, they are understood to mean the habeas corpus ad subjiciendum, (see infra.) Dancy v. Owens, 126 Okl. 37, 258 P. 879, 884." },
+    { head: "HABEAS CORPUS AD SUBJICIENDUM", page: 837, text: "A writ directed to the person detaining another, and commanding him to produce the body of the prisoner, (or person detained,) with the day and cause of his caption and detention, ad faciendum, subjiciendum et recipiendum, to do, submit to, and receive whatsoever the judge or court awarding the writ shall consider in that behalf. 3 Bl. Comm. 131; 3 Steph. Comm. 695. This is the well-known remedy for deliverance from illegal confinement, called by Sir William Blackstone the most celebrated writ in the English law, and the great and efficacious writ in all manner of illegal confinement. 3 Bl. Comm. 129." }
+  ]},
+  MANDAMUS: { term: "MANDAMUS", entries: [
+    { head: "MANDAMUS", page: 1113, text: "Lat. We command. This is the name of a writ (formerly a high prerogative writ) which issues from a court of superior jurisdiction, and is directed to a private or municipal corporation, or any of its officers, or to an executive, administrative or judicial officer, or to an inferior court, commanding the performance of a particular act therein specified, and belonging to his or their public, official, or ministerial duty, or directing the restoration of the complainant to rights or privileges of which he has been illegally deprived. Lahiff v. St. Joseph, etc., Soc., 76 Conn. 648, 57 A. 692, 65 L.R.A. 92, 100 Am.St.Rep. 1012." },
+    { head: "MANDAMUS", page: 1113, text: "The action of mandamus is one, brought in a court of competent jurisdiction, to obtain an order of such court commanding an inferior tribunal, board, corporation, or person to do or not to do an act the performance or omission of which the law enjoins as a duty resulting from an office, trust, or station. Where discretion is left to the inferior tribunal or person, the mandamus can only compel it to act, but cannot control such discretion." }
+  ]},
+  PROHIBITION: { term: "PROHIBITION", entries: [
+    { head: "PROHIBITION", page: 1377, text: "In practice. The name of a writ issued by a superior court, directed to the judge and parties of a suit in an inferior court, commanding them to cease from the prosecution of the same, upon a suggestion that the cause originally, or some collateral matter arising therein, does not belong to that jurisdiction, but to the cognizance of some other court. 3 Bl. Comm. 112; Alexander v. Crollott, 199 U.S. 580, 26 S.Ct. 161, 50 L.Ed. 317." },
+    { head: "PROHIBITION", page: 1377, text: "The writ of prohibition is the counterpart of the writ of mandate. It arrests the proceedings of any tribunal, corporation, board, or person, when such proceedings are without or in excess of the jurisdiction of such tribunal, corporation, board, or person. Code Civ. Proc. Cal. \u00A7 1102." }
+  ]},
+  CERTIORARI: { term: "CERTIORARI", entries: [
+    { head: "CERTIORARI", page: 287, text: "Lat. (To be informed of, to be made certain in regard to.) The name of a writ of review or inquiry. Leonard v. Willcox, 101 Vt. 195, 142 A. 762, 766; Nissen v. International Brotherhood of Teamsters, Chauffeurs, Stablemen & Helpers of America, 229 Iowa 1028, 295 N.W. 858." },
+    { head: "CERTIORARI", page: 287, text: "Originally, and in English practice, an original writ commanding judges or officers of inferior courts to certify or to return records or proceedings in a cause for judicial review of their action. Jacob; Ashworth v. Hatcher, 98 W.Va. 323, 128 S.E. 93." }
+  ]},
+  QUO_WARRANTO: { term: "QUO WARRANTO", entries: [
+    { head: "QUO WARRANTO", page: 1417, text: "In old English practice. A writ, in the nature of a writ of right for the king, against him who claimed or usurped any office, franchise, or liberty, to inquire by what authority he supported his claim, in order to determine the right. It lay also in case of non-user, or long neglect of a franchise, or misuser or abuse of it; being a writ commanding the defendant to show by what warrant he exercises such a franchise, having never had any grant of it, or having forfeited it by neglect or abuse. 3 Bl. Comm. 262." }
+  ]},
+  PETITION: { term: "PETITION", entries: [
+    { head: "PETITION", page: 1303, text: "A written address, embodying an application or prayer from the person or persons preferring it, to the power, body, or person to whom it is presented, for the exercise of his or their authority in the redress of some wrong, or the grant of some favor, privilege, or license. Enderson v. Hildenbrand, 52 N.D. 533, 204 N.W. 356; Benton Coal Mining Co. v. Industrial Commission, 321 Ill. 208, 151 N.E. 520, 522." },
+    { head: "PETITION", page: 1303, text: "In practice. An application made to a court ex parte, or where there are no parties in opposition, praying for the exercise of the judicial powers of the court in relation to some matter which is not the subject for a suit or action, or for authority to do some act which requires the sanction of the court; as for the appointment of a guardian, for leave to sell trust property, etc." }
+  ]},
+  APPEARANCE: { term: "APPEARANCE", entries: [
+    { head: "APPEARANCE", page: 125, text: "In practice. A coming into court as party to a suit, whether as plaintiff or defendant. Stephens v. Ringling, 102 S.C. 333, 86 S.E. 683, 685. The formal proceeding by which a defendant submits himself to the jurisdiction of the court. Flint v. Comly, 95 Me. 251, 49 A. 1044." },
+    { head: "APPEARANCE", page: 125, text: "An appearance may be either general or special; the former is a simple and unqualified or unrestricted submission to the jurisdiction of the court, the latter a submission to the jurisdiction for some specific purpose only, not for all the purposes of the suit. Louisville & N. R. Co. v. Industrial Board of Illinois, 282 Ill. 136, 118 N.E. 483, 485." },
+    { head: "APPEARANCE — SPECIAL", page: 125, text: "A special appearance is for the purpose of testing the sufficiency of service or the jurisdiction of the court; a general appearance is made where the defendant waives defects of service and submits to the jurisdiction. State v. Huller, 23 N.M. 306, 168 P. 528, 534, 1 A.L.R. 170." }
+  ]},
+  NOTICE: { term: "NOTICE", entries: [
+    { head: "NOTICE", page: 1210, text: "Information; the result of observation, whether by the senses or the mind; knowledge of the existence of a fact or state of affairs; the means of knowledge." },
+    { head: "NOTICE", page: 1210, text: "In another sense, \u201Cnotice\u201D means information, an advice, or written warning, in more or less formal shape, intended to apprise a person of some proceeding in which his interests are involved, or informing him of some fact which it is his right to know and the duty of the notifying party to communicate." }
+  ]},
+  DEMAND: { term: "DEMAND", entries: [
+    { head: "DEMAND, n.", page: 516, text: "A peremptory claim to thing of right, differing from claim, in that it presupposes that there is no defense or doubt upon question of right. Golden v. Golden, 155 Okl. 10, 8 P.2d 42, 45; Anderson v. Commercial Credit Co., 110 Mont. 333, 101 P.2d 367, 369." },
+    { head: "DEMAND, n.", page: 516, text: "An imperative request preferred by one person to another, under a claim of right, requiring the latter to do or yield something or to abstain from some act. Zimmerman v. Hicks, C.C.A., 7 F.2d 443, 445; Norwood Nat. Bank v. Piedmont Pub. Co., 106 S.C. 472, 91 S.E. 866, 867." }
+  ]},
+  AFFIDAVIT: { term: "AFFIDAVIT", entries: [
+    { head: "AFFIDAVIT", page: 80, text: "A written or printed declaration or statement of facts, made voluntarily, and confirmed by the oath or affirmation of the party making it, taken before an officer having authority to administer such oath. Cox v. Stern, 170 Ill. 442, 48 N.E. 906, 62 Am.St.Rep. 385; Hays v. Loomis, 84 Ill. 18." }
+  ]},
+  COMPLAINT: { term: "COMPLAINT", entries: [
+    { head: "COMPLAINT", page: 356, text: "In civil practice. In those states having a Code of Civil Procedure, the complaint is the first or initiatory pleading on the part of the plaintiff in a civil action. It corresponds to the declaration in the common-law practice. Code N.Y. \u00A7 141; McMath v. Parsons, 26 Minn. 246, 2 N.W. 703. Its purpose is to give defendant information of all material facts on which plaintiff relies to support his demand. Fox v. Cosgriff, 64 Idaho 448, 133 P.2d 930, 932." },
+    { head: "COMPLAINT", page: 356, text: "The complaint shall contain: (1) The title of the cause, specifying the name of the court in which the action is brought, the name of the county in which the trial is required to be had, and the names of the parties to the action, plaintiff and defendant. (2) A plain and concise statement of the facts constituting a cause of action, without unnecessary repetition; and each material allegation shall be distinctly numbered. (3) A demand of the relief to which the plaintiff supposes himself entitled. If the recovery of money be demanded, the amount thereof must be stated. Code N.C. 1883, \u00A7 233 (C.S. \u00A7 506)." }
+  ]},
+  JURISDICTION: { term: "JURISDICTION", entries: [
+    { head: "JURISDICTION", page: 991, text: "The word is a term of large and comprehensive import, and embraces every kind of judicial action. Federal Land Bank of Louisville, Ky. v. Crombie, 258 Ky. 383, 80 S.W.2d 39, 40. It is the authority by which courts and judicial officers take cognizance of and decide cases. Board of Trustees of Firemen's Relief and Pension Fund of City of Marietta v. Brooks, 179 Okl. 600, 67 P.2d 4, 6." },
+    { head: "JURISDICTION", page: 991, text: "It exists when court has cognizance of class of cases involved, proper parties are present, and point to be decided is within issues. Noxon Chemical Products Co. v. Leckie, C.C.A. N.J., 39 F.2d 318, 319." }
+  ]},
+  RES_JUDICATA: { term: "RES JUDICATA", entries: [
+    { head: "RES JUDICATA", page: 1470, text: "A matter adjudged; a thing judicially acted upon or decided; a thing or matter settled by judgment. A phrase of the civil law, constantly quoted in the books. Epstein v. Soskin, 86 Misc. Rep. 94, 148 N.Y.S. 323, 324. Rule that final judgment or decree on merits by court of competent jurisdiction is conclusive of rights of parties or their privies in all later suits on points and matters determined in former suit. American S. S. Co. v. Wickwire Spencer Steel Co., D.C. N.Y., 8 F.Supp. 562, 566." },
+    { head: "RES JUDICATA", page: 1470, text: "The sum and substance of the whole rule is that a matter once judicially decided is finally decided. Massie v. Paul, 263 Ky. 183, 92 S.W.2d 11, 14." }
+  ]},
+  LOCUS_STANDI: { term: "LOCUS STANDI", entries: [
+    { head: "LOCUS STANDI", page: 1090, text: "A place of standing; standing in court. A right of appearance in a court of justice, or before a legislative body, on a given question." }
+  ]},
+  WRIT: { term: "WRIT", entries: [
+    { head: "WRIT", page: 1783, text: "A precept in writing, couched in the form of a letter, running in the name of the king, president, or state, issuing from a court of justice, and sealed with its seal, addressed to a sheriff or other officer of the law, or directly to the person whose action the court desires to command, either as the commencement of a suit or other proceeding or as incidental to its progress, and requiring the performance of a specified act, or giving authority and commission to have it done." }
+  ]},
+  CHARGE: { term: "CHARGE", entries: [
+    { head: "CHARGE", page: 295, text: "In Criminal Law. An accusation or oral charge. People v. Ross, 235 Mich. 433, 209 N.W. 663, 666; Haggard v. First Nat. Bank of Mandan, 72 N.D. 434, 8 N.W.2d 5, 9. A formal complaint, information, or indictment. People v. Lepori, 35 Cal. App. 60, 169 P. 692, 694." }
+  ]}
+};
+
+/* ---------- tile art: one original gold line drawing per document type ---------- */
+function svgWrap(inner){ return '<svg viewBox="0 0 200 140" role="img" aria-hidden="true" fill="none" stroke="#e8c766" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">' + inner + '</svg>'; }
+var ART = {
+  motion: svgWrap('<g transform="rotate(-28 118 46)"><rect x="86" y="30" width="64" height="15" rx="6"/><rect x="86" y="51" width="64" height="15" rx="6"/><rect x="111" y="45" width="14" height="8"/></g><line x1="98" y1="66" x2="66" y2="104"/><line x1="34" y1="120" x2="120" y2="120"/><line x1="46" y1="112" x2="108" y2="112"/><path d="M150 84 l14 8 M158 70 l12 12" stroke="#c9a227"/>'),
+  dismiss: svgWrap('<rect x="62" y="16" width="76" height="98" rx="3"/><line x1="76" y1="40" x2="124" y2="40"/><line x1="76" y1="58" x2="124" y2="58"/><line x1="76" y1="76" x2="112" y2="76"/><line x1="58" y1="12" x2="142" y2="118" stroke="#e06c5a"/><line x1="142" y1="12" x2="58" y2="118" stroke="#e06c5a"/><path d="M152 108 h24 M168 100 l10 8 -10 8" stroke="#c9a227"/>'),
+  habeas: svgWrap('<line x1="30" y1="118" x2="170" y2="118"/><line x1="58" y1="24" x2="58" y2="118"/><line x1="142" y1="24" x2="142" y2="118"/><line x1="100" y1="24" x2="100" y2="58"/><line x1="100" y1="86" x2="100" y2="118"/><line x1="40" y1="24" x2="160" y2="24"/><path d="M84 66 L66 56 M84 74 L64 74 M116 66 L134 56 M116 74 L136 74" stroke="#c9a227"/><circle cx="100" cy="72" r="5" fill="#e8c766"/>'),
+  mandamus: svgWrap('<path d="M70 26 l10 12 12 -16 12 16 10 -12 -4 22 H74 Z" fill="#c9a227" stroke="none"/><rect x="42" y="60" width="116" height="34" rx="8"/><circle cx="42" cy="77" r="9"/><circle cx="158" cy="77" r="9"/><line x1="60" y1="72" x2="140" y2="72" stroke="#c9a227"/><line x1="60" y1="83" x2="124" y2="83" stroke="#c9a227"/><path d="M100 102 v22 M90 114 l10 10 10 -10"/>'),
+  prohibition: svgWrap('<circle cx="100" cy="72" r="54"/><line x1="62" y1="110" x2="138" y2="34"/><rect x="82" y="52" width="9" height="30" rx="4.5" fill="#e8c766" stroke="none"/><rect x="93" y="46" width="9" height="36" rx="4.5" fill="#e8c766" stroke="none"/><rect x="104" y="48" width="9" height="34" rx="4.5" fill="#e8c766" stroke="none"/><rect x="115" y="54" width="9" height="28" rx="4.5" fill="#e8c766" stroke="none"/><path d="M82 82 q18 16 42 0 l0 14 q-21 12 -42 0 Z" fill="#e8c766" stroke="none"/>'),
+  certiorari: svgWrap('<path d="M100 108 C84 96 62 92 44 96 V58 C62 54 84 58 100 70 C116 58 138 54 156 58 V96 C138 92 116 96 100 108 Z"/><line x1="100" y1="70" x2="100" y2="108"/><path d="M100 46 V20 M90 30 L100 19 L110 30"/><path d="M100 4 l3.5 7 7.5 1 -5.5 5 1.5 7.5 -7 -4 -7 4 1.5 -7.5 -5.5 -5 7.5 -1 Z" fill="#c9a227" stroke="none" transform="translate(0,-2) scale(0.9) translate(11,2)"/>'),
+  quo: svgWrap('<path d="M52 58 l12 -24 18 18 18 -26 18 26 18 -18 12 24 -6 14 H58 Z" fill="#c9a227" stroke="none"/><rect x="56" y="86" width="88" height="34" rx="7"/><circle cx="56" cy="103" r="7"/><circle cx="144" cy="103" r="7"/><text x="100" y="112" text-anchor="middle" font-family="Georgia,serif" font-size="24" fill="#e8c766" stroke="none" font-weight="bold">?</text>'),
+  petition: svgWrap('<line x1="24" y1="120" x2="176" y2="120"/><circle cx="58" cy="52" r="10"/><path d="M58 64 L76 92 L104 92"/><path d="M64 76 L94 62"/><rect x="112" y="34" width="50" height="64" rx="3"/><line x1="122" y1="50" x2="152" y2="50"/><line x1="122" y1="64" x2="152" y2="64"/><line x1="122" y1="78" x2="144" y2="78"/>'),
+  appearance: svgWrap('<path d="M56 122 V26 H144 V122"/><path d="M144 26 L168 44 V122"/><line x1="56" y1="122" x2="168" y2="122"/><line x1="82" y1="122" x2="130" y2="122" stroke="#e06c5a" stroke-dasharray="5 6"/><circle cx="104" cy="66" r="9"/><path d="M104 76 V100 M104 84 L90 92 M104 84 L118 92 M104 100 L94 118 M104 100 L114 118"/>'),
+  intent: svgWrap('<rect x="36" y="56" width="128" height="58" rx="3"/><path d="M36 60 L100 96 L164 60"/><line x1="100" y1="56" x2="100" y2="24"/><path d="M100 24 h34 l-8 9 8 9 h-34" fill="#c9a227" stroke="none"/>'),
+  demand: svgWrap('<rect x="30" y="48" width="118" height="62" rx="3"/><path d="M30 52 L89 88 L148 52"/><circle cx="152" cy="106" r="17" fill="#14110a"/><text x="152" y="114" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#e8c766" stroke="none" font-weight="bold">!</text>'),
+  affidavit: svgWrap('<rect x="48" y="18" width="76" height="104" rx="3"/><line x1="62" y1="42" x2="110" y2="42"/><line x1="62" y1="58" x2="110" y2="58"/><line x1="62" y1="74" x2="98" y2="74"/><path d="M158 14 C138 34 128 56 124 84 L118 96 C136 88 152 58 158 14 Z"/><line x1="124" y1="84" x2="146" y2="34" stroke="#c9a227"/>'),
+  complaint: svgWrap('<line x1="100" y1="22" x2="100" y2="106"/><circle cx="100" cy="18" r="5"/><line x1="44" y1="36" x2="156" y2="36"/><path d="M44 36 L30 66 M44 36 L58 66 M28 66 a16 8 0 0 0 32 0"/><path d="M156 36 L142 66 M156 36 L170 66 M140 66 a16 8 0 0 0 32 0"/><line x1="76" y1="118" x2="124" y2="118"/><rect x="88" y="44" width="24" height="32" rx="2" stroke="#c9a227"/><line x1="93" y1="54" x2="107" y2="54" stroke="#c9a227"/><line x1="93" y1="63" x2="107" y2="63" stroke="#c9a227"/>')
+};
+
+/* ---------- templates ---------- */
+var CATS = [
+  { id: "motions", name: "MOTIONS", sub: "Ask the court for an order — or ask it to send the case out of court." },
+  { id: "writs", name: "WRITS", sub: "The great writs: court orders that command, arrest, review, or test authority." },
+  { id: "petitions", name: "PETITIONS", sub: "A written prayer for the exercise of authority." },
+  { id: "notices", name: "NOTICES", sub: "Formal written warnings that put the other side on notice — and start the clock." },
+  { id: "filings", name: "AFFIDAVITS & COMPLAINTS", sub: "Sworn statements of fact, and the pleading that opens a civil action." }
+];
+var TEMPLATES = [
+  { id:"motion", cat:"motions", name:"Motion", title:"MOTION", art:"motion", termKey:"MOTION",
+    line:"The general motion — an application to the court for a rule or order.", auth:["MOTION","JURISDICTION"],
+    selfRole:"Movant", oppRole:"Respondent" },
+  { id:"dismiss", cat:"motions", name:"Motion to Dismiss", title:"MOTION TO DISMISS", art:"dismiss", termKey:"DISMISSAL",
+    line:"Ask the court to send the action out of court — no jurisdiction, no claim, or already decided.", auth:["DISMISSAL","JURISDICTION","RES_JUDICATA"],
+    selfRole:"Movant", oppRole:"Respondent" },
+  { id:"habeas", cat:"writs", name:"Writ of Habeas Corpus", title:"PETITION FOR WRIT OF HABEAS CORPUS", art:"habeas", termKey:"HABEAS",
+    line:"\u201CYou have the body.\u201D Test an unlawful detention and demand to be brought before the court.", auth:["HABEAS","WRIT","JURISDICTION"],
+    selfRole:"Petitioner", oppRole:"Respondent", oppLabel:"Respondent / custodian detaining the petitioner" },
+  { id:"mandamus", cat:"writs", name:"Writ of Mandamus", title:"PETITION FOR WRIT OF MANDAMUS", art:"mandamus", termKey:"MANDAMUS",
+    line:"\u201CWe command.\u201D Compel an officer, board, or inferior court to perform a duty the law enjoins.", auth:["MANDAMUS","WRIT"],
+    selfRole:"Relator / Petitioner", oppRole:"Respondent",
+    extras:[{k:"duty", label:"The specific duty the respondent is required by law to perform", ph:"e.g., issue the license, certify the record, docket the filing"}] },
+  { id:"prohibition", cat:"writs", name:"Writ of Prohibition", title:"PETITION FOR WRIT OF PROHIBITION", art:"prohibition", termKey:"PROHIBITION",
+    line:"Arrest proceedings in a court that is acting without, or in excess of, its jurisdiction.", auth:["PROHIBITION","WRIT","JURISDICTION"],
+    selfRole:"Relator / Petitioner", oppRole:"Respondent",
+    extras:[{k:"lower", label:"Inferior court or tribunal whose proceedings are to be arrested", ph:"e.g., Court of Common Pleas, Magisterial District Court"}] },
+  { id:"certiorari", cat:"writs", name:"Writ of Certiorari", title:"PETITION FOR WRIT OF CERTIORARI", art:"certiorari", termKey:"CERTIORARI",
+    line:"Bring the record of an inferior tribunal up for review of its errors.", auth:["CERTIORARI","WRIT"],
+    selfRole:"Petitioner", oppRole:"Respondent",
+    extras:[{k:"lower", label:"Inferior court or tribunal whose record is to be certified and reviewed", ph:"e.g., Magisterial District Court, zoning hearing board"}] },
+  { id:"quo", cat:"writs", name:"Quo Warranto", title:"PETITION IN THE NATURE OF QUO WARRANTO", art:"quo", termKey:"QUO_WARRANTO",
+    line:"\u201CBy what warrant?\u201D Make a claimant show the authority for the office or franchise he exercises.", auth:["QUO_WARRANTO","WRIT"],
+    selfRole:"Relator / Petitioner", oppRole:"Respondent",
+    extras:[{k:"office", label:"Office, franchise, or authority the respondent claims or exercises", ph:"e.g., the office of township supervisor, a corporate franchise"}] },
+  { id:"petition", cat:"petitions", name:"Petition", title:"PETITION", art:"petition", termKey:"PETITION",
+    line:"The general petition — a written prayer for the court to exercise its authority.", auth:["PETITION","JURISDICTION"],
+    selfRole:"Petitioner", oppRole:"Respondent" },
+  { id:"appearance", cat:"notices", name:"Notice of Special Appearance", title:"NOTICE OF SPECIAL APPEARANCE", art:"appearance", termKey:"APPEARANCE",
+    line:"Appear for one purpose only — to test service and jurisdiction — without submitting to the court.", auth:["APPEARANCE","JURISDICTION","LOCUS_STANDI"],
+    selfRole:"Defendant, appearing specially", oppRole:"Plaintiff", noRelief:false,
+    reliefLabel:"What you ask the court to do (e.g., quash service and dismiss for want of jurisdiction)" },
+  { id:"intent", cat:"notices", name:"Notice of Intent", title:"NOTICE OF INTENT", art:"intent", termKey:"NOTICE",
+    line:"Put the other side on written notice of what you intend to do, and when.", auth:["NOTICE"],
+    selfRole:"Claimant", oppRole:"Recipient",
+    extras:[{k:"intent", label:"The action you intend to take", ph:"e.g., file a complaint, record a lien, terminate the agreement"}] },
+  { id:"demand", cat:"notices", name:"Notice & Demand", title:"NOTICE AND DEMAND", art:"demand", termKey:"NOTICE",
+    line:"A peremptory claim of right: perform, produce, or cease — within a stated number of days.", auth:["NOTICE","DEMAND"],
+    selfRole:"Claimant", oppRole:"Recipient",
+    extras:[{k:"days", label:"Days given to comply before you act", ph:"e.g., 10"}] },
+  { id:"affidavit", cat:"filings", name:"Affidavit", title:"AFFIDAVIT", art:"affidavit", termKey:"AFFIDAVIT",
+    line:"Your statement of facts, made voluntarily and confirmed by oath or affirmation.", auth:["AFFIDAVIT"],
+    selfRole:"Affiant", oppRole:"", affidavit:true },
+  { id:"complaint", cat:"filings", name:"Complaint", title:"COMPLAINT", art:"complaint", termKey:"COMPLAINT",
+    line:"The first pleading that opens a civil action — facts numbered, relief demanded.", auth:["COMPLAINT","CHARGE","JURISDICTION"],
+    selfRole:"Plaintiff", oppRole:"Defendant",
+    extras:[{k:"amount", label:"Money demanded, if any (Black\u2019s: the amount must be stated)", ph:"e.g., $5,000"}] }
+];
+function tpl(id){ for (var i=0;i<TEMPLATES.length;i++) if (TEMPLATES[i].id===id) return TEMPLATES[i]; return null; }
+
+/* ---------- tile picker ---------- */
+(function renderTiles(){
+  var host = document.getElementById("picker");
+  var html = "";
+  CATS.forEach(function(c){
+    html += '<h2 class="cathead">' + c.name + '</h2><p class="catsub">' + c.sub + '</p><div class="tilegrid">';
+    TEMPLATES.filter(function(t){return t.cat===c.id;}).forEach(function(t){
+      var b = BLACKS[t.termKey];
+      html += '<button class="tile" data-tpl="' + t.id + '"><span class="art">' + ART[t.art] + '</span>' +
+        '<span class="tbody"><h3>' + t.name + '</h3><p>' + t.line + '</p>' +
+        '<span class="tpage">Black\u2019s p. ' + b.entries[0].page + '</span></span></button>';
+    });
+    html += '</div>';
+  });
+  host.innerHTML = html;
+  Array.prototype.forEach.call(host.querySelectorAll(".tile"), function(el){
+    el.addEventListener("click", function(){ openBuilder(el.getAttribute("data-tpl")); });
+  });
+})();
+
+/* ---------- access gate (soft gate, lane pattern) ---------- */
+var ACCESS_KEY = "lawDocsAccessV1";
+var CODE_HASH = "ea0bf35c"; /* hash only — the member code itself ships with the membership */
+function fnv(s){ var x = 0x811c9dc5; for (var i=0;i<s.length;i++){ x ^= s.charCodeAt(i); x = Math.imul(x, 0x01000193) >>> 0; } return ("0000000" + x.toString(16)).slice(-8); }
+function hasAccess(){ try { return !!window.localStorage.getItem(ACCESS_KEY); } catch(e){ return false; } }
+function showGate(){
+  var g = document.getElementById("docgate");
+  g.hidden = false; document.body.classList.add("doclocked");
+}
+function hideGate(){
+  var g = document.getElementById("docgate");
+  g.hidden = true; document.body.classList.remove("doclocked");
+}
+document.getElementById("gateform").addEventListener("submit", function(ev){
+  ev.preventDefault();
+  var email = document.getElementById("gateemail").value.trim();
+  var code = document.getElementById("gatecode").value.trim().toUpperCase();
+  var ack = document.getElementById("gateack").checked;
+  var err = document.getElementById("gateerr");
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { err.textContent = "Enter a valid email address."; return; }
+  if (fnv(code) !== CODE_HASH) { err.textContent = "That access code was not recognized. Members receive the code with their $10/mo membership."; return; }
+  if (!ack) { err.textContent = "Please read the disclaimer and check the acknowledgment box to continue."; return; }
+  err.textContent = "";
+  try { window.localStorage.setItem(ACCESS_KEY, JSON.stringify({ email: email, ts: Date.now(), ack: true })); } catch(e){}
+  hideGate();
+});
+if (!hasAccess()) showGate();
+</script>
+
+<script>
+"use strict";
+/* ================= builder ================= */
+var currentTpl = null;
+function esc(s){ return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function todayISO(){ var d = new Date(); function p(n){ return (n<10?"0":"")+n; } return d.getFullYear() + "-" + p(d.getMonth()+1) + "-" + p(d.getDate()); }
+function fmtDate(iso){
+  if (!iso) return "____________________";
+  var m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!m) return esc(iso);
+  var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  return months[parseInt(m[2],10)-1] + " " + parseInt(m[3],10) + ", " + m[1];
+}
+function fieldHTML(f){
+  var req = f.req ? ' <span style="color:var(--bad)">*</span>' : '';
+  var cls = f.wide ? 'fld wide' : 'fld';
+  if (f.type === "area") return '<div class="' + cls + '"><label for="ff_' + f.k + '">' + f.label + req + '</label><textarea id="ff_' + f.k + '" placeholder="' + esc(f.ph||"") + '"></textarea></div>';
+  return '<div class="' + cls + '"><label for="ff_' + f.k + '">' + f.label + req + '</label><input type="' + (f.type||"text") + '" id="ff_' + f.k + '" placeholder="' + esc(f.ph||"") + '"></div>';
+}
+function openBuilder(id){
+  currentTpl = tpl(id);
+  var t = currentTpl;
+  document.getElementById("picker").hidden = true;
+  document.getElementById("docview").hidden = true;
+  var b = document.getElementById("builder");
+  b.hidden = false;
+  document.getElementById("buildertitle").textContent = t.title;
+  var bk = BLACKS[t.termKey];
+  var def = '<div class="dterm">' + bk.term + ' — as Black\u2019s defines it</div>';
+  bk.entries.forEach(function(e){
+    def += '<p class="dquote">&ldquo;' + esc(e.text) + '&rdquo;</p><p class="dsrc">— Black\u2019s Law Dictionary, 4th Edition Revised, p. ' + e.page + '</p>';
+  });
+  document.getElementById("defcard").innerHTML = def;
+  var fields = [];
+  fields.push({k:"filer", label:"Your living name (the filer)", req:true, ph:"e.g., John Doe"});
+  fields.push({k:"estate", label:"Estate / trading name in ALL CAPS (optional)", ph:"e.g., JOHN DOE ESTATE"});
+  if (!t.affidavit) fields.push({k:"court", label:"Court name", req:true, ph:"e.g., Court of Common Pleas"});
+  fields.push({k:"county", label:"County", req:true, ph:"e.g., Luzerne"});
+  fields.push({k:"state", label:"State", req:true, ph:"e.g., Pennsylvania"});
+  fields.push({k:"caseno", label:"Case / docket number (if assigned)", ph:"e.g., CP-40-CR-0001237-2026"});
+  if (!t.affidavit) {
+    fields.push({k:"opp", label: t.oppLabel || "Opposing party", req:true, ph:"The other side, exactly as named in the case"});
+    fields.push({k:"judge", label:"Judge / magistrate name (optional)", ph:"e.g., Hon. Jane Smith"});
+  }
+  fields.push({k:"facts", label: t.affidavit ? "Facts you swear to — one fact per paragraph, blank line between facts" : "Statement of facts — what happened, in order (blank line between paragraphs)", req:true, wide:true, type:"area", ph:"Write the facts plainly: who, what, when, where."});
+  if (!t.affidavit) fields.push({k:"relief", label: t.reliefLabel || "Relief requested — exactly what you ask the court (or the recipient) to do", req:true, wide:true, type:"area", ph:"e.g., dismiss this action with prejudice and assess costs to the plaintiff"});
+  fields.push({k:"date", label:"Date of signing", type:"date"});
+  document.getElementById("formgrid").innerHTML = fields.map(fieldHTML).join("");
+  var ex = "";
+  (t.extras||[]).forEach(function(x){ ex += fieldHTML({k:"ex_"+x.k, label:x.label, ph:x.ph, wide:true}); });
+  document.getElementById("extrafields").innerHTML = ex;
+  document.getElementById("ff_date").value = todayISO();
+  document.getElementById("formerr").textContent = "";
+  window.scrollTo(0,0);
+}
+function val(k){ var el = document.getElementById("ff_"+k); return el ? el.value.trim() : ""; }
+function collect(){
+  var t = currentTpl;
+  var f = { tpl:t, filer:val("filer"), estate:val("estate"), court:val("court"), county:val("county"),
+    state:val("state"), caseno:val("caseno"), opp:val("opp"), judge:val("judge"), facts:val("facts"),
+    relief:val("relief"), date:val("date") || todayISO(),
+    use308: document.getElementById("opt308").checked,
+    useEstate: document.getElementById("optestate").checked };
+  (t.extras||[]).forEach(function(x){ f["ex_"+x.k] = val("ex_"+x.k); });
+  return f;
+}
+var SAMPLE = { filer:"John Doe", estate:"JOHN DOE ESTATE", court:"Court of Common Pleas", county:"Luzerne",
+  state:"Pennsylvania", caseno:"CP-40-CV-0000000-2026", opp:"Jane Roe", judge:"",
+  facts:"On March 3, 2026, the undersigned was served with process in this matter at his dwelling in Wilkes-Barre, Pennsylvania.\n\nThe undersigned has not consented to the jurisdiction asserted, has not entered a general appearance, and reserves every right and objection.",
+  relief:"quash the service of process, dismiss this action for want of jurisdiction over the person, and grant such other and further relief as the court deems just",
+  ex_duty:"certify and return the complete record of the proceedings below", ex_lower:"Magisterial District Court 11-1-01",
+  ex_office:"the office of township tax collector", ex_intent:"file a complaint and pursue every remedy at law and in equity",
+  ex_days:"10", ex_amount:"$5,000" };
+document.getElementById("btnsample").addEventListener("click", function(){
+  Object.keys(SAMPLE).forEach(function(k){
+    var el = document.getElementById("ff_"+k);
+    if (el && !el.value) el.value = SAMPLE[k];
+  });
+});
+document.getElementById("btnback").addEventListener("click", function(){
+  document.getElementById("builder").hidden = true;
+  document.getElementById("picker").hidden = false;
+  window.scrollTo(0,0);
+});
+
+/* ================= document generation ================= */
+function capName(f){ return (f.useEstate && f.estate) ? f.estate : f.filer.toUpperCase(); }
+function paras(text){
+  return String(text||"").split(/\n\s*\n/).map(function(s){ return s.trim(); }).filter(Boolean);
+}
+function numberedFacts(text){
+  var ps = paras(text);
+  if (ps.length <= 1) {
+    var lines = String(text||"").split(/\n+/).map(function(s){return s.trim();}).filter(Boolean);
+    if (lines.length > 1) ps = lines;
+  }
+  if (ps.length <= 1) return '<p class="indent">' + esc(ps[0]||"") + '</p>';
+  var h = "<ol>";
+  ps.forEach(function(p){ h += "<li>" + esc(p) + "</li>"; });
+  return h + "</ol>";
+}
+function authoritiesHTML(t){
+  var h = '<h4>Definitions and Authorities — Black\u2019s Law Dictionary, 4th Edition Revised</h4>';
+  h += '<p>The definitions below are quoted verbatim from Black\u2019s Law Dictionary, 4th Edition Revised, and are offered for the court\u2019s convenience.</p>';
+  t.auth.forEach(function(key){
+    var b = BLACKS[key];
+    b.entries.forEach(function(e){
+      h += '<p class="authq"><b>' + esc(e.head) + '.</b> &ldquo;' + esc(e.text) + '&rdquo;</p>';
+      h += '<p class="authsrc">— Black\u2019s Law Dictionary, 4th Edition Revised, p. ' + e.page + '</p>';
+    });
+  });
+  return h;
+}
+function captionHTML(f, t){
+  if (t.affidavit) {
+    var head = "";
+    if (f.court) head += '<p class="courtline center">' + esc(f.court.toUpperCase()) + '</p>';
+    head += '<p class="courtline center">' + esc(f.county.toUpperCase()) + ' COUNTY, ' + esc(f.state.toUpperCase()) + '</p>';
+    return head;
+  }
+  var left = '<div class="capleft"><p style="text-align:center"><b>' + esc(capName(f)) + '</b>,<br>' + esc(t.selfRole) + ',</p>' +
+    '<p class="vs" style="text-align:center">v.</p>' +
+    '<p style="text-align:center"><b>' + esc(f.opp.toUpperCase()) + '</b>,<br>' + esc(t.oppRole) + '.</p></div>';
+  var right = '<div class="capright"><div>' +
+    (f.caseno ? '<p>Case No. <b>' + esc(f.caseno) + '</b></p>' : '<p>Case No. ____________________</p>') +
+    (f.judge ? '<p>' + esc(f.judge) + '</p>' : '') +
+    '<p style="margin-top:10px"><b>' + esc(t.title) + '</b></p></div></div>';
+  var top = '<p class="courtline center">' + esc(f.court.toUpperCase()) + '</p>' +
+    '<p class="courtline center">' + esc(f.county.toUpperCase()) + ' COUNTY, ' + esc(f.state.toUpperCase()) + '</p>';
+  return top + '<div class="capwrap">' + left + right + '</div>';
+}
+function sigHTML(f, t){
+  var h = '<div class="sigblock"><p>Dated: ' + fmtDate(f.date) + '</p><p>Respectfully submitted,</p>';
+  if (f.use308) h += '<p><i>Without prejudice — UCC 1-308. All rights reserved.</i></p>';
+  h += '<div class="sigline"></div><p>' + esc(f.filer) + (t.affidavit ? ', Affiant' : ', ' + esc(t.selfRole)) + ', pro se, sui juris</p>';
+  if (f.useEstate && f.estate) h += '<p>for ' + esc(f.estate) + '</p>';
+  return h + '</div>';
+}
+function certHTML(f){
+  return '<h4>Certificate of Service</h4><p class="indent">I certify that on ' + fmtDate(f.date) +
+    ' I served a true and correct copy of this document on ' + esc(f.opp) +
+    ', by ____________________________________ (first-class mail, hand delivery, or e-service), addressed to the party or counsel of record.</p>' +
+    '<div class="sigblock"><div class="sigline"></div><p>' + esc(f.filer) + '</p></div>';
+}
+var DOCFOOT = '<div class="docfoot">EDUCATIONAL TEMPLATE — NOT LEGAL ADVICE. This document was generated from a study template in the UCC Talk24 Court Document Generator, with definitions quoted verbatim from Black\u2019s Law Dictionary, 4th Edition Revised. It is not legal advice and creates no attorney\u2013client relationship. If you do not have the knowledge of a lawyer, have a lawyer review this document before filing it. Court rules, forms, fees, and deadlines vary by court — verify them with the clerk of your court before you file.</div>';
+
+function buildBody(f){
+  var t = f.tpl, N = esc(capName(f)), name = esc(f.filer), opp = esc(f.opp);
+  var facts = numberedFacts(f.facts);
+  var relief = esc(f.relief);
+  var auth = authoritiesHTML(t);
+  var prayer = '<h4>Prayer for Relief</h4><p class="indent">WHEREFORE, the undersigned prays that this Court ' + relief + ', and grant such other and further relief as the Court deems just and proper.</p>';
+  switch (t.id) {
+    case "motion":
+      return '<p class="indent">COMES NOW the Movant, ' + name + ', appearing pro se and sui juris, and moves this Court as follows, and in support states:</p>' + facts +
+        '<h4>Argument</h4><p class="indent">A motion is, in the words of Black\u2019s, \u201can application for a rule or order\u201D to the court. The facts above entitle the Movant to the order requested. Jurisdiction is \u201cthe authority by which courts and judicial officers take cognizance of and decide cases\u201D — the Movant asks this Court to exercise that authority on the facts stated, and on no others.</p>' + auth + prayer;
+    case "dismiss":
+      return '<p class="indent">COMES NOW the Movant, ' + name + ', appearing pro se and sui juris, and moves this Court to dismiss this action, and in support states:</p>' + facts +
+        '<h4>Grounds</h4><p class="indent">A dismissal is \u201can order or judgment finally disposing of an action, suit, motion, etc., by sending it out of court.\u201D Jurisdiction — \u201cthe authority by which courts and judicial officers take cognizance of and decide cases\u201D — must exist when the court has \u201ccognizance of class of cases involved, proper parties are present, and point to be decided is within issues.\u201D Where those elements fail, or where the matter has already been judicially decided, the action cannot proceed.</p>' + auth + prayer;
+    case "habeas":
+      return '<p class="indent">The Petitioner, ' + name + ', appearing pro se and sui juris, respectfully represents to this Court:</p>' + facts +
+        '<h4>The Restraint Is Unlawful</h4><p class="indent">The Petitioner is restrained of liberty by the Respondent named above. Habeas corpus — \u201cyou have the body\u201D — is \u201cthe well-known remedy for deliverance from illegal confinement,\u201D and its sole office is to test whether the detention is lawful and to release from unlawful imprisonment. The Petitioner demands that the Respondent produce the body and show the day and cause of the caption and detention.</p>' + auth +
+        '<h4>Prayer for Relief</h4><p class="indent">WHEREFORE, the Petitioner prays that a Writ of Habeas Corpus issue, directed to the Respondent, commanding the Respondent to produce the body of the Petitioner before this Court at a time certain, with the day and cause of the detention; that the lawfulness of the restraint be inquired into; and that the Petitioner ' + relief + ', and be granted such other and further relief as the Court deems just.</p>';
+    case "mandamus":
+      return '<p class="indent">The Relator, ' + name + ', appearing pro se and sui juris, respectfully represents:</p>' + facts +
+        '<h4>The Duty</h4><p class="indent">The law enjoins upon the Respondent, as a duty resulting from office, trust, or station, the following act: ' + esc(f.ex_duty || "the act described in the facts above") + '. Demand for performance has been made, and the Respondent has refused or neglected to perform. Mandamus — \u201cwe command\u201D — is the remedy: an order \u201ccommanding the performance of a particular act therein specified, and belonging to his or their public, official, or ministerial duty.\u201D</p>' + auth +
+        '<h4>Prayer for Relief</h4><p class="indent">WHEREFORE, the Relator prays that an alternative writ of mandamus issue, commanding the Respondent to perform the duty stated, or to show cause why the Respondent should not be required to do so; and that on default or insufficient cause a peremptory writ issue, and that the Respondent ' + relief + ', with such other and further relief as the Court deems just.</p>';
+    case "prohibition":
+      return '<p class="indent">The Relator, ' + name + ', appearing pro se and sui juris, respectfully represents:</p>' + facts +
+        '<h4>Excess of Jurisdiction</h4><p class="indent">Proceedings are pending or threatened in ' + esc(f.ex_lower || "the inferior tribunal named in the facts above") + ' that are without, or in excess of, its jurisdiction. Prohibition \u201carrests the proceedings of any tribunal, corporation, board, or person, when such proceedings are without or in excess of the jurisdiction of such tribunal, corporation, board, or person,\u201D and commands the inferior court \u201cto cease from the prosecution of the same.\u201D The grievance cannot be redressed by ordinary proceedings or by appeal in time to prevent the harm.</p>' + auth +
+        '<h4>Prayer for Relief</h4><p class="indent">WHEREFORE, the Relator prays that a Writ of Prohibition issue to the tribunal named, commanding it to cease and desist from the proceedings described; and that the Respondent ' + relief + ', with such other and further relief as the Court deems just.</p>';
+    case "certiorari":
+      return '<p class="indent">The Petitioner, ' + name + ', appearing pro se and sui juris, respectfully represents:</p>' + facts +
+        '<h4>Review of the Record</h4><p class="indent">The proceedings described above were had in ' + esc(f.ex_lower || "the inferior tribunal named in the facts above") + '. Certiorari — \u201cto be informed of, to be made certain in regard to\u201D — is the writ by which a superior court commands the judges or officers of an inferior court \u201cto certify or to return records or proceedings in a cause for judicial review of their action.\u201D The errors complained of appear on the face of that record.</p>' + auth +
+        '<h4>Prayer for Relief</h4><p class="indent">WHEREFORE, the Petitioner prays that a Writ of Certiorari issue, commanding the tribunal named to certify and return its record in this matter to this Court; that the proceedings be reviewed; that the errors be corrected and the judgment or order below quashed; and that the Respondent ' + relief + ', with such other and further relief as the Court deems just.</p>';
+    case "quo":
+      return '<p class="indent">The Relator, ' + name + ', appearing pro se and sui juris, respectfully represents:</p>' + facts +
+        '<h4>By What Warrant</h4><p class="indent">The Respondent claims or exercises ' + esc(f.ex_office || "the office, franchise, or authority described in the facts above") + '. Quo warranto lies \u201cagainst him who claimed or usurped any office, franchise, or liberty, to inquire by what authority he supported his claim, in order to determine the right,\u201D and commands the defendant \u201cto show by what warrant he exercises such a franchise.\u201D</p>' + auth +
+        '<h4>Prayer for Relief</h4><p class="indent">WHEREFORE, the Relator prays that the Respondent be required to show by what warrant the Respondent claims or exercises the office, franchise, or authority described; that on failure of such showing the Respondent be ousted and excluded from the same; and that the Respondent ' + relief + ', with such other and further relief as the Court deems just.</p>';
+    case "petition":
+      return '<p class="indent">The Petitioner, ' + name + ', appearing pro se and sui juris, respectfully represents and prays:</p>' + facts +
+        '<h4>The Prayer</h4><p class="indent">A petition is \u201ca written address, embodying an application or prayer from the person or persons preferring it, to the power, body, or person to whom it is presented, for the exercise of his or their authority in the redress of some wrong, or the grant of some favor, privilege, or license.\u201D On the facts stated, the Petitioner presents this prayer.</p>' + auth + prayer;
+    case "appearance":
+      return '<p class="indent">PLEASE TAKE NOTICE that the undersigned, ' + name + ', appears <b>SPECIALLY</b> in this matter, and for one purpose only: to test the sufficiency of the service of process and the jurisdiction of this Court over the undersigned. This is not a general appearance. The undersigned does not submit to the jurisdiction of this Court for all the purposes of the suit, and waives nothing.</p>' + facts +
+        '<h4>As Black\u2019s Draws the Line</h4><p class="indent">\u201CA special appearance is for the purpose of testing the sufficiency of service or the jurisdiction of the court; a general appearance is made where the defendant waives defects of service and submits to the jurisdiction.\u201D The undersigned appears under the first of those two descriptions, and expressly not under the second.</p>' + auth + prayer;
+    case "intent":
+      return '<p class="indent">PLEASE TAKE NOTICE that the undersigned, ' + name + ', gives notice of intent as follows. The undersigned intends to: ' + esc(f.ex_intent || "take the action described below") + '.</p>' + facts +
+        '<p class="indent">This notice is \u201cinformation, an advice, or written warning, in more or less formal shape, intended to apprise a person of some proceeding in which his interests are involved\u201D — it is given so that the recipient has the knowledge of the facts directly, in writing, before the action is taken. Time is of the essence.</p>' + auth +
+        '<h4>Demand</h4><p class="indent">To avoid the intended action, the recipient is asked to ' + relief + '.</p>';
+    case "demand":
+      return '<p class="indent">TAKE NOTICE, and demand is hereby made: the undersigned, ' + name + ', claims as of right, and demands, that you ' + relief + '.</p>' + facts +
+        '<p class="indent">A demand is \u201ca peremptory claim to thing of right,\u201D and \u201can imperative request preferred by one person to another, under a claim of right, requiring the latter to do or yield something or to abstain from some act.\u201D You are given ' + esc(f.ex_days || "ten (10)") + ' days from service of this notice to comply. On your failure or refusal, the undersigned will pursue every remedy at law and in equity, without further notice.</p>' + auth;
+    case "affidavit":
+      return '<p class="indent">I, ' + name + ', being duly sworn, depose and say:</p>' + facts +
+        '<p class="indent">Further the affiant saith naught.</p>' + auth;
+    case "complaint":
+      return '<p class="indent">The Plaintiff, ' + name + ', appearing pro se and sui juris, complaining of the Defendant, ' + opp + ', alleges:</p>' + facts +
+        '<h4>The Charge of the Pleading</h4><p class="indent">A complaint is \u201cthe first or initiatory pleading on the part of the plaintiff in a civil action,\u201D and \u201cits purpose is to give defendant information of all material facts on which plaintiff relies to support his demand.\u201D The numbered allegations above are that statement of facts, and the demand below is the relief to which the Plaintiff supposes himself entitled' + (f.ex_amount ? ', including the sum of ' + esc(f.ex_amount) : '') + '.</p>' + auth + prayer;
+  }
+  return facts + auth + prayer;
+}
+function generate(){
+  var t = currentTpl, f = collect();
+  var missing = [];
+  if (!f.filer) missing.push("your living name");
+  if (!t.affidavit && !f.court) missing.push("the court name");
+  if (!f.county) missing.push("the county");
+  if (!f.state) missing.push("the state");
+  if (!t.affidavit && !f.opp) missing.push("the opposing party");
+  if (!f.facts) missing.push("the statement of facts");
+  if (!t.affidavit && !f.relief) missing.push("the relief requested");
+  var err = document.getElementById("formerr");
+  if (missing.length) { err.textContent = "Still needed: " + missing.join(", ") + "."; return; }
+  err.textContent = "";
+  var html = captionHTML(f, t) +
+    '<h2 class="doctitle">' + esc(t.title) + '</h2>' +
+    buildBody(f) +
+    sigHTML(f, t) +
+    (t.affidavit
+      ? '<h4>Jurat</h4><p>Sworn to (or affirmed) and subscribed before me this ______ day of ____________________, 20______.</p><div class="sigblock"><div class="sigline"></div><p>Notary Public / officer authorized to administer oaths &nbsp;[SEAL]</p><p>My commission expires: ____________________</p></div>'
+      : certHTML(f)) +
+    DOCFOOT;
+  document.getElementById("paper").innerHTML = html;
+  document.getElementById("builder").hidden = true;
+  document.getElementById("docview").hidden = false;
+  window.scrollTo(0,0);
+}
+document.getElementById("docform").addEventListener("submit", function(ev){ ev.preventDefault(); generate(); });
+document.getElementById("btnprint").addEventListener("click", function(){ window.print(); });
+document.getElementById("btnedit").addEventListener("click", function(){
+  document.getElementById("docview").hidden = true;
+  document.getElementById("builder").hidden = false;
+  window.scrollTo(0,0);
+});
+document.getElementById("btnnew").addEventListener("click", function(){
+  document.getElementById("docview").hidden = true;
+  document.getElementById("builder").hidden = true;
+  document.getElementById("picker").hidden = false;
+  window.scrollTo(0,0);
+});
+window.DOCGEN = { BLACKS: BLACKS, TEMPLATES: TEMPLATES, ART: ART, hasAccess: hasAccess, openBuilder: openBuilder, generate: generate };
+</script>
+</body>
+</html>
