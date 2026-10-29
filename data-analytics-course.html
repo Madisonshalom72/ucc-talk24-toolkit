@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Data Analytics — Interactive Course | Excel · Power BI · SQL · Python</title>
+<meta name="description" content="A hands-on interactive Data Analytics course: Excel, Power BI, SQL and Python labs with a personal AI trainer. Practical knowledge, real projects, real results.">
+<style>
+:root{
+  --ink:#07090f; --ink2:#0b0f1a; --panel:#101623; --panel2:#141c30;
+  --line:#24304d; --txt:#eef2ff; --dim:#9aa7c7; --dim2:#6b7799;
+  --gold:#f5c518; --gold2:#ffd94d; --goldsoft:rgba(245,197,24,.14);
+  --green:#37d67a; --red:#ff5d6c; --blue:#4da3ff;
+  --excel:#2fae5f; --pbi:#f2c811; --sql:#39c2d7; --py:#ffd43b;
+  --r:16px; --rs:10px;
+  --shadow:0 18px 50px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(245,197,24,.12), transparent 60%),
+    radial-gradient(700px 500px at -10% 30%, rgba(77,163,255,.08), transparent 60%),
+    linear-gradient(180deg,#07090f 0%,#0a0e18 55%,#07090f 100%);
+  color:var(--txt);
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  min-height:100vh; overflow-x:hidden;
+}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(120,150,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(120,150,255,.05) 1px,transparent 1px);
+  background-size:44px 44px;mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 78%);}
+a{color:var(--gold2)}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+.wrap{max-width:1060px;margin:0 auto;padding:0 16px 90px;position:relative;z-index:1}
+
+/* ---------- header ---------- */
+header.top{position:sticky;top:0;z-index:40;backdrop-filter:blur(14px);
+  background:rgba(7,9,15,.82);border-bottom:1px solid var(--line)}
+.top-in{max-width:1060px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.4px;font-size:15px}
+.logo .mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--gold),#b8860b);color:#14100a;box-shadow:0 0 18px rgba(245,197,24,.45)}
+.logo small{display:block;font-weight:600;color:var(--dim);font-size:10px;letter-spacing:1.6px}
+.top nav{margin-left:auto;display:flex;gap:8px;align-items:center}
+.chipbtn{background:var(--panel);border:1px solid var(--line);color:var(--txt);border-radius:999px;
+  padding:8px 14px;font-size:13px;font-weight:600;transition:.2s}
+.chipbtn:hover{border-color:var(--gold);color:var(--gold2)}
+.chipbtn.trainer-open{background:linear-gradient(135deg,var(--gold),#c9930a);color:#171106;border:none;
+  box-shadow:0 0 16px rgba(245,197,24,.35)}
+.progress-shell{max-width:1060px;margin:0 auto;padding:0 16px 10px}
+.progress-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--dim);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:5px}
+.progress-track{height:8px;border-radius:99px;background:#151c2e;border:1px solid var(--line);overflow:hidden}
+.progress-fill{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,#b8860b,var(--gold),var(--gold2));
+  box-shadow:0 0 14px rgba(245,197,24,.6);transition:width .7s cubic-bezier(.2,.9,.2,1)}
+
+/* ---------- hero ---------- */
+.hero{padding:34px 0 8px;text-align:left}
+.kicker{color:var(--gold);font-weight:700;letter-spacing:2.6px;font-size:11px;text-transform:uppercase}
+.hero h1{font-size:clamp(34px,7.2vw,58px);line-height:1.02;font-weight:900;margin:10px 0 8px}
+.hero h1 .gold{background:linear-gradient(92deg,var(--gold2),var(--gold) 55%,#ffec9e);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 22px rgba(245,197,24,.25))}
+.hero p.lede{color:var(--dim);font-size:clamp(15px,2.6vw,18px);max-width:640px;line-height:1.55}
+.hero .pillars{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pillar{border:1px solid var(--line);background:rgba(16,22,35,.8);border-radius:999px;padding:7px 13px;font-size:12.5px;color:var(--dim)}
+.pillar b{color:var(--gold2)}
+
+/* ---------- tiles ---------- */
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}
+@media(max-width:560px){.tiles{grid-template-columns:1fr 1fr;gap:10px}}
+@media(max-width:400px){.tiles{grid-template-columns:1fr}}
+.tile{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--panel);
+  text-align:left;padding:0;color:var(--txt);transition:transform .25s,border-color .25s,box-shadow .25s;box-shadow:var(--shadow)}
+.tile:hover,.tile:active{transform:translateY(-4px) scale(1.01);border-color:var(--gold);box-shadow:0 22px 60px rgba(0,0,0,.6),0 0 0 1px rgba(245,197,24,.25)}
+.tile .art{height:128px;position:relative;overflow:hidden}
+.tile .art svg{width:100%;height:100%;display:block}
+.tile .body{padding:14px 16px 16px}
+.tile h3{font-size:19px;font-weight:800;letter-spacing:.3px}
+.tile p{color:var(--dim);font-size:13px;line-height:1.5;margin-top:4px;min-height:38px}
+.tile .foot{display:flex;align-items:center;gap:8px;margin-top:10px}
+.tag{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:6px;padding:4px 8px;background:var(--goldsoft);color:var(--gold2)}
+.tile .status{margin-left:auto;font-size:12px;color:var(--dim)}
+.tile .status.done{color:var(--green);font-weight:700}
+.tile.wide{grid-column:1/-1}
+.tile.wide .art{height:110px}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.tile .badge{position:absolute;top:10px;right:10px;z-index:2;background:rgba(7,9,15,.75);border:1px solid var(--line);
+  color:var(--gold2);font-size:10px;font-weight:800;letter-spacing:1.4px;padding:5px 9px;border-radius:999px}
+
+/* ---------- screens / sections ---------- */
+.screen{display:none;animation:fadeUp .45s ease both}
+.screen.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.backbtn{background:none;border:1px solid var(--line);color:var(--dim);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:600;margin:18px 0 4px}
+.backbtn:hover{color:var(--gold2);border-color:var(--gold)}
+.track-head{display:flex;gap:16px;align-items:center;margin:10px 0 6px;flex-wrap:wrap}
+.track-head .ic{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:27px;flex:none;
+  background:var(--panel2);border:1px solid var(--line)}
+.track-head h2{font-size:clamp(24px,5vw,34px);font-weight:900}
+.track-head p{color:var(--dim);font-size:14px;margin-top:2px;max-width:560px;line-height:1.5}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;margin-top:16px;box-shadow:var(--shadow)}
+.card h3{font-size:17px;font-weight:800;margin-bottom:6px}
+.card h3 .num{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--goldsoft);
+  color:var(--gold2);font-size:13px;margin-right:8px;vertical-align:2px}
+.card p,.card li{color:#c6cfe4;font-size:14.5px;line-height:1.65}
+.card ul{margin:8px 0 4px 18px}
+.card li{margin:4px 0}
+code,.mono{font-family:"Cascadia Code",Consolas,Menlo,monospace}
+code{background:#0a0f1c;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:.86em;color:var(--gold2)}
+pre{background:#05070d;border:1px solid var(--line);border-radius:var(--rs);padding:13px 14px;overflow-x:auto;margin-top:10px}
+pre code{background:none;border:none;padding:0;color:#d7e3ff;font-size:13px;line-height:1.6}
+.callout{border-left:3px solid var(--gold);background:var(--goldsoft);border-radius:0 var(--rs) var(--rs) 0;padding:11px 14px;margin-top:12px;font-size:13.5px;color:#e8ddae;line-height:1.55}
+.btn{background:linear-gradient(135deg,var(--gold),#c9930a);color:#171106;border:none;border-radius:12px;
+  padding:12px 20px;font-weight:800;font-size:14.5px;transition:.2s;box-shadow:0 8px 22px rgba(245,197,24,.25)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(245,197,24,.35)}
+.btn.ghost{background:var(--panel);color:var(--txt);border:1px solid var(--line);box-shadow:none}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold2)}
+.btn.small{padding:9px 14px;font-size:13px;border-radius:10px}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.feedback{margin-top:12px;border-radius:var(--rs);padding:11px 14px;font-size:14px;line-height:1.55;display:none}
+.feedback.ok{display:block;background:rgba(55,214,122,.12);border:1px solid rgba(55,214,122,.45);color:#a9f0c6}
+.feedback.bad{display:block;background:rgba(255,93,108,.1);border:1px solid rgba(255,93,108,.4);color:#ffc2c8}
+.feedback.info{display:block;background:rgba(77,163,255,.1);border:1px solid rgba(77,163,255,.4);color:#c4deff}
+
+/* ---------- excel grid ---------- */
+.formula-bar{display:flex;gap:8px;align-items:center;background:#0a0f1c;border:1px solid var(--line);border-radius:var(--rs);padding:8px 10px;margin-top:12px}
+.formula-bar .fx{font-style:italic;font-weight:800;color:var(--gold2);font-family:Georgia,serif}
+.formula-bar .cellname{font-family:Consolas,monospace;font-size:13px;color:var(--dim);min-width:34px;text-align:center;border:1px solid var(--line);border-radius:6px;padding:4px 0;background:var(--panel)}
+.formula-bar input{flex:1;background:transparent;border:none;color:var(--txt);font-family:Consolas,monospace;font-size:14px;outline:none;min-width:0}
+.sheet-scroll{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:var(--rs)}
+table.sheet{border-collapse:collapse;width:100%;min-width:520px;background:#0a0f1c;font-size:13px}
+table.sheet th,table.sheet td{border:1px solid #1c2740;padding:0;height:30px;text-align:right}
+table.sheet th{background:#131b2e;color:var(--dim);font-weight:700;text-align:center;padding:4px 6px;font-size:12px}
+table.sheet td input{width:100%;height:100%;background:transparent;border:none;color:var(--txt);text-align:right;
+  font-family:Consolas,monospace;font-size:13px;padding:4px 7px;outline:none}
+table.sheet td input:focus{background:rgba(245,197,24,.12)}
+table.sheet td.locked{color:#c6cfe4;font-family:Consolas,monospace;padding:4px 7px;background:rgba(255,255,255,.02)}
+table.sheet td.target{background:rgba(245,197,24,.09);box-shadow:inset 0 0 0 1px rgba(245,197,24,.45)}
+table.sheet td.target input{color:var(--gold2);font-weight:700}
+table.sheet td.txt{text-align:left}
+table.sheet td.txt input{text-align:left;font-family:inherit}
+table.sheet td.good{box-shadow:inset 0 0 0 2px var(--green)}
+.tasklist{margin-top:14px;display:grid;gap:8px}
+.task{display:flex;gap:10px;align-items:flex-start;background:#0a0f1c;border:1px solid var(--line);border-radius:var(--rs);padding:10px 12px;font-size:13.5px;line-height:1.5;color:#c6cfe4}
+.task .dot{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--dim2);display:grid;place-items:center;font-size:11px;margin-top:1px;color:transparent}
+.task.done{border-color:rgba(55,214,122,.5)}
+.task.done .dot{background:var(--green);border-color:var(--green);color:#06230f;font-weight:900}
+.task button{margin-left:auto;flex:none}
+
+/* ---------- SQL / code labs ---------- */
+.codebox{width:100%;background:#05070d;border:1px solid var(--line);border-radius:var(--rs);color:#d7e3ff;
+  font-family:Consolas,Menlo,monospace;font-size:14px;line-height:1.55;padding:13px 14px;outline:none;resize:vertical}
+.codebox:focus{border-color:var(--gold)}
+table.data{border-collapse:collapse;width:100%;margin-top:12px;font-size:13px;background:#0a0f1c}
+table.data th,table.data td{border:1px solid #1c2740;padding:6px 9px;text-align:left}
+table.data th{background:#131b2e;color:var(--gold2);font-family:Consolas,monospace;font-size:12px}
+table.data td{color:#dbe4f7;font-family:Consolas,monospace;font-size:12.5px}
+.dbnote{font-size:12px;color:var(--dim2);margin-top:8px;font-family:Consolas,monospace;line-height:1.6}
+.labrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+
+/* ---------- Power BI builder ---------- */
+.fieldgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media(max-width:560px){.fieldgrid{grid-template-columns:1fr}}
+.fieldbox{background:#0a0f1c;border:1px solid var(--line);border-radius:var(--rs);padding:12px}
+.fieldbox h4{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.fchip{background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;transition:.15s}
+.fchip.sel{background:var(--gold);color:#171106;border-color:var(--gold);font-weight:800}
+.viz{background:#0a0f1c;border:1px solid var(--line);border-radius:var(--rs);padding:14px;margin-top:12px;min-height:180px}
+.viz svg{width:100%;height:auto;display:block}
+.bigcard-num{font-size:44px;font-weight:900;color:var(--gold2);text-align:center;padding:22px 0 4px}
+.bigcard-lab{text-align:center;color:var(--dim);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;padding-bottom:18px}
+.dax-tokens{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.dax-built{background:#05070d;border:1px dashed var(--line);border-radius:var(--rs);padding:12px 14px;font-family:Consolas,monospace;font-size:14px;color:var(--gold2);min-height:46px;margin-top:10px;word-break:break-word}
+
+/* ---------- Python console ---------- */
+.pyline{font-family:Consolas,Menlo,monospace;font-size:14px;line-height:2;background:#05070d;border:1px solid var(--line);border-radius:var(--rs);padding:13px 14px;margin-top:10px;overflow-x:auto;white-space:nowrap;color:#d7e3ff}
+.pyline select{background:#131b2e;color:var(--gold2);border:1px solid var(--gold);border-radius:6px;font-family:inherit;font-size:13px;padding:2px 5px}
+.pyout{background:#05070d;border:1px solid var(--line);border-left:3px solid var(--green);border-radius:var(--rs);padding:11px 14px;margin-top:10px;font-family:Consolas,monospace;font-size:13px;color:#b9f4cd;white-space:pre-wrap;display:none;line-height:1.6}
+
+/* ---------- quiz ---------- */
+.quiz-q{margin-top:16px}
+.quiz-q p.q{font-weight:700;font-size:15px;line-height:1.5}
+.opts{display:grid;gap:8px;margin-top:10px}
+.opt{background:#0a0f1c;border:1px solid var(--line);border-radius:var(--rs);padding:11px 13px;text-align:left;color:var(--txt);font-size:14px;line-height:1.45;transition:.15s;width:100%}
+.opt:hover{border-color:var(--gold)}
+.opt.sel{border-color:var(--gold);background:var(--goldsoft)}
+.opt.right{border-color:var(--green);background:rgba(55,214,122,.12)}
+.opt.wrong{border-color:var(--red);background:rgba(255,93,108,.1)}
+
+/* ---------- trainer ---------- */
+.trainer-fab{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;align-items:center;gap:9px;
+  background:linear-gradient(135deg,var(--gold),#c9930a);color:#171106;border:none;border-radius:999px;
+  padding:13px 18px;font-weight:800;font-size:14px;box-shadow:0 14px 34px rgba(0,0,0,.55),0 0 20px rgba(245,197,24,.35)}
+.trainer-panel{position:fixed;inset:auto 0 0 0;z-index:70;background:var(--ink2);border-top:1px solid var(--gold);
+  border-radius:22px 22px 0 0;max-height:82vh;display:none;flex-direction:column;box-shadow:0 -20px 60px rgba(0,0,0,.7)}
+.trainer-panel.open{display:flex;animation:slideUp .35s ease both}
+@keyframes slideUp{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@media(min-width:760px){.trainer-panel{left:auto;right:18px;bottom:18px;width:420px;border:1px solid var(--gold);border-radius:22px}}
+.trainer-head{display:flex;align-items:center;gap:11px;padding:15px 16px;border-bottom:1px solid var(--line)}
+.avatar{width:42px;height:42px;border-radius:13px;flex:none;display:grid;place-items:center;font-size:21px;
+  background:linear-gradient(135deg,#1b2542,#0d1322);border:1px solid var(--gold)}
+.trainer-head h3{font-size:15.5px}
+.trainer-head p{font-size:12px;color:var(--dim)}
+.trainer-head .x{margin-left:auto;background:none;border:none;color:var(--dim);font-size:22px;line-height:1}
+.trainer-msgs{overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:9px;min-height:180px}
+.msg{max-width:88%;border-radius:14px;padding:10px 13px;font-size:14px;line-height:1.55;animation:fadeUp .3s ease both}
+.msg.bot{background:var(--panel2);border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg.user{background:var(--gold);color:#171106;font-weight:600;align-self:flex-end;border-bottom-right-radius:4px}
+.msg b{color:var(--gold2)} .msg.user b{color:#171106}
+.trainer-actions{display:flex;gap:7px;flex-wrap:wrap;padding:0 16px 10px}
+.trainer-input{display:flex;gap:8px;padding:12px 16px 16px;border-top:1px solid var(--line)}
+.trainer-input input{flex:1;background:#0a0f1c;border:1px solid var(--line);border-radius:12px;color:var(--txt);padding:12px 13px;font-size:14px;outline:none;min-width:0}
+.trainer-input input:focus{border-color:var(--gold)}
+
+/* ---------- final / certificate ---------- */
+.steps{display:grid;gap:10px;margin-top:12px}
+.step{display:flex;gap:12px;background:#0a0f1c;border:1px solid var(--line);border-radius:var(--rs);padding:13px 14px;align-items:flex-start}
+.step .n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--goldsoft);color:var(--gold2);font-weight:800;display:grid;place-items:center;font-size:13px}
+.step.done{border-color:rgba(55,214,122,.5)} .step.done .n{background:var(--green);color:#06230f}
+.step h4{font-size:14.5px} .step p{font-size:13px;color:var(--dim);line-height:1.5;margin-top:2px}
+.cert{display:none;margin-top:18px;text-align:center;border:2px solid var(--gold);border-radius:20px;padding:30px 20px;
+  background:radial-gradient(600px 260px at 50% -20%,rgba(245,197,24,.18),transparent),linear-gradient(180deg,#131a2c,#0b0f1a)}
+.cert.show{display:block;animation:fadeUp .6s ease both}
+.cert .seal{font-size:46px}
+.cert h3{font-size:24px;font-weight:900;margin:8px 0 2px}
+.cert .who{font-size:19px;color:var(--gold2);font-weight:800;margin:8px 0}
+.cert p{color:var(--dim);font-size:13.5px;line-height:1.6}
+.cert input{background:#0a0f1c;border:1px solid var(--line);border-radius:10px;color:var(--txt);padding:11px 13px;font-size:15px;text-align:center;margin-top:12px;width:min(320px,90%)}
+footer{margin-top:44px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim2);font-size:12.5px;line-height:1.7;text-align:center}
+footer a{color:var(--dim)}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="logo">
+      <span class="mark">◈</span>
+      <span>DATA ANALYTICS<small>INTERACTIVE COURSE</small></span>
+    </div>
+    <nav>
+      <a class="chipbtn" href="#" data-sister-course-link>More courses</a>
+      <button class="chipbtn trainer-open" id="navTrainerBtn" type="button">🤖 AI Trainer</button>
+    </nav>
+  </div>
+  <div class="progress-shell">
+    <div class="progress-meta"><span>Course progress</span><span id="progressPct">0% complete</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ================= HOME ================= -->
+<section class="screen active" id="screen-home">
+  <div class="hero">
+    <div class="kicker">1:1 Personal Training · Interactive Edition</div>
+    <h1>Data <span class="gold">Analytics</span></h1>
+    <p class="lede">Four tools. One real dataset. Zero boring lectures. Learn Excel, Power BI, SQL and Python by
+    actually doing the work — cleaning data, writing queries, building dashboards and automating analysis —
+    with a personal AI trainer at your side the whole way.</p>
+    <div class="pillars">
+      <span class="pillar">🎯 <b>Practical</b> Knowledge</span>
+      <span class="pillar">🛠 <b>Real</b> Projects</span>
+      <span class="pillar">📈 <b>Real</b> Results</span>
+      <span class="pillar">🏆 Certificate on completion</span>
+    </div>
+  </div>
+
+  <div class="tiles" id="tileGrid">
+    <button class="tile" data-goto="excel" type="button">
+      <span class="badge">TRACK 1</span>
+      <div class="art"><svg viewBox="0 0 400 128" preserveAspectRatio="xMidYMid slice" aria-label="Excel spreadsheet grid with formula bar">
+        <rect width="400" height="128" fill="#0d2818"/>
+        <rect x="0" y="0" width="400" height="26" fill="#185c33"/>
+        <text x="14" y="18" fill="#bff0d2" font-size="13" font-style="italic" font-family="Georgia">fx</text>
+        <rect x="42" y="6" width="330" height="14" rx="3" fill="#0a1f12"/>
+        <text x="50" y="17" fill="#7fe6ab" font-size="10" font-family="Consolas">=SUM(B2:B17)</text>
+        <g stroke="#2fae5f" stroke-width="1" opacity=".55">
+          <path d="M0 52H400M0 78H400M0 104H400M66 26V128M132 26V128M198 26V128M264 26V128M330 26V128"/>
+        </g>
+        <g fill="#eafff2" font-size="11" font-family="Consolas" text-anchor="end">
+          <text x="124" y="46">250</text><text x="190" y="46">240</text><text x="256" y="46">360</text>
+          <text x="124" y="72">270</text><text x="190" y="72">150</text><text x="256" y="72">180</text>
+          <text x="124" y="98">300</text><text x="190" y="98">225</text><text x="256" y="98">175</text>
+        </g>
+        <rect x="264" y="104" width="136" height="24" fill="#2fae5f"/>
+        <text x="392" y="120" fill="#04170b" font-size="12" font-weight="bold" font-family="Consolas" text-anchor="end">TOTAL 3,890</text>
+        <text x="14" y="120" fill="#7fe6ab" font-size="15" font-weight="bold">X</text>
+      </svg></div>
+      <div class="body">
+        <h3>Excel — Advanced</h3>
+        <p>Power functions, data cleaning, dynamic dashboards — on a live spreadsheet you edit yourself.</p>
+        <div class="foot"><span class="tag">Hands-on lab</span><span class="status" data-status="excel">Not started</span></div>
+      </div>
+    </button>
+
+    <button class="tile" data-goto="powerbi" type="button">
+      <span class="badge">TRACK 2</span>
+      <div class="art"><svg viewBox="0 0 400 128" preserveAspectRatio="xMidYMid slice" aria-label="Power BI dashboard with bar chart">
+        <rect width="400" height="128" fill="#241d04"/>
+        <rect x="14" y="12" width="180" height="104" rx="8" fill="#171204" stroke="#f2c811" stroke-opacity=".4"/>
+        <g fill="#f2c811">
+          <rect x="34" y="70" width="26" height="34" rx="2"><animate attributeName="height" values="34;40;34" dur="3s" repeatCount="indefinite"/></rect>
+          <rect x="72" y="48" width="26" height="56" rx="2" opacity=".85"/>
+          <rect x="110" y="30" width="26" height="74" rx="2"><animate attributeName="height" values="74;66;74" dur="3.4s" repeatCount="indefinite"/></rect>
+          <rect x="148" y="58" width="26" height="46" rx="2" opacity=".7"/>
+        </g>
+        <rect x="210" y="12" width="176" height="48" rx="8" fill="#171204" stroke="#f2c811" stroke-opacity=".4"/>
+        <text x="298" y="44" fill="#ffd94d" font-size="21" font-weight="bold" text-anchor="middle">$3,890</text>
+        <rect x="210" y="70" width="176" height="46" rx="8" fill="#171204" stroke="#f2c811" stroke-opacity=".4"/>
+        <path d="M222 104 L258 88 L292 94 L326 76 L372 82" stroke="#ffd94d" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="326" cy="76" r="4" fill="#ffd94d"/>
+      </svg></div>
+      <div class="body">
+        <h3>Power BI</h3>
+        <p>Design dashboards, model data, and write DAX measures — build real visuals from live data.</p>
+        <div class="foot"><span class="tag">Dashboard lab</span><span class="status" data-status="powerbi">Not started</span></div>
+      </div>
+    </button>
+
+    <button class="tile" data-goto="sql" type="button">
+      <span class="badge">TRACK 3</span>
+      <div class="art"><svg viewBox="0 0 400 128" preserveAspectRatio="xMidYMid slice" aria-label="SQL database with a query">
+        <rect width="400" height="128" fill="#06222b"/>
+        <ellipse cx="80" cy="30" rx="52" ry="13" fill="#0e4a5a"/>
+        <path d="M28 30 v62 a52 13 0 0 0 104 0 V30" fill="#093743"/>
+        <ellipse cx="80" cy="92" rx="52" ry="13" fill="#0e4a5a"/>
+        <path d="M28 52 a52 13 0 0 0 104 0 M28 72 a52 13 0 0 0 104 0" stroke="#39c2d7" stroke-width="2" fill="none" opacity=".8"/>
+        <rect x="160" y="18" width="228" height="92" rx="8" fill="#04161b" stroke="#39c2d7" stroke-opacity=".45"/>
+        <text x="174" y="42" fill="#8fe3f2" font-size="12.5" font-family="Consolas">SELECT region,</text>
+        <text x="174" y="62" fill="#8fe3f2" font-size="12.5" font-family="Consolas">  SUM(revenue)</text>
+        <text x="174" y="82" fill="#8fe3f2" font-size="12.5" font-family="Consolas">FROM orders</text>
+        <text x="174" y="100" fill="#ffd94d" font-size="12.5" font-family="Consolas">GROUP BY region;</text>
+      </svg></div>
+      <div class="body">
+        <h3>SQL</h3>
+        <p>Write real queries against a real database — SELECT, JOIN and GROUP BY, executed live.</p>
+        <div class="foot"><span class="tag">Query lab</span><span class="status" data-status="sql">Not started</span></div>
+      </div>
+    </button>
+
+    <button class="tile" data-goto="python" type="button">
+      <span class="badge">TRACK 4</span>
+      <div class="art"><svg viewBox="0 0 400 128" preserveAspectRatio="xMidYMid slice" aria-label="Python code window with pandas">
+        <rect width="400" height="128" fill="#141a08"/>
+        <rect x="12" y="10" width="376" height="108" rx="9" fill="#0a0d04" stroke="#ffd43b" stroke-opacity=".35"/>
+        <circle cx="30" cy="24" r="4" fill="#ff5d6c"/><circle cx="46" cy="24" r="4" fill="#ffd43b"/><circle cx="62" cy="24" r="4" fill="#37d67a"/>
+        <text x="24" y="52" fill="#9ecbff" font-size="12.5" font-family="Consolas">import pandas as pd</text>
+        <text x="24" y="72" fill="#d7e3ff" font-size="12.5" font-family="Consolas">df = pd.read_csv(<tspan fill="#ffd43b">"orders.csv"</tspan>)</text>
+        <text x="24" y="92" fill="#d7e3ff" font-size="12.5" font-family="Consolas">df.groupby(<tspan fill="#ffd43b">"region"</tspan>)[<tspan fill="#ffd43b">"revenue"</tspan>].sum()</text>
+        <text x="330" y="118" fill="#4da3ff" font-size="17" font-weight="bold">Py</text>
+      </svg></div>
+      <div class="body">
+        <h3>Python</h3>
+        <p>Analyze data with pandas, automate the boring parts, and plot your findings.</p>
+        <div class="foot"><span class="tag">Coding lab</span><span class="status" data-status="python">Not started</span></div>
+      </div>
+    </button>
+
+    <button class="tile" data-open-trainer type="button">
+      <span class="badge">1:1 GUIDANCE</span>
+      <div class="art"><svg viewBox="0 0 400 128" preserveAspectRatio="xMidYMid slice" aria-label="Personal AI trainer robot coach">
+        <rect width="400" height="128" fill="#191204"/>
+        <circle cx="200" cy="58" r="34" fill="#241a05" stroke="#f5c518" stroke-width="2"/>
+        <circle cx="188" cy="54" r="5.5" fill="#ffd94d"><animate attributeName="opacity" values="1;.35;1" dur="2.6s" repeatCount="indefinite"/></circle>
+        <circle cx="212" cy="54" r="5.5" fill="#ffd94d"><animate attributeName="opacity" values="1;.35;1" dur="2.6s" repeatCount="indefinite"/></circle>
+        <path d="M186 72 q14 9 28 0" stroke="#ffd94d" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <rect x="196" y="14" width="8" height="12" rx="3" fill="#f5c518"/><circle cx="200" cy="12" r="5" fill="#ffd94d"/>
+        <path d="M120 108 q80 -22 160 0" stroke="#f5c518" stroke-width="2" fill="none" opacity=".5"/>
+        <text x="200" y="122" fill="#ffd94d" font-size="10" text-anchor="middle" letter-spacing="3">ASK · HINT · EXPLAIN</text>
+      </svg></div>
+      <div class="body">
+        <h3>Personal AI Trainer</h3>
+        <p>Stuck on a lab? Ask your trainer. Hints, simpler explanations and worked examples — never just the answer.</p>
+        <div class="foot"><span class="tag">Always on</span><span class="status">Tap to chat →</span></div>
+      </div>
+    </button>
+
+    <button class="tile" data-goto="final" type="button">
+      <span class="badge">CAPSTONE</span>
+      <div class="art"><svg viewBox="0 0 400 128" preserveAspectRatio="xMidYMid slice" aria-label="Final real-world project briefcase">
+        <rect width="400" height="128" fill="#160f02"/>
+        <rect x="120" y="38" width="160" height="66" rx="10" fill="#2a1e05" stroke="#f5c518" stroke-width="2"/>
+        <rect x="168" y="24" width="64" height="22" rx="8" fill="none" stroke="#f5c518" stroke-width="3"/>
+        <rect x="120" y="64" width="160" height="8" fill="#f5c518" opacity=".8"/>
+        <rect x="188" y="58" width="24" height="18" rx="3" fill="#ffd94d"/>
+        <path d="M64 96 l34 -20 30 12 38 -26" stroke="#37d67a" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M318 40 l10 14 20 -22" stroke="#37d67a" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </svg></div>
+      <div class="body">
+        <h3>Final Project</h3>
+        <p>One real-world case, all four tools in sequence — finish it and earn your certificate.</p>
+        <div class="foot"><span class="tag">Case study</span><span class="status" data-status="final">Locked until tracks are underway</span></div>
+      </div>
+    </button>
+  </div>
+
+  <div class="card">
+    <h3>How this course works</h3>
+    <p>Every track uses the <b>same real dataset</b> — 16 sales orders from a small supply company — so you see how the
+    four tools connect: Excel cleans and totals it, SQL queries it, Power BI visualizes it, Python automates it.
+    Do the labs in any order. The trainer (bottom-right button) knows which task you're on and will coach you through it.
+    Finish all four tracks and the final project to earn the completion certificate.</p>
+    <div class="callout">💡 <b>New to all of this?</b> Start with Excel — it teaches you the shape of the data. SQL and Python get much easier once the data feels familiar.</div>
+  </div>
+</section>
+
+<!-- ================= EXCEL ================= -->
+<section class="screen" id="screen-excel">
+  <button class="backbtn" data-goto="home" type="button">← All tracks</button>
+  <div class="track-head">
+    <div class="ic">📗</div>
+    <div><h2>Excel — Advanced</h2>
+    <p>Excel is where most analysis starts: data lands messy, and your job is to clean it, calculate with it, and present it. Master the functions and the rest of this course gets easier.</p></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1</span>Functions do the heavy lifting</h3>
+    <p>A formula starts with <code>=</code> and can point at other cells — change a number and every result updates. The five functions you'll use daily:</p>
+    <ul>
+      <li><code>=SUM(G2:G17)</code> — add a whole range. The colon means "everything between".</li>
+      <li><code>=AVERAGE(G2:G17)</code> — the mean. <code>=COUNT</code>, <code>=MAX</code>, <code>=MIN</code> work the same way.</li>
+      <li><code>=E2*F2</code> — plain math between cells: quantity × price = revenue.</li>
+      <li><code>=IF(E2&gt;=5,"Bulk","Standard")</code> — a decision: test, value-if-true, value-if-false.</li>
+      <li><code>=VLOOKUP(K2,M2:N6,2)</code> — find a value in a table and pull back a column next to it. The classic lookup.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>Cleaning data before you trust it</h3>
+    <p>Real exports arrive with blank cells, text hiding in number columns ("8 (est)"), duplicates and stray spaces.
+    Pros clean first: check totals against a hand count, sort to spot odd values, and never calculate on a column
+    you haven't eyeballed. In the Final Project you'll rescue a sheet with exactly this kind of damage.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>From grid to dashboard</h3>
+    <p>A dynamic dashboard is just formulas + charts wired together: summary cells (total, average, best region)
+    feed titles and charts, so when next month's data pastes in, the whole dashboard refreshes itself.
+    Power BI (Track 2) industrializes this idea — Excel is where you learn it by hand.</p>
+  </div>
+
+  <div class="card">
+    <h3>🧪 Lab — the BrightLine sales sheet</h3>
+    <p>This is the course dataset: 16 orders. Revenue in column G is <code>Qty × Price</code> — one cell is done for you.
+    Complete the five gold tasks. Click a cell to edit it in the formula bar, then press Enter or <b>Check my work</b>.</p>
+    <div class="formula-bar">
+      <span class="fx">fx</span><span class="cellname" id="fxCell">G2</span>
+      <input id="fxInput" type="text" value="=E2*F2" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="sheet-scroll"><table class="sheet" id="excelSheet"></table></div>
+    <div class="tasklist" id="excelTasks"></div>
+    <div class="labrow">
+      <button class="btn" id="excelCheck" type="button">Check my work</button>
+      <button class="btn ghost" data-ask-trainer="excel" type="button">Ask the trainer</button>
+    </div>
+    <div class="feedback" id="excelFeedback"></div>
+  </div>
+
+  <div class="card quiz" id="excelQuizCard">
+    <h3>✅ Track check — Excel</h3>
+    <div id="excelQuiz"></div>
+    <div class="labrow"><button class="btn small" data-quiz-check="excel" type="button">Score my answers</button></div>
+    <div class="feedback" id="excelQuizFeedback"></div>
+  </div>
+</section>
+
+<!-- ================= POWER BI ================= -->
+<section class="screen" id="screen-powerbi">
+  <button class="backbtn" data-goto="home" type="button">← All tracks</button>
+  <div class="track-head">
+    <div class="ic">📊</div>
+    <div><h2>Power BI</h2>
+    <p>Power BI turns tables into living dashboards: pick a category, pick a measure, and the visual does the math — for every row, instantly, and again every time the data refreshes.</p></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1</span>Visuals = category + measure</h3>
+    <p>Every chart answers one question: <i>a measure, broken down by a category.</i> "Revenue by region",
+    "Units by product", "Orders by month". Choose the pair and Power BI aggregates — sums, counts, averages — on the fly.
+    A <b>card</b> visual shows a single headline number, like total revenue.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>DAX — formulas for dashboards</h3>
+    <p>DAX is Excel's formula language grown up. A measure like
+    <code>Total Revenue = SUM(Orders[Revenue])</code> doesn't live in one cell — it's recalculated inside every
+    visual, filtered by whatever the user clicks. Same idea as <code>=SUM(...)</code>, but it follows the dashboard around.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>Model first, chart second</h3>
+    <p>Pros organize tables into a <b>star schema</b>: one central <b>fact table</b> of events (orders — things you measure)
+    surrounded by <b>dimension tables</b> that describe them (customers, products — things you slice by).
+    Clean models make fast, correct dashboards; a single giant spreadsheet-table makes slow, confusing ones.</p>
+  </div>
+
+  <div class="card">
+    <h3>🧪 Lab — build the BrightLine dashboard</h3>
+    <p>Pick a visual type, a category and a measure. The chart builds itself from the same 16 orders.</p>
+    <div class="fieldgrid">
+      <div class="fieldbox"><h4>Visual type</h4><div class="chips" id="pbiTypeChips">
+        <button class="fchip sel" data-ptype="bar" type="button">📊 Bar chart</button>
+        <button class="fchip" data-ptype="card" type="button">🔢 Card (one number)</button>
+      </div></div>
+      <div class="fieldbox"><h4>Category (slice by)</h4><div class="chips" id="pbiCatChips">
+        <button class="fchip sel" data-pcat="region" type="button">Region</button>
+        <button class="fchip" data-pcat="product" type="button">Product</button>
+        <button class="fchip" data-pcat="month" type="button">Month</button>
+      </div></div>
+      <div class="fieldbox"><h4>Measure (the number)</h4><div class="chips" id="pbiMeasChips">
+        <button class="fchip sel" data-pmeas="revenue" type="button">Revenue $</button>
+        <button class="fchip" data-pmeas="units" type="button">Units sold</button>
+        <button class="fchip" data-pmeas="orders" type="button">Order count</button>
+      </div></div>
+      <div class="fieldbox"><h4>Your build</h4><p id="pbiBuildLabel" style="color:var(--dim);font-size:13.5px">Bar chart · Revenue by Region</p></div>
+    </div>
+    <div class="viz" id="pbiViz"></div>
+    <div class="tasklist" id="pbiTasks"></div>
+    <div class="feedback" id="pbiFeedback"></div>
+  </div>
+
+  <div class="card">
+    <h3>🧮 Lab — write a DAX measure</h3>
+    <p>Tap the tokens in order to build: <b>Total Revenue = SUM of the Revenue column of the Orders table</b>. DAX writes table columns as <code>Table[Column]</code>.</p>
+    <div class="dax-built" id="daxBuilt">…tap tokens below…</div>
+    <div class="dax-tokens" id="daxTokens"></div>
+    <div class="labrow">
+      <button class="btn" id="daxCheck" type="button">Check my measure</button>
+      <button class="btn ghost" id="daxClear" type="button">Clear</button>
+      <button class="btn ghost" data-ask-trainer="powerbi" type="button">Ask the trainer</button>
+    </div>
+    <div class="feedback" id="daxFeedback"></div>
+  </div>
+
+  <div class="card quiz" id="pbiQuizCard">
+    <h3>✅ Track check — Power BI</h3>
+    <div id="pbiQuiz"></div>
+    <div class="labrow"><button class="btn small" data-quiz-check="powerbi" type="button">Score my answers</button></div>
+    <div class="feedback" id="pbiQuizFeedback"></div>
+  </div>
+</section>
+
+<!-- ================= SQL ================= -->
+<section class="screen" id="screen-sql">
+  <button class="backbtn" data-goto="home" type="button">← All tracks</button>
+  <div class="track-head">
+    <div class="ic">🗄️</div>
+    <div><h2>SQL</h2>
+    <p>SQL is how you ask a database questions — and get exactly the rows you want back. Every query below runs for real, in your browser, against the BrightLine database.</p></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1</span>The shape of every query</h3>
+    <pre><code>SELECT  what columns you want
+FROM    which table
+WHERE   which rows qualify
+GROUP BY  how to bucket them
+ORDER BY  how to sort the answer</code></pre>
+    <p>You describe <i>what</i> you want, not how to find it — the database engine does the hunting.
+    <code>WHERE revenue &gt; 250</code> filters rows; aggregates like <code>SUM(revenue)</code> collapse many rows into one number.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>JOIN — questions that span tables</h3>
+    <p>Databases split data into tables on purpose: <code>orders</code> knows the amount, <code>customers</code> knows who.
+    A JOIN stitches them on the shared key:
+    <code>FROM orders JOIN customers ON orders.customer_id = customers.customer_id</code>.
+    After the join you can select columns from both tables as if they were one.</p>
+    <div class="dbnote">DATABASE · orders(order_id, date, customer_id, region, product, qty, price, revenue) · customers(customer_id, name, city, segment)</div>
+  </div>
+
+  <div class="card">
+    <h3>🧪 Lab — query the BrightLine database</h3>
+    <p>Three questions. Write each query and press <b>Run</b> — results are checked against the real data.</p>
+
+    <h4 style="margin-top:16px">Query 1 — Big orders</h4>
+    <p>List <code>order_id, product, revenue</code> for orders with revenue <b>over 250</b>.</p>
+    <textarea class="codebox" id="sqlQ1" rows="3" spellcheck="false">SELECT order_id, product, revenue FROM orders
+WHERE </textarea>
+    <div class="labrow"><button class="btn small" data-sql-run="1" type="button">▶ Run query 1</button>
+    <button class="btn ghost small" data-ask-trainer="sql" type="button">Ask the trainer</button></div>
+    <div id="sqlOut1"></div><div class="feedback" id="sqlFb1"></div>
+
+    <h4 style="margin-top:20px">Query 2 — Who placed them?</h4>
+    <p>Contractors are a key segment. Show <code>customers.name, orders.order_id, orders.revenue</code> for orders whose customer's segment is <code>'Contractor'</code>. You'll need the JOIN.</p>
+    <textarea class="codebox" id="sqlQ2" rows="4" spellcheck="false">SELECT customers.name, orders.order_id, orders.revenue
+FROM orders
+JOIN customers ON orders.customer_id = customers.customer_id
+WHERE </textarea>
+    <div class="labrow"><button class="btn small" data-sql-run="2" type="button">▶ Run query 2</button></div>
+    <div id="sqlOut2"></div><div class="feedback" id="sqlFb2"></div>
+
+    <h4 style="margin-top:20px">Query 3 — Revenue by region, biggest first</h4>
+    <p>One row per region: <code>region</code> and the total revenue as <code>total</code>, sorted by total descending.</p>
+    <textarea class="codebox" id="sqlQ3" rows="4" spellcheck="false">SELECT region, SUM(revenue) AS total
+FROM orders
+</textarea>
+    <div class="labrow"><button class="btn small" data-sql-run="3" type="button">▶ Run query 3</button></div>
+    <div id="sqlOut3"></div><div class="feedback" id="sqlFb3"></div>
+  </div>
+
+  <div class="card quiz" id="sqlQuizCard">
+    <h3>✅ Track check — SQL</h3>
+    <div id="sqlQuiz"></div>
+    <div class="labrow"><button class="btn small" data-quiz-check="sql" type="button">Score my answers</button></div>
+    <div class="feedback" id="sqlQuizFeedback"></div>
+  </div>
+</section>
+
+<!-- ================= PYTHON ================= -->
+<section class="screen" id="screen-python">
+  <button class="backbtn" data-goto="home" type="button">← All tracks</button>
+  <div class="track-head">
+    <div class="ic">🐍</div>
+    <div><h2>Python</h2>
+    <p>Python is where analysis becomes automation: write it once, run it every week. With the <b>pandas</b> library, a table becomes a DataFrame you can filter, group and chart in single lines.</p></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1</span>Meet the DataFrame</h3>
+    <p><code>df</code> is your table in code. Columns are picked with brackets — <code>df["revenue"]</code> —
+    filters are conditions — <code>df[df["qty"] &gt;= 5]</code> — and pandas does in one line what takes
+    Excel a column of formulas. Below, <code>df</code> already holds all 16 BrightLine orders.</p>
+    <pre><code>import pandas as pd
+df = pd.read_csv("orders.csv")   # 16 rows, columns: order_id … revenue</code></pre>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>groupby — the SQL idea, in code</h3>
+    <p><code>df.groupby("region")["revenue"].sum()</code> reads exactly like it sounds: bucket the rows by region,
+    take the revenue column, add it up. It's the same move as SQL's <code>GROUP BY</code> and Power BI's
+    category + measure — learn it once, recognize it everywhere.</p>
+  </div>
+
+  <div class="card">
+    <h3>🧪 Lab — complete the code, run the numbers</h3>
+    <p>Each exercise is real pandas with a few blanks. Choose the right words, press <b>Run</b>, and the result is computed live from the dataset.</p>
+
+    <h4 style="margin-top:14px">Exercise 1 — Total revenue</h4>
+    <div class="pyline">total = df[<select id="py1a"><option value="">?</option><option value="revenue">"revenue"</option><option value="qty">"qty"</option><option value="price">"price"</option></select>].sum()</div>
+    <div class="labrow"><button class="btn small" data-py-run="1" type="button">▶ Run</button>
+    <button class="btn ghost small" data-ask-trainer="python" type="button">Ask the trainer</button></div>
+    <div class="pyout" id="pyOut1"></div><div class="feedback" id="pyFb1"></div>
+
+    <h4 style="margin-top:18px">Exercise 2 — Revenue by region</h4>
+    <div class="pyline">by_region = df.groupby(<select id="py2a"><option value="">?</option><option value="region">"region"</option><option value="product">"product"</option><option value="segment">"segment"</option></select>)[<select id="py2b"><option value="">?</option><option value="revenue">"revenue"</option><option value="qty">"qty"</option><option value="order_id">"order_id"</option></select>].sum()</div>
+    <div class="labrow"><button class="btn small" data-py-run="2" type="button">▶ Run</button></div>
+    <div class="pyout" id="pyOut2"></div><div class="feedback" id="pyFb2"></div>
+
+    <h4 style="margin-top:18px">Exercise 3 — Filter the bulk orders</h4>
+    <div class="pyline">big = df[df[<select id="py3a"><option value="">?</option><option value="qty">"qty"</option><option value="revenue">"revenue"</option><option value="price">"price"</option></select>] &gt;= <select id="py3b"><option value="">?</option><option value="5">5</option><option value="3">3</option><option value="10">10</option></select>]&nbsp;&nbsp;# then: print(len(big))</div>
+    <div class="labrow"><button class="btn small" data-py-run="3" type="button">▶ Run</button></div>
+    <div class="pyout" id="pyOut3"></div><div class="feedback" id="pyFb3"></div>
+
+    <h4 style="margin-top:18px">Exercise 4 — Chart it (matplotlib)</h4>
+    <div class="pyline">plt.bar(by_region.index, by_region.<select id="py4a"><option value="">?</option><option value="values">values</option><option value="columns">columns</option><option value="shape">shape</option></select>)</div>
+    <div class="labrow"><button class="btn small" data-py-run="4" type="button">▶ Run</button></div>
+    <div class="pyout" id="pyOut4"></div><div class="feedback" id="pyFb4"></div>
+  </div>
+
+  <div class="card quiz" id="pyQuizCard">
+    <h3>✅ Track check — Python</h3>
+    <div id="pyQuiz"></div>
+    <div class="labrow"><button class="btn small" data-quiz-check="python" type="button">Score my answers</button></div>
+    <div class="feedback" id="pyQuizFeedback"></div>
+  </div>
+</section>
+
+<!-- ================= FINAL PROJECT ================= -->
+<section class="screen" id="screen-final">
+  <button class="backbtn" data-goto="home" type="button">← All tracks</button>
+  <div class="track-head">
+    <div class="ic">🏆</div>
+    <div><h2>Final Project — the BrightLine quarterly review</h2>
+    <p>The owner asks three things: <i>Is the data clean? Which region leads? Show me.</i> You'll answer with all four tools in sequence — exactly how a real analyst's week flows.</p></div>
+  </div>
+
+  <div class="card">
+    <h3>Your mission, step by step</h3>
+    <div class="steps">
+      <div class="step" id="fstep1"><span class="n">1</span><div><h4>Excel — rescue the export</h4>
+      <p>A 5-order export arrived damaged: one quantity is typed as text and two revenue cells are blank. Fix the quantity, write the revenue formulas, total it.</p></div></div>
+      <div class="step" id="fstep2"><span class="n">2</span><div><h4>SQL — pull the regional totals</h4>
+      <p>Query the full database: one row per region with total revenue.</p></div></div>
+      <div class="step" id="fstep3"><span class="n">3</span><div><h4>Power BI — build the chart for the owner</h4>
+      <p>Configure the visual: revenue by region, bar chart.</p></div></div>
+      <div class="step" id="fstep4"><span class="n">4</span><div><h4>Python — name the winner</h4>
+      <p>Complete the one-liner that returns the top region's name.</p></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Step 1 · Excel — the damaged export</h3>
+    <p>Click the damaged cells to fix them. Order 2003's quantity reads <code>8 (est)</code> — type the clean number into cell C4.
+    Then give E4 its formula (<code>=C4*D4</code>), finish E6, and total the sheet in E7.</p>
+    <div class="formula-bar"><span class="fx">fx</span><span class="cellname" id="fxCellF">E4</span>
+      <input id="fxInputF" type="text" autocomplete="off" spellcheck="false"></div>
+    <div class="sheet-scroll"><table class="sheet" id="finalSheet"></table></div>
+    <div class="labrow"><button class="btn" id="finalCheck1" type="button">Check step 1</button>
+    <button class="btn ghost" data-ask-trainer="final" type="button">Ask the trainer</button></div>
+    <div class="feedback" id="finalFb1"></div>
+  </div>
+
+  <div class="card">
+    <h3>Step 2 · SQL — regional totals</h3>
+    <p>Write the query: <code>region</code> plus <code>SUM(revenue) AS total</code>, grouped by region.</p>
+    <textarea class="codebox" id="finalSql" rows="3" spellcheck="false">SELECT region, SUM(revenue) AS total FROM orders
+</textarea>
+    <div class="labrow"><button class="btn" id="finalRun2" type="button">▶ Run &amp; check step 2</button></div>
+    <div id="finalSqlOut"></div><div class="feedback" id="finalFb2"></div>
+  </div>
+
+  <div class="card">
+    <h3>Step 3 · Power BI — the owner's chart</h3>
+    <p>Set the visual to a <b>bar chart</b> of <b>Revenue</b> by <b>Region</b>, then build it.</p>
+    <div class="fieldgrid">
+      <div class="fieldbox"><h4>Visual type</h4><div class="chips" id="fTypeChips">
+        <button class="fchip" data-ftype="card" type="button">🔢 Card</button>
+        <button class="fchip" data-ftype="bar" type="button">📊 Bar chart</button>
+      </div></div>
+      <div class="fieldbox"><h4>Category</h4><div class="chips" id="fCatChips">
+        <button class="fchip" data-fcat="product" type="button">Product</button>
+        <button class="fchip" data-fcat="region" type="button">Region</button>
+      </div></div>
+      <div class="fieldbox"><h4>Measure</h4><div class="chips" id="fMeasChips">
+        <button class="fchip" data-fmeas="units" type="button">Units sold</button>
+        <button class="fchip" data-fmeas="revenue" type="button">Revenue $</button>
+      </div></div>
+      <div class="fieldbox"><h4>Build</h4><button class="btn small" id="finalBuild3" type="button">Build the visual</button></div>
+    </div>
+    <div class="viz" id="finalViz"></div>
+    <div class="feedback" id="finalFb3"></div>
+  </div>
+
+  <div class="card">
+    <h3>Step 4 · Python — name the winner</h3>
+    <div class="pyline">top_region = df.groupby(<select id="fPyA"><option value="">?</option><option value="region">"region"</option><option value="product">"product"</option></select>)[<select id="fPyB"><option value="">?</option><option value="revenue">"revenue"</option><option value="qty">"qty"</option></select>].sum().idxmax()</div>
+    <div class="labrow"><button class="btn" id="finalRun4" type="button">▶ Run &amp; finish</button></div>
+    <div class="pyout" id="finalPyOut"></div><div class="feedback" id="finalFb4"></div>
+  </div>
+
+  <div class="cert" id="certBox">
+    <div class="seal">🏆</div>
+    <h3>Certificate of Completion</h3>
+    <p>This certifies that</p>
+    <div class="who" id="certWho">—</div>
+    <p>has completed the <b>Data Analytics Interactive Course</b> — Excel · Power BI · SQL · Python —
+    including all four hands-on labs and the BrightLine quarterly review capstone project.</p>
+    <p id="certDate" style="margin-top:6px"></p>
+    <input id="certName" type="text" placeholder="Type your name for the certificate" autocomplete="name">
+    <div class="labrow" style="justify-content:center">
+      <button class="btn" id="certBtn" type="button">Put my name on it</button>
+      <button class="btn ghost" onclick="window.print()" type="button">Print / save</button>
+    </div>
+  </div>
+  <div class="feedback" id="finalGate"></div>
+</section>
+
+<footer>
+  <p>Interactive course based on the Data Analytics training outline by <b>Ali Data Analytics</b> (alidataanalytics.com) — practical knowledge · real projects · real results.</p>
+  <p style="margin-top:6px"><a href="#" data-sister-course-link>More courses — AI Agents: Interactive Course →</a></p>
+</footer>
+</div><!-- /wrap -->
+
+<!-- ================= TRAINER ================= -->
+<button class="trainer-fab" id="trainerFab" type="button">🤖 <span>AI Trainer</span></button>
+<div class="trainer-panel" id="trainerPanel" role="dialog" aria-label="Personal AI trainer">
+  <div class="trainer-head">
+    <div class="avatar">🤖</div>
+    <div><h3>Coach Ada — your AI trainer</h3><p id="trainerContext">Here to help · hints, examples, simpler explanations</p></div>
+    <button class="x" id="trainerClose" type="button" aria-label="Close trainer">×</button>
+  </div>
+  <div class="trainer-msgs" id="trainerMsgs"></div>
+  <div class="trainer-actions">
+    <button class="btn ghost small" id="trHint" type="button">💡 Give me a hint</button>
+    <button class="btn ghost small" id="trSimpler" type="button">🐢 Explain simpler</button>
+    <button class="btn ghost small" id="trExample" type="button">📝 Show an example</button>
+  </div>
+  <div class="trainer-input">
+    <input id="trainerInput" type="text" placeholder="Ask about Excel, SQL, DAX, pandas…" autocomplete="off">
+    <button class="btn" id="trainerSend" type="button">Ask</button>
+  </div>
+</div>
+
+<script>
+'use strict';
+/* =====================================================================
+   DATA ANALYTICS — INTERACTIVE COURSE
+   One shared dataset (BrightLine Supplies, 16 orders) drives every lab.
+   ===================================================================== */
+var CUSTOMERS = [
+  {customer_id:1, name:'Apex Builders',   city:'Scranton',    segment:'Contractor'},
+  {customer_id:2, name:'Keystone Realty', city:'Wilkes-Barre',segment:'Property'},
+  {customer_id:3, name:'Lakeview Schools',city:'Dallas',      segment:'Education'},
+  {customer_id:4, name:'Metro Fitness',   city:'Kingston',    segment:'Retail'},
+  {customer_id:5, name:'Harbor Dental',    city:'Pittston',    segment:'Healthcare'},
+  {customer_id:6, name:'Blue Ridge Cafe', city:'Hazleton',    segment:'Hospitality'}
+];
+var ORDERS = [
+  {order_id:1001, date:'2026-09-02', customer_id:1, region:'North', product:'Widget Pro',    qty:10, price:25},
+  {order_id:1002, date:'2026-09-03', customer_id:2, region:'South', product:'Gadget Plus',   qty:4,  price:60},
+  {order_id:1003, date:'2026-09-05', customer_id:3, region:'East',  product:'Sensor Kit',    qty:8,  price:45},
+  {order_id:1004, date:'2026-09-08', customer_id:4, region:'West',  product:'Cable Pack',    qty:20, price:12},
+  {order_id:1005, date:'2026-09-11', customer_id:1, region:'North', product:'Mount Bracket', qty:15, price:18},
+  {order_id:1006, date:'2026-09-14', customer_id:5, region:'South', product:'Widget Pro',    qty:6,  price:25},
+  {order_id:1007, date:'2026-09-17', customer_id:6, region:'East',  product:'Gadget Plus',   qty:3,  price:60},
+  {order_id:1008, date:'2026-09-21', customer_id:2, region:'South', product:'Sensor Kit',    qty:5,  price:45},
+  {order_id:1009, date:'2026-09-24', customer_id:3, region:'East',  product:'Cable Pack',    qty:30, price:12},
+  {order_id:1010, date:'2026-09-28', customer_id:4, region:'West',  product:'Widget Pro',    qty:12, price:25},
+  {order_id:1011, date:'2026-10-02', customer_id:5, region:'South', product:'Mount Bracket', qty:9,  price:18},
+  {order_id:1012, date:'2026-10-06', customer_id:6, region:'East',  product:'Widget Pro',    qty:7,  price:25},
+  {order_id:1013, date:'2026-10-09', customer_id:1, region:'North', product:'Gadget Plus',   qty:5,  price:60},
+  {order_id:1014, date:'2026-10-13', customer_id:3, region:'East',  product:'Mount Bracket', qty:11, price:18},
+  {order_id:1015, date:'2026-10-16', customer_id:2, region:'South', product:'Cable Pack',    qty:25, price:12},
+  {order_id:1016, date:'2026-10-20', customer_id:4, region:'West',  product:'Sensor Kit',    qty:4,  price:45}
+];
+ORDERS.forEach(function(o){ o.revenue = o.qty * o.price; o.month = o.date.slice(0,7) === '2026-09' ? 'Sep 2026' : 'Oct 2026'; });
+var TABLES = { orders: ORDERS, customers: CUSTOMERS };
+var PRICE_TABLE = [ ['Widget Pro',25], ['Gadget Plus',60], ['Sensor Kit',45], ['Cable Pack',12], ['Mount Bracket',18] ];
+
+function fmt(n){ return (Math.round(n*100)/100).toLocaleString('en-US'); }
+function money(n){ return '$' + fmt(n); }
+function groupSum(rows, key, val){
+  var out = {};
+  rows.forEach(function(r){ out[r[key]] = (out[r[key]]||0) + r[val]; });
+  return out;
+}
+function groupCount(rows, key){
+  var out = {};
+  rows.forEach(function(r){ out[r[key]] = (out[r[key]]||0) + 1; });
+  return out;
+}
+</script>
+<script>
+'use strict';
+/* ============================ FORMULA ENGINE ============================ */
+function colToNum(c){ var n=0; for(var i=0;i<c.length;i++) n = n*26 + (c.charCodeAt(i)-64); return n; }
+function numToCol(n){ var s=''; while(n>0){ var m=(n-1)%26; s=String.fromCharCode(65+m)+s; n=Math.floor((n-1)/26); } return s; }
+function parseAddr(a){ var m=/^\$?([A-Z]+)\$?(\d+)$/.exec(a.toUpperCase()); if(!m) return null; return {col:colToNum(m[1]), row:parseInt(m[2],10)}; }
+function addrName(col,row){ return numToCol(col)+row; }
+
+function makeBook(cellSpec){
+  var book = { cells:{} };
+  Object.keys(cellSpec).forEach(function(a){ book.cells[a] = { raw: cellSpec[a].raw, locked: !!cellSpec[a].locked, target: !!cellSpec[a].target, text: !!cellSpec[a].text }; });
+  return book;
+}
+function cellRaw(book, addr){ var c = book.cells[addr]; return c ? c.raw : ''; }
+function setCellRaw(book, addr, raw){
+  if(!book.cells[addr]) book.cells[addr] = { raw:'', locked:false };
+  book.cells[addr].raw = raw;
+}
+function cellValue(book, addr, stack){
+  var c = book.cells[addr];
+  if(!c || c.raw === '' || c.raw == null) return '';
+  var raw = String(c.raw);
+  if(raw.charAt(0) !== '='){
+    var num = Number(raw.replace(/,/g,''));
+    return (raw.trim() !== '' && !isNaN(num)) ? num : raw;
+  }
+  stack = stack || {};
+  if(stack[addr]) return '#CYCLE!';
+  stack[addr] = true;
+  try { return evalFormula(book, raw.slice(1), stack); }
+  catch(e){ return '#ERR'; }
+  finally { delete stack[addr]; }
+}
+function rangeValues(book, a1, a2, stack){
+  var p1=parseAddr(a1), p2=parseAddr(a2), out=[];
+  for(var r=Math.min(p1.row,p2.row); r<=Math.max(p1.row,p2.row); r++)
+    for(var c=Math.min(p1.col,p2.col); c<=Math.max(p1.col,p2.col); c++)
+      out.push(cellValue(book, addrName(c,r), stack));
+  return out;
+}
+function tokenizeFormula(s){
+  var toks=[], i=0;
+  while(i<s.length){
+    var ch=s.charAt(i);
+    if(ch===' '){ i++; continue; }
+    if(ch==='"'){ var j=s.indexOf('"', i+1); toks.push({t:'str', v:s.slice(i+1, j<0? s.length : j)}); i=(j<0? s.length : j+1); continue; }
+    if(/[0-9.]/.test(ch)){ var m=/^[0-9]*\.?[0-9]+/.exec(s.slice(i)); toks.push({t:'num', v:parseFloat(m[0])}); i+=m[0].length; continue; }
+    if(/[$A-Za-z_]/.test(ch)){ var m2=/^\$?[A-Za-z_][A-Za-z0-9_.]*\$?[0-9]*/.exec(s.slice(i)); toks.push({t:'id', v:m2[0].toUpperCase()}); i+=m2[0].length; continue; }
+    var two=s.slice(i,i+2);
+    if(two==='>='||two==='<='||two==='<>'){ toks.push({t:'op', v:two}); i+=2; continue; }
+    if('+-*/(),:<>='.indexOf(ch)>=0){ toks.push({t:'op', v:ch}); i++; continue; }
+    i++;
+  }
+  return toks;
+}
+function evalFormula(book, src, stack){
+  var toks = tokenizeFormula(src), pos = 0;
+  function peek(){ return toks[pos]; }
+  function next(){ return toks[pos++]; }
+  function expectOp(v){ var tk=next(); if(!tk || tk.v!==v) throw new Error('expected '+v); }
+  function parseExpr(){ return parseCmp(); }
+  function parseCmp(){
+    var l = parseAdd();
+    while(peek() && peek().t==='op' && ['>=','<=','<>','=','>','<'].indexOf(peek().v)>=0){
+      var op=next().v, r=parseAdd();
+      if(op==='>=') l = (l>=r); else if(op==='<=') l=(l<=r); else if(op==='<>') l=(l!==r);
+      else if(op==='=') l=(l===r); else if(op==='>') l=(l>r); else l=(l<r);
+    }
+    return l;
+  }
+  function parseAdd(){
+    var l=parseMul();
+    while(peek() && peek().t==='op' && (peek().v==='+'||peek().v==='-')){
+      var op=next().v, r=parseMul(); l = (op==='+') ? (+l)+(+r) : (+l)-(+r);
+    }
+    return l;
+  }
+  function parseMul(){
+    var l=parseUnary();
+    while(peek() && peek().t==='op' && (peek().v==='*'||peek().v==='/')){
+      var op=next().v, r=parseUnary(); l = (op==='*') ? (+l)*(+r) : (+l)/(+r);
+    }
+    return l;
+  }
+  function parseUnary(){
+    if(peek() && peek().t==='op' && peek().v==='-'){ next(); return -parseUnary(); }
+    return parsePrimary();
+  }
+  function parsePrimary(){
+    var tk=next();
+    if(!tk) throw new Error('unexpected end');
+    if(tk.t==='num') return tk.v;
+    if(tk.t==='str') return tk.v;
+    if(tk.t==='op' && tk.v==='('){ var v=parseExpr(); expectOp(')'); return v; }
+    if(tk.t==='id'){
+      var name=tk.v.replace(/\$/g,'');
+      if(peek() && peek().t==='op' && peek().v==='('){ /* function call */
+        next();
+        var args=[];
+        if(!(peek() && peek().v===')')){
+          args.push(parseArg());
+          while(peek() && peek().v===','){ next(); args.push(parseArg()); }
+        }
+        expectOp(')');
+        return callFunc(name, args);
+      }
+      if(peek() && peek().t==='op' && peek().v===':'){
+        next(); var tk2=next();
+        return { __range:[name, tk2.v.replace(/\$/g,'')] };
+      }
+      return cellValue(book, name, stack);
+    }
+    throw new Error('bad token');
+  }
+  function parseArg(){
+    var save=pos;
+    var tk=peek();
+    if(tk && tk.t==='id' && toks[pos+1] && toks[pos+1].v===':'){
+      var a=next().v.replace(/\$/g,''); next(); var b=next().v.replace(/\$/g,'');
+      return { __range:[a,b] };
+    }
+    pos=save;
+    return parseExpr();
+  }
+  function flatVals(arg){
+    if(arg && arg.__range) return rangeValues(book, arg.__range[0], arg.__range[1], stack);
+    return [arg];
+  }
+  function nums(arg){ return flatVals(arg).filter(function(v){ return typeof v==='number'; }); }
+  function callFunc(name, args){
+    if(name==='SUM'){ var s=0; args.forEach(function(a){ nums(a).forEach(function(v){ s+=v; }); }); return s; }
+    if(name==='AVERAGE'){ var all=[]; args.forEach(function(a){ all=all.concat(nums(a)); }); return all.length? all.reduce(function(x,y){return x+y;},0)/all.length : 0; }
+    if(name==='COUNT'){ var n=0; args.forEach(function(a){ n+=nums(a).length; }); return n; }
+    if(name==='MAX'){ var m=-Infinity; args.forEach(function(a){ nums(a).forEach(function(v){ if(v>m)m=v; }); }); return m; }
+    if(name==='MIN'){ var m2=Infinity; args.forEach(function(a){ nums(a).forEach(function(v){ if(v<m2)m2=v; }); }); return m2; }
+    if(name==='IF'){ return args[0] ? args[1] : args[2]; }
+    if(name==='ROUND'){ var f=Math.pow(10, args[1]||0); return Math.round(args[0]*f)/f; }
+    if(name==='ABS'){ return Math.abs(args[0]); }
+    if(name==='VLOOKUP'){
+      var key=args[0], rng=args[1], col=args[2];
+      if(!rng || !rng.__range) throw new Error('vlookup range');
+      var p1=parseAddr(rng.__range[0]), p2=parseAddr(rng.__range[1]);
+      for(var r=p1.row; r<=p2.row; r++){
+        var first=cellValue(book, addrName(p1.col, r), stack);
+        if(String(first)===String(key)) return cellValue(book, addrName(p1.col+col-1, r), stack);
+      }
+      return '#N/A';
+    }
+    throw new Error('unknown fn '+name);
+  }
+  var result = parseExpr();
+  return result;
+}
+
+/* ============================ SHEET RENDERING ============================ */
+var sheetState = {}; /* id -> {book, tableEl, fxInput, fxCell, cur} */
+function renderSheet(id, book, tableEl, opts){
+  opts = opts || {};
+  var cols = opts.cols, rows = opts.rows;
+  var html = '<tr><th style="width:34px"></th>';
+  cols.forEach(function(c){ html += '<th'+(opts.widths&&opts.widths[c]?' style="width:'+opts.widths[c]+'"':'')+'>'+c+'</th>'; });
+  html += '</tr>';
+  rows.forEach(function(r){
+    html += '<tr><th>'+r+'</th>';
+    cols.forEach(function(c){
+      var addr = c + r, cell = book.cells[addr];
+      if(!cell){ html += '<td></td>'; return; }
+      var cls = [];
+      if(cell.target) cls.push('target');
+      if(cell.text) cls.push('txt');
+      if(cell.locked){
+        var v = cellValue(book, addr);
+        html += '<td class="locked '+cls.join(' ')+'" data-addr="'+addr+'">'+(v===''?'':(typeof v==='number'? fmt(v) : v))+'</td>';
+      } else {
+        html += '<td class="'+cls.join(' ')+'"><input data-addr="'+addr+'" value="'+String(cell.raw).replace(/"/g,'&quot;')+'" autocomplete="off" spellcheck="false"></td>';
+      }
+    });
+    html += '</tr>';
+  });
+  tableEl.innerHTML = html;
+  sheetState[id] = { book:book, tableEl:tableEl, cols:cols, rows:rows, opts:opts, cur: opts.startCell || null };
+}
+function refreshSheet(id){
+  var st = sheetState[id]; if(!st) return;
+  var inputs = st.tableEl.querySelectorAll ? st.tableEl.querySelectorAll('input') : [];
+  /* locked formula cells: rewrite their display */
+  var tds = st.tableEl.querySelectorAll ? st.tableEl.querySelectorAll('td.locked') : [];
+  for(var i=0;i<tds.length;i++){
+    var addr = tds[i].getAttribute('data-addr');
+    if(addr && st.book.cells[addr] && String(st.book.cells[addr].raw).charAt(0)==='='){
+      var v = cellValue(st.book, addr);
+      tds[i].textContent = (v===''?'':(typeof v==='number'? fmt(v) : v));
+    }
+  }
+  for(var j=0;j<inputs.length;j++){ syncTargetClass(st, inputs[j]); }
+}
+function syncTargetClass(st, input){
+  var addr = input.getAttribute('data-addr');
+  var td = input.parentNode;
+  if(td && td.classList && st.book.cells[addr] && st.book.cells[addr].target){
+    /* done-ness handled by task checkers via data-done on td */
+  }
+}
+function markCellGood(book, tableEl, addr, good){
+  if(!tableEl || !tableEl.querySelectorAll) return;
+  var inputs = tableEl.querySelectorAll('input');
+  for(var i=0;i<inputs.length;i++){
+    if(inputs[i].getAttribute('data-addr')===addr){
+      var td = inputs[i].parentNode;
+      if(td && td.classList){ if(good) td.classList.add('good'); else td.classList.remove('good'); }
+    }
+  }
+  var tds = tableEl.querySelectorAll('td.locked');
+  for(var j=0;j<tds.length;j++){
+    if(tds[j].getAttribute('data-addr')===addr && tds[j].classList){
+      if(good) tds[j].classList.add('good'); else tds[j].classList.remove('good');
+    }
+  }
+}
+function wireSheet(id, fxInput, fxCellLabel, onCommit){
+  var st = sheetState[id];
+  function select(addr){
+    st.cur = addr;
+    if(fxCellLabel) fxCellLabel.textContent = addr;
+    if(fxInput) fxInput.value = cellRaw(st.book, addr);
+  }
+  st.select = select;
+  var inputs = st.tableEl.querySelectorAll('input');
+  for(var i=0;i<inputs.length;i++){
+    (function(inp){
+      inp.addEventListener('focus', function(){ select(inp.getAttribute('data-addr')); });
+      inp.addEventListener('click', function(){ select(inp.getAttribute('data-addr')); });
+      inp.addEventListener('change', function(){ commit(inp.getAttribute('data-addr'), inp.value); });
+      inp.addEventListener('keydown', function(e){ if(e.key==='Enter'){ commit(inp.getAttribute('data-addr'), inp.value); } });
+    })(inputs[i]);
+  }
+  if(fxInput){
+    fxInput.addEventListener('change', function(){ if(st.cur) commit(st.cur, fxInput.value); });
+    fxInput.addEventListener('keydown', function(e){ if(e.key==='Enter' && st.cur) commit(st.cur, fxInput.value); });
+  }
+  function commit(addr, val){
+    setCellRaw(st.book, addr, String(val).trim());
+    refreshSheet(id);
+    if(onCommit) onCommit(addr);
+  }
+  st.commit = commit;
+  if(st.cur) select(st.cur);
+}
+
+/* ============================ EXCEL LAB ============================ */
+var EXCEL_TASKS = [
+  { id:'ex1', label:'G5 — revenue for order 1004: multiply Qty (E5) by Price (F5).', hint:['Every formula starts with =. You want the two number cells on row 5 multiplied.','Try: =E5*F5 — the * is the multiply sign.','Answer shape: =E5*F5 → 240.'] },
+  { id:'ex2', label:'G18 — TOTAL row: add up the whole Revenue column, G2 through G17.', hint:['One function adds a range: SUM. Ranges use a colon, like G2:G17.','Try: =SUM(G2:G17)','Answer shape: =SUM(G2:G17) → 3,890.'] },
+  { id:'ex3', label:'G19 — AVERAGE row: the mean order revenue across G2:G17.', hint:['Same range as the total, different function.','The function is AVERAGE — =AVERAGE(G2:G17).','Answer shape: =AVERAGE(G2:G17) → 243.13.'] },
+  { id:'ex4', label:'H2 — label order 1001: "Bulk" if Qty (E2) is 5 or more, otherwise "Standard". Use IF.', hint:['IF takes three parts: test, value-if-true, value-if-false. Text goes in "quotes".','Test: E2>=5. Values: "Bulk" and "Standard".','Answer shape: =IF(E2>=5,"Bulk","Standard") → Bulk.'] },
+  { id:'ex5', label:'K3 — look up the unit price of the product named in K2, from the price table M2:N6. Use VLOOKUP.', hint:['VLOOKUP(what to find, where to look, which column to bring back). The price is column 2 of the table.','Find K2, look in M2:N6, bring back column 2.','Answer shape: =VLOOKUP(K2,M2:N6,2) → 45.'] }
+];
+function buildExcelBook(){
+  var spec = {};
+  var heads = {A:'Order',B:'Date',C:'Region',D:'Product',E:'Qty',F:'Price',G:'Revenue',H:'Class',M:'Product',N:'Price'};
+  Object.keys(heads).forEach(function(c){ spec[c+'1'] = { raw: heads[c], locked:true, text:true }; });
+  ORDERS.forEach(function(o, i){
+    var r = i+2;
+    spec['A'+r] = { raw:String(o.order_id), locked:true };
+    spec['B'+r] = { raw:o.date, locked:true };
+    spec['C'+r] = { raw:o.region, locked:true, text:true };
+    spec['D'+r] = { raw:o.product, locked:true, text:true };
+    spec['E'+r] = { raw:String(o.qty), locked:true };
+    spec['F'+r] = { raw:String(o.price), locked:true };
+    spec['H'+r] = { raw:'', locked:true };
+    if(r===2){ spec['G2'] = { raw:'=E2*F2', locked:false }; spec['H2'] = { raw:'', locked:false, target:true }; }
+    else if(r===5){ spec['G5'] = { raw:'', locked:false, target:true }; }
+    else { spec['G'+r] = { raw:String(o.revenue), locked:true }; }
+  });
+  spec['A18'] = { raw:'TOTAL', locked:true, text:true };
+  spec['G18'] = { raw:'', locked:false, target:true };
+  spec['A19'] = { raw:'AVERAGE', locked:true, text:true };
+  spec['G19'] = { raw:'', locked:false, target:true };
+  spec['J2'] = { raw:'Lookup product:', locked:true, text:true };
+  spec['K2'] = { raw:'Sensor Kit', locked:true, text:true };
+  spec['J3'] = { raw:'Unit price:', locked:true, text:true };
+  spec['K3'] = { raw:'', locked:false, target:true };
+  PRICE_TABLE.forEach(function(p, i){
+    spec['M'+(i+2)] = { raw:p[0], locked:true, text:true };
+    spec['N'+(i+2)] = { raw:String(p[1]), locked:true };
+  });
+  return makeBook(spec);
+}
+function checkExcelTask(book, tid){
+  var g5=cellRaw(book,'G5'), g18=cellRaw(book,'G18'), g19=cellRaw(book,'G19'), h2=cellRaw(book,'H2'), k3=cellRaw(book,'K3');
+  if(tid==='ex1') return cellValue(book,'G5')===240 && /^=/.test(g5) && /E5/i.test(g5) && /F5/i.test(g5) && /\*/.test(g5);
+  if(tid==='ex2') return cellValue(book,'G18')===3890 && /SUM/i.test(g18) && /G2\s*:\s*G17/i.test(g18);
+  if(tid==='ex3'){ var v=cellValue(book,'G19'); return typeof v==='number' && Math.abs(v-243.125)<0.02 && /AVERAGE/i.test(g19); }
+  if(tid==='ex4') return cellValue(book,'H2')==='Bulk' && /IF/i.test(h2);
+  if(tid==='ex5') return cellValue(book,'K3')===45 && /VLOOKUP/i.test(k3);
+  return false;
+}
+
+/* ============================ FINAL SHEET (STEP 1) ============================ */
+function buildFinalBook(){
+  var spec = {};
+  var heads = {A:'Order',B:'Product',C:'Qty',D:'Price',E:'Revenue'};
+  Object.keys(heads).forEach(function(c){ spec[c+'1'] = { raw: heads[c], locked:true, text:true }; });
+  var rows = [
+    [2001,'Widget Pro','10','25','=C2*D2', true],
+    [2002,'Gadget Plus','4','60','=C3*D3', true],
+    [2003,'Sensor Kit','8 (est)','45','', false],
+    [2004,'Cable Pack','20','12','=C5*D5', true],
+    [2005,'Mount Bracket','15','18','', false]
+  ];
+  rows.forEach(function(rw, i){
+    var r = i+2;
+    spec['A'+r] = { raw:String(rw[0]), locked:true };
+    spec['B'+r] = { raw:rw[1], locked:true, text:true };
+    spec['C'+r] = { raw:rw[2], locked: rw[5] && r!==4, target: r===4 };
+    if(r===4) spec['C4'] = { raw:'8 (est)', locked:false, target:true };
+    spec['D'+r] = { raw:rw[3], locked:true };
+    spec['E'+r] = { raw:rw[4], locked: !!rw[5], target: !rw[5] };
+  });
+  spec['A7'] = { raw:'TOTAL', locked:true, text:true };
+  spec['E7'] = { raw:'', locked:false, target:true };
+  return makeBook(spec);
+}
+function checkFinalStep1(book){
+  var c4 = cellValue(book,'C4');
+  var e4ok = cellValue(book,'E4')===360 && /C4/i.test(cellRaw(book,'E4')) && /D4/i.test(cellRaw(book,'E4'));
+  var e6ok = cellValue(book,'E6')===270 && /C6/i.test(cellRaw(book,'E6'));
+  var e7ok = cellValue(book,'E7')===1360 && /SUM/i.test(cellRaw(book,'E7'));
+  return (c4===8) && e4ok && e6ok && e7ok;
+}
+
+/* ============================ MINI SQL ENGINE ============================ */
+function sqlError(msg){ var e=new Error(msg); e.isSql=true; return e; }
+function tokenizeSql(s){
+  var toks=[], i=0;
+  s = s.replace(/;\s*$/,'');
+  while(i<s.length){
+    var ch=s.charAt(i);
+    if(/\s/.test(ch)){ i++; continue; }
+    if(ch==="'"){ var j=s.indexOf("'", i+1); if(j<0) throw sqlError('Unclosed string'); toks.push({t:'str', v:s.slice(i+1,j)}); i=j+1; continue; }
+    if(/[0-9]/.test(ch)){ var m=/^[0-9]+(\.[0-9]+)?/.exec(s.slice(i)); toks.push({t:'num', v:parseFloat(m[0])}); i+=m[0].length; continue; }
+    if(/[A-Za-z_]/.test(ch)){ var m2=/^[A-Za-z_][A-Za-z0-9_.]*/.exec(s.slice(i)); toks.push({t:'id', v:m2[0]}); i+=m2[0].length; continue; }
+    var two=s.slice(i,i+2);
+    if(two==='>='||two==='<='||two==='!='||two==='<>'){ toks.push({t:'op', v:two}); i+=2; continue; }
+    if('(),*=<>'.indexOf(ch)>=0){ toks.push({t:'op', v:ch}); i++; continue; }
+    throw sqlError('Unexpected character: '+ch);
+  }
+  return toks;
+}
+var SQL_KEYWORDS = ['SELECT','FROM','WHERE','JOIN','ON','GROUP','BY','ORDER','ASC','DESC','LIMIT','AS','AND','OR','SUM','COUNT','AVG','MAX','MIN'];
+function runSQL(sql){
+  var toks = tokenizeSql(sql), pos=0;
+  function peek(){ return toks[pos]; }
+  function next(){ return toks[pos++]; }
+  function isKw(tk, kw){ return tk && tk.t==='id' && tk.v.toUpperCase()===kw; }
+  function expectKw(kw){ var tk=next(); if(!isKw(tk,kw)) throw sqlError('Expected '+kw); }
+  function colVal(row, ref){
+    if(ref.indexOf('.')>=0 && row.hasOwnProperty(ref)) return row[ref];
+    var parts = ref.split('.');
+    var col = parts[parts.length-1];
+    if(row.hasOwnProperty(col)) return row[col];
+    throw sqlError('Unknown column: '+ref);
+  }
+  if(!isKw(peek(),'SELECT')) throw sqlError('Query must start with SELECT');
+  next();
+  /* select list */
+  var selectAll=false, items=[];
+  if(peek() && peek().v==='*'){ next(); selectAll=true; }
+  else {
+    while(true){
+      var tk=next();
+      if(!tk) throw sqlError('Bad SELECT list');
+      var agg=null;
+      if(tk.t==='id' && ['SUM','COUNT','AVG','MAX','MIN'].indexOf(tk.v.toUpperCase())>=0 && peek() && peek().v==='('){
+        agg=tk.v.toUpperCase(); next();
+        var arg=next(); var argCol = (arg && arg.v==='*') ? '*' : (arg ? arg.v : null);
+        if(!argCol) throw sqlError('Bad aggregate');
+        var close=next(); if(!close || close.v!==')') throw sqlError('Missing ) in aggregate');
+        items.push({agg:agg, col:argCol});
+      } else if(tk.t==='id'){
+        items.push({agg:null, col:tk.v});
+      } else throw sqlError('Bad SELECT item');
+      if(isKw(peek(),'AS')){ next(); var al=next(); if(!al||al.t!=='id') throw sqlError('Bad alias'); items[items.length-1].alias=al.v; }
+      if(peek() && peek().v===','){ next(); continue; }
+      break;
+    }
+  }
+  expectKw('FROM');
+  var fromTk=next(); if(!fromTk||fromTk.t!=='id') throw sqlError('Expected table name');
+  var baseName=fromTk.v.toLowerCase();
+  if(!TABLES[baseName]) throw sqlError('Unknown table: '+fromTk.v);
+  var rows = TABLES[baseName].map(function(r){ var o={}; for(var k in r) o[k]=r[k]; o.__t=baseName; return o; });
+  /* join */
+  if(isKw(peek(),'JOIN')){
+    next();
+    var jt=next(); var jName=jt.v.toLowerCase();
+    if(!TABLES[jName]) throw sqlError('Unknown table: '+jt.v);
+    expectKw('ON');
+    var leftRef=next().v; var eq=next(); if(eq.v!=='=') throw sqlError('JOIN needs =');
+    var rightRef=next().v;
+    var joined=[];
+    rows.forEach(function(r){
+      TABLES[jName].forEach(function(jr){
+        /* keep BOTH tables addressable: plain keys for the base table,
+           table-prefixed keys for both, plain-if-free for the joined one —
+           so orders.customer_id and customers.customer_id stay distinct. */
+        var merged={};
+        for(var k in r){ merged[k]=r[k]; merged[baseName+'.'+k]=r[k]; }
+        for(var k2 in jr){ merged[jName+'.'+k2]=jr[k2]; if(!merged.hasOwnProperty(k2)) merged[k2]=jr[k2]; }
+        if(colVal(merged,leftRef)===colVal(merged,rightRef)) joined.push(merged);
+      });
+    });
+    rows=joined;
+  }
+  /* where */
+  function parseCond(){
+    var ref=next(); if(!ref||ref.t!=='id') throw sqlError('WHERE needs a column');
+    var op=next(); if(!op||op.t!=='op') throw sqlError('WHERE needs an operator');
+    var val=next(); if(!val||(val.t!=='num'&&val.t!=='str')) throw sqlError('WHERE needs a value');
+    return {ref:ref.v, op:op.v, val:val.v};
+  }
+  function testCond(row, c){
+    var lv=colVal(row,c.ref), rv=c.val;
+    if(c.op==='=') return lv===rv || String(lv)===String(rv);
+    if(c.op==='!=') return lv!==rv;
+    if(c.op==='>') return +lv>+rv;
+    if(c.op==='<') return +lv<+rv;
+    if(c.op==='>=') return +lv>=+rv;
+    if(c.op==='<=') return +lv<=+rv;
+    throw sqlError('Bad operator '+c.op);
+  }
+  if(isKw(peek(),'WHERE')){
+    next();
+    var conds=[parseCond()], ops=[];
+    while(isKw(peek(),'AND')||isKw(peek(),'OR')){ ops.push(next().v.toUpperCase()); conds.push(parseCond()); }
+    rows = rows.filter(function(row){
+      var res=testCond(row,conds[0]);
+      for(var i=0;i<ops.length;i++){ res = (ops[i]==='AND') ? (res && testCond(row,conds[i+1])) : (res || testCond(row,conds[i+1])); }
+      return res;
+    });
+  }
+  /* group by */
+  var groupCol=null;
+  if(isKw(peek(),'GROUP')){ next(); expectKw('BY'); groupCol=next().v; }
+  var cols, outRows;
+  function aggVal(item, groupRows){
+    if(item.agg==='COUNT') return groupRows.length;
+    var vals=groupRows.map(function(r){ return +colVal(r,item.col); });
+    if(item.agg==='SUM') return vals.reduce(function(a,b){return a+b;},0);
+    if(item.agg==='AVG') return Math.round(vals.reduce(function(a,b){return a+b;},0)/vals.length*100)/100;
+    if(item.agg==='MAX') return Math.max.apply(null,vals);
+    if(item.agg==='MIN') return Math.min.apply(null,vals);
+    throw sqlError('Bad aggregate');
+  }
+  function itemKey(item){ return item.alias || (item.agg ? item.agg.toLowerCase()+'_'+item.col.split('.').pop() : item.col.split('.').pop()); }
+  if(groupCol){
+    var groups={}, order=[];
+    rows.forEach(function(r){ var k=String(colVal(r,groupCol)); if(!groups[k]){ groups[k]=[]; order.push(k); } groups[k].push(r); });
+    cols=items.map(itemKey);
+    outRows = order.map(function(k){
+      var o={};
+      items.forEach(function(item){
+        if(item.agg) o[itemKey(item)]=aggVal(item, groups[k]);
+        else o[itemKey(item)]=colVal(groups[k][0], item.col);
+      });
+      return o;
+    });
+  } else if(items.some(function(i){ return i.agg; })){
+    cols=items.map(itemKey);
+    var o={}; items.forEach(function(item){ o[itemKey(item)] = item.agg ? aggVal(item, rows) : colVal(rows[0]||{}, item.col); });
+    outRows=[o];
+  } else if(selectAll){
+    cols = rows.length? Object.keys(rows[0]).filter(function(k){return k!=='__t';}) : [];
+    outRows = rows.map(function(r){ var o={}; cols.forEach(function(c){ o[c]=r[c]; }); return o; });
+  } else {
+    cols=items.map(itemKey);
+    outRows = rows.map(function(r){ var o={}; items.forEach(function(item){ o[itemKey(item)]=colVal(r,item.col); }); return o; });
+  }
+  /* order by */
+  if(isKw(peek(),'ORDER')){
+    next(); expectKw('BY');
+    var oc=next().v.split('.').pop(); var dir=1;
+    if(isKw(peek(),'DESC')){ next(); dir=-1; } else if(isKw(peek(),'ASC')) next();
+    var key = cols.indexOf(oc)>=0 ? oc : cols[0];
+    outRows.sort(function(a,b){ var x=a[key], y=b[key]; if(typeof x==='number'&&typeof y==='number') return (x-y)*dir; return String(x)<String(y)? -dir : dir; });
+  }
+  if(isKw(peek(),'LIMIT')){ next(); var lim=next(); outRows=outRows.slice(0, lim.v); }
+  return { cols: cols, rows: outRows };
+}
+function renderSqlResult(el, res){
+  if(!res.rows.length){ el.innerHTML='<p class="dbnote">0 rows returned.</p>'; return; }
+  var html='<table class="data"><tr>'+res.cols.map(function(c){return '<th>'+c+'</th>';}).join('')+'</tr>';
+  res.rows.forEach(function(r){ html+='<tr>'+res.cols.map(function(c){return '<td>'+r[c]+'</td>';}).join('')+'</tr>'; });
+  html+='</table><p class="dbnote">'+res.rows.length+' row'+(res.rows.length===1?'':'s')+' returned.</p>';
+  el.innerHTML=html;
+}
+function sqlSetEq(res, expected){
+  /* expected: array of objects; compare as multisets on shared keys */
+  if(res.rows.length!==expected.length) return false;
+  var used={};
+  for(var i=0;i<expected.length;i++){
+    var found=false;
+    for(var j=0;j<res.rows.length;j++){
+      if(used[j]) continue;
+      var ok=true, e=expected[i], r=res.rows[j];
+      for(var k in e){ if(String(r[k])!==String(e[k])){ ok=false; break; } }
+      if(ok){ used[j]=true; found=true; break; }
+    }
+    if(!found) return false;
+  }
+  return true;
+}
+var SQL_EXPECTED = {
+  1: ORDERS.filter(function(o){return o.revenue>250;}).map(function(o){ return {order_id:o.order_id, product:o.product, revenue:o.revenue}; }),
+  2: [ {name:'Apex Builders', order_id:1001, revenue:250}, {name:'Apex Builders', order_id:1005, revenue:270}, {name:'Apex Builders', order_id:1013, revenue:300} ],
+  3: [ {region:'East', total:1273}, {region:'South', total:1077}, {region:'North', total:820}, {region:'West', total:720} ]
+};
+
+/* ============================ CHARTS / POWER BI ============================ */
+function measureAgg(cat, meas){
+  if(meas==='revenue') return groupSum(ORDERS, cat, 'revenue');
+  if(meas==='units') return groupSum(ORDERS, cat, 'qty');
+  return groupCount(ORDERS, cat);
+}
+function barChartSVG(dataObj, opts){
+  opts = opts || {};
+  var keys = Object.keys(dataObj).sort(function(a,b){ return dataObj[b]-dataObj[a]; });
+  var max = Math.max.apply(null, keys.map(function(k){ return dataObj[k]; }));
+  var W=520, H=210, base=168, bw=Math.min(64, (W-60)/keys.length - 18);
+  var out='<svg viewBox="0 0 '+W+' '+H+'" role="img">';
+  out+='<line x1="34" y1="'+base+'" x2="'+(W-10)+'" y2="'+base+'" stroke="#24304d" stroke-width="2"/>';
+  keys.forEach(function(k, i){
+    var v=dataObj[k], h=Math.max(4, Math.round((v/max)*(base-34)));
+    var x=44 + i*((W-60)/keys.length) + ((W-60)/keys.length - bw)/2;
+    var col = (opts.color||'#f2c811');
+    out+='<rect x="'+x+'" y="'+(base-h)+'" width="'+bw+'" height="'+h+'" rx="4" fill="'+col+'" opacity="'+(i===0?1:0.72)+'"><animate attributeName="height" from="0" to="'+h+'" dur="0.7s" fill="freeze"/><animate attributeName="y" from="'+base+'" to="'+(base-h)+'" dur="0.7s" fill="freeze"/></rect>';
+    out+='<text x="'+(x+bw/2)+'" y="'+(base-h-7)+'" fill="#eef2ff" font-size="13" font-weight="bold" text-anchor="middle">'+fmt(v)+'</text>';
+    out+='<text x="'+(x+bw/2)+'" y="'+(base+19)+'" fill="#9aa7c7" font-size="11.5" text-anchor="middle">'+k+'</text>';
+  });
+  return out+'</svg>';
+}
+function renderViz(vizEl, cfg){
+  if(cfg.type==='card'){
+    var total = ORDERS.reduce(function(s,o){ return s + (cfg.meas==='revenue'? o.revenue : cfg.meas==='units'? o.qty : 1); }, 0);
+    vizEl.innerHTML = '<div class="bigcard-num">'+(cfg.meas==='revenue'? money(total) : fmt(total))+'</div><div class="bigcard-lab">'+
+      (cfg.meas==='revenue'?'Total Revenue':cfg.meas==='units'?'Total Units Sold':'Total Orders')+'</div>';
+    return { cardTotal: total };
+  }
+  var data = measureAgg(cfg.cat, cfg.meas);
+  vizEl.innerHTML = barChartSVG(data, { color:'#f2c811' });
+  return { data: data };
+}
+var PBI_TASKS = [
+  { id:'pbi1', label:'Build a BAR chart of Revenue by Region.', hint:['Visual type: Bar chart. Category: Region. Measure: Revenue $.','Three chips, three sections — one in each of the first three boxes.','East should lead at 1,273.'] },
+  { id:'pbi2', label:'Switch the category to Product (keep Revenue) — which product earns most?', hint:['Only the Category chip changes: Product.','Cable Pack wins on volume: lots of cheap orders still add up.','Top bar: Cable Pack, 900.'] },
+  { id:'pbi3', label:'Build a CARD showing Total Revenue.', hint:['Visual type: Card (one number). Measure: Revenue $.','The card ignores category — it is one headline number.','The card should read $3,890.'] }
+];
+var daxBuiltArr = [];
+var DAX_TOKENS = ['Total Revenue','=','SUM','(','Orders[Revenue]',')','AVERAGE','Orders[Qty]','COUNT','Total Units'];
+var DAX_ANSWER = ['Total Revenue','=','SUM','(','Orders[Revenue]',')'];
+
+/* ============================ PYTHON LABS ============================ */
+function pyRun(n){
+  function v(id){ var el=document.getElementById(id); return el? el.value : ''; }
+  function out(id, txt){ var el=document.getElementById(id); if(el){ el.style.display='block'; el.textContent=txt; } }
+  function fb(id, ok, msg){ setFeedback(id, ok?'ok':'bad', msg); }
+  if(n===1){
+    var a=v('py1a');
+    if(a==='revenue'){ out('pyOut1','total = 3890\n# the .sum() of the revenue column — one line, whole column'); completeTask('python','py1'); fb('pyFb1',true,'Correct — df["revenue"].sum() = 3,890. That is the same total your Excel SUM produced.'); }
+    else if(a){ var s=ORDERS.reduce(function(x,o){return x+o[a];},0); out('pyOut1','total = '+fmt(s)); fb('pyFb1',false,'That ran — but it summed "'+a+'", not revenue. The question asks for money: pick the revenue column.'); }
+    else fb('pyFb1',false,'Pick a column first — which column holds the money?');
+  }
+  if(n===2){
+    var g=v('py2a'), c=v('py2b');
+    if(g==='region' && c==='revenue'){
+      var gs=groupSum(ORDERS,'region','revenue');
+      var rows=Object.keys(gs).sort().map(function(k){ return k.padEnd? k : k; });
+      var txt='region\n'; ['East','North','South','West'].forEach(function(k){ txt+=k+'  '+gs[k]+'\n'; });
+      txt+='Name: revenue, dtype: int64';
+      out('pyOut2', txt); completeTask('python','py2'); fb('pyFb2',true,'Exactly right — groupby("region")["revenue"].sum(). East leads with 1,273, just like your SQL GROUP BY will show.');
+    } else if(g && c){ out('pyOut2','(ran, but that groups by '+g+' / sums '+c+')'); fb('pyFb2',false,'Close — group by region (where), and sum revenue (the money). Check both blanks.'); }
+    else fb('pyFb2',false,'Two blanks to fill: the column to group by, and the column to add up.');
+  }
+  if(n===3){
+    var col=v('py3a'), num=parseInt(v('py3b'),10);
+    if(col==='qty' && num===5){
+      var big=ORDERS.filter(function(o){return o.qty>=5;});
+      var rev=big.reduce(function(s,o){return s+o.revenue;},0);
+      out('pyOut3','13\n# 13 bulk orders, worth '+money(rev)+' of the '+money(3890)+' total');
+      completeTask('python','py3'); fb('pyFb3',true,'Correct — df[df["qty"] >= 5] keeps 13 orders. Filtering is just a condition inside brackets.');
+    } else if(col && num){ var bb=ORDERS.filter(function(o){return o[col]>=num;}); out('pyOut3', String(bb.length)); fb('pyFb3',false,'That filter kept '+bb.length+' orders. The task: quantity (qty) of 5 or more.'); }
+    else fb('pyFb3',false,'Fill both blanks: which column are we testing, and what is the cutoff?');
+  }
+  if(n===4){
+    var w=v('py4a');
+    if(w==='values'){
+      var gs2=groupSum(ORDERS,'region','revenue');
+      document.getElementById('pyOut4').style.display='block';
+      document.getElementById('pyOut4').innerHTML='&lt;Figure: bar chart&gt;\n'+barChartSVG(gs2,{color:'#ffd43b'});
+      completeTask('python','py4'); fb('pyFb4',true,'Rendered! by_region.index gives the labels (regions), by_region.values gives the bar heights (the sums).');
+    } else if(w){ fb('pyFb4',false,'plt.bar(x, y) needs the heights: by_region.values. "columns" and "shape" describe the table, not the numbers.'); }
+    else fb('pyFb4',false,'Pick what goes on the y-axis — the bar heights.');
+  }
+}
+
+/* ============================ QUIZZES ============================ */
+var QUIZZES = {
+  excel: [
+    { q:'What does =SUM(G2:G17) do?', opts:['Adds only G2 and G17','Adds every cell from G2 through G17','Counts the cells G2 to G17'], a:1 },
+    { q:'A quantity cell contains the text "8 (est)". What happens to your totals?', opts:['Excel quietly treats it as 8','It is ignored by SUM and can silently shrink totals — clean it first','The file becomes corrupt'], a:1 },
+    { q:'Which formula labels an order "Bulk" when quantity is 5 or more?', opts:['=IF(E2>=5,"Bulk","Standard")','=SUM(E2>=5)','=VLOOKUP("Bulk",E2,5)'], a:0 }
+  ],
+  powerbi: [
+    { q:'Every Power BI visual is fundamentally…', opts:['A pivot table with colors','A measure broken down by a category','A screenshot of Excel'], a:1 },
+    { q:'In a star schema, the ORDERS table is the…', opts:['Dimension table — it describes things','Fact table — it holds the events you measure','Lookup table for spell-checking'], a:1 },
+    { q:'What makes a DAX measure different from an Excel formula?', opts:['It uses semicolons','It is recalculated inside every visual, under whatever filters are active','It only works on Tuesdays'], a:1 }
+  ],
+  sql: [
+    { q:'Which clause filters rows in SQL?', opts:['SELECT','WHERE','ORDER BY'], a:1 },
+    { q:'Why do we JOIN customers to orders?', opts:['To delete duplicate orders','Because the answer needs columns from both tables','To make the query run slower'], a:1 },
+    { q:'GROUP BY region with SUM(revenue) gives you…', opts:['Every order, sorted by region','One row per region with its total revenue','The region with the most orders only'], a:1 }
+  ],
+  python: [
+    { q:'In pandas, df["revenue"] is…', opts:['One cell','The whole revenue column','A new file'], a:1 },
+    { q:'df[df["qty"] >= 5] returns…', opts:['Only the qty column','A new DataFrame with just the rows where qty is 5+','An error — filters live in SQL only'], a:1 },
+    { q:'groupby in pandas is the same idea as…', opts:['SQL GROUP BY / a Power BI category + measure','Saving a CSV','A for-loop over a list of files'], a:0 }
+  ]
+};
+var quizSel = {};
+function renderQuiz(track, container){
+  var qs = QUIZZES[track];
+  var html='';
+  qs.forEach(function(item, qi){
+    html += '<div class="quiz-q"><p class="q">'+(qi+1)+'. '+item.q+'</p><div class="opts">';
+    item.opts.forEach(function(o, oi){ html += '<button class="opt" type="button" data-quiz="'+track+'" data-q="'+qi+'" data-o="'+oi+'">'+o+'</button>'; });
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+}
+function scoreQuiz(track){
+  var qs=QUIZZES[track], score=0;
+  qs.forEach(function(item, qi){ if(quizSel[track+':'+qi]===item.a) score++; });
+  return { score:score, total:qs.length };
+}
+
+/* ============================ STATE & PROGRESS ============================ */
+var SQL_TASKS = [
+  { id:'sql1', label:'Query 1 — big orders (revenue over 250).', hint:['WHERE filters rows. Compare the revenue column to 250.',' revenue > 250 — six orders qualify.','Full shape: SELECT order_id, product, revenue FROM orders WHERE revenue > 250'] },
+  { id:'sql2', label:'Query 2 — contractor orders via JOIN.', hint:['The name lives in customers, the money in orders — that is what JOIN is for. The starter already has the JOIN; finish the WHERE.','Filter on the segment column of customers: customers.segment = \'Contractor\'.','Apex Builders is the only contractor: 3 orders, 250 / 270 / 300.'] },
+  { id:'sql3', label:'Query 3 — revenue by region, biggest first.', hint:['One row per region = GROUP BY region. Sorting = ORDER BY … DESC.','GROUP BY region, then ORDER BY total DESC (total is your alias).','East 1,273 · South 1,077 · North 820 · West 720.'] }
+];
+var PY_TASKS = [
+  { id:'py1', label:'Exercise 1 — total revenue with .sum().', hint:['You want the money column. Its name is revenue.','df["revenue"].sum() adds the whole column: 3,890.'] },
+  { id:'py2', label:'Exercise 2 — groupby region, sum revenue.', hint:['groupby takes the bucket column; the brackets after take the money column.','groupby("region")["revenue"] — East should top the printout at 1,273.'] },
+  { id:'py3', label:'Exercise 3 — filter qty >= 5.', hint:['The condition tests the qty column against 5.','df[df["qty"] >= 5] — 13 orders survive.'] },
+  { id:'py4', label:'Exercise 4 — bar chart heights.', hint:['plt.bar(x, y): x is labels, y is the numbers — the sums are stored as .values.','by_region.values — the heights 820, 1077, 1273, 720.'] }
+];
+var FINAL_TASKS = [
+  { id:'f1', label:'Step 1 — rescue the Excel export.', hint:['Three fixes: C4 should be the number 8 (text "8 (est)" is ignored by math). E4 = C4*D4. E6 = C6*D6. Then E7 totals E2:E6.','E7: =SUM(E2:E6) → 1,360.'] },
+  { id:'f2', label:'Step 2 — SQL regional totals.', hint:['Same pattern as Query 3 without the sort: SELECT region, SUM(revenue) AS total FROM orders GROUP BY region.'] },
+  { id:'f3', label:'Step 3 — build the owner chart.', hint:['Bar chart · Region · Revenue — then press Build the visual.'] },
+  { id:'f4', label:'Step 4 — Python idxmax.', hint:['groupby("region")["revenue"].sum() gives the totals; .idxmax() returns the label of the biggest — East.'] }
+];
+var TASK_DEFS = { excel: EXCEL_TASKS, powerbi: PBI_TASKS.concat([{ id:'pbi4', label:'DAX — build the Total Revenue measure.', hint:['DAX measure = name, =, function, ( Table[Column] ).','SUM over Orders[Revenue]: Total Revenue = SUM(Orders[Revenue])'] }]), sql: SQL_TASKS, python: PY_TASKS, final: FINAL_TASKS };
+var TRACK_TASKS = { excel:['ex1','ex2','ex3','ex4','ex5'], powerbi:['pbi1','pbi2','pbi3','pbi4'], sql:['sql1','sql2','sql3'], python:['py1','py2','py3','py4'], final:['f1','f2','f3','f4'] };
+var TOTAL_UNITS = 25;
+
+var state = { tasks:{}, quizzes:{}, cert:false };
+Object.keys(TRACK_TASKS).forEach(function(t){ state.tasks[t]={}; });
+function saveState(){ try { window.localStorage.setItem('daCourseStateV1', JSON.stringify(state)); } catch(e){} }
+function loadState(){
+  try {
+    var s = window.localStorage.getItem('daCourseStateV1');
+    if(s){ var p=JSON.parse(s); if(p && p.tasks) state=p; }
+  } catch(e){}
+}
+function doneUnits(){
+  var n = state.cert? 1:0;
+  Object.keys(state.tasks).forEach(function(t){ Object.keys(state.tasks[t]).forEach(function(k){ if(state.tasks[t][k]) n++; }); });
+  Object.keys(state.quizzes).forEach(function(t){ if(state.quizzes[t]) n++; });
+  return n;
+}
+function trackDone(track){
+  var tasksOk = TRACK_TASKS[track].every(function(id){ return state.tasks[track][id]; });
+  if(track==='final') return tasksOk;
+  return tasksOk && !!state.quizzes[track];
+}
+function setFeedback(id, kind, msg){
+  var el=document.getElementById(id); if(!el) return;
+  el.className='feedback '+kind; el.textContent=msg;
+}
+function completeTask(track, id){
+  if(state.tasks[track][id]) { updateProgress(); return false; }
+  state.tasks[track][id]=true;
+  saveState(); updateProgress(); refreshTaskLists(); refreshFinalSteps();
+  trainerReact(track, id);
+  return true;
+}
+function completeQuiz(track){
+  if(!state.quizzes[track]){ state.quizzes[track]=true; saveState(); }
+  updateProgress(); refreshTaskLists();
+}
+function updateProgress(){
+  var pct = Math.round(doneUnits()/TOTAL_UNITS*100);
+  var fill=document.getElementById('progressFill'), lab=document.getElementById('progressPct');
+  if(fill) fill.style.width = pct+'%';
+  if(lab) lab.textContent = pct+'% complete';
+  ['excel','powerbi','sql','python','final'].forEach(function(t){
+    var el=document.querySelector('[data-status="'+t+'"]');
+    if(!el) return;
+    var started = TRACK_TASKS[t].some(function(id){ return state.tasks[t][id]; });
+    if(trackDone(t)){ el.textContent='✓ Complete'; el.classList.add('done'); }
+    else if(started){ el.textContent='In progress…'; el.classList.remove('done'); }
+    else if(t==='final'){ el.textContent='Locked until tracks are underway'; }
+    else { el.textContent='Not started'; el.classList.remove('done'); }
+  });
+  if(trackDone('final') && !state.cert){
+    state.cert=true; saveState();
+    var cert=document.getElementById('certBox'); if(cert) cert.classList.add('show');
+    var d=document.getElementById('certDate'); if(d) d.textContent='Issued ' + new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    updateProgress();
+  }
+}
+function renderTaskList(el, defs, track){
+  if(!el) return;
+  var html='';
+  defs.forEach(function(t){
+    var done = state.tasks[track][t.id];
+    html += '<div class="task'+(done?' done':'')+'"><span class="dot">✓</span><span>'+t.label+'</span>'+
+      (done?'':'<button class="btn ghost small" type="button" data-hint="'+track+':'+t.id+'">Hint</button>')+'</div>';
+  });
+  el.innerHTML=html;
+  var btns=el.querySelectorAll('button[data-hint]');
+  for(var i=0;i<btns.length;i++){ (function(b){ b.addEventListener('click', function(){
+    var parts=b.getAttribute('data-hint').split(':'); openTrainer(); trainerHint(parts[0], parts[1], true);
+  }); })(btns[i]); }
+}
+function refreshTaskLists(){
+  renderTaskList(document.getElementById('excelTasks'), EXCEL_TASKS, 'excel');
+  renderTaskList(document.getElementById('pbiTasks'), PBI_TASKS, 'powerbi');
+}
+function refreshFinalSteps(){
+  ['f1','f2','f3','f4'].forEach(function(id, i){
+    var el=document.getElementById('fstep'+(i+1));
+    if(el){ if(state.tasks.final[id]) el.classList.add('done'); }
+  });
+}
+
+/* ============================ NAVIGATION ============================ */
+var currentScreen='home';
+function show(name){
+  currentScreen=name;
+  var screens=document.querySelectorAll('.screen');
+  for(var i=0;i<screens.length;i++){ screens[i].classList.toggle('active', screens[i].id==='screen-'+name); }
+  try { window.scrollTo(0,0); } catch(e){}
+  var ctx=document.getElementById('trainerContext');
+  if(ctx) ctx.textContent='Here to help · you are in: '+({home:'Course home',excel:'Excel track',powerbi:'Power BI track',sql:'SQL track',python:'Python track',final:'Final project'})[name];
+}
+
+/* ============================ LAB WIRING ============================ */
+var excelBook=null, finalBook=null;
+function checkExcelTasks(manual){
+  var newly=[];
+  EXCEL_TASKS.forEach(function(t){
+    var ok=checkExcelTask(excelBook, t.id);
+    markCellGood(excelBook, sheetState.excel.tableEl, {ex1:'G5',ex2:'G18',ex3:'G19',ex4:'H2',ex5:'K3'}[t.id], ok);
+    if(ok && !state.tasks.excel[t.id]){ completeTask('excel', t.id); newly.push(t.id); }
+  });
+  if(manual){
+    var doneN = EXCEL_TASKS.filter(function(t){ return state.tasks.excel[t.id]; }).length;
+    if(doneN===EXCEL_TASKS.length) setFeedback('excelFeedback','ok','All five tasks check out — the sheet is fully wired. Revenue column, total, average, label and lookup: all correct.');
+    else setFeedback('excelFeedback','info', doneN+' of 5 tasks complete. '+(newly.length? 'Nice — just locked in '+newly.join(', ').toUpperCase()+'. ':'')+'Check the gold cells that are not green yet, or ask the trainer for a hint.');
+  }
+  refreshTaskLists();
+}
+function runSqlTask(n){
+  var ta=document.getElementById('sqlQ'+n), out=document.getElementById('sqlOut'+n);
+  try {
+    var res=runSQL(ta.value);
+    renderSqlResult(out, res);
+    var ok;
+    if(n===3){ ok = res.rows.length===4 && SQL_EXPECTED[3].every(function(e,i){ return String(res.rows[i].region)===e.region && +res.rows[i].total===e.total; }); }
+    else ok = sqlSetEq(res, SQL_EXPECTED[n]);
+    if(ok){ completeTask('sql','sql'+n); setFeedback('sqlFb'+n,'ok','Query correct — '+res.rows.length+' rows, exactly the right answer. '+(n===1?'Six orders clear $250.':n===2?'The JOIN pulled the contractor\u2019s name onto every order.':'East leads at $1,273.')); }
+    else setFeedback('sqlFb'+n,'bad','It ran, but the result is not the answer to this question ('+res.rows.length+' rows back). Compare carefully — or ask the trainer for a hint.');
+  } catch(e){
+    if(out) out.innerHTML='';
+    setFeedback('sqlFb'+n,'bad','SQL error: '+e.message+'. Check spelling, commas, and that every ( has its ).');
+  }
+}
+var pbiCfg={ type:'bar', cat:'region', meas:'revenue' };
+function checkPbiTasks(){
+  var lbl=document.getElementById('pbiBuildLabel');
+  if(lbl) lbl.textContent=(pbiCfg.type==='bar'?'Bar chart':'Card')+' · '+(pbiCfg.meas==='revenue'?'Revenue':pbiCfg.meas==='units'?'Units':'Orders')+' by '+pbiCfg.cat.charAt(0).toUpperCase()+pbiCfg.cat.slice(1);
+  if(pbiCfg.type==='bar' && pbiCfg.cat==='region' && pbiCfg.meas==='revenue' && !state.tasks.powerbi.pbi1){ completeTask('powerbi','pbi1'); setFeedback('pbiFeedback','ok','Task 1 done — East leads at $1,273. Now change only the Category to Product.'); }
+  if(pbiCfg.type==='bar' && pbiCfg.cat==='product' && pbiCfg.meas==='revenue' && state.tasks.powerbi.pbi1 && !state.tasks.powerbi.pbi2){ completeTask('powerbi','pbi2'); setFeedback('pbiFeedback','ok','Task 2 done — Cable Pack tops revenue at $900: cheap, but 75 units sold. Now build the Card.'); }
+  if(pbiCfg.type==='card' && pbiCfg.meas==='revenue' && !state.tasks.powerbi.pbi3){ completeTask('powerbi','pbi3'); setFeedback('pbiFeedback','ok','Task 3 done — one number, $3,890, the headline every dashboard needs.'); }
+  refreshTaskLists();
+}
+function wireChips(containerId, attr, cb){
+  var c=document.getElementById(containerId); if(!c) return;
+  c.addEventListener('click', function(e){
+    var t=e.target;
+    if(!t || !t.getAttribute || !t.getAttribute(attr)) return;
+    var kids=c.querySelectorAll('['+attr+']');
+    for(var i=0;i<kids.length;i++) kids[i].classList.remove('sel');
+    t.classList.add('sel');
+    cb(t.getAttribute(attr));
+  });
+}
+
+/* ============================ AI TRAINER ============================ */
+var KB = [
+ { track:'all', keys:['progress','how am i doing','how much','complete %','score'], a:'Your progress bar up top counts 25 units: 16 lab tasks, 4 track checks, 4 final-project steps and the certificate. Every green dot is a unit banked.', simple:'The bar at the top fills up as you finish tasks. 25 little jobs in total.', ex:'Finish the Excel lab (5 tasks) + its check = 6 units = 24%.' },
+ { track:'all', keys:['certificate','cert','diploma','finish','complete the course'], a:'The certificate unlocks when all four Final Project steps are green. Put your name on it and use Print / Save to keep a copy.', simple:'Do the 4 final steps, then the certificate appears with your name on it.', ex:'Final steps: fix the Excel export → SQL totals → Power BI chart → Python winner.' },
+ { track:'all', keys:['start','begin','where','stuck','help','lost'], a:'Start where the data starts: Excel. It teaches you the shape of the BrightLine dataset, and then SQL, Power BI and Python all reuse what you learned. In any lab, the gold cells / boxes are what you edit.', simple:'Do Excel first. After that, the other tracks feel much easier.', ex:'Excel task 1: click cell G5 and type =E5*F5.' },
+ { track:'all', keys:['dataset','data','brightline','orders','company'], a:'Everything runs on one dataset: 16 orders from BrightLine Supplies (Sep–Oct 2026), 6 customers, 5 products, 4 regions. Total revenue is $3,890 — you will re-derive that number four different ways.', simple:'Same 16 orders everywhere. Total sales: $3,890.', ex:'Biggest region: East, $1,273. Biggest product line: Cable Pack, $900.' },
+ { track:'excel', keys:['sum','add','total','range'], a:'SUM adds a range: =SUM(G2:G17). The colon means "everything from G2 to G17". Press Enter and the cell shows the result, not the formula.', simple:'Type =SUM( then the first cell, a colon, the last cell, then ).', ex:'=SUM(G2:G17) → 3890. =SUM(E2:E17) would total the quantities instead.' },
+ { track:'excel', keys:['average','mean','avg'], a:'AVERAGE works like SUM but divides by the count: =AVERAGE(G2:G17) → 243.13. Watch out: text cells in the range are skipped, which can quietly change the answer.', simple:'=AVERAGE(range) gives the middle-of-the-road value.', ex:'3890 ÷ 16 orders = 243.125, shown as 243.13.' },
+ { track:'excel', keys:['if','label','bulk','condition'], a:'IF is a decision in a cell: =IF(test, value-if-true, value-if-false). Text answers need quotes: =IF(E2>=5,"Bulk","Standard").', simple:'IF asks a yes/no question and picks one of two answers.', ex:'Qty 10 → test is true → "Bulk". Qty 4 → "Standard".' },
+ { track:'excel', keys:['vlookup','lookup','find','price list','table'], a:'VLOOKUP(find, table, column) hunts down a table\u2019s first column and brings back a value from the column you name. Here: =VLOOKUP(K2,M2:N6,2) finds "Sensor Kit" in the price table and returns its price, 45.', simple:'VLOOKUP = "look this word up in that table, bring back the price next to it."', ex:'Looking up "Gadget Plus" would return 60.' },
+ { track:'excel', keys:['clean','dirty','text','est','error','wrong total'], a:'Text in a number column (like "8 (est)") is invisible to SUM — it is skipped, so totals shrink silently. Cleaning means turning it into the plain number 8 before you calculate. Always eyeball a column before trusting a total.', simple:'If a number has words stuck to it, formulas ignore it. Clean it to a plain number first.', ex:'That is exactly the trap waiting in Final Project step 1, cell C4.' },
+ { track:'powerbi', keys:['dax','measure','sum(','formula'], a:'A DAX measure is a named calculation: Total Revenue = SUM(Orders[Revenue]). Table[Column] is how DAX points at a column. Unlike an Excel cell, the measure recalculates inside every visual, under any filter.', simple:'DAX is Excel formulas that live inside the dashboard instead of a cell.', ex:'Total Units = SUM(Orders[Qty]) would total 147 units.' },
+ { track:'powerbi', keys:['category','measure','chart','visual','bar','card'], a:'Every visual = a measure (the number) broken down by a category (the slices). Bar of Revenue by Region sums revenue four times, once per region. A card skips the slicing and shows one headline number.', simple:'Pick WHAT number, then pick HOW to slice it.', ex:'Units by Product: Cable Pack leads with 75 units but only $900.' },
+ { track:'powerbi', keys:['star schema','fact','dimension','model','tables'], a:'Star schema: the fact table (orders — events with numbers) sits in the middle; dimension tables (customers, products — descriptions) connect around it. Facts are what you measure; dimensions are what you slice by.', simple:'Orders in the middle (things that happened). Customers/products around it (who and what).', ex:'"Revenue by customer segment" needs the fact (revenue) joined to the dimension (segment).' },
+ { track:'sql', keys:['where','filter','condition','over','greater'], a:'WHERE keeps only rows that pass your test: WHERE revenue > 250. Text values wear single quotes: WHERE region = \'East\'. Numbers do not.', simple:'WHERE = "only show me rows where this is true."', ex:'WHERE qty >= 10 keeps 5 orders: 1001, 1004, 1005, 1009, 1015.' },
+ { track:'sql', keys:['join','customers','two tables','combine','name'], a:'JOIN glues tables on a shared key: FROM orders JOIN customers ON orders.customer_id = customers.customer_id. After that, customers.name and orders.revenue can sit in the same SELECT.', simple:'JOIN = "staple the two tables together where the IDs match."', ex:'Apex Builders is customer 1 — the join attaches that name to orders 1001, 1005, 1013.' },
+ { track:'sql', keys:['group by','group','total by','per region','sum'], a:'GROUP BY buckets rows, then the aggregate summarizes each bucket: SELECT region, SUM(revenue) AS total FROM orders GROUP BY region. Add ORDER BY total DESC to rank them.', simple:'GROUP BY = "make one row per group, with a total."', ex:'East 1273 · South 1077 · North 820 · West 720.' },
+ { track:'sql', keys:['select','syntax','order of','clauses'], a:'Clause order is fixed: SELECT … FROM … WHERE … GROUP BY … ORDER BY … LIMIT. The database reads it in a different order than you write it (FROM first), but you must write it in the official order.', simple:'SELECT what, FROM where, WHERE which rows, GROUP BY buckets, ORDER BY sorting.', ex:'SELECT region FROM orders — the simplest legal query.' },
+ { track:'python', keys:['pandas','dataframe','df','read_csv'], a:'A DataFrame is a table in code, nicknamed df. df["revenue"] grabs a whole column; df.head() peeks at the first rows. Everything in the Python lab runs on the same 16-order df.', simple:'df is just the spreadsheet, but in code.', ex:'len(df) → 16. df["qty"].max() → 30.' },
+ { track:'python', keys:['groupby','group','by region'], a:'df.groupby("region")["revenue"].sum() — bucket by region, take revenue, add it up. Same idea as SQL GROUP BY and a Power BI category + measure. idxmax() then returns the label of the biggest bucket.', simple:'groupby = "sort into piles, then do math on each pile."', ex:'groupby("product")["qty"].sum() → Cable Pack 75 units.' },
+ { track:'python', keys:['filter','brackets','condition','rows where'], a:'Filtering is a condition inside double brackets: df[df["qty"] >= 5]. The inner df["qty"] >= 5 produces a true/false list; the outer df[ ] keeps the true rows.', simple:'df[df[test]] = keep only the rows that pass the test.', ex:'df[df["region"] == "East"] → the 5 East orders.' },
+ { track:'python', keys:['matplotlib','plot','bar','chart','plt'], a:'plt.bar(x, y) draws bars: x = labels, y = heights. Feed it by_region.index (the region names) and by_region.values (their totals) and the chart matches your Power BI visual.', simple:'plt.bar(labels, numbers). That is the whole trick.', ex:'After the lab chart, plt.title("Revenue by region") names it.' },
+ { track:'final', keys:['final','project','capstone','quarterly'], a:'The capstone is one story in four moves: clean it in Excel, total it in SQL, show it in Power BI, name the winner in Python. Each step checks itself — green dots on the mission list mean you are through.', simple:'Four steps, one per tool, same order as the tracks.', ex:'The final answer the owner wants: East region, $1,273.' }
+];
+var trainerState = { lastEntry:null, hintStage:{}, opened:false };
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+function trainerMsg(who, html){
+  var box=document.getElementById('trainerMsgs'); if(!box) return;
+  var d=document.createElement('div'); d.className='msg '+who; d.innerHTML=html;
+  box.appendChild(d); try { box.scrollTop=box.scrollHeight; } catch(e){}
+}
+function openTrainer(){
+  var p=document.getElementById('trainerPanel'); if(!p) return;
+  p.classList.add('open'); trainerState.opened=true;
+  if(!trainerState.greeted){
+    trainerState.greeted=true;
+    trainerMsg('bot','Hey, I\u2019m <b>Coach Ada</b> — your personal trainer for this course. Ask me anything about the labs, or tap <b>Hint</b> and I\u2019ll coach you through the exact task you\u2019re on (no answers handed over — hints first, like a good trainer).');
+  }
+}
+function closeTrainer(){ var p=document.getElementById('trainerPanel'); if(p) p.classList.remove('open'); }
+function currentTaskId(track){
+  var ids=TRACK_TASKS[track]||[];
+  for(var i=0;i<ids.length;i++){ if(!state.tasks[track][ids[i]]) return ids[i]; }
+  return null;
+}
+function findTaskDef(track, id){
+  var defs=TASK_DEFS[track]||[];
+  for(var i=0;i<defs.length;i++) if(defs[i].id===id) return defs[i];
+  return null;
+}
+function trainerHint(track, taskId, fresh){
+  var def=findTaskDef(track, taskId);
+  if(!def){ trainerMsg('bot','That part is already in the bank — nice work. Pick any unfinished task and I\u2019ll hint that one.'); return; }
+  var key=track+':'+taskId;
+  var stage=trainerState.hintStage[key]||0;
+  var hints=def.hint||[];
+  if(!hints.length){ trainerMsg('bot','No hint written for that one — ask me about the topic in your own words and I\u2019ll explain it.'); return; }
+  var h=hints[Math.min(stage, hints.length-1)];
+  trainerState.hintStage[key]=stage+1;
+  trainerMsg('bot','💡 <b>Hint '+(Math.min(stage,hints.length-1)+1)+' of '+hints.length+'</b> — '+esc(h));
+}
+function askTrainer(text){
+  var q=' '+String(text||'').toLowerCase()+' ';
+  var best=null, bestScore=0;
+  KB.forEach(function(e){
+    var score=0;
+    e.keys.forEach(function(k){
+      var hit;
+      if(k.length<=3){ hit = new RegExp('(^|[^a-z])'+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'([^a-z]|$)').test(q); }
+      else hit = q.indexOf(k)>=0;
+      if(hit) score += 2 + Math.min(2, k.length/6);
+    });
+    if(e.track===currentScreen) score += 1.5;
+    if(e.track==='all') score += 0.25;
+    if(score>bestScore){ bestScore=score; best=e; }
+  });
+  if(!best || bestScore<2){
+    return { a:'Good question — let me aim you at the right shelf. I coach on: <b>Excel</b> (SUM, AVERAGE, IF, VLOOKUP, cleaning), <b>Power BI</b> (measures, DAX, star schema), <b>SQL</b> (WHERE, JOIN, GROUP BY), <b>Python</b> (pandas, groupby, filters, charts) — plus your progress and the final project. Try asking about one of those, or tap <b>Hint</b> for the task in front of you.', entry:null };
+  }
+  trainerState.lastEntry=best;
+  return { a:best.a, entry:best };
+}
+function trainerReact(track, id){
+  if(!trainerState.opened) return;
+  var def=findTaskDef(track,id);
+  var names={excel:'Excel',powerbi:'Power BI',sql:'SQL',python:'Python',final:'Final Project'};
+  trainerMsg('bot','✅ Banked — '+(def? esc(def.label.split('—')[0].split('·')[0]) : 'task done')+' ('+names[track]+'). '+doneUnits()+' of '+TOTAL_UNITS+' units. '+(trackDone(track)? 'That track is fully complete. 🎉' : 'Keep rolling.'));
+}
+
+/* ============================ INIT ============================ */
+function init(){
+  loadState();
+  /* navigation */
+  var gotos=document.querySelectorAll('[data-goto]');
+  for(var i=0;i<gotos.length;i++){ (function(b){ b.addEventListener('click', function(){ show(b.getAttribute('data-goto')); }); })(gotos[i]); }
+  var ots=document.querySelectorAll('[data-open-trainer]');
+  for(var j=0;j<ots.length;j++){ ots[j].addEventListener('click', openTrainer); }
+  var navBtn=document.getElementById('navTrainerBtn'); if(navBtn) navBtn.addEventListener('click', openTrainer);
+  var fab=document.getElementById('trainerFab'); if(fab) fab.addEventListener('click', openTrainer);
+  var cls=document.getElementById('trainerClose'); if(cls) cls.addEventListener('click', closeTrainer);
+
+  /* excel lab */
+  excelBook=buildExcelBook();
+  renderSheet('excel', excelBook, document.getElementById('excelSheet'), {
+    cols:['A','B','C','D','E','F','G','H','I','J','K','L','M','N'],
+    rows:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],
+    widths:{A:'64px',B:'86px',C:'64px',D:'110px',E:'44px',F:'52px',G:'76px',H:'92px',I:'14px',J:'104px',K:'86px',L:'14px',M:'104px',N:'52px'},
+    startCell:'G2'
+  });
+  wireSheet('excel', document.getElementById('fxInput'), document.getElementById('fxCell'), function(){ checkExcelTasks(false); });
+  var ec=document.getElementById('excelCheck'); if(ec) ec.addEventListener('click', function(){ checkExcelTasks(true); });
+
+  /* final step 1 sheet */
+  finalBook=buildFinalBook();
+  renderSheet('final', finalBook, document.getElementById('finalSheet'), {
+    cols:['A','B','C','D','E'], rows:[1,2,3,4,5,6,7],
+    widths:{A:'70px',B:'130px',C:'90px',D:'70px',E:'90px'}, startCell:'E4'
+  });
+  wireSheet('final', document.getElementById('fxInputF'), document.getElementById('fxCellF'), function(){});
+  var fc1=document.getElementById('finalCheck1');
+  if(fc1) fc1.addEventListener('click', function(){
+    if(checkFinalStep1(finalBook)){ completeTask('final','f1'); setFeedback('finalFb1','ok','Step 1 complete — cleaned qty (8), both revenue formulas, and a $1,360 total. That is exactly how a pro rescues an export.'); }
+    else {
+      var parts=[];
+      if(cellValue(finalBook,'C4')!==8) parts.push('C4 still is not the clean number 8');
+      if(cellValue(finalBook,'E4')!==360) parts.push('E4 should be =C4*D4 → 360');
+      if(cellValue(finalBook,'E6')!==270) parts.push('E6 should be =C6*D6 → 270');
+      if(cellValue(finalBook,'E7')!==1360) parts.push('E7 should total E2:E6 → 1,360');
+      setFeedback('finalFb1','bad','Not yet: '+parts.join(' · ')+'.');
+    }
+  });
+
+  /* power bi builder */
+  wireChips('pbiTypeChips','data-ptype', function(v){ pbiCfg.type=v; renderViz(document.getElementById('pbiViz'), pbiCfg); checkPbiTasks(); });
+  wireChips('pbiCatChips','data-pcat', function(v){ pbiCfg.cat=v; renderViz(document.getElementById('pbiViz'), pbiCfg); checkPbiTasks(); });
+  wireChips('pbiMeasChips','data-pmeas', function(v){ pbiCfg.meas=v; renderViz(document.getElementById('pbiViz'), pbiCfg); checkPbiTasks(); });
+  renderViz(document.getElementById('pbiViz'), pbiCfg);
+
+  /* DAX builder */
+  var dt=document.getElementById('daxTokens');
+  if(dt){
+    var html='';
+    DAX_TOKENS.forEach(function(t){ html+='<button class="fchip" type="button" data-dax="'+t.replace(/"/g,'&quot;')+'">'+t+'</button>'; });
+    dt.innerHTML=html;
+    dt.addEventListener('click', function(e){
+      var t=e.target; if(!t || !t.getAttribute || !t.getAttribute('data-dax')) return;
+      daxBuiltArr.push(t.getAttribute('data-dax'));
+      document.getElementById('daxBuilt').textContent=daxBuiltArr.join(' ');
+    });
+  }
+  var dclear=document.getElementById('daxClear');
+  if(dclear) dclear.addEventListener('click', function(){ daxBuiltArr=[]; document.getElementById('daxBuilt').textContent='…tap tokens below…'; });
+  var dcheck=document.getElementById('daxCheck');
+  if(dcheck) dcheck.addEventListener('click', function(){
+    var built=daxBuiltArr.join(' ').replace(/\s+/g,' ').trim();
+    var want=DAX_ANSWER.join(' ');
+    if(built===want){ completeTask('powerbi','pbi4'); setFeedback('daxFeedback','ok','Perfect DAX: Total Revenue = SUM(Orders[Revenue]). That one measure now powers every visual you build.'); }
+    else setFeedback('daxFeedback','bad','Not quite — a measure reads: name, =, function, (, Table[Column], ). You built: "'+(built||'nothing yet')+'". Clear and rebuild in that order.');
+  });
+
+  /* sql lab */
+  var runs=document.querySelectorAll('[data-sql-run]');
+  for(var r=0;r<runs.length;r++){ (function(b){ b.addEventListener('click', function(){ runSqlTask(parseInt(b.getAttribute('data-sql-run'),10)); }); })(runs[r]); }
+  var fr2=document.getElementById('finalRun2');
+  if(fr2) fr2.addEventListener('click', function(){
+    var out=document.getElementById('finalSqlOut');
+    try {
+      var res=runSQL(document.getElementById('finalSql').value);
+      renderSqlResult(out, res);
+      if(sqlSetEq(res, SQL_EXPECTED[3])){ completeTask('final','f2'); setFeedback('finalFb2','ok','Step 2 complete — four regions, correct totals. The owner\u2019s answer is in this table.'); }
+      else setFeedback('finalFb2','bad','It ran, but those are not the regional totals. You need GROUP BY region with SUM(revenue).');
+    } catch(e){ if(out) out.innerHTML=''; setFeedback('finalFb2','bad','SQL error: '+e.message); }
+  });
+
+  /* final step 3 builder */
+  var fCfg={ type:'card', cat:'product', meas:'units' };
+  wireChips('fTypeChips','data-ftype', function(v){ fCfg.type=v; });
+  wireChips('fCatChips','data-fcat', function(v){ fCfg.cat=v; });
+  wireChips('fMeasChips','data-fmeas', function(v){ fCfg.meas=v; });
+  var fb3=document.getElementById('finalBuild3');
+  if(fb3) fb3.addEventListener('click', function(){
+    renderViz(document.getElementById('finalViz'), fCfg);
+    if(fCfg.type==='bar' && fCfg.cat==='region' && fCfg.meas==='revenue'){ completeTask('final','f3'); setFeedback('finalFb3','ok','Step 3 complete — that is the chart that goes in front of the owner: East clearly on top.'); }
+    else setFeedback('finalFb3','bad','Built — but the owner asked for a BAR chart of REVENUE by REGION. Check the three settings.');
+  });
+
+  /* final step 4 */
+  var fr4=document.getElementById('finalRun4');
+  if(fr4) fr4.addEventListener('click', function(){
+    var a=document.getElementById('fPyA').value, b=document.getElementById('fPyB').value;
+    var outEl=document.getElementById('finalPyOut');
+    if(a==='region' && b==='revenue'){
+      outEl.style.display='block'; outEl.textContent='"East"\n# groupby → sum → idxmax: the label of the largest total';
+      completeTask('final','f4'); setFeedback('finalFb4','ok','Step 4 complete — East. All four tools agree, and so does the owner\u2019s report.');
+    } else { outEl.style.display='block'; outEl.textContent='(ran — but that names the winner of a different contest)'; setFeedback('finalFb4','bad','Group by region and sum revenue — the winner must come from the money column.'); }
+  });
+
+  /* python lab */
+  var pyruns=document.querySelectorAll('[data-py-run]');
+  for(var p=0;p<pyruns.length;p++){ (function(b){ b.addEventListener('click', function(){ pyRun(parseInt(b.getAttribute('data-py-run'),10)); }); })(pyruns[p]); }
+
+  /* quizzes */
+  ['excel','powerbi','sql','python'].forEach(function(track){
+    var cont=document.getElementById(track==='powerbi'?'pbiQuiz':track==='python'?'pyQuiz':track+'Quiz');
+    renderQuiz(track, cont);
+  });
+  var quizBoxes=document.querySelectorAll('.quiz');
+  for(var q=0;q<quizBoxes.length;q++){
+    quizBoxes[q].addEventListener('click', function(e){
+      var t=e.target;
+      if(t && t.getAttribute && t.getAttribute('data-quiz')){
+        quizSel[t.getAttribute('data-quiz')+':'+t.getAttribute('data-q')] = parseInt(t.getAttribute('data-o'),10);
+        var sibs=t.parentNode.querySelectorAll('.opt');
+        for(var s=0;s<sibs.length;s++) sibs[s].classList.remove('sel');
+        t.classList.add('sel');
+      }
+      if(t && t.getAttribute && t.getAttribute('data-quiz-check')){
+        var track=t.getAttribute('data-quiz-check');
+        var res=scoreQuiz(track);
+        var fbId = track==='excel'?'excelQuizFeedback':track==='powerbi'?'pbiQuizFeedback':track==='sql'?'sqlQuizFeedback':'pyQuizFeedback';
+        if(res.score===res.total){ completeQuiz(track); setFeedback(fbId,'ok','Perfect — '+res.score+'/'+res.total+'. Track check banked.'); }
+        else setFeedback(fbId,'info', res.score+'/'+res.total+' correct. Re-read the teach cards for the misses and try again — the trainer can explain any of them.');
+      }
+    });
+  }
+
+  /* trainer wiring */
+  var send=document.getElementById('trainerSend');
+  function doAsk(){
+    var inp=document.getElementById('trainerInput');
+    var text=inp.value.trim(); if(!text) return;
+    trainerMsg('user', esc(text)); inp.value='';
+    var res=askTrainer(text);
+    trainerMsg('bot', res.a);
+  }
+  if(send) send.addEventListener('click', doAsk);
+  var tin=document.getElementById('trainerInput');
+  if(tin) tin.addEventListener('keydown', function(e){ if(e.key==='Enter') doAsk(); });
+  var hintBtn=document.getElementById('trHint');
+  if(hintBtn) hintBtn.addEventListener('click', function(){
+    var track = currentScreen==='home' ? 'excel' : currentScreen;
+    var tid = currentTaskId(track);
+    if(!tid){ trainerMsg('bot','Everything in the '+track+' track is done — no hints needed there. 🎉'); return; }
+    trainerHint(track, tid, false);
+  });
+  var simpBtn=document.getElementById('trSimpler');
+  if(simpBtn) simpBtn.addEventListener('click', function(){
+    if(trainerState.lastEntry) trainerMsg('bot','🐢 Simpler version: '+esc(trainerState.lastEntry.simple));
+    else trainerMsg('bot','Ask me a question first, then I can re-tell it simpler. Or tap Hint for the task in front of you.');
+  });
+  var exBtn=document.getElementById('trExample');
+  if(exBtn) exBtn.addEventListener('click', function(){
+    if(trainerState.lastEntry) trainerMsg('bot','📝 Example: '+esc(trainerState.lastEntry.ex));
+    else trainerMsg('bot','Ask me something first — then I\u2019ll show a worked example of exactly that.');
+  });
+  var asks=document.querySelectorAll('[data-ask-trainer]');
+  for(var a=0;a<asks.length;a++){ (function(b){ b.addEventListener('click', function(){
+    openTrainer();
+    var track=b.getAttribute('data-ask-trainer');
+    var tid=currentTaskId(track);
+    if(tid) trainerHint(track, tid, false);
+    else trainerMsg('bot','That lab is fully complete — ask me anything else about the topic.');
+  }); })(asks[a]); }
+
+  /* certificate */
+  var certBtn=document.getElementById('certBtn');
+  if(certBtn) certBtn.addEventListener('click', function(){
+    var name=document.getElementById('certName').value.trim();
+    document.getElementById('certWho').textContent = name || 'BrightLine Analyst';
+    trainerMsg('bot','🏆 Certificate issued'+(name? ' to <b>'+esc(name)+'</b>':'')+' — all four tools, one real project. That is a portfolio piece: mention the capstone when you talk about this course.');
+  });
+
+  refreshTaskLists();
+  refreshFinalSteps();
+  updateProgress();
+  show('home');
+}
+if(typeof document!=='undefined' && document.addEventListener){
+  document.addEventListener('DOMContentLoaded', init);
+}
+
+/* exports for the test harness */
+if(typeof window!=='undefined'){
+  window.DACourse = {
+    ORDERS:ORDERS, CUSTOMERS:CUSTOMERS, TABLES:TABLES,
+    runSQL:runSQL, sqlSetEq:sqlSetEq, SQL_EXPECTED:SQL_EXPECTED,
+    makeBook:makeBook, cellValue:cellValue, setCellRaw:setCellRaw, cellRaw:cellRaw,
+    buildExcelBook:buildExcelBook, checkExcelTask:checkExcelTask,
+    buildFinalBook:buildFinalBook, checkFinalStep1:checkFinalStep1,
+    measureAgg:measureAgg, barChartSVG:barChartSVG, groupSum:groupSum,
+    QUIZZES:QUIZZES, scoreQuiz:scoreQuiz, quizSel:quizSel,
+    askTrainer:askTrainer, KB:KB,
+    state:state, completeTask:completeTask, doneUnits:doneUnits, TOTAL_UNITS:TOTAL_UNITS,
+    init:init, pyRun:pyRun
+  };
+}
+
+</script>
+</body>
+</html>
