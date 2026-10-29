@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Computer Networking for Beginners — Interactive Course</title>
+<meta name="description" content="An interactive beginner course in computer networking: fundamentals, IP addressing, protocols, devices, the OSI model and troubleshooting — with hands-on labs and a personal AI trainer.">
+<style>
+:root{
+  --ink:#04070f; --ink2:#070d1d; --panel:#0a1428; --panel2:#0d1a36;
+  --line:#1b3560; --line2:#26509c;
+  --cyan:#22d3ee; --blue:#38bdf8; --deep:#2563eb; --glow:#67e8f9;
+  --txt:#e6f2ff; --dim:#9db8dd; --faint:#5f7ba6;
+  --good:#34d399; --bad:#fb7185; --warn:#fbbf24;
+  --r:16px;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--ink); color:var(--txt); font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif; line-height:1.55; overflow-x:hidden}
+body::before{content:""; position:fixed; inset:0; z-index:-2;
+  background:
+   radial-gradient(900px 480px at 85% -5%, rgba(37,99,235,.28), transparent 60%),
+   radial-gradient(700px 420px at -10% 30%, rgba(34,211,238,.14), transparent 60%),
+   radial-gradient(800px 500px at 50% 115%, rgba(56,189,248,.12), transparent 60%),
+   var(--ink);}
+body::after{content:""; position:fixed; inset:0; z-index:-1; opacity:.5; pointer-events:none;
+  background-image:linear-gradient(rgba(56,189,248,.05) 1px, transparent 1px),linear-gradient(90deg, rgba(56,189,248,.05) 1px, transparent 1px);
+  background-size:44px 44px;}
+a{color:var(--cyan)}
+button{font-family:inherit; cursor:pointer}
+.wrap{max-width:1060px; margin:0 auto; padding:0 16px 90px}
+
+/* ---------- header ---------- */
+header.top{position:sticky; top:0; z-index:60; backdrop-filter:blur(12px); background:rgba(4,7,15,.86); border-bottom:1px solid var(--line)}
+.top-in{max-width:1060px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; gap:12px}
+.logo{display:flex; align-items:center; gap:10px; min-width:0}
+.logo-mark{width:38px; height:38px; flex:0 0 38px; border-radius:11px; display:grid; place-items:center; font-size:20px; color:#03101f;
+  background:linear-gradient(135deg,var(--glow),var(--blue) 55%,var(--deep)); box-shadow:0 0 18px rgba(34,211,238,.55)}
+.logo b{font-size:15px; letter-spacing:.12em; display:block; white-space:nowrap}
+.logo small{color:var(--faint); font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; display:block; white-space:nowrap}
+.top nav{margin-left:auto; display:flex; gap:8px; align-items:center}
+.btn{border:1px solid var(--line2); background:linear-gradient(180deg,var(--panel2),var(--panel)); color:var(--txt);
+  padding:9px 14px; border-radius:999px; font-size:13.5px; font-weight:600; letter-spacing:.02em; transition:.18s; display:inline-flex; align-items:center; gap:7px}
+.btn:hover{border-color:var(--cyan); box-shadow:0 0 14px rgba(34,211,238,.35); transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(135deg,var(--cyan),var(--deep)); color:#02131f; border-color:transparent}
+.btn.primary:hover{box-shadow:0 0 22px rgba(34,211,238,.6)}
+.btn:disabled{opacity:.45; cursor:not-allowed; transform:none; box-shadow:none}
+.btn.ghost{background:transparent}
+.trainer-btn img{width:22px; height:22px; border-radius:50%; object-fit:cover; border:1px solid var(--cyan)}
+.progress-shell{max-width:1060px; margin:0 auto; padding:0 16px 10px}
+.progress-meta{display:flex; justify-content:space-between; font-size:11.5px; color:var(--dim); letter-spacing:.14em; text-transform:uppercase; margin-bottom:5px}
+.pbar{height:9px; border-radius:99px; background:#0a1830; border:1px solid var(--line); overflow:hidden}
+.pbar>i{display:block; height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--deep),var(--cyan),var(--glow)); box-shadow:0 0 12px rgba(34,211,238,.8); transition:width .6s cubic-bezier(.2,.9,.2,1)}
+
+/* ---------- hero ---------- */
+.hero{padding:38px 0 8px; text-align:center; animation:fadeUp .6s ease both}
+.kicker{color:var(--cyan); letter-spacing:.34em; font-size:11.5px; text-transform:uppercase; font-weight:700}
+.hero h1{font-size:clamp(30px,6.4vw,54px); line-height:1.06; margin:12px 0 8px; letter-spacing:.01em;
+  background:linear-gradient(92deg,#fff 10%,var(--glow) 45%,var(--blue) 75%,#fff); -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 0 22px rgba(34,211,238,.25))}
+.hero p.sub{color:var(--dim); max-width:640px; margin:0 auto; font-size:16px}
+.hero .promise{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:18px}
+.chip{border:1px solid var(--line); background:rgba(13,26,54,.7); color:var(--dim); border-radius:999px; padding:6px 12px; font-size:12.5px}
+.chip b{color:var(--glow); font-weight:700}
+
+/* ---------- tiles ---------- */
+.tiles{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:16px; margin-top:28px}
+.tile{position:relative; border:1px solid var(--line); border-radius:var(--r); overflow:hidden; background:var(--panel); text-align:left; padding:0; color:var(--txt); transition:.22s; animation:fadeUp .55s ease both}
+.tile:hover{transform:translateY(-4px); border-color:var(--cyan); box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 22px rgba(34,211,238,.28)}
+.tile .art{position:relative; height:128px; overflow:hidden}
+.tile .art img{width:100%; height:100%; object-fit:cover; display:block; transform:scale(1.02); transition:transform .5s}
+.tile:hover .art img{transform:scale(1.1)}
+.tile .art::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(4,7,15,.88)); }
+.tile .num{position:absolute; top:10px; left:10px; z-index:2; background:rgba(3,10,24,.82); border:1px solid var(--cyan); color:var(--glow);
+  font-weight:800; font-size:12px; letter-spacing:.14em; padding:4px 9px; border-radius:8px}
+.tile .state{position:absolute; top:10px; right:10px; z-index:2; font-size:11px; font-weight:700; letter-spacing:.08em; padding:4px 9px; border-radius:8px;
+  background:rgba(3,10,24,.82); border:1px solid var(--line2); color:var(--dim)}
+.tile .state.done{border-color:var(--good); color:var(--good)}
+.tile .body{padding:14px 16px 16px}
+.tile h3{margin:0 0 5px; font-size:17.5px; letter-spacing:.01em}
+.tile p{margin:0; color:var(--dim); font-size:13.5px; line-height:1.45}
+.tile .go{margin-top:12px; color:var(--cyan); font-weight:700; font-size:13px; letter-spacing:.06em}
+.tile.wide{grid-column:span 2}
+@media (max-width:560px){ .tile.wide{grid-column:span 1} .tiles{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))} .tile .art{height:104px} }
+.tile.final .art{display:grid; place-items:center; background:radial-gradient(420px 200px at 50% 0%, rgba(34,211,238,.35), transparent), linear-gradient(140deg,#0a1f42,#071228)}
+.tile.final .big{font-size:52px; filter:drop-shadow(0 0 16px rgba(34,211,238,.8))}
+.sheen::before{content:""; position:absolute; top:0; left:-80%; width:55%; height:100%; z-index:3; transform:skewX(-18deg);
+  background:linear-gradient(90deg,transparent,rgba(160,240,255,.16),transparent); animation:sheen 4.6s ease-in-out infinite}
+@keyframes sheen{0%,55%{left:-80%} 85%,100%{left:130%}}
+@keyframes fadeUp{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 10px rgba(34,211,238,.5)} 50%{box-shadow:0 0 24px rgba(34,211,238,.95)}}
+
+/* ---------- section view ---------- */
+.view{display:none}
+.view.on{display:block; animation:fadeUp .45s ease both}
+.sec-head{margin-top:26px; border:1px solid var(--line); border-radius:var(--r); overflow:hidden; background:var(--panel)}
+.sec-head .art{height:190px; position:relative}
+.sec-head .art img{width:100%; height:100%; object-fit:cover; display:block}
+.sec-head .art::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(4,7,15,.15),rgba(4,7,15,.92))}
+.sec-head .txt{position:relative; margin-top:-64px; padding:0 20px 18px; z-index:2}
+.sec-head h2{margin:0; font-size:clamp(24px,4.6vw,34px)}
+.sec-head .num{color:var(--cyan); letter-spacing:.3em; font-size:12px; font-weight:800; text-transform:uppercase}
+.sec-head p{color:var(--dim); margin:6px 0 0; max-width:640px}
+.card{border:1px solid var(--line); background:linear-gradient(180deg,var(--panel2),var(--panel)); border-radius:var(--r); padding:20px; margin-top:18px}
+.card h3{margin:0 0 6px; font-size:19px; display:flex; align-items:center; gap:9px}
+.card h3 .tag{font-size:10.5px; letter-spacing:.18em; color:#02131f; background:linear-gradient(90deg,var(--cyan),var(--glow)); padding:3px 8px; border-radius:6px; font-weight:800}
+.teach p{margin:10px 0; color:#c9dcf7}
+.teach p b, .teach li b{color:var(--glow)}
+.teach ul{margin:8px 0 8px 18px; padding:0; color:#c9dcf7}
+.teach li{margin:5px 0}
+.callout{border-left:3px solid var(--cyan); background:rgba(34,211,238,.07); padding:12px 14px; border-radius:0 12px 12px 0; margin:14px 0; color:#d7ebff}
+.callout b{color:var(--glow)}
+
+/* ---------- quiz / options ---------- */
+.q{margin:16px 0; padding:14px; border:1px solid var(--line); border-radius:12px; background:rgba(6,12,26,.55)}
+.q .qq{font-weight:700; margin-bottom:10px}
+.opts{display:grid; gap:8px}
+.opt{border:1px solid var(--line2); background:#0a1730; color:var(--txt); text-align:left; padding:11px 13px; border-radius:10px; font-size:14.5px; transition:.15s; width:100%}
+.opt:hover{border-color:var(--cyan)}
+.opt.sel{border-color:var(--cyan); background:rgba(34,211,238,.13); box-shadow:0 0 10px rgba(34,211,238,.25)}
+.opt.right{border-color:var(--good); background:rgba(52,211,153,.14); color:#d9ffef}
+.opt.wrong{border-color:var(--bad); background:rgba(251,113,133,.12); color:#ffe1e6}
+.feedback{margin-top:10px; font-size:14px; display:none}
+.feedback.show{display:block}
+.feedback.ok{color:var(--good)} .feedback.no{color:var(--bad)}
+.score-line{margin-top:14px; font-weight:700; letter-spacing:.03em}
+.sec-status{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+.sec-status .chip.done{border-color:var(--good); color:var(--good)}
+.navrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:20px}
+
+/* ---------- labs ---------- */
+.lab-note{color:var(--dim); font-size:14px; margin:4px 0 14px}
+/* packet journey */
+.track{position:relative; margin:26px 4px 8px; height:86px}
+.track .rail{position:absolute; left:0; right:0; top:40px; height:4px; border-radius:99px; background:linear-gradient(90deg,var(--deep),var(--cyan),var(--deep)); opacity:.7}
+.nodes{position:absolute; inset:0; display:flex; justify-content:space-between}
+.node{width:20%; display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center}
+.node .dot{width:46px; height:46px; border-radius:14px; display:grid; place-items:center; font-size:22px; background:#0a1834; border:1px solid var(--line2); transition:.3s; z-index:2}
+.node small{font-size:10.5px; letter-spacing:.06em; color:var(--dim); text-transform:uppercase; font-weight:700}
+.node.hit .dot{border-color:var(--cyan); box-shadow:0 0 18px rgba(34,211,238,.75); transform:scale(1.1); background:#0d2c4d}
+#packetDot{position:absolute; top:28px; width:26px; height:26px; border-radius:8px; z-index:3; margin-left:-13px;
+  background:linear-gradient(135deg,var(--glow),var(--deep)); box-shadow:0 0 20px rgba(103,232,249,.95); transition:left .55s cubic-bezier(.3,.8,.3,1); display:grid; place-items:center; font-size:14px}
+.hop-text{min-height:52px; color:#d7ebff; background:rgba(34,211,238,.06); border:1px dashed var(--line2); border-radius:12px; padding:12px 14px; margin-top:36px}
+/* ip lab */
+.ip-row{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:10px 0; padding:10px; border:1px solid var(--line); border-radius:12px; background:rgba(6,12,26,.55)}
+.ip-row code{font-size:16px; color:var(--glow); background:#06101f; padding:5px 10px; border-radius:8px; border:1px solid var(--line)}
+.mini{padding:7px 12px; border-radius:999px; border:1px solid var(--line2); background:#0a1730; color:var(--txt); font-weight:700; font-size:13px}
+.mini.sel{border-color:var(--cyan); background:rgba(34,211,238,.16)}
+.mini.right{border-color:var(--good); color:var(--good)} .mini.wrong{border-color:var(--bad); color:var(--bad)}
+/* matcher */
+.match-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+@media (max-width:560px){ .match-grid{grid-template-columns:1fr 1fr} }
+.mchip{border:1px solid var(--line2); background:#0a1730; color:var(--txt); border-radius:12px; padding:12px; font-weight:800; letter-spacing:.04em; font-size:15px; transition:.15s; width:100%}
+.mchip.sel{border-color:var(--warn); box-shadow:0 0 12px rgba(251,191,36,.45)}
+.mchip.done{border-color:var(--good); color:var(--good); opacity:.75}
+.mjob{border:1px solid var(--line); background:rgba(6,12,26,.55); color:var(--dim); border-radius:12px; padding:12px; font-size:13.5px; text-align:left; width:100%; transition:.15s}
+.mjob:hover{border-color:var(--cyan); color:var(--txt)}
+.mjob.done{border-color:var(--good); color:var(--good)}
+.shake{animation:shake .35s}
+@keyframes shake{0%,100%{transform:none} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)}}
+/* osi */
+.osi-stack{display:grid; gap:8px; margin:14px 0}
+.osi-layer{border:1px solid var(--line2); border-radius:12px; padding:12px 14px; background:linear-gradient(90deg,rgba(37,99,235,.16),rgba(34,211,238,.05)); color:var(--txt); text-align:left; width:100%; display:flex; gap:12px; align-items:center; transition:.15s}
+.osi-layer:hover{border-color:var(--cyan)}
+.osi-layer.visited{border-color:var(--good)}
+.osi-layer .n{font-weight:900; color:var(--glow); font-size:18px; width:26px}
+.osi-layer .nm{font-weight:800; letter-spacing:.05em}
+.osi-layer .dt{color:var(--faint); font-size:12px; margin-left:auto; text-align:right}
+.osi-detail{border:1px dashed var(--line2); border-radius:12px; padding:14px; min-height:74px; color:#d7ebff; background:rgba(34,211,238,.05)}
+.order-pool{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0}
+.order-chip{border:1px solid var(--line2); background:#0a1730; color:var(--txt); border-radius:999px; padding:9px 14px; font-weight:700}
+.order-chip.used{opacity:.32; pointer-events:none}
+.order-slot{min-height:44px; border:1px dashed var(--line2); border-radius:12px; padding:8px 10px; color:var(--dim); display:flex; flex-wrap:wrap; gap:6px; align-items:center}
+.order-slot .placed{background:rgba(34,211,238,.15); border:1px solid var(--cyan); color:var(--txt); border-radius:999px; padding:5px 11px; font-weight:700; font-size:13px}
+/* clinic */
+.case-tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px}
+.step-pool{display:grid; gap:8px; margin:10px 0}
+.step-btn{border:1px solid var(--line2); background:#0a1730; color:var(--txt); text-align:left; padding:11px 13px; border-radius:10px; font-size:14.5px; width:100%}
+.step-btn:hover{border-color:var(--cyan)}
+.step-btn.used{opacity:.35; pointer-events:none}
+.step-done{display:grid; gap:6px; margin:10px 0}
+.step-done .sd{border:1px solid var(--good); color:#d9ffef; background:rgba(52,211,153,.1); border-radius:10px; padding:9px 12px; font-size:14px}
+
+/* ---------- trainer ---------- */
+#trainerFab{position:fixed; right:16px; bottom:16px; z-index:80; display:flex; align-items:center; gap:9px; border:1px solid var(--cyan);
+  background:linear-gradient(135deg,#0b2547,#081426); color:var(--txt); border-radius:999px; padding:8px 16px 8px 8px; font-weight:800; letter-spacing:.03em;
+  box-shadow:0 10px 30px rgba(0,0,0,.55); animation:pulseGlow 2.6s infinite}
+#trainerFab img{width:36px; height:36px; border-radius:50%; object-fit:cover; border:2px solid var(--cyan)}
+#trainerPanel{position:fixed; top:0; right:0; height:100dvh; width:min(400px,94vw); z-index:90; background:linear-gradient(180deg,#081426,#050a16);
+  border-left:1px solid var(--line2); transform:translateX(105%); transition:transform .35s cubic-bezier(.2,.9,.25,1); display:flex; flex-direction:column; box-shadow:-20px 0 50px rgba(0,0,0,.5)}
+#trainerPanel.open{transform:none}
+.tp-head{display:flex; gap:12px; align-items:center; padding:16px; border-bottom:1px solid var(--line)}
+.tp-head img{width:52px; height:52px; border-radius:50%; object-fit:cover; border:2px solid var(--cyan); box-shadow:0 0 14px rgba(34,211,238,.5)}
+.tp-head b{font-size:17px; display:block}
+.tp-head small{color:var(--dim); font-size:12px}
+.tp-head .x{margin-left:auto}
+#chatLog{flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px}
+.msg{max-width:88%; padding:11px 13px; border-radius:14px; font-size:14.5px; line-height:1.5; animation:fadeUp .3s ease both}
+.msg.nex{align-self:flex-start; background:#0c1e3d; border:1px solid var(--line2); border-bottom-left-radius:4px}
+.msg.me{align-self:flex-end; background:linear-gradient(135deg,var(--deep),#164e9e); border-bottom-right-radius:4px}
+.msg b{color:var(--glow)}
+.tp-chips{display:flex; gap:7px; flex-wrap:wrap; padding:0 16px 10px}
+.tp-actions{display:flex; gap:7px; flex-wrap:wrap; padding:0 16px 10px}
+.tp-input{display:flex; gap:8px; padding:12px 16px 16px; border-top:1px solid var(--line)}
+.tp-input input{flex:1; background:#0a1730; border:1px solid var(--line2); border-radius:999px; color:var(--txt); padding:11px 15px; font-size:14.5px; outline:none}
+.tp-input input:focus{border-color:var(--cyan)}
+#toast{position:fixed; left:50%; bottom:86px; transform:translate(-50%,20px); z-index:95; background:#0b2547; border:1px solid var(--cyan); color:var(--txt);
+  padding:11px 16px; border-radius:12px; font-size:14px; font-weight:600; opacity:0; pointer-events:none; transition:.3s; max-width:92vw; text-align:center; box-shadow:0 12px 30px rgba(0,0,0,.5)}
+#toast.show{opacity:1; transform:translate(-50%,0)}
+
+/* ---------- final / cert ---------- */
+.cert{display:none; margin-top:20px; border:2px solid var(--cyan); border-radius:18px; padding:28px 22px; text-align:center;
+  background:radial-gradient(500px 240px at 50% 0%, rgba(34,211,238,.18), transparent), linear-gradient(180deg,#0a1c3d,#060f22); box-shadow:0 0 34px rgba(34,211,238,.3)}
+.cert.show{display:block; animation:fadeUp .6s ease both}
+.cert .seal{font-size:44px}
+.cert h3{font-size:24px; margin:8px 0 2px; letter-spacing:.04em}
+.cert .nm{font-size:21px; color:var(--glow); font-weight:800; margin:10px 0 2px}
+.cert p{color:var(--dim); margin:4px 0}
+.cert input{background:#0a1730; border:1px solid var(--line2); border-radius:10px; color:var(--txt); padding:10px 13px; font-size:15px; text-align:center; width:min(320px,90%)}
+footer{margin-top:44px; border-top:1px solid var(--line); padding-top:18px; color:var(--faint); font-size:13px; text-align:center}
+footer .credit{color:var(--dim)}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="logo">
+      <div class="logo-mark">🌐</div>
+      <div><b>NETWORKING</b><small>For Beginners</small></div>
+    </div>
+    <nav>
+      <a class="btn ghost" href="#" data-sister-course-link>More courses</a>
+      <button class="btn" id="homeBtn" type="button">⌂ Home</button>
+      <button class="btn trainer-btn" id="trainerBtnTop" type="button"><img src="net-trainer.jpg" alt="Nex, your AI trainer">Ask Nex</button>
+    </nav>
+  </div>
+  <div class="progress-shell">
+    <div class="progress-meta"><span>Course progress</span><span id="progressLabel">0 of 6 sections</span></div>
+    <div class="pbar"><i id="progressBar"></i></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <section id="view-home" class="view on">
+    <div class="hero">
+      <div class="kicker">Interactive Course · Connect · Configure · Troubleshoot · Learn</div>
+      <h1>Computer Networking<br>for Beginners</h1>
+      <p class="sub">From networking fundamentals to real-world network configuration. No experience needed — you will learn by <b style="color:var(--glow)">doing</b>: send a packet across a network, work real IP addresses, match the protocols, stack the OSI layers, and diagnose broken networks like a tech.</p>
+      <div class="promise">
+        <span class="chip">✔ <b>Easy-to-follow</b> fundamentals</span>
+        <span class="chip">✔ Concepts <b>explained plainly</b></span>
+        <span class="chip">✔ Essential <b>protocols &amp; devices</b></span>
+        <span class="chip">✔ <b>Practical</b> troubleshooting</span>
+        <span class="chip">✔ Foundation for <b>CCNA &amp; IT support</b></span>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:26px">
+      <b>What is a computer network?</b> Picture a digital highway system. It connects devices so they can communicate and share resources — every device is a vehicle, and the roads carry data to its destination. At home, your phone, laptop, tablet and TV all connect through one central hub — your router, the traffic controller. Zoom out and those same highways span cities, countries and continents: that is the internet. It began in 1969 as ARPANET, a small network linking four universities — and never stopped growing.
+    </div>
+
+    <div class="tiles" id="tileGrid"></div>
+
+    <div class="card">
+      <h3>How this course works</h3>
+      <p class="teach" style="color:#c9dcf7">Each section has three parts: a short <b>plain-English lesson</b>, a <b>hands-on lab</b> where you actually do the work, and a <b>quick check</b>. Finish the lab and pass the check to complete the section. Your progress saves on this device automatically. Stuck anywhere? Tap <b>Ask Nex</b> — your personal AI trainer rides along the whole way.</p>
+    </div>
+  </section>
+
+  <!-- ============ SECTION ============ -->
+  <section id="view-section" class="view">
+    <div class="sec-head">
+      <div class="art"><img id="secImg" src="" alt=""></div>
+      <div class="txt">
+        <div class="num" id="secNum">Section 01</div>
+        <h2 id="secTitle">—</h2>
+        <p id="secTag">—</p>
+      </div>
+    </div>
+
+    <div class="card teach" id="teachCard">
+      <h3><span class="tag">LEARN</span> The lesson</h3>
+      <div id="teachBody"></div>
+    </div>
+
+    <div class="card" id="labCard">
+      <h3><span class="tag">LAB</span> <span id="labTitle">Hands-on</span></h3>
+      <p class="lab-note" id="labNote"></p>
+      <div id="labMount"></div>
+      <div class="score-line" id="labScore"></div>
+    </div>
+
+    <div class="card" id="checkCard">
+      <h3><span class="tag">CHECK</span> Quick check</h3>
+      <p class="lab-note">Answer all three. You need at least 2 of 3 — plus a finished lab — to complete this section.</p>
+      <div id="checkMount"></div>
+      <button class="btn primary" id="gradeCheckBtn" type="button">Grade my check</button>
+      <div class="score-line" id="checkScore"></div>
+    </div>
+
+    <div class="sec-status" id="secStatus"></div>
+    <div class="navrow">
+      <button class="btn" id="backHomeBtn" type="button">← All sections</button>
+      <button class="btn" id="askNexSec" type="button">Ask Nex about this section</button>
+      <button class="btn primary hidden" id="nextSecBtn" type="button">Next section →</button>
+    </div>
+  </section>
+
+  <!-- ============ FINAL ============ -->
+  <section id="view-final" class="view">
+    <div class="sec-head">
+      <div class="art" style="display:grid;place-items:center;background:radial-gradient(500px 220px at 50% 0%,rgba(34,211,238,.3),transparent),linear-gradient(140deg,#0a1f42,#071228)">
+        <div style="font-size:74px;filter:drop-shadow(0 0 18px rgba(34,211,238,.85))">🏆</div>
+      </div>
+      <div class="txt">
+        <div class="num">Final Check</div>
+        <h2>The Networking Final</h2>
+        <p>Twelve questions across all six sections. Score 10 or more — with all six sections complete — to earn your completion certificate.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="tag">EXAM</span> Final check</h3>
+      <div id="finalMount"></div>
+      <button class="btn primary" id="gradeFinalBtn" type="button">Grade my final</button>
+      <div class="score-line" id="finalScore"></div>
+    </div>
+    <div class="cert" id="certBox">
+      <div class="seal">🎓</div>
+      <h3>Certificate of Completion</h3>
+      <p>This certifies that</p>
+      <div class="nm" id="certName">Network Graduate</div>
+      <p>has completed <b style="color:var(--glow)">Computer Networking for Beginners</b> — all six sections and the final check.</p>
+      <p id="certMeta" style="font-size:13px"></p>
+      <div style="margin-top:14px"><input id="nameInput" type="text" placeholder="Type your name for the certificate" maxlength="40"></div>
+      <p style="font-size:12px; margin-top:12px">Tip: screenshot this certificate to keep it and share it.</p>
+    </div>
+    <div class="navrow">
+      <button class="btn" id="finalHomeBtn" type="button">← All sections</button>
+    </div>
+  </section>
+
+  <footer>
+    <p class="credit">Interactive course based on “The Computer Networking Bible for Beginners” outline by IT-HUB-Official.</p>
+    <p>Keep learning: <a href="#" data-sister-course-link>More courses</a> · Foundation for CCNA &amp; IT support studies. This course teaches concepts; hands-on practice on real gear is the next step.</p>
+  </footer>
+</div>
+
+<!-- ============ TRAINER ============ -->
+<button id="trainerFab" type="button"><img src="net-trainer.jpg" alt="Nex">Ask Nex</button>
+<aside id="trainerPanel" aria-label="Personal AI trainer">
+  <div class="tp-head">
+    <img src="net-trainer.jpg" alt="Nex, your AI trainer">
+    <div><b>Nex — your AI trainer</b><small>Personal trainer · Networking course</small></div>
+    <button class="btn ghost x" id="trainerClose" type="button">✕</button>
+  </div>
+  <div id="chatLog"></div>
+  <div class="tp-chips" id="chipRow"></div>
+  <div class="tp-actions" id="actionRow">
+    <button class="mini" id="actSimpler" type="button">Explain it simpler</button>
+    <button class="mini" id="actExample" type="button">Show an example</button>
+    <button class="mini" id="actHint" type="button">Hint for the lab</button>
+  </div>
+  <form class="tp-input" id="chatForm">
+    <input id="chatInput" type="text" placeholder="Ask Nex anything about networking…" autocomplete="off">
+    <button class="btn primary" type="submit">Send</button>
+  </form>
+</aside>
+<div id="toast"></div>
+
+<script>
+"use strict";
+/* ============================================================
+   Computer Networking for Beginners — interactive course engine
+   ============================================================ */
+var LS_KEY = "netCourseV1";
+var P = { done:{}, labs:{}, checks:{}, finalScore:null, finalPassed:false, name:"", visitedLayers:{}, trainerWelcomed:false };
+try { var saved = localStorage.getItem(LS_KEY); if (saved) { var sp = JSON.parse(saved); for (var k in sp) P[k] = sp[k]; } } catch(e){}
+function save(){ try { localStorage.setItem(LS_KEY, JSON.stringify(P)); } catch(e){} }
+
+var SECTIONS = [
+ { id:"s1", num:"01", title:"Networking Fundamentals", img:"net-s1.jpg", lab:"packet",
+   tag:"What a network is, why it exists, and the journey every piece of data takes.",
+   labTitle:"Packet Journey", labNote:"Press “Send the packet” and walk your request step by step from your PC to a web server — and all the way back. Answer the checkpoint questions as you go.",
+   teach:[
+    {h:"A network is a highway system for data", b:"A <b>computer network</b> is two or more devices connected so they can <b>communicate and share resources</b> — files, printers, and one shared internet connection. Think of it as a highway system: devices are the vehicles, cables and Wi-Fi are the roads, and data is the cargo. Without a network, sharing a file means walking a USB stick to the other machine. With one, it arrives in a blink."},
+    {h:"LAN, WAN and the internet", b:"A <b>LAN</b> (Local Area Network) covers one small area — your home or one office. A <b>WAN</b> (Wide Area Network) links sites across cities or countries. The <b>internet</b> is the biggest WAN of all: a network of networks, owned by nobody and used by everybody. It started in <b>1969 as ARPANET</b>, connecting four university computers — a modest beginning for something revolutionary."},
+    {h:"Everything travels in packets", b:"When you load a web page, the data is chopped into small chunks called <b>packets</b>. Each packet carries the destination address, its piece of the data, and a sequence number so the receiver can rebuild the whole thing in order. Packets may take different roads and still arrive fine — the receiver reassembles them like a jigsaw."},
+    {h:"The journey of one request", b:"You type an address and press Enter. Your PC hands the packet to the <b>switch</b>, which delivers it inside your home network. The <b>router</b> — the traffic controller — sends it out to the internet. Internet routers pass it from hand to hand until it reaches the <b>server</b> holding the page. The server sends packets back along the same chain, and your PC rebuilds the page. That whole round trip usually takes less than a second."}
+   ],
+   check:[
+    {q:"In the highway analogy, what plays the role of the traffic controller at home?", opts:["The router","The printer","The monitor"], a:0, why:"The router directs traffic between your devices and the wider internet."},
+    {q:"Data crosses a network in small chunks called…", opts:["Packets","Folders","Channels"], a:0, why:"Packets carry an address, a piece of data, and a sequence number."},
+    {q:"The internet began as which small research network?", opts:["ARPANET, in 1969","Skynet, in 1999","WebNet, in 1989"], a:0, why:"ARPANET linked four university computers in 1969."}
+   ]},
+ { id:"s2", num:"02", title:"IP Addressing", img:"net-s2.jpg", lab:"ip",
+   tag:"The address system that lets every device be found — IPv4, masks, gateways and subnets.",
+   labTitle:"IP & Subnet Playground", labNote:"Your home network is 192.168.1.0 with mask 255.255.255.0 (a /24). Sort the addresses, classify them, and do the quick math a support tech does every day.",
+   teach:[
+    {h:"An IP address is a device's address", b:"Every device on a network needs an <b>IP address</b> — its street address for data. An IPv4 address is four numbers separated by dots, like <b>192.168.1.10</b>. Each number (an octet) runs 0–255. No two devices on the same network may share an address, or traffic gets delivered to the wrong house."},
+    {h:"The subnet mask draws the neighborhood line", b:"The <b>subnet mask</b> (e.g. 255.255.255.0) splits the address into the <b>network part</b> (the street) and the <b>host part</b> (the house number). Devices whose network parts match can talk directly; anything else must go through the router. The shorthand <b>/24</b> means the first 24 bits are the street — the classic home mask 255.255.255.0."},
+    {h:"Network, gateway, broadcast — and 254 homes", b:"On 192.168.1.0/24: the <b>network address</b> is 192.168.1.0 (names the street itself, never given to a device), the <b>broadcast address</b> is 192.168.1.255 (shouts to every house at once), and <b>192.168.1.1 through .254</b> — 254 addresses — can be handed to devices. The <b>default gateway</b> is your router's own address, usually 192.168.1.1: the door to every other network."},
+    {h:"Private vs public — and who hands addresses out", b:"<b>Private</b> addresses (192.168.x.x, 10.x.x.x, 172.16–31.x.x) work inside your network and are reused in millions of homes. Your router holds one <b>public</b> address facing the internet and translates for everyone inside (that's NAT). Most devices don't get typed addresses at all — a service called <b>DHCP</b> hands them out automatically when they join."}
+   ],
+   check:[
+    {q:"What does the subnet mask tell a device?", opts:["Which part of the address is the network, and which part is the host","How fast the Wi-Fi is","The Wi-Fi password"], a:0, why:"The mask draws the line between street (network) and house number (host)."},
+    {q:"On 192.168.1.0/24, the default gateway is usually…", opts:["192.168.1.1 — the router","192.168.1.255 — the broadcast","192.168.1.0 — the network address"], a:0, why:"The gateway is the router's address, typically .1 on a home network."},
+    {q:"Which of these is a PRIVATE address?", opts:["192.168.1.20","8.8.8.8","203.0.113.9"], a:0, why:"192.168.x.x is reserved for private, inside-the-network use."}
+   ]},
+ { id:"s3", num:"03", title:"Network Protocols", img:"net-s3.jpg", lab:"proto",
+   tag:"The agreed languages devices speak — who does what, from web pages to email.",
+   labTitle:"Protocol Match-Up", labNote:"Protocols are matched pairs: pick a protocol on the left, then tap the job it does on the right. Clear all eight, then ace the three real-world scenarios.",
+   teach:[
+    {h:"A protocol is an agreed language", b:"A <b>protocol</b> is a set of rules two devices agree on so they understand each other — like two people agreeing to speak English and take turns. Networking runs on dozens of them working together, each doing one job well."},
+    {h:"The everyday eight", b:"<b>HTTP/HTTPS</b> carries web pages (the S means encrypted and secure). <b>DNS</b> is the internet's phone book — it turns names like example.com into IP addresses. <b>DHCP</b> hands a device its IP address automatically when it joins. <b>TCP</b> delivers data reliably — every packet confirmed, resent if lost, rebuilt in order. <b>UDP</b> is the fast, no-confirmation option used for live video and gaming. <b>FTP</b> moves files between computers. <b>SMTP</b> sends email, and <b>ICMP</b> carries network error messages — it's what the ping tool uses to test a connection."},
+    {h:"TCP vs UDP: the delivery choice", b:"Think of <b>TCP</b> as registered mail: slower, but signed for, tracked, and re-sent if it goes missing — right for web pages, files and email, where every byte matters. <b>UDP</b> is shouting across the room: fast, but no guarantee it was heard — right for live streams and calls, where a late packet is worse than a lost one."},
+    {h:"A single click uses half a dozen protocols", b:"Type a web address and press Enter: <b>DHCP</b> already gave your device its address. <b>DNS</b> looks up the site's IP. <b>TCP</b> opens a reliable connection. <b>HTTPS</b> encrypts and carries the page. Protocols layer like a relay team — each hands off cleanly to the next."}
+   ],
+   check:[
+    {q:"You type a website name. Which protocol turns it into an IP address?", opts:["DNS","FTP","SMTP"], a:0, why:"DNS is the phone book of the internet."},
+    {q:"A live video call should ride on which transport, and why?", opts:["UDP — speed matters more than perfect delivery","TCP — every packet must be confirmed","FTP — it moves files"], a:0, why:"For live media, a late packet is useless; UDP skips the confirmation overhead."},
+    {q:"Your laptop joins a new Wi-Fi and magically has an IP address. Thank…", opts:["DHCP","DNS","ICMP"], a:0, why:"DHCP automatically leases an address to joining devices."}
+   ]},
+ { id:"s4", num:"04", title:"Network Devices", img:"net-s4.jpg", lab:"device",
+   tag:"The hardware that moves, guards and serves your data — switch, router, firewall, server and more.",
+   labTitle:"Device ID Game", labNote:"Read the description, name the device. Six ID rounds, then two “which device fixes this?” calls from the field.",
+   teach:[
+    {h:"End devices: where work happens", b:"<b>PCs, phones, printers and cameras</b> are end devices — they create and consume the data. A <b>server</b> is a computer whose whole job is serving others: holding websites, files or email and answering requests around the clock. When you 'visit a website,' a server is doing the answering."},
+    {h:"Switch and router: the two traffic managers", b:"A <b>switch</b> connects devices <b>inside one network</b> and delivers packets using hardware (MAC) addresses — it's the mail sorter inside one building. A <b>router</b> connects <b>different networks together</b> and chooses paths using IP addresses — it's the highway interchange between cities. Home 'routers' usually combine router + switch + Wi-Fi in one box."},
+    {h:"Firewall and access point", b:"A <b>firewall</b> is the security guard: it inspects traffic crossing the boundary and blocks what the rules don't allow — the first line of defense for every network. A <b>wireless access point (AP)</b> is the bridge that lets Wi-Fi devices join the wired network; big buildings use several APs so coverage follows you down the hall."},
+    {h:"Modem and cables: the on-ramp and the roads", b:"A <b>modem</b> translates between your home wiring and your provider's technology (cable, fiber, DSL) — it's the on-ramp to your ISP. The roads themselves are <b>Ethernet cables</b> (fast, reliable, up to the port's rated speed) and <b>Wi-Fi radio</b> (convenient, shared, and weaker through walls). Rule of thumb: if it doesn't move, plug it in."}
+   ],
+   check:[
+    {q:"Which device connects DIFFERENT networks and routes by IP address?", opts:["Router","Switch","Printer"], a:0, why:"Routers join networks; switches work inside one network."},
+    {q:"The security guard that inspects and blocks traffic at the boundary is the…", opts:["Firewall","Access point","Modem"], a:0, why:"A firewall enforces the rules on traffic entering and leaving."},
+    {q:"A switch delivers packets inside one network using…", opts:["MAC (hardware) addresses","Website names","Email addresses"], a:0, why:"Switches read the destination MAC address on each frame."}
+   ]},
+ { id:"s5", num:"05", title:"Networking Models", img:"net-s5.jpg", lab:"osi",
+   tag:"The OSI seven layers and the TCP/IP stack — the map every tech uses to find faults.",
+   labTitle:"Stack Explorer & Layer Challenge", labNote:"Tap all seven OSI layers to learn each job, then rebuild the stack from the top (7) to the bottom (1) from memory.",
+   teach:[
+    {h:"Why a model at all?", b:"Networking has a lot of moving parts, so engineers split the work into <b>layers</b> — each layer does one job and trusts the layers below it. A <b>model</b> gives everyone the same map and the same vocabulary. When something breaks, the model tells you where to look: 'it's a Layer 1 problem' means check the cable."},
+    {h:"The OSI model: seven layers", b:"From top to bottom: <b>7 Application</b> (the apps you touch — web, email), <b>6 Presentation</b> (formatting, encryption), <b>5 Session</b> (opens and manages conversations), <b>4 Transport</b> (TCP/UDP — delivery), <b>3 Network</b> (IP addresses and routing), <b>2 Data Link</b> (MAC addresses and switches), <b>1 Physical</b> (cables, signals, radio). Memory trick: <b>P</b>lease <b>D</b>o <b>N</b>ot <b>T</b>hrow <b>S</b>ausage <b>P</b>izza <b>A</b>way — read it bottom to top."},
+    {h:"Encapsulation: the envelope inside the envelope", b:"As data travels <b>down</b> the stack on the sending side, each layer wraps it with its own header — like putting a letter in an envelope, then that envelope in a bigger one. The name changes as it descends: <b>data → segment → packet → frame → bits</b>. The receiving side unwraps layer by layer, in reverse, until the app gets its data back."},
+    {h:"TCP/IP: the model the real internet runs on", b:"The <b>TCP/IP model</b> squeezes the same ideas into four layers: <b>Application</b> (OSI 5–7), <b>Transport</b>, <b>Internet</b> (OSI 3), and <b>Network Access</b> (OSI 1–2). OSI is the teaching map and troubleshooting language; TCP/IP is what's actually implemented. Know both: interviewers and the CCNA speak OSI, networks speak TCP/IP."}
+   ],
+   check:[
+    {q:"Routing and IP addresses live on which OSI layer?", opts:["Layer 3 — Network","Layer 1 — Physical","Layer 7 — Application"], a:0, why:"Layer 3 (Network) is where IP addressing and routing happen."},
+    {q:"At Layer 2, data is called a… and it travels by MAC address.", opts:["Frame","Segment","Packet"], a:0, why:"Data → segment (L4) → packet (L3) → frame (L2) → bits (L1)."},
+    {q:"A cut cable is a problem at which layer?", opts:["Layer 1 — Physical","Layer 4 — Transport","Layer 6 — Presentation"], a:0, why:"Cables, signals and radio are the Physical layer's whole job."}
+   ]},
+ { id:"s6", num:"06", title:"Troubleshooting", img:"net-s6.jpg", lab:"clinic",
+   tag:"A tech's method for broken networks: work from the cable up, one test at a time.",
+   labTitle:"Troubleshooting Clinic", labNote:"Three patients, three mystery faults. For each case, tap the diagnostic steps in the order a good tech takes them — physical first, then work upward.",
+   teach:[
+    {h:"The golden rule: start at Layer 1", b:"Most 'the internet is down' calls are embarrassingly physical: an unplugged cable, a dead port, Wi-Fi switched off. A good tech works <b>bottom-up</b> through the model — <b>physical → IP configuration → local network → gateway → DNS → the service itself</b> — because each layer depends on the one below. Never reinstall software before checking the cable."},
+    {h:"The five classic questions", b:"Run them in order: <b>1.</b> Is it plugged in / connected? (lights, cable, Wi-Fi) <b>2.</b> Does the device have a valid IP address? (169.254.x.x means DHCP failed — it never got one.) <b>3.</b> Can it ping the <b>gateway</b>? That tests the local network. <b>4.</b> Can it ping a public IP like 8.8.8.8? That tests the route to the internet. <b>5.</b> Can it resolve a <b>name</b> (ping a website by name)? If 4 works and 5 fails, it's DNS — the network is fine, the phone book is broken."},
+    {h:"Ping and ipconfig: the stethoscope", b:"<b>ping</b> sends an ICMP echo and times the reply — it answers 'can I reach it, and how fast?' <b>ipconfig</b> (Windows) shows your IP address, mask, gateway and DNS servers in one glance. Two commands, and you can sort almost any fault into 'local, internet, or DNS' in under a minute."},
+    {h:"Scope the fault before you fix it", b:"One device down or everybody down? One device points at that device; everybody points at shared gear — switch, router, provider. And the tech's oldest question costs nothing: <b>'What changed?'</b> Networks rarely break on their own; they break right after something changed. Note the fix when you find it — future you says thanks."}
+   ],
+   check:[
+    {q:"A PC's IP address is 169.254.10.5. What most likely happened?", opts:["DHCP failed — the device never received an address","The internet is down worldwide","The monitor is broken"], a:0, why:"169.254.x.x is the self-assigned fallback when no DHCP server answers."},
+    {q:"Pinging 8.8.8.8 works, but website names won't load. Suspect…", opts:["DNS","The network cable","The printer"], a:0, why:"Reaching IPs but not names means the name-resolution (DNS) step is broken."},
+    {q:"A good tech troubleshoots in which order?", opts:["Physical first, then work upward layer by layer","Reinstall Windows first","Blame the provider first"], a:0, why:"Bottom-up: every layer depends on the one beneath it."}
+   ]}
+];
+
+var FINALQ = [
+ {q:"A device that connects different networks and routes traffic by IP address is a…", opts:["Router","Switch","Access point"], a:0},
+ {q:"DNS does which job?", opts:["Turns website names into IP addresses","Hands out IP addresses automatically","Encrypts web pages"], a:0},
+ {q:"How many usable device addresses does a /24 network have?", opts:["254","256","24"], a:0},
+ {q:"Which transport is best for a live video call?", opts:["UDP — fast, no confirmation delays","TCP — every packet confirmed","FTP — built for files"], a:0},
+ {q:"TCP/IP work at OSI Layer 4. That layer is called…", opts:["Transport","Network","Data Link"], a:0},
+ {q:"The default gateway is…", opts:["Your router's address — the door to other networks","The broadcast address","Your public IP on a billboard"], a:0},
+ {q:"A switch delivers traffic inside one network using…", opts:["MAC addresses","IP addresses only","DNS names"], a:0},
+ {q:"Which protocol sends email between servers?", opts:["SMTP","DHCP","ICMP"], a:0},
+ {q:"Ping uses which protocol to test reachability?", opts:["ICMP","FTP","HTTPS"], a:0},
+ {q:"'It's a Layer 1 problem' means you should check…", opts:["Cables, ports and Wi-Fi radio","The email server","The website's code"], a:0},
+ {q:"DHCP's job is to…", opts:["Automatically give joining devices an IP address","Translate names to addresses","Block unwanted traffic"], a:0},
+ {q:"Everybody in the office lost the internet at once. First suspect?", opts:["Shared gear — switch, router or the provider","Each person's monitor","The office printer"], a:0}
+];
+
+var OSI = [
+ {n:7, name:"Application", job:"Where apps talk to the network — the layer you actually touch.", ex:"HTTP/HTTPS, DNS, SMTP, FTP", data:"Data"},
+ {n:6, name:"Presentation", job:"Translates, compresses and encrypts data so both sides read it the same way.", ex:"SSL/TLS encryption, JPEG, ASCII", data:"Data"},
+ {n:5, name:"Session", job:"Opens, manages and closes conversations between two devices.", ex:"Login sessions, video-call setup", data:"Data"},
+ {n:4, name:"Transport", job:"End-to-end delivery: reliable with TCP, fast with UDP. Adds port numbers.", ex:"TCP, UDP — ports 80, 443", data:"Segment"},
+ {n:3, name:"Network", job:"Logical addressing and path-finding across networks. Routers live here.", ex:"IP, ICMP (ping)", data:"Packet"},
+ {n:2, name:"Data Link", job:"Local delivery on one network using hardware MAC addresses. Switches live here.", ex:"Ethernet, Wi-Fi frames, MAC", data:"Frame"},
+ {n:1, name:"Physical", job:"The actual signals — electricity, light and radio carrying raw bits.", ex:"Cables, hubs, Wi-Fi radio", data:"Bits"}
+];
+
+var PROTOCOLS = [
+ {name:"DNS", job:"Turns website names (example.com) into IP addresses"},
+ {name:"DHCP", job:"Automatically hands a joining device its IP address"},
+ {name:"HTTP", job:"Carries web pages between browser and server"},
+ {name:"HTTPS", job:"Carries web pages encrypted, so eavesdroppers can't read them"},
+ {name:"TCP", job:"Delivers data reliably — confirmed, in order, resent if lost"},
+ {name:"UDP", job:"Fires data fast with no confirmation — live video & gaming"},
+ {name:"FTP", job:"Transfers files between two computers"},
+ {name:"SMTP", job:"Sends email from client to server and between servers"}
+];
+var PROTO_SCEN = [
+ {q:"A gamer wants the lowest delay, even if a frame or two drops. Protocol?", opts:["UDP","TCP","FTP"], a:0},
+ {q:"A brand-new laptop joins the office Wi-Fi and needs an address. Protocol?", opts:["DHCP","SMTP","ICMP"], a:0},
+ {q:"You type a site's name, not its numbers. Which protocol answers first?", opts:["DNS","UDP","FTP"], a:0}
+];
+
+var DEVICES = [
+ {name:"PC (End Device)", icon:"💻", desc:"A worker's laptop that creates and uses data on the network."},
+ {name:"Switch", icon:"🔀", desc:"A box with many ports that delivers frames between devices inside ONE network, using MAC addresses."},
+ {name:"Router", icon:"🧭", desc:"Connects different networks together and picks the path for packets using IP addresses."},
+ {name:"Firewall", icon:"🛡️", desc:"Inspects traffic crossing the network boundary and blocks whatever the rules forbid."},
+ {name:"Server", icon:"🗄️", desc:"A computer that exists to answer others — it hosts the company website and files."},
+ {name:"Access Point", icon:"📶", desc:"Bridges wireless devices onto the wired network — the Wi-Fi doorway in the ceiling."}
+];
+var DEVICE_FIX = [
+ {q:"FIELD CALL: Nobody in one room can reach anything, and the box linking their PCs has no lights. First suspect?", opts:["Switch","DNS server","Firewall"], a:0},
+ {q:"FIELD CALL: Phones keep dropping Wi-Fi in the far conference room, fine everywhere else. The fix adds a…", opts:["Access Point","Modem","Printer"], a:0}
+];
+
+var CLINIC = [
+ { title:"Case 1 — “The whole house is offline”", symptom:"Every device lost the internet at the same time. Lights on the router look wrong.",
+   steps:["Check the physical layer: power, cables, and router lights","Check the router's connection to the modem / provider line","Restart the router and watch it reconnect","Test one device: ping the gateway, then a public IP"] },
+ { title:"Case 2 — “Only my laptop is dead”", symptom:"Everyone else is online. Your laptop shows an IP address of 169.254.10.5.",
+   steps:["Check the physical layer: Wi-Fi on, cable seated, try another port","Read the IP configuration — 169.254.x.x means DHCP failed","Renew the lease / reconnect so DHCP can hand out a real address","Ping the gateway to prove local traffic flows"] },
+ { title:"Case 3 — “Numbers work, names don't”", symptom:"You can ping 8.8.8.8 and it replies fast, but no website name will load.",
+   steps:["Confirm the physical and IP layers are fine (the ping by number already proves it)","Ping a website by name to confirm name resolution is the broken step","Check the DNS server address in the IP configuration","Point the device at a working DNS server and retest the name"] }
+];
+
+/* -------- packet journey data -------- */
+var JOURNEY = [
+ {node:0, act:"Your PC packages your request into a packet, stamped with the server's IP address as the destination.", q:null},
+ {node:1, act:"The switch reads the local hardware (MAC) address and forwards the packet across your home network — fast, and only to the right port.", q:{q:"Checkpoint: what does the switch use to deliver the packet inside your network?", opts:["MAC (hardware) addresses","Website names","The Wi-Fi password"], a:0}},
+ {node:2, act:"The router — your traffic controller — sees the destination is NOT on your street, so it sends the packet out toward the internet.", q:{q:"Checkpoint: why must the router handle this packet?", opts:["The destination is on a different network","The packet is too heavy for the switch","Switches can't forward packets"], a:0}},
+ {node:3, act:"Out on the internet, big routers pass the packet hand to hand. Each one reads the destination IP and forwards it closer — sometimes a dozen hops.", q:null},
+ {node:4, act:"The packet reaches the server. The server finds the page you asked for and builds a reply — chopped into packets of its own.", q:{q:"Checkpoint: what does the server send back?", opts:["The data you requested, as reply packets","A new IP address for your PC","A printed copy of the page"], a:0}},
+ {node:3, act:"The reply packets ride the internet back — not always by the same road the request took.", q:null},
+ {node:2, act:"Your router receives the replies and, using NAT, works out which device inside your home asked for them.", q:null},
+ {node:1, act:"The switch delivers the reply packets to your PC's port — and only your PC's port.", q:null},
+ {node:0, act:"Your PC reassembles the packets in order… and the web page appears. Total time: usually well under a second. 🎉", q:null}
+];
+var NODES = [ {icon:"💻", label:"Your PC"}, {icon:"🔀", label:"Switch"}, {icon:"🧭", label:"Router"}, {icon:"🌍", label:"Internet"}, {icon:"🗄️", label:"Server"} ];
+
+/* -------- IP lab data -------- */
+var IP_SORT = [
+ {ip:"192.168.1.55", same:true}, {ip:"192.168.2.20", same:false}, {ip:"10.0.0.8", same:false}, {ip:"192.168.1.200", same:true}
+];
+var IP_CLASS = [
+ {q:"192.168.1.5 — private or public?", opts:["Private","Public"], a:0},
+ {q:"8.8.8.8 (Google's DNS) — private or public?", opts:["Private","Public"], a:1},
+ {q:"172.16.5.4 — private or public?", opts:["Private","Public"], a:0}
+];
+var IP_MATH = [
+ {q:"A /24 network: how many addresses can go to devices?", opts:["254","256","24"], a:0},
+ {q:"The NETWORK address of the 192.168.1.0/24 network is…", opts:["192.168.1.0","192.168.1.1","192.168.1.255"], a:0},
+ {q:"The BROADCAST address of 192.168.1.0/24 is…", opts:["192.168.1.255","192.168.1.0","192.168.1.1"], a:0}
+];
+
+/* ============================================================
+   Engine
+   ============================================================ */
+function $(id){ return document.getElementById(id); }
+function el(tag, cls, html){ var e = document.createElement(tag); if(cls) e.className = cls; if(html !== undefined) e.innerHTML = html; return e; }
+function shuffle(a){ a = a.slice(); for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+var toastTimer = null;
+function toast(msg){ var t = $("toast"); t.textContent = msg; t.className = "show"; clearTimeout(toastTimer); toastTimer = setTimeout(function(){ t.className = ""; }, 3400); }
+
+var CUR = null;           // current section object
+var LAB = {};             // per-open lab state
+var checkSel = {};        // current section check selections
+
+function doneCount(){ var n = 0; SECTIONS.forEach(function(s){ if (P.done[s.id]) n++; }); return n; }
+function updateProgress(){
+  var n = doneCount();
+  $("progressBar").style.width = Math.round(n / SECTIONS.length * 100) + "%";
+  $("progressLabel").textContent = n + " of " + SECTIONS.length + " sections" + (P.finalPassed ? " · Final passed 🏆" : "");
+}
+function showView(name){
+  ["home","section","final"].forEach(function(v){ $("view-" + v).classList.toggle("on", v === name); });
+  window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+/* ---------- home tiles ---------- */
+function renderTiles(){
+  var g = $("tileGrid"); g.innerHTML = "";
+  SECTIONS.forEach(function(s, i){
+    var t = el("button", "tile sheen"); t.type = "button"; t.style.animationDelay = (i * 0.06) + "s";
+    var done = !!P.done[s.id];
+    t.innerHTML = '<div class="art"><img src="' + s.img + '" alt="' + s.title + ' illustration"><span class="num">' + s.num + '</span>' +
+      '<span class="state' + (done ? " done" : "") + '">' + (done ? "✔ COMPLETE" : (P.labs[s.id] ? "LAB DONE · CHECK LEFT" : "START")) + '</span></div>' +
+      '<div class="body"><h3>' + s.title + '</h3><p>' + s.tag + '</p><div class="go">' + (done ? "Review section →" : "Enter section →") + '</div></div>';
+    t.addEventListener("click", function(){ openSection(s.id); });
+    g.appendChild(t);
+  });
+  var tr = el("button", "tile sheen"); tr.type = "button";
+  tr.innerHTML = '<div class="art"><img src="net-trainer.jpg" alt="Nex, your personal AI trainer"><span class="num">AI</span><span class="state">ALWAYS ON</span></div>' +
+    '<div class="body"><h3>Meet Nex — Your AI Trainer</h3><p>Stuck on a concept? Nex explains it, simplifies it, gives examples and drops lab hints — without handing you the answers.</p><div class="go">Chat with Nex →</div></div>';
+  tr.addEventListener("click", openTrainer);
+  g.appendChild(tr);
+  var fin = el("button", "tile final sheen"); fin.type = "button";
+  var fn = doneCount();
+  fin.innerHTML = '<div class="art"><div class="big">🏆</div><span class="num">FINAL</span><span class="state' + (P.finalPassed ? " done" : "") + '">' + (P.finalPassed ? "✔ PASSED" : fn + " / 6 SECTIONS") + '</span></div>' +
+    '<div class="body"><h3>The Final Check</h3><p>Twelve questions across all six sections. Complete every section and score 10+ to earn your certificate.</p><div class="go">' + (P.finalPassed ? "See your result →" : "Take the final →") + '</div></div>';
+  fin.addEventListener("click", function(){ openFinal(); });
+  g.appendChild(fin);
+}
+
+/* ---------- section view ---------- */
+function secById(id){ for (var i = 0; i < SECTIONS.length; i++) if (SECTIONS[i].id === id) return SECTIONS[i]; return null; }
+function openSection(id){
+  CUR = secById(id); checkSel = {}; LAB = {};
+  $("secImg").src = CUR.img; $("secImg").alt = CUR.title + " illustration";
+  $("secNum").textContent = "Section " + CUR.num + " of 06";
+  $("secTitle").textContent = CUR.title;
+  $("secTag").textContent = CUR.tag;
+  var tb = $("teachBody"); tb.innerHTML = "";
+  CUR.teach.forEach(function(t){ tb.appendChild(el("h4", "", t.h)); var p = el("p", "", t.b); tb.appendChild(p); });
+  $("labTitle").textContent = CUR.labTitle;
+  $("labNote").textContent = CUR.labNote;
+  $("labScore").textContent = P.labs[CUR.id] ? "✔ Lab complete — nice work. You can replay it any time." : "";
+  LAB_BUILDERS[CUR.lab]($("labMount"));
+  renderCheck();
+  updateSecStatus();
+  var idx = SECTIONS.indexOf(CUR);
+  $("nextSecBtn").classList.toggle("hidden", idx >= SECTIONS.length - 1);
+  showView("section");
+  nexContext();
+}
+function updateSecStatus(){
+  var st = $("secStatus"); st.innerHTML = "";
+  var labChip = el("span", "chip" + (P.labs[CUR.id] ? " done" : ""), (P.labs[CUR.id] ? "✔ " : "○ ") + "Lab: " + CUR.labTitle);
+  var cs = P.checks[CUR.id];
+  var chkChip = el("span", "chip" + (cs !== undefined && cs >= 2 ? " done" : ""), (cs !== undefined && cs >= 2 ? "✔ " : "○ ") + "Check: " + (cs !== undefined ? cs + " / 3" : "not taken"));
+  var doneChip = el("span", "chip" + (P.done[CUR.id] ? " done" : ""), P.done[CUR.id] ? "✔ SECTION COMPLETE" : "Section not complete yet");
+  st.appendChild(labChip); st.appendChild(chkChip); st.appendChild(doneChip);
+}
+function maybeCompleteSection(){
+  if (!CUR) return;
+  var cs = P.checks[CUR.id];
+  if (P.labs[CUR.id] && cs !== undefined && cs >= 2 && !P.done[CUR.id]){
+    P.done[CUR.id] = true; save(); updateProgress(); renderTiles(); updateSecStatus();
+    toast("🎉 Section complete: " + CUR.title);
+    nexSay("Section complete — <b>" + CUR.title + "</b> is in the bag. " + (doneCount() === 6 ? "That's all six! The Final Check is unlocked and waiting. 🏆" : "That's " + doneCount() + " of 6. Keep the streak going."), true);
+  }
+}
+
+/* ---------- generic quiz renderer (section checks + final) ---------- */
+function renderQuiz(mount, questions, selStore, prefix){
+  mount.innerHTML = "";
+  questions.forEach(function(q, qi){
+    var box = el("div", "q");
+    box.appendChild(el("div", "qq", (qi + 1) + ". " + q.q));
+    var opts = el("div", "opts");
+    q.opts.forEach(function(o, oi){
+      var b = el("button", "opt", o); b.type = "button"; b.dataset.q = qi; b.dataset.o = oi;
+      if (selStore[qi] === oi) b.classList.add("sel");
+      b.addEventListener("click", function(){
+        selStore[qi] = oi;
+        var sibs = opts.querySelectorAll(".opt");
+        for (var x = 0; x < sibs.length; x++) sibs[x].classList.remove("sel", "right", "wrong");
+        b.classList.add("sel");
+      });
+      opts.appendChild(b);
+    });
+    box.appendChild(opts);
+    var fb = el("div", "feedback"); fb.id = prefix + "-fb-" + qi; box.appendChild(fb);
+    mount.appendChild(box);
+  });
+}
+function gradeQuiz(mount, questions, selStore, prefix){
+  var score = 0, answered = 0;
+  questions.forEach(function(q, qi){
+    var fb = $(prefix + "-fb-" + qi);
+    var btns = mount.querySelectorAll('.opt[data-q="' + qi + '"]');
+    for (var x = 0; x < btns.length; x++){ btns[x].classList.remove("right", "wrong"); }
+    if (selStore[qi] === undefined){ fb.className = "feedback show no"; fb.textContent = "No answer picked yet."; return; }
+    answered++;
+    var pick = btns[selStore[qi]];
+    if (selStore[qi] === q.a){ score++; pick.classList.add("right"); fb.className = "feedback show ok"; fb.textContent = "✔ Correct. " + (q.why || ""); }
+    else { pick.classList.add("wrong"); btns[q.a].classList.add("right"); fb.className = "feedback show no"; fb.textContent = "✘ Not quite. " + (q.why || ""); }
+  });
+  return { score: score, answered: answered, total: questions.length };
+}
+function renderCheck(){ renderQuiz($("checkMount"), CUR.check, checkSel, "chk"); $("checkScore").textContent = P.checks[CUR.id] !== undefined ? "Best recorded check score: " + P.checks[CUR.id] + " / 3" : ""; }
+$("gradeCheckBtn").addEventListener("click", function(){
+  var r = gradeQuiz($("checkMount"), CUR.check, checkSel, "chk");
+  if (r.answered < r.total){ $("checkScore").textContent = "Answer all three questions first (" + r.answered + " of 3 answered)."; return; }
+  if (P.checks[CUR.id] === undefined || r.score > P.checks[CUR.id]) P.checks[CUR.id] = r.score;
+  save(); $("checkScore").textContent = "You scored " + r.score + " / 3." + (r.score >= 2 ? " Check passed ✔" : " You need 2 of 3 — review the lesson and try again.");
+  updateSecStatus(); maybeCompleteSection();
+});
+
+/* ============================================================
+   LAB 1 — Packet Journey
+   ============================================================ */
+function labPacket(mount){
+  LAB.p = { step: 0, answered: {} };
+  mount.innerHTML = "";
+  var track = el("div", "track");
+  var nodes = el("div", "nodes");
+  NODES.forEach(function(n, i){ var nd = el("div", "node"); nd.id = "node-" + i; nd.innerHTML = '<div class="dot">' + n.icon + '</div><small>' + n.label + '</small>'; nodes.appendChild(nd); });
+  track.appendChild(el("div", "rail"));
+  track.appendChild(nodes);
+  var dot = el("div", "", "📦"); dot.id = "packetDot"; dot.style.left = "10%";
+  track.appendChild(dot);
+  mount.appendChild(track);
+  var hop = el("div", "hop-text"); hop.id = "hopText"; mount.appendChild(hop);
+  var quizMount = el("div"); quizMount.id = "pktQuiz"; mount.appendChild(quizMount);
+  var row = el("div", "navrow");
+  var back = el("button", "btn", "← Back"); back.type = "button"; back.id = "pktBack";
+  var next = el("button", "btn primary", "Send the packet →"); next.type = "button"; next.id = "pktNext";
+  row.appendChild(back); row.appendChild(next); mount.appendChild(row);
+  back.addEventListener("click", function(){ if (LAB.p.step > 0){ LAB.p.step--; drawPacket(); } });
+  next.addEventListener("click", function(){
+    var st = JOURNEY[LAB.p.step];
+    if (st.q && !LAB.p.answered[LAB.p.step]){ toast("Answer the checkpoint question to continue."); return; }
+    if (LAB.p.step < JOURNEY.length - 1){ LAB.p.step++; drawPacket(); }
+  });
+  drawPacket();
+}
+function drawPacket(){
+  var st = JOURNEY[LAB.p.step];
+  var pct = 10 + st.node * 20;
+  $("packetDot").style.left = pct + "%";
+  for (var i = 0; i < NODES.length; i++){ $("node-" + i).classList.toggle("hit", i === st.node); }
+  $("hopText").innerHTML = "<b>Hop " + (LAB.p.step + 1) + " of " + JOURNEY.length + " — at the " + NODES[st.node].label + ":</b> " + st.act;
+  var qm = $("pktQuiz"); qm.innerHTML = "";
+  if (st.q && !LAB.p.answered[LAB.p.step]){
+    var box = el("div", "q"); box.appendChild(el("div", "qq", st.q.q));
+    var opts = el("div", "opts");
+    st.q.opts.forEach(function(o, oi){
+      var b = el("button", "opt", o); b.type = "button";
+      b.addEventListener("click", function(){
+        if (oi === st.q.a){ LAB.p.answered[LAB.p.step] = true; b.classList.add("right"); toast("✔ Correct — packet released."); drawPacketSoft(); }
+        else { b.classList.add("wrong"); toast("✘ Not that one — think about this hop's job, then try again."); }
+      });
+      opts.appendChild(b);
+    });
+    box.appendChild(opts); qm.appendChild(box);
+  }
+  $("pktNext").textContent = LAB.p.step >= JOURNEY.length - 1 ? "Journey complete ✔" : (LAB.p.step === 0 ? "Send the packet →" : "Next hop →");
+  $("pktNext").disabled = LAB.p.step >= JOURNEY.length - 1;
+  $("pktBack").disabled = LAB.p.step === 0;
+  if (LAB.p.step >= JOURNEY.length - 1 && !P.labs[CUR.id]){ P.labs[CUR.id] = true; save(); $("labScore").textContent = "✔ Lab complete — your packet made the full round trip."; maybeCompleteSection(); }
+}
+function drawPacketSoft(){ var qm = $("pktQuiz"); if (qm) qm.innerHTML = ""; }
+
+/* ============================================================
+   LAB 2 — IP Playground
+   ============================================================ */
+function labIP(mount){
+  LAB.ip = { sort: {}, cls: {}, math: {} };
+  mount.innerHTML = "";
+  mount.appendChild(el("h4", "", "Exercise 1 — Same street or different street?"));
+  mount.appendChild(el("p", "lab-note", "Your PC is 192.168.1.10 /24. For each address, decide: SAME network (talks directly) or OTHER network (needs the router)."));
+  IP_SORT.forEach(function(r, i){
+    var row = el("div", "ip-row");
+    row.appendChild(el("code", "", r.ip));
+    var b1 = el("button", "mini", "SAME network"); b1.type = "button";
+    var b2 = el("button", "mini", "OTHER network"); b2.type = "button";
+    b1.addEventListener("click", function(){ LAB.ip.sort[i] = true; b1.classList.add("sel"); b2.classList.remove("sel"); });
+    b2.addEventListener("click", function(){ LAB.ip.sort[i] = false; b2.classList.add("sel"); b1.classList.remove("sel"); });
+    row.appendChild(b1); row.appendChild(b2);
+    var fb = el("span", ""); fb.id = "ipsort-fb-" + i; row.appendChild(fb);
+    mount.appendChild(row);
+  });
+  mount.appendChild(el("h4", "", "Exercise 2 — Private or public?"));
+  var cMount = el("div"); mount.appendChild(cMount); renderQuiz(cMount, IP_CLASS, LAB.ip.cls, "ipcls");
+  mount.appendChild(el("h4", "", "Exercise 3 — The /24 math"));
+  var mMount = el("div"); mount.appendChild(mMount); renderQuiz(mMount, IP_MATH, LAB.ip.math, "ipmath");
+  var chk = el("button", "btn primary", "Check all my answers"); chk.type = "button"; chk.style.marginTop = "14px";
+  chk.addEventListener("click", function(){
+    var ok = true;
+    IP_SORT.forEach(function(r, i){
+      var fb = $("ipsort-fb-" + i);
+      if (LAB.ip.sort[i] === undefined){ fb.textContent = " ← pick one"; fb.style.color = "var(--warn)"; ok = false; }
+      else if (LAB.ip.sort[i] === r.same){ fb.textContent = " ✔"; fb.style.color = "var(--good)"; }
+      else { fb.textContent = " ✘ " + (r.same ? "Same street — the first three numbers match yours." : "Different street — the network part differs."); fb.style.color = "var(--bad)"; ok = false; }
+    });
+    var r1 = gradeQuiz(cMount, IP_CLASS, LAB.ip.cls, "ipcls");
+    var r2 = gradeQuiz(mMount, IP_MATH, LAB.ip.math, "ipmath");
+    if (r1.answered < 3 || r2.answered < 3) ok = false;
+    if (r1.score < 3 || r2.score < 3) ok = false;
+    if (ok && !P.labs[CUR.id]){ P.labs[CUR.id] = true; save(); $("labScore").textContent = "✔ Lab complete — every address sorted, classified and counted."; maybeCompleteSection(); }
+    else if (!ok){ $("labScore").textContent = "Not yet — fix the red ones and check again. Nex can simplify subnet masks if you're stuck."; }
+  });
+  mount.appendChild(chk);
+}
+
+/* ============================================================
+   LAB 3 — Protocol Match-Up
+   ============================================================ */
+function labProto(mount){
+  LAB.pr = { sel: null, matched: {}, scen: {} };
+  mount.innerHTML = "";
+  var grid = el("div", "match-grid");
+  var left = el("div"); left.style.display = "grid"; left.style.gap = "10px";
+  var right = el("div"); right.style.display = "grid"; right.style.gap = "10px";
+  PROTOCOLS.forEach(function(p){
+    var b = el("button", "mchip", p.name); b.type = "button"; b.id = "proto-" + p.name;
+    b.addEventListener("click", function(){
+      if (LAB.pr.matched[p.name]) return;
+      LAB.pr.sel = p.name;
+      PROTOCOLS.forEach(function(x){ var e = $("proto-" + x.name); if (e) e.classList.toggle("sel", x.name === p.name); });
+    });
+    left.appendChild(b);
+  });
+  shuffle(PROTOCOLS).forEach(function(p){
+    var b = el("button", "mjob", p.job); b.type = "button"; b.dataset.proto = p.name;
+    b.addEventListener("click", function(){
+      if (!LAB.pr.sel){ toast("Pick a protocol on the left first."); return; }
+      if (b.dataset.proto === LAB.pr.sel){
+        LAB.pr.matched[p.name] = true;
+        b.classList.add("done"); var src = $("proto-" + p.name); if (src){ src.classList.add("done"); src.classList.remove("sel"); }
+        LAB.pr.sel = null;
+        var n = Object.keys(LAB.pr.matched).length;
+        toast("✔ Matched " + n + " of " + PROTOCOLS.length + ".");
+        if (n === PROTOCOLS.length) protoScen(mount);
+      } else {
+        b.classList.add("shake"); setTimeout(function(){ b.classList.remove("shake"); }, 380);
+        toast("✘ That job belongs to a different protocol. Try again.");
+      }
+    });
+    right.appendChild(b);
+  });
+  grid.appendChild(left); grid.appendChild(right); mount.appendChild(grid);
+  var scenMount = el("div"); scenMount.id = "scenMount"; mount.appendChild(scenMount);
+  if (Object.keys(LAB.pr.matched).length === PROTOCOLS.length) protoScen(mount);
+}
+function protoScen(mount){
+  var sm = $("scenMount"); if (!sm || sm.dataset.built) return; sm.dataset.built = "1";
+  sm.appendChild(el("h4", "", "Round 2 — Real-world scenarios"));
+  var qm = el("div"); sm.appendChild(qm); renderQuiz(qm, PROTO_SCEN, LAB.pr.scen, "scen");
+  var chk = el("button", "btn primary", "Check scenarios"); chk.type = "button"; chk.style.marginTop = "12px";
+  chk.addEventListener("click", function(){
+    var r = gradeQuiz(qm, PROTO_SCEN, LAB.pr.scen, "scen");
+    if (r.score === 3 && !P.labs[CUR.id]){ P.labs[CUR.id] = true; save(); $("labScore").textContent = "✔ Lab complete — eight matches and three scenarios, all correct."; maybeCompleteSection(); }
+    else $("labScore").textContent = "Matches done ✔ · Scenarios: " + r.score + " / 3 — get all three to finish the lab.";
+  });
+  sm.appendChild(chk);
+}
+
+/* ============================================================
+   LAB 4 — Device ID Game
+   ============================================================ */
+function labDevice(mount){
+  LAB.dv = { round: 0, firstTry: 0, mistakesThisRound: false };
+  mount.innerHTML = "";
+  var card = el("div", "q");
+  var icon = el("div", "", ""); icon.style.fontSize = "40px"; icon.id = "dvIcon";
+  var desc = el("div", "qq"); desc.id = "dvDesc";
+  var opts = el("div", "opts"); opts.id = "dvOpts";
+  var fb = el("div", "feedback"); fb.id = "dvFb";
+  card.appendChild(icon); card.appendChild(desc); card.appendChild(opts); card.appendChild(fb);
+  mount.appendChild(card);
+  var sc = el("div", "score-line"); sc.id = "dvScore"; mount.appendChild(sc);
+  drawDeviceRound();
+}
+function deviceRounds(){
+  var rounds = DEVICES.map(function(d){ return { icon: d.icon, prompt: "NAME THIS DEVICE: " + d.desc, answer: d.name, pool: DEVICES.map(function(x){ return x.name; }) }; });
+  DEVICE_FIX.forEach(function(f){ rounds.push({ icon: "🚨", prompt: f.q, answer: f.opts[f.a], pool: f.opts }); });
+  return rounds;
+}
+function drawDeviceRound(){
+  var rounds = deviceRounds();
+  if (LAB.dv.round >= rounds.length){
+    $("dvIcon").textContent = "🏁"; $("dvDesc").textContent = "Game over — first-try score: " + LAB.dv.firstTry + " of " + rounds.length + ".";
+    $("dvOpts").innerHTML = "";
+    if (!P.labs[CUR.id]){ P.labs[CUR.id] = true; save(); }
+    $("labScore").textContent = "✔ Lab complete — you identified the full device lineup.";
+    $("dvScore").textContent = "";
+    maybeCompleteSection(); return;
+  }
+  var r = rounds[LAB.dv.round];
+  LAB.dv.mistakesThisRound = false;
+  $("dvIcon").textContent = r.icon;
+  $("dvDesc").textContent = r.prompt;
+  $("dvFb").className = "feedback";
+  $("dvScore").textContent = "Round " + (LAB.dv.round + 1) + " of " + rounds.length + " · First-try score: " + LAB.dv.firstTry;
+  var opts = $("dvOpts"); opts.innerHTML = "";
+  shuffle(r.pool).forEach(function(name){
+    var b = el("button", "opt", name); b.type = "button";
+    b.addEventListener("click", function(){
+      if (name === r.answer){
+        b.classList.add("right");
+        if (!LAB.dv.mistakesThisRound) LAB.dv.firstTry++;
+        var fb = $("dvFb"); fb.className = "feedback show ok"; fb.textContent = "✔ Correct — that's the " + r.answer + ".";
+        setTimeout(drawDeviceRound, 850); LAB.dv.round++;
+      } else {
+        b.classList.add("wrong"); LAB.dv.mistakesThisRound = true;
+        var fb2 = $("dvFb"); fb2.className = "feedback show no"; fb2.textContent = "✘ Not that device — look at the job in the description and try again.";
+      }
+    });
+    opts.appendChild(b);
+  });
+}
+
+/* ============================================================
+   LAB 5 — OSI Stack Explorer & Ordering Challenge
+   ============================================================ */
+function labOSI(mount){
+  LAB.osi = { placed: 0 };
+  mount.innerHTML = "";
+  mount.appendChild(el("h4", "", "Part 1 — Explore the stack (tap every layer)"));
+  var stack = el("div", "osi-stack");
+  OSI.forEach(function(L){
+    var b = el("button", "osi-layer" + (P.visitedLayers[L.n] ? " visited" : ""), ""); b.type = "button"; b.id = "osi-" + L.n;
+    b.innerHTML = '<span class="n">' + L.n + '</span><span class="nm">' + L.name + '</span><span class="dt">carries: ' + L.data + '</span>';
+    b.addEventListener("click", function(){
+      P.visitedLayers[L.n] = true; save(); b.classList.add("visited");
+      $("osiDetail").innerHTML = "<b>Layer " + L.n + " — " + L.name + ".</b> " + L.job + "<br><span style='color:var(--faint)'>Examples: " + L.ex + " · Data is called: <b>" + L.data + "</b></span>";
+      osiProgress();
+    });
+    stack.appendChild(b);
+  });
+  mount.appendChild(stack);
+  var det = el("div", "osi-detail", "Tap a layer above to see its job. Visit all seven to unlock the ordering challenge."); det.id = "osiDetail";
+  mount.appendChild(det);
+  mount.appendChild(el("h4", "", "Part 2 — Rebuild the stack"));
+  mount.appendChild(el("p", "lab-note", "Tap the layers in order from the TOP of the stack (Layer 7) down to the BOTTOM (Layer 1)."));
+  var slot = el("div", "order-slot", "Your stack will appear here…"); slot.id = "osiSlot"; mount.appendChild(slot);
+  var pool = el("div", "order-pool"); pool.id = "osiPool"; mount.appendChild(pool);
+  shuffle(OSI).forEach(function(L){
+    var c = el("button", "order-chip", L.n + " · " + L.name); c.type = "button"; c.id = "osichip-" + L.n;
+    c.addEventListener("click", function(){
+      var expected = 7 - LAB.osi.placed;
+      if (L.n === expected){
+        c.classList.add("used"); LAB.osi.placed++;
+        if (LAB.osi.placed === 1) slot.innerHTML = "";
+        slot.appendChild(el("span", "placed", L.n + " · " + L.name));
+        if (LAB.osi.placed === 7){ toast("✔ Stack rebuilt perfectly, 7 down to 1."); osiProgress(); }
+      } else {
+        c.classList.add("shake"); setTimeout(function(){ c.classList.remove("shake"); }, 380);
+        toast("✘ Not that layer yet — you need Layer " + expected + " next.");
+      }
+    });
+    pool.appendChild(c);
+  });
+  osiProgress();
+}
+function osiProgress(){
+  var visited = OSI.filter(function(L){ return P.visitedLayers[L.n]; }).length;
+  var placed = LAB.osi ? LAB.osi.placed : 0;
+  $("labScore").textContent = "Layers explored: " + visited + " / 7 · Stack rebuilt: " + placed + " / 7";
+  if (visited === 7 && placed === 7 && !P.labs[CUR.id]){ P.labs[CUR.id] = true; save(); $("labScore").textContent = "✔ Lab complete — you can read the stack and rebuild it from memory."; maybeCompleteSection(); }
+}
+
+/* ============================================================
+   LAB 6 — Troubleshooting Clinic
+   ============================================================ */
+function labClinic(mount){
+  LAB.cl = { idx: 0, next: {}, doneCases: {}, pools: {} };
+  CLINIC.forEach(function(c, i){ LAB.cl.next[i] = 0; });
+  mount.innerHTML = "";
+  var tabs = el("div", "case-tabs");
+  CLINIC.forEach(function(c, i){
+    var b = el("button", "mini", "Case " + (i + 1)); b.type = "button"; b.id = "caseTab-" + i;
+    b.addEventListener("click", function(){ LAB.cl.idx = i; drawClinicCase(mount); });
+    tabs.appendChild(b);
+  });
+  mount.appendChild(tabs);
+  var body = el("div"); body.id = "clinicBody"; mount.appendChild(body);
+  drawClinicCase(mount);
+}
+function drawClinicCase(mount){
+  var i = LAB.cl.idx, c = CLINIC[i];
+  CLINIC.forEach(function(x, xi){ var t = $("caseTab-" + xi); if (t){ t.classList.toggle("sel", xi === i); t.textContent = "Case " + (xi + 1) + (LAB.cl.doneCases[xi] ? " ✔" : ""); } });
+  var body = $("clinicBody"); body.innerHTML = "";
+  body.appendChild(el("h4", "", c.title));
+  body.appendChild(el("p", "lab-note", "🩺 Symptom: " + c.symptom));
+  body.appendChild(el("p", "lab-note", "Tap the steps in the order a good tech takes them — physical first, then upward."));
+  var doneBox = el("div", "step-done"); doneBox.id = "clinicDone";
+  for (var d = 0; d < LAB.cl.next[i]; d++) doneBox.appendChild(el("div", "sd", "✔ " + c.steps[d]));
+  body.appendChild(doneBox);
+  if (!LAB.cl.pools[i]) LAB.cl.pools[i] = shuffle(c.steps.map(function(s, si){ return si; }));
+  var pool = el("div", "step-pool");
+  LAB.cl.pools[i].forEach(function(si){
+    if (si < LAB.cl.next[i] && LAB.cl.doneCases[i]) return;
+    if (si < LAB.cl.next[i]) return;
+    var b = el("button", "step-btn", c.steps[si]); b.type = "button";
+    b.addEventListener("click", function(){
+      if (si === LAB.cl.next[i]){
+        LAB.cl.next[i]++; drawClinicCase(mount);
+        if (LAB.cl.next[i] === c.steps.length){
+          LAB.cl.doneCases[i] = true;
+          toast("✔ " + c.title.split(" — ")[0] + " solved — order was perfect.");
+          var doneN = Object.keys(LAB.cl.doneCases).length;
+          if (doneN === CLINIC.length && !P.labs[CUR.id]){ P.labs[CUR.id] = true; save(); $("labScore").textContent = "✔ Lab complete — all three patients diagnosed, tech-style."; maybeCompleteSection(); }
+          else $("labScore").textContent = "Cases solved: " + doneN + " / " + CLINIC.length;
+          drawClinicCase(mount);
+        }
+      } else {
+        b.classList.add("shake"); setTimeout(function(){ b.classList.remove("shake"); }, 380);
+        toast("✘ A tech wouldn't do that step yet — work from the physical layer upward.");
+      }
+    });
+    pool.appendChild(b);
+  });
+  body.appendChild(pool);
+  if (LAB.cl.doneCases[i]) body.appendChild(el("p", "lab-note", "✔ This case is solved. Pick another case above."));
+}
+
+var LAB_BUILDERS = { packet: labPacket, ip: labIP, proto: labProto, device: labDevice, osi: labOSI, clinic: labClinic };
+
+/* ============================================================
+   Final view
+   ============================================================ */
+var finalSel = {};
+function openFinal(){
+  renderQuiz($("finalMount"), FINALQ, finalSel, "fin");
+  refreshCert();
+  $("finalScore").textContent = P.finalScore !== null && P.finalScore !== undefined ? "Your recorded final score: " + P.finalScore + " / 12." : "";
+  showView("final");
+}
+function refreshCert(){
+  var passed = (P.finalScore !== null && P.finalScore !== undefined && P.finalScore >= 10);
+  P.finalPassed = passed && doneCount() === 6;
+  var box = $("certBox");
+  if (P.finalPassed){
+    box.classList.add("show");
+    $("certName").textContent = P.name || "Network Graduate";
+    $("certMeta").textContent = "Final score " + P.finalScore + " / 12 · All 6 sections complete · " + new Date().toLocaleDateString("en-US", { year:"numeric", month:"long", day:"numeric" });
+  } else box.classList.remove("show");
+  save(); updateProgress();
+}
+$("gradeFinalBtn").addEventListener("click", function(){
+  var r = gradeQuiz($("finalMount"), FINALQ, finalSel, "fin");
+  if (r.answered < r.total){ $("finalScore").textContent = "Answer all twelve questions first (" + r.answered + " of 12 answered)."; return; }
+  P.finalScore = r.score; save();
+  if (r.score >= 10 && doneCount() === 6){ $("finalScore").textContent = "🏆 " + r.score + " / 12 — PASSED. Your certificate is below."; nexSay("You passed the Final Check with <b>" + r.score + " / 12</b> and finished every section. Certificate earned — screenshot it, you did the work. 🎓", true); }
+  else if (r.score >= 10){ $("finalScore").textContent = r.score + " / 12 — that's a passing score! Finish the remaining sections (" + doneCount() + " of 6 done) and your certificate unlocks here automatically."; }
+  else { $("finalScore").textContent = r.score + " / 12 — you need 10. Review the sections that tripped you, ask Nex about anything fuzzy, and retake it."; }
+  refreshCert(); renderTiles();
+});
+$("nameInput").addEventListener("input", function(){ P.name = $("nameInput").value; save(); if (P.finalPassed) $("certName").textContent = P.name || "Network Graduate"; });
+
+/* ---------- nav wiring ---------- */
+$("homeBtn").addEventListener("click", function(){ renderTiles(); showView("home"); nexContext(); });
+$("backHomeBtn").addEventListener("click", function(){ renderTiles(); showView("home"); nexContext(); });
+$("finalHomeBtn").addEventListener("click", function(){ renderTiles(); showView("home"); nexContext(); });
+$("nextSecBtn").addEventListener("click", function(){ var i = SECTIONS.indexOf(CUR); if (i < SECTIONS.length - 1) openSection(SECTIONS[i + 1].id); });
+$("askNexSec").addEventListener("click", openTrainer);
+$("trainerBtnTop").addEventListener("click", openTrainer);
+$("trainerFab").addEventListener("click", openTrainer);
+$("trainerClose").addEventListener("click", function(){ $("trainerPanel").classList.remove("open"); });
+
+/* ============================================================
+   Nex — personal AI trainer (client-side knowledge base)
+   ============================================================ */
+var KB = [
+ /* general */
+ {sec:"gen", keys:["what is a network","network mean","define network"], full:"A <b>network</b> is two or more devices connected so they can communicate and share resources — files, printers, one internet connection. Highways for data: devices are vehicles, links are roads, data is cargo.", simple:"A network is devices connected so they can talk and share things.", example:"Your phone, laptop and TV all using one home Wi-Fi = a network."},
+ {sec:"gen", keys:["internet","world wide","arpanet","history","1969"], full:"The <b>internet</b> is a network of networks — millions of LANs linked by routers into one global WAN. It grew out of <b>ARPANET</b>, a 1969 research network connecting four universities.", simple:"The internet = lots of smaller networks connected together, worldwide.", example:"Your home LAN joins your provider's network, which joins the global internet."},
+ {sec:"gen", keys:["packet"], full:"A <b>packet</b> is a small chunk of data with three things: the destination address, its piece of the payload, and a sequence number so the receiver can rebuild everything in order. Big files travel as many packets.", simple:"A packet is one small piece of a message, labeled with where it's going.", example:"A photo you send might travel as hundreds of packets that your friend's phone reassembles."},
+ /* s1 */
+ {sec:"s1", keys:["switch or router","switch vs router","router or switch","difference switch"], full:"A <b>switch</b> delivers traffic <b>inside</b> one network using MAC addresses. A <b>router</b> moves traffic <b>between</b> different networks using IP addresses. Your packet needed the switch first (local delivery), then the router (leaving home).", simple:"Switch = inside one network. Router = between networks.", example:"Switch = mail sorter inside one building. Router = the highway interchange between cities."},
+ {sec:"s1", keys:["lan","wan","local area"], full:"A <b>LAN</b> covers one small area — a home or office. A <b>WAN</b> spans cities or countries, usually by linking LANs together. The internet is the largest WAN.", simple:"LAN = small, one place. WAN = big, many places.", example:"Your home Wi-Fi is a LAN; a bank's branches linked nationwide form a WAN."},
+ {sec:"s1", keys:["journey","path","travel","hop"], full:"One request's trip: <b>PC → switch → router → internet routers → server</b>, then back the same way. The switch handles local delivery, the router exits your network, internet routers forward hop by hop, and the server replies with the data.", simple:"PC, switch, router, internet, server — and back again.", example:"That's exactly the ride you took in the Packet Journey lab."},
+ /* s2 */
+ {sec:"s2", keys:["subnet","mask","/24","255"], full:"The <b>subnet mask</b> splits an IP address into the network part (the street) and the host part (the house). 255.255.255.0 = /24: on 192.168.1.x, the first three numbers name the street, the last one the house. Same street = talk directly; different street = via the router.", simple:"The mask says which part of the address is the street and which is the house number.", example:"192.168.1.10 and 192.168.1.55 share a street. 192.168.2.20 lives on a different one."},
+ {sec:"s2", keys:["gateway","default"], full:"The <b>default gateway</b> is your router's address on your network — usually 192.168.1.1. Any packet headed off your street gets handed to the gateway. No gateway set = no leaving the neighborhood.", simple:"The gateway is the door out of your network — it's your router.", example:"Your laptop sends a packet for a website to 192.168.1.1, and the router takes it from there."},
+ {sec:"s2", keys:["private","public","nat"], full:"<b>Private</b> addresses (192.168.x.x, 10.x.x.x, 172.16–31.x.x) only work inside a network and get reused everywhere. Your router holds the household's one <b>public</b> address and translates between the two worlds — that translation is <b>NAT</b>.", simple:"Private = inside-only addresses. Public = the one address the internet sees.", example:"Three homes can all have a 192.168.1.10 inside — the internet only sees each router's public address."},
+ {sec:"s2", keys:["254","how many","usable","hosts","broadcast"], full:"On a /24: 256 total addresses, minus the network address (.0) and the broadcast address (.255) = <b>254 usable</b> for devices. Broadcast (.255) means 'everybody on this street, listen up.'", simple:"/24 = 254 devices max. First address names the network, last one is broadcast.", example:"192.168.1.0/24: devices get .1 through .254."},
+ /* s3 */
+ {sec:"s3", keys:["dns","name","phone book"], full:"<b>DNS</b> is the internet's phone book: it translates names you type (example.com) into the IP addresses devices actually use. No DNS = you could only visit sites by typing numbers.", simple:"DNS turns website names into numbers (IP addresses).", example:"You type a shop's name; DNS finds its number so your browser can call it."},
+ {sec:"s3", keys:["dhcp","automatic","assigned","lease"], full:"<b>DHCP</b> automatically leases an IP address (plus mask, gateway and DNS) to any device that joins the network. It's why you never type an address when you join Wi-Fi. If DHCP fails, devices fall back to a useless 169.254.x.x address.", simple:"DHCP hands out IP addresses automatically when a device joins.", example:"Join a coffee-shop Wi-Fi and you're online instantly — DHCP did that."},
+ {sec:"s3", keys:["tcp","udp","reliable","transport"], full:"<b>TCP</b> = reliable delivery: confirms receipt, resends losses, keeps order — for web, files, email. <b>UDP</b> = fast, no confirmation — for live video, calls and games, where a late packet is worse than a lost one.", simple:"TCP double-checks everything. UDP just sends it, fast.", example:"TCP is registered mail with a signature. UDP is shouting across the room."},
+ {sec:"s3", keys:["https","secure","encrypt","http"], full:"<b>HTTP</b> carries web pages. <b>HTTPS</b> is the same system wrapped in encryption (TLS) — the padlock in your browser. It keeps passwords and card numbers unreadable to anyone listening in between.", simple:"HTTPS = web traffic, encrypted and private.", example:"Banking sites force HTTPS so nobody on the café Wi-Fi can snoop."},
+ {sec:"s3", keys:["smtp","email","ftp","icmp","ping protocol"], full:"<b>SMTP</b> sends email. <b>FTP</b> transfers files. <b>ICMP</b> carries network error and test messages — ping uses it. Each protocol does one job and hands off cleanly to the others.", simple:"SMTP = email out. FTP = files. ICMP = network test signals (ping).", example:"You send mail (SMTP), a friend downloads a file (FTP), you test the line (ICMP ping)."},
+ /* s4 */
+ {sec:"s4", keys:["firewall","security","block"], full:"A <b>firewall</b> guards the boundary of a network. It inspects traffic trying to enter or leave and enforces rules: known-good flows pass, everything else is dropped. It's the first line of defense on every serious network.", simple:"A firewall is a security guard checking who gets in and out.", example:"Your home router's firewall silently drops random probes from the internet all day."},
+ {sec:"s4", keys:["access point","ap","wifi coverage","wireless"], full:"A <b>wireless access point</b> bridges Wi-Fi devices onto the wired network. One AP covers a limited area, so big spaces use several — that's how offices and schools keep signal everywhere.", simple:"An access point is the doorway between Wi-Fi and the wired network.", example:"Dead spot in the far room? A second AP near it fixes the coverage."},
+ {sec:"s4", keys:["modem","isp","provider"], full:"A <b>modem</b> translates between your home network and your provider's technology (cable, fiber, DSL). It's the on-ramp to your ISP. Modem ≠ router, though one box often does both jobs.", simple:"The modem connects your home to your internet provider.", example:"Fiber line comes in → modem converts it → router shares it with the house."},
+ {sec:"s4", keys:["server"], full:"A <b>server</b> is a computer dedicated to answering others: hosting websites, files, email or game worlds. When you 'visit' a site, a server does the answering — usually from a data center, running 24/7.", simple:"A server is a computer whose job is answering requests from other computers.", example:"The page you loaded in the lab was 'served' by a machine built for exactly that."},
+ /* s5 */
+ {sec:"s5", keys:["osi","layers","seven","7 layers"], full:"The <b>OSI model</b> has seven layers, top to bottom: 7 Application, 6 Presentation, 5 Session, 4 Transport, 3 Network, 2 Data Link, 1 Physical. Bottom-to-top memory trick: <b>P</b>lease <b>D</b>o <b>N</b>ot <b>T</b>hrow <b>S</b>ausage <b>P</b>izza <b>A</b>way.", simple:"Seven layers, from the apps (top) down to cables and signals (bottom).", example:"A web request starts at Layer 7 (the browser) and exits at Layer 1 (the wire)."},
+ {sec:"s5", keys:["layer 3","network layer","routing layer"], full:"<b>Layer 3 — Network</b> — handles logical addressing (IP) and routing between networks. Routers operate here, and your packet becomes a 'packet' at this layer.", simple:"Layer 3 = IP addresses and routing. Routers live here.", example:"Choosing the path from your house to a server overseas is Layer 3 work."},
+ {sec:"s5", keys:["encapsulation","segment","frame","header","wrap"], full:"Going down the stack, each layer wraps the data with its own header — <b>encapsulation</b>. The name changes as it descends: data → <b>segment</b> (L4) → <b>packet</b> (L3) → <b>frame</b> (L2) → <b>bits</b> (L1). The receiver unwraps in reverse.", simple:"Each layer puts the data in its own envelope. Names change layer by layer.", example:"Letter → envelope (frame) → mailbag (packet) — opened in reverse at the other end."},
+ {sec:"s5", keys:["tcp/ip model","four layers","tcpip"], full:"The <b>TCP/IP model</b> is the practical 4-layer version the internet actually runs: Application (OSI 5–7), Transport, Internet (OSI 3), Network Access (OSI 1–2). OSI is the teaching map; TCP/IP is the territory.", simple:"TCP/IP = OSI squeezed into 4 layers. It's what real networks run.", example:"Exams speak OSI; production networks speak TCP/IP. Know both."},
+ /* s6 */
+ {sec:"s6", keys:["169","apipa","self assigned"], full:"<b>169.254.x.x</b> is the fallback address a device gives itself when <b>DHCP never answered</b>. It can't reach the gateway or the internet. Seeing it tells you exactly where to dig: connection first, then the DHCP service.", simple:"169.254.x.x = 'I never got a real address.' DHCP failed.", example:"A laptop shows 169.254.10.5 — reconnect it, renew the lease, check the router's DHCP."},
+ {sec:"s6", keys:["ping","ipconfig","test"], full:"<b>ping</b> sends an ICMP echo and times the reply: 'can I reach it, how fast?' <b>ipconfig</b> prints your IP, mask, gateway and DNS in one glance. Ping in this order: gateway → public IP (8.8.8.8) → a name. Where it first fails is where the fault lives.", simple:"ping = 'are you there?' ipconfig = 'what are my settings?'", example:"Gateway pings fine, 8.8.8.8 fails → the fault is beyond your house, at the router/provider."},
+ {sec:"s6", keys:["method","order","bottom up","where to start","first"], full:"Troubleshoot <b>bottom-up</b>: 1 physical (cables, lights, Wi-Fi) → 2 IP configuration → 3 gateway → 4 internet by number → 5 DNS by name. Each layer leans on the one below, so a higher fix on a broken lower layer is wasted work.", simple:"Start with the cable. Climb one layer at a time.", example:"'Website down' that turned out to be an unplugged switch — Layer 1 beats reinstalling anything."},
+ {sec:"s6", keys:["everyone","scope","one device","all devices"], full:"Scope first: <b>one device</b> down points at that device; <b>everyone</b> down points at shared gear — switch, router, provider. And always ask 'what changed?' — most faults follow a change.", simple:"One device = its problem. Everybody = shared equipment's problem.", example:"Whole office offline after the cleaner unplugged the switch to vacuum. Classic."}
+];
+var LABHINTS = {
+ s1:"Watch what each hop ADDS. The switch only knows local (MAC) delivery; the moment the destination is another network, the router takes over. If a checkpoint trips you: ask 'is this hop inside my network or leaving it?'",
+ s2:"Street-and-house thinking: compare only the first three numbers for /24. Same first three = same street. And remember the two reserved addresses — .0 names the street, .255 shouts to all of it — so devices get the 254 in between.",
+ s3:"Match by the JOB, not the letters. Ask: is this about names (DNS), getting an address (DHCP), web pages (HTTP/HTTPS), reliability (TCP), speed (UDP), files (FTP) or mail (SMTP)? For scenarios, imagine the app in your hand.",
+ s4:"Read the description for the JOB being done: delivering inside one network = switch; joining networks = router; guarding = firewall; answering requests = server; bridging Wi-Fi = access point.",
+ s5:"For the stack rebuild, chant it top-down: Application, Presentation, Session, Transport, Network, Data Link, Physical. Explore each layer in Part 1 first — the order will stick once you've touched them all.",
+ s6:"Never skip the physical layer, even when the symptom sounds smart. Order for every case: connection → IP address → gateway → then the fancy stuff. The symptom text usually whispers which layer is broken.",
+ gen:"Tell me which section you're in, or tap 'Ask Nex' from inside a section — I'll aim the hint at that lab."
+};
+var SUGGEST = {
+ gen:["What is a network?","What is a packet?","Tell me about DNS"],
+ s1:["Switch or router — who does what?","LAN vs WAN?","Walk me through the packet journey"],
+ s2:["Explain the subnet mask simpler","What is a gateway?","Why 254 hosts?"],
+ s3:["TCP vs UDP?","What does DNS do?","What does DHCP do?"],
+ s4:["What does a firewall do?","Modem vs router?","What is a server?"],
+ s5:["List the 7 OSI layers","What is encapsulation?","Layer 3 — what happens there?"],
+ s6:["What does 169.254 mean?","How do I use ping?","Where do I start troubleshooting?"]
+};
+var lastEntry = null;
+
+function nexSay(html, silent){
+  var log = $("chatLog"); if (!log) return;
+  var m = el("div", "msg nex"); m.innerHTML = html; log.appendChild(m);
+  log.scrollTop = log.scrollHeight;
+  if (silent && !$("trainerPanel").classList.contains("open")) { /* toast already handled by caller */ }
+}
+function meSay(text){ var log = $("chatLog"); var m = el("div", "msg me"); m.textContent = text; log.appendChild(m); log.scrollTop = log.scrollHeight; }
+function openTrainer(){
+  $("trainerPanel").classList.add("open");
+  if (!P.trainerWelcomed){
+    P.trainerWelcomed = true; save();
+    nexSay("👋 I'm <b>Nex</b>, your personal AI trainer for this course. I know every section, lab and check in here. Ask me to <b>explain</b> a concept, make it <b>simpler</b>, show an <b>example</b>, or give you a <b>hint</b> — I coach, I don't hand out check answers. What are we working on?");
+  }
+  nexContext();
+}
+function nexContext(){
+  var key = CUR && $("view-section").classList.contains("on") ? CUR.id : "gen";
+  var row = $("chipRow"); row.innerHTML = "";
+  (SUGGEST[key] || SUGGEST.gen).forEach(function(q){
+    var b = el("button", "mini", q); b.type = "button";
+    b.addEventListener("click", function(){ meSay(q); trainerAnswer(q); });
+    row.appendChild(b);
+  });
+}
+function keyHit(t, k){
+  if (k.indexOf(" ") >= 0 || k.indexOf("/") >= 0) return t.indexOf(k) >= 0;
+  return t.indexOf(" " + k + " ") >= 0;
+}
+function findEntry(text){
+  var t = " " + text.toLowerCase().replace(/[^a-z0-9/ ]+/g, " ").replace(/\s+/g, " ") + " ";
+  var best = null, bestScore = 0;
+  KB.forEach(function(e){
+    var s = 0;
+    e.keys.forEach(function(k){ if (keyHit(t, k)) s += k.length; });
+    if (CUR && e.sec === CUR.id) s += 2;
+    if (s > bestScore){ bestScore = s; best = e; }
+  });
+  return bestScore >= 3 ? best : null;
+}
+function trainerAnswer(text){
+  var t = text.toLowerCase();
+  if (/(progress|how am i|my score|how many.*done)/.test(t)){
+    nexSay("Here's where you stand: <b>" + doneCount() + " of 6 sections complete</b>, " + Object.keys(P.labs).filter(function(k){ return P.labs[k]; }).length + " labs finished" + (P.finalScore !== null && P.finalScore !== undefined ? ", final score " + P.finalScore + "/12" : "") + ". " + (doneCount() === 6 ? "Everything's done except glory — go take the Final. 🏆" : "Next best move: open the next unfinished section from the home tiles."));
+    return;
+  }
+  if (/(hint|stuck|lab help)/.test(t)){
+    var hintKey = CUR && $("view-section").classList.contains("on") ? CUR.id : "gen";
+    nexSay("🕵️ <b>Lab hint:</b> " + LABHINTS[hintKey]);
+    return;
+  }
+  var mode = "full";
+  if (/(simpl|easier|plain english|confus|don't understand|dont understand)/.test(t)) mode = "simple";
+  if (/(example|real life|show me)/.test(t)) mode = "example";
+  var e = findEntry(text);
+  if (!e && lastEntry && mode !== "full"){ e = lastEntry; }
+  if (e){
+    lastEntry = e;
+    var body = mode === "simple" ? e.simple : (mode === "example" ? e.example : e.full);
+    nexSay((mode === "simple" ? "In plain terms: " : mode === "example" ? "Real-life version: " : "") + body);
+  } else {
+    nexSay("Good question — that one's outside my course notes, and I only teach what this course covers (I won't guess at you). Try asking me about <b>packets, IP addresses, subnet masks, DNS, DHCP, TCP vs UDP, switches, routers, firewalls, the OSI layers, ping</b>, or <b>troubleshooting order</b> — or tap a suggestion below.");
+  }
+}
+$("chatForm").addEventListener("submit", function(ev){
+  ev.preventDefault();
+  var v = $("chatInput").value.trim(); if (!v) return;
+  $("chatInput").value = "";
+  meSay(v); trainerAnswer(v);
+});
+$("actSimpler").addEventListener("click", function(){ if (lastEntry){ meSay("Explain it simpler"); nexSay("In plain terms: " + lastEntry.simple); } else nexSay("Ask me about a topic first — then I'll re-explain that topic in the plainest words I have."); });
+$("actExample").addEventListener("click", function(){ if (lastEntry){ meSay("Show an example"); nexSay("Real-life version: " + lastEntry.example); } else nexSay("Ask me about a topic first — then I'll give you a real-life example of it."); });
+$("actHint").addEventListener("click", function(){ meSay("Hint for the lab"); trainerAnswer("hint"); });
+
+/* ---------- init ---------- */
+if (P.name) $("nameInput").value = P.name;
+renderTiles();
+updateProgress();
+refreshCert();
+nexContext();
+</script>
+</body>
+</html>
