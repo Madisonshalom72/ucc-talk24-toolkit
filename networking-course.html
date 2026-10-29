@@ -221,6 +221,60 @@ footer{margin-top:44px; border-top:1px solid var(--line); padding-top:18px; colo
 footer .credit{color:var(--dim)}
 .hidden{display:none !important}
 </style>
+
+<style data-motion>
+/* ===== MOTION PASS — 2026-10-29: "all my sites have moving motion" ===== */
+.hero h1{background-size:220% 100%; animation:gradShift 8s ease-in-out infinite alternate}
+@keyframes gradShift{from{background-position:0% 50%}to{background-position:100% 50%}}
+.hero .promise .chip{animation:fadeUp .6s ease both}
+.hero .promise .chip:nth-child(2){animation-delay:.07s}.hero .promise .chip:nth-child(3){animation-delay:.14s}
+.hero .promise .chip:nth-child(4){animation-delay:.21s}.hero .promise .chip:nth-child(5){animation-delay:.28s}
+/* gentle Ken Burns drift on tile art; pauses off-screen via .mv-off */
+.tile .art img{animation:kb 15s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.03) translate(0,0)}to{transform:scale(1.1) translate(-1.6%,-1.6%)}}
+.tile.mv-off .fxlayer i, .tile.mv-off .fxlayer .osi i, .tile.mv-off .big, .tile.mv-off .art img{animation-play-state:paused !important}
+/* fx overlay layers (packet travel, sweeps, nodes, OSI, pings) */
+.fxlayer{position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden}
+.fxlayer i{position:absolute; display:block}
+.pkt{width:100%; height:0; top:56%; animation:pktTravel 3.8s linear infinite}
+.pkt::before{content:""; position:absolute; right:-6px; top:-5px; width:10px; height:10px; border-radius:50%; background:var(--glow); box-shadow:0 0 12px 3px rgba(103,232,249,.75)}
+.pkt.p2{animation-delay:-1.3s}.pkt.p3{animation-delay:-2.6s}
+.pkt.slow{top:36%; animation-duration:6.5s}
+@keyframes pktTravel{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+.sweep{left:0; top:0; bottom:0; width:100%; background:linear-gradient(90deg, transparent 0%, rgba(34,211,238,.15) 86%, rgba(103,232,249,.5) 96%, rgba(103,232,249,.85) 100%); animation:sweepMove 4.4s linear infinite}
+@keyframes sweepMove{from{transform:translateX(-102%)}to{transform:translateX(102%)}}
+.fxnode{width:11px; height:11px; border-radius:50%; background:var(--cyan); opacity:.15}
+.fxnode.n1{left:16%; top:28%}.fxnode.n2{left:38%; top:60%}.fxnode.n3{left:62%; top:32%}.fxnode.n4{left:84%; top:58%}
+.fxnode{animation:nodeBlink 3.2s ease-in-out infinite}
+.fxnode.n2{animation-delay:.5s}.fxnode.n3{animation-delay:1s}.fxnode.n4{animation-delay:1.5s}
+@keyframes nodeBlink{0%,100%{opacity:.15; box-shadow:none}12%{opacity:1; box-shadow:0 0 14px 3px rgba(34,211,238,.65)}30%{opacity:.15; box-shadow:none}}
+.osi{position:absolute; right:10px; bottom:10px; display:flex; flex-direction:column; gap:2.5px}
+.osi i{position:static; width:44px; height:5px; border-radius:3px; background:var(--cyan); opacity:.18; animation:osiSeq 3.6s ease-in-out infinite}
+.osi i:nth-child(2){animation-delay:.16s}.osi i:nth-child(3){animation-delay:.32s}.osi i:nth-child(4){animation-delay:.48s}
+.osi i:nth-child(5){animation-delay:.64s}.osi i:nth-child(6){animation-delay:.8s}.osi i:nth-child(7){animation-delay:.96s}
+@keyframes osiSeq{0%,100%{opacity:.18; box-shadow:none}8%{opacity:1; box-shadow:0 0 10px 2px rgba(34,211,238,.7)}26%{opacity:.18; box-shadow:none}}
+.ping{left:50%; top:46%; width:54px; height:54px; margin:-27px 0 0 -27px; border:2px solid rgba(103,232,249,.85); border-radius:50%; animation:pingRing 2.6s ease-out infinite}
+@keyframes pingRing{from{transform:scale(.25); opacity:.9}to{transform:scale(1.25); opacity:0}}
+.halo{left:50%; top:44%; width:120px; height:120px; margin:-60px 0 0 -60px; border-radius:50%; background:radial-gradient(circle, rgba(103,232,249,.34), transparent 65%); animation:haloBreath 3.4s ease-in-out infinite}
+@keyframes haloBreath{0%,100%{transform:scale(.85); opacity:.55}50%{transform:scale(1.08); opacity:1}}
+/* Final trophy bobs with a breathing glow */
+.tile.final .big{animation:trophyBob 3s ease-in-out infinite}
+@keyframes trophyBob{0%,100%{transform:translateY(0); filter:drop-shadow(0 0 10px rgba(34,211,238,.55))}50%{transform:translateY(-7px); filter:drop-shadow(0 0 22px rgba(34,211,238,.9))}}
+/* Nex avatars bob gently (FAB + header) */
+@keyframes fabBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+#trainerFab img, .trainer-btn img{animation:fabBob 3.2s ease-in-out infinite}
+/* More-courses menu */
+.mc-wrap{position:relative; display:inline-block}
+.mc-menu{position:absolute; top:calc(100% + 8px); right:0; min-width:238px; background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:7px; display:none; z-index:95; box-shadow:0 18px 40px rgba(0,0,0,.6); text-align:left}
+.mc-menu.open{display:block; animation:fadeUp .25s ease both}
+.mc-menu a{display:block; padding:9px 11px; border-radius:9px; color:var(--txt); text-decoration:none; font-size:13.5px; font-weight:600}
+.mc-menu a small{display:block; color:var(--dim); font-size:11.5px; font-weight:500; margin-top:1px}
+.mc-menu a:hover{background:rgba(34,211,238,.14)}
+@media (prefers-reduced-motion: reduce){
+  .hero h1,.hero .promise .chip,.tile .art img,.pkt,.sweep,.fxnode,.osi i,.ping,.halo,.tile.final .big,
+  #trainerFab img,.trainer-btn img{animation:none !important}
+}
+</style>
 </head>
 <body>
 
@@ -231,7 +285,7 @@ footer .credit{color:var(--dim)}
       <div><b>NETWORKING</b><small>For Beginners</small></div>
     </div>
     <nav>
-      <a class="btn ghost" href="#" data-sister-course-link>More courses</a>
+      <span class="mc-wrap"><a class="btn ghost" href="#" data-sister-course-link id="mcToggle" aria-haspopup="true" aria-expanded="false">More courses ▾</a><span class="mc-menu" id="mcMenu" role="menu"><a href="https://madisonshalom72.github.io/ucc-talk24-toolkit/ai-agents-course.html">AI Agents<small>Model · Tools · Memory · Loop · Guardrails</small></a><a href="https://madisonshalom72.github.io/ucc-talk24-toolkit/data-analytics-course.html">Data Analytics<small>Excel · Power BI · SQL · Python</small></a><a href="https://madisonshalom72.github.io/ucc-talk24-toolkit/law-course.html">L.A.W. — Land · Air · Water<small>The jurisdiction course</small></a></span></span>
       <button class="btn" id="homeBtn" type="button">⌂ Home</button>
       <button class="btn trainer-btn" id="trainerBtnTop" type="button"><img src="net-trainer.jpg" alt="Nex, your AI trainer">Ask Nex</button>
     </nav>
@@ -345,7 +399,7 @@ footer .credit{color:var(--dim)}
 
   <footer>
     <p class="credit">Interactive course based on “The Computer Networking Bible for Beginners” outline by IT-HUB-Official.</p>
-    <p>Keep learning: <a href="#" data-sister-course-link>More courses</a> · Foundation for CCNA &amp; IT support studies. This course teaches concepts; hands-on practice on real gear is the next step.</p>
+    <p>Keep learning: <a href="https://madisonshalom72.github.io/ucc-talk24-toolkit/ai-agents-course.html" data-sister-course-link>AI Agents</a> · <a href="https://madisonshalom72.github.io/ucc-talk24-toolkit/data-analytics-course.html" data-sister-course-link>Data Analytics</a> · Foundation for CCNA &amp; IT support studies. This course teaches concepts; hands-on practice on real gear is the next step.</p>
   </footer>
 </div>
 
@@ -585,25 +639,33 @@ function showView(name){
 }
 
 /* ---------- home tiles ---------- */
+var FX = {
+    s1: '<i class="pkt"></i><i class="pkt p2"></i><i class="pkt p3"></i>',
+    s2: '<i class="sweep"></i><i class="pkt slow"></i>',
+    s3: '<i class="pkt"></i><i class="pkt p2"></i>',
+    s4: '<i class="fxnode n1"></i><i class="fxnode n2"></i><i class="fxnode n3"></i><i class="fxnode n4"></i>',
+    s5: '<span class="osi"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>',
+    s6: '<i class="ping"></i>'
+  };
 function renderTiles(){
   var g = $("tileGrid"); g.innerHTML = "";
   SECTIONS.forEach(function(s, i){
     var t = el("button", "tile sheen"); t.type = "button"; t.style.animationDelay = (i * 0.06) + "s";
     var done = !!P.done[s.id];
-    t.innerHTML = '<div class="art"><img src="' + s.img + '" alt="' + s.title + ' illustration"><span class="num">' + s.num + '</span>' +
+    t.innerHTML = '<div class="art"><img src="' + s.img + '" alt="' + s.title + ' illustration"><span class="fxlayer" aria-hidden="true">' + (FX[s.id] || '') + '</span><span class="num">' + s.num + '</span>' +
       '<span class="state' + (done ? " done" : "") + '">' + (done ? "✔ COMPLETE" : (P.labs[s.id] ? "LAB DONE · CHECK LEFT" : "START")) + '</span></div>' +
       '<div class="body"><h3>' + s.title + '</h3><p>' + s.tag + '</p><div class="go">' + (done ? "Review section →" : "Enter section →") + '</div></div>';
     t.addEventListener("click", function(){ openSection(s.id); });
     g.appendChild(t);
   });
-  var tr = el("button", "tile sheen"); tr.type = "button";
-  tr.innerHTML = '<div class="art"><img src="net-trainer.jpg" alt="Nex, your personal AI trainer"><span class="num">AI</span><span class="state">ALWAYS ON</span></div>' +
+  var tr = el("button", "tile sheen trainer-tile"); tr.type = "button";
+  tr.innerHTML = '<div class="art"><img src="net-trainer.jpg" alt="Nex, your personal AI trainer"><span class="fxlayer" aria-hidden="true"><i class="halo"></i></span><span class="num">AI</span><span class="state">ALWAYS ON</span></div>' +
     '<div class="body"><h3>Meet Nex — Your AI Trainer</h3><p>Stuck on a concept? Nex explains it, simplifies it, gives examples and drops lab hints — without handing you the answers.</p><div class="go">Chat with Nex →</div></div>';
   tr.addEventListener("click", openTrainer);
   g.appendChild(tr);
   var fin = el("button", "tile final sheen"); fin.type = "button";
   var fn = doneCount();
-  fin.innerHTML = '<div class="art"><div class="big">🏆</div><span class="num">FINAL</span><span class="state' + (P.finalPassed ? " done" : "") + '">' + (P.finalPassed ? "✔ PASSED" : fn + " / 6 SECTIONS") + '</span></div>' +
+  fin.innerHTML = '<div class="art"><div class="big">🏆</div><span class="fxlayer" aria-hidden="true"><i class="ping"></i></span><span class="num">FINAL</span><span class="state' + (P.finalPassed ? " done" : "") + '">' + (P.finalPassed ? "✔ PASSED" : fn + " / 6 SECTIONS") + '</span></div>' +
     '<div class="body"><h3>The Final Check</h3><p>Twelve questions across all six sections. Complete every section and score 10+ to earn your certificate.</p><div class="go">' + (P.finalPassed ? "See your result →" : "Take the final →") + '</div></div>';
   fin.addEventListener("click", function(){ openFinal(); });
   g.appendChild(fin);
@@ -1186,6 +1248,28 @@ renderTiles();
 updateProgress();
 refreshCert();
 nexContext();
+</script>
+
+<script data-motion>
+(function(){try{
+  var RM = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var tg = document.getElementById("mcToggle"), mn = document.getElementById("mcMenu");
+  if(tg && mn){
+    tg.addEventListener("click", function(ev){ ev.preventDefault(); var o = mn.classList.toggle("open"); tg.setAttribute("aria-expanded", o ? "true" : "false"); });
+    document.addEventListener("click", function(ev){ if(ev.target && ev.target.closest && !ev.target.closest(".mc-wrap")){ mn.classList.remove("open"); tg.setAttribute("aria-expanded","false"); } });
+  }
+  var io = ("IntersectionObserver" in window && !RM) ? new IntersectionObserver(function(es){ es.forEach(function(e){
+    e.target.classList.toggle("mv-off", !e.isIntersecting);
+  }); }, { threshold: .08 }) : null;
+  function arm(){
+    document.querySelectorAll("#tileGrid .tile").forEach(function(t){
+      if(!t._mv){ t._mv = 1; if(io) io.observe(t); }
+    });
+  }
+  arm();
+  var grid = document.getElementById("tileGrid");
+  if(grid && "MutationObserver" in window){ new MutationObserver(arm).observe(grid, { childList: true }); }
+}catch(e){} })();
 </script>
 </body>
 </html>

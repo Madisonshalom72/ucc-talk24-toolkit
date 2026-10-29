@@ -192,13 +192,88 @@ footer.site a{color:var(--sky)}
 .coach-input button{background:var(--blue); color:#fff; border:none; border-radius:11px; padding:0 15px; font-weight:800}
 @media (max-width:520px){ .tiles{grid-template-columns:1fr 1fr} .tile-art{height:96px} .tile h3{font-size:15.5px} .tile p{font-size:12px} .bins{grid-template-columns:1fr} #coachMsgs{height:250px} .logo .hand{display:none} .logo{font-size:15px} .navlink{padding:5px 8px; font-size:12px} }
 </style>
+
+<style data-motion>
+/* ===== MOTION PASS — 2026-10-29: "all my sites have moving motion" ===== */
+body::before{content:""; position:fixed; inset:-12%; z-index:-1; pointer-events:none;
+  background:radial-gradient(700px 380px at 82% -4%, rgba(59,130,246,.15), transparent 60%), radial-gradient(620px 420px at 6% 26%, rgba(56,189,248,.10), transparent 55%);
+  animation:bgDrift 26s ease-in-out infinite alternate}
+@keyframes bgDrift{from{transform:translate3d(-1.6%,-1%,0) scale(1)}to{transform:translate3d(1.6%,1.4%,0) scale(1.05)}}
+.hero h1 .grad{background-size:220% 100%; animation:gradShift 7s ease-in-out infinite alternate}
+@keyframes gradShift{from{background-position:0% 50%}to{background-position:100% 50%}}
+.formula-eq span{animation:eqGlow 3.6s ease-in-out infinite}
+.formula-eq span:nth-of-type(2){animation-delay:.3s}.formula-eq span:nth-of-type(3){animation-delay:.6s}
+.formula-eq span:nth-of-type(4){animation-delay:.9s}.formula-eq span:nth-of-type(5){animation-delay:1.2s}
+.formula-eq span:nth-of-type(6){animation-delay:1.5s}
+@keyframes eqGlow{0%,100%{text-shadow:none}50%{text-shadow:0 0 16px rgba(125,211,252,.95)}}
+/* staggered reveal; animations pause while a tile is off-screen */
+.tile{opacity:0; transform:translateY(16px)}
+.tile.mv-in{opacity:1; transform:none; transition:opacity .55s ease var(--d,0s), transform .55s ease var(--d,0s), border-color .18s ease, box-shadow .18s ease}
+.tile.mv-in:hover{transform:translateY(-3px); transition-delay:0s,0s,0s,0s}
+.tile.mv-off svg *{animation-play-state:paused !important}
+/* M1 — formula blocks light up in sequence */
+@keyframes blkPulse{0%,100%{opacity:.6}50%{opacity:1}}
+.fx-blocks rect{animation:blkPulse 2.8s ease-in-out infinite}
+.fx-blocks rect:nth-of-type(2){animation-delay:.25s}.fx-blocks rect:nth-of-type(3){animation-delay:.5s}
+.fx-blocks rect:nth-of-type(4){animation-delay:.75s}.fx-blocks rect:nth-of-type(5){animation-delay:1s}
+.fx-blocks rect:nth-of-type(6){animation-delay:1.25s}
+/* M2 — JSON packet rides the flow; tool gear turns */
+@keyframes pktRun{0%{transform:translateX(124px); opacity:0}10%{opacity:1}88%{opacity:1}100%{transform:translateX(306px); opacity:0}}
+.fx-pkt{animation:pktRun 3.4s linear infinite}
+@keyframes spinSlow{to{transform:rotate(360deg)}}
+.fx-gear{transform-box:fill-box; transform-origin:center; animation:spinSlow 16s linear infinite}
+/* M3 — ReAct ring rotates; T/A/O nodes pulse in turn */
+.fx-ring,.fx-ring2{transform-box:view-box; transform-origin:200px 75px; animation:spinSlow 10s linear infinite}
+@keyframes nodePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.13)}}
+.fx-node{transform-box:fill-box; transform-origin:center; animation:nodePulse 2.6s ease-in-out infinite}
+/* M4 — bolt flickers; fact cards drift into the vault */
+@keyframes boltZap{0%,100%{opacity:1}8%{opacity:.35}16%{opacity:1}54%{opacity:1}62%{opacity:.45}70%{opacity:1}}
+.fx-bolt{animation:boltZap 3.8s linear infinite}
+@keyframes cardDrift{0%{transform:translate(140px,0); opacity:0}12%{opacity:.95}82%{opacity:.95}100%{transform:translate(240px,0); opacity:0}}
+.fx-card{animation:cardDrift 3.6s ease-in-out infinite}
+.fx-card.d2{animation-delay:1.8s}
+/* M5 — magnifier searches the documents */
+@keyframes magSearch{0%,100%{transform:translate(0,0)}25%{transform:translate(-8px,-5px)}55%{transform:translate(3px,3px)}78%{transform:translate(8px,-3px)}}
+.fx-mag{animation:magSearch 5.5s ease-in-out infinite}
+/* M6 — shield check draws itself; MCP plug blinks */
+@keyframes drawCheck{0%{stroke-dashoffset:70; opacity:1}38%{stroke-dashoffset:0; opacity:1}82%{stroke-dashoffset:0; opacity:1}96%,100%{stroke-dashoffset:0; opacity:.25}}
+.fx-draw{stroke-dasharray:70; animation:drawCheck 4.4s ease-in-out infinite}
+@keyframes plugBlink{0%,100%{opacity:1}50%{opacity:.4}}
+.fx-plug{animation:plugBlink 2.2s ease-in-out infinite}
+/* M7 — signals flow down the team wires */
+@keyframes dashFlow{to{stroke-dashoffset:-56}}
+.fx-flow{stroke-dasharray:7 7; animation:dashFlow 2.2s linear infinite}
+/* M8 — route dashes march to the flag; flag waves; stops pulse */
+@keyframes dashFlow2{to{stroke-dashoffset:-64}}
+.fx-flow2{animation:dashFlow2 3.2s linear infinite}
+@keyframes flagSway{from{transform:rotate(-3.5deg)}to{transform:rotate(3.5deg)}}
+.fx-flag{transform-box:fill-box; transform-origin:0% 100%; animation:flagSway 2.4s ease-in-out infinite alternate}
+.fx-nodes circle{transform-box:fill-box; transform-origin:center; animation:nodePulse 2.6s ease-in-out infinite}
+.fx-nodes circle:nth-child(2){animation-delay:.4s}.fx-nodes circle:nth-child(3){animation-delay:.8s}.fx-nodes circle:nth-child(4){animation-delay:1.2s}
+/* Coach Nova — pulse ring + gentle bob */
+@keyframes coachPulse{0%{box-shadow:0 10px 28px rgba(2,8,30,.65), 0 0 0 1px rgba(125,211,252,.35), 0 0 0 0 rgba(125,211,252,.45)}70%{box-shadow:0 10px 28px rgba(2,8,30,.65), 0 0 0 1px rgba(125,211,252,.35), 0 0 0 15px rgba(125,211,252,0)}100%{box-shadow:0 10px 28px rgba(2,8,30,.65), 0 0 0 1px rgba(125,211,252,.35), 0 0 0 0 rgba(125,211,252,0)}}
+#coachBtn{animation:coachPulse 2.8s ease-out infinite}
+#coachBtn .avatar{animation:bob 3.2s ease-in-out infinite}
+/* More-courses menu */
+.mc-wrap{position:relative; display:inline-block}
+.mc-menu{position:absolute; top:calc(100% + 8px); right:0; min-width:238px; background:var(--panel2); border:1px solid var(--line); border-radius:14px; padding:7px; display:none; z-index:90; box-shadow:0 18px 40px rgba(2,8,30,.7); text-align:left}
+.mc-menu.open{display:block; animation:fadeUp .25s ease both}
+.mc-menu a{display:block; padding:9px 11px; border-radius:9px; color:var(--white); text-decoration:none; font-size:13.5px; font-weight:600}
+.mc-menu a small{display:block; color:var(--muted); font-size:11.5px; font-weight:500; margin-top:1px}
+.mc-menu a:hover{background:rgba(59,130,246,.18)}
+@media (prefers-reduced-motion: reduce){
+  body::before,.hero h1 .grad,.formula-eq span,.fx-blocks rect,.fx-pkt,.fx-gear,.fx-ring,.fx-ring2,.fx-node,
+  .fx-bolt,.fx-card,.fx-mag,.fx-draw,.fx-plug,.fx-flow,.fx-flow2,.fx-flag,.fx-nodes circle,#coachBtn,#coachBtn .avatar{animation:none !important}
+  .tile{opacity:1 !important; transform:none !important}
+}
+</style>
 </head>
 <body>
 <header class="site">
   <div class="site-in">
     <div class="logo"><span class="badge" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="7" width="16" height="12" rx="3" fill="#fff"/><circle cx="9.5" cy="13" r="1.6" fill="#2563eb"/><circle cx="14.5" cy="13" r="1.6" fill="#2563eb"/><path d="M12 7V4M12 4h.01" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M8.5 16.5h7" stroke="#2563eb" stroke-width="1.6" stroke-linecap="round"/></svg></span> AI&nbsp;AGENTS <span class="hand" style="font-size:14px">interactive course</span></div>
     <nav>
-      <a class="navlink" href="#" data-sister-course-link title="More courses">More courses</a>
+      <span class="mc-wrap"><a class="navlink" href="#" data-sister-course-link id="mcToggle" title="More courses" aria-haspopup="true" aria-expanded="false">More courses ▾</a><span class="mc-menu" id="mcMenu" role="menu"><a href="https://madisonshalom72.github.io/ucc-talk24-toolkit/data-analytics-course.html">Data Analytics<small>Excel · Power BI · SQL · Python</small></a><a href="https://madisonshalom72.github.io/ucc-talk24-toolkit/networking-course.html">Computer Networking for Beginners<small>Fundamentals · IP · Protocols · OSI</small></a><a href="https://madisonshalom72.github.io/ucc-talk24-toolkit/law-course.html">L.A.W. — Land · Air · Water<small>The jurisdiction course</small></a></span></span>
       <a class="navlink" href="#home" id="navHome">Course home</a>
     </nav>
   </div>
@@ -224,48 +299,48 @@ footer.site a{color:var(--sky)}
   <section class="tiles" id="tileGrid" aria-label="Course modules">
     <!-- M1 -->
     <button class="tile" data-goto="1">
-      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><g font-family="monospace" font-size="11" fill="#dbeafe" text-anchor="middle"><rect x="30" y="26" width="100" height="34" rx="8" fill="#1d4ed8"/><text x="80" y="47">MODEL</text><rect x="150" y="26" width="110" height="34" rx="8" fill="#2563eb"/><text x="205" y="47">INSTRUCT.</text><rect x="280" y="26" width="90" height="34" rx="8" fill="#1d4ed8"/><text x="325" y="47">TOOLS</text><rect x="30" y="76" width="100" height="34" rx="8" fill="#2563eb"/><text x="80" y="97">MEMORY</text><rect x="150" y="76" width="110" height="34" rx="8" fill="#1d4ed8"/><text x="205" y="97">LOOP</text><rect x="280" y="76" width="90" height="34" rx="8" fill="#2563eb"/><text x="325" y="97">GUARDS</text></g><circle cx="200" cy="132" r="4" fill="#7dd3fc"/><path d="M60 60v10M200 60v10M340 60v10M60 110v12M340 110v12" stroke="#7dd3fc" stroke-width="2"/></svg></span>
+      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><g class="fx-blocks" font-family="monospace" font-size="11" fill="#dbeafe" text-anchor="middle"><rect x="30" y="26" width="100" height="34" rx="8" fill="#1d4ed8"/><text x="80" y="47">MODEL</text><rect x="150" y="26" width="110" height="34" rx="8" fill="#2563eb"/><text x="205" y="47">INSTRUCT.</text><rect x="280" y="26" width="90" height="34" rx="8" fill="#1d4ed8"/><text x="325" y="47">TOOLS</text><rect x="30" y="76" width="100" height="34" rx="8" fill="#2563eb"/><text x="80" y="97">MEMORY</text><rect x="150" y="76" width="110" height="34" rx="8" fill="#1d4ed8"/><text x="205" y="97">LOOP</text><rect x="280" y="76" width="90" height="34" rx="8" fill="#2563eb"/><text x="325" y="97">GUARDS</text></g><circle cx="200" cy="132" r="4" fill="#7dd3fc"/><path d="M60 60v10M200 60v10M340 60v10M60 110v12M340 110v12" stroke="#7dd3fc" stroke-width="2"/></svg></span>
       <span class="tile-body"><span class="tile-kicker">Module 1</span><h3>The Agent Formula</h3><p>Six building blocks that turn a chatbot into an agent. Tap each part and meet a working example.</p><span class="tile-foot"><span class="chip" data-status="1">Not started</span><span class="go">Start →</span></span></span>
     </button>
     <!-- M2 -->
     <button class="tile" data-goto="2">
-      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><rect x="24" y="46" width="104" height="52" rx="12" fill="#1e3a8a"/><text x="76" y="70" font-size="12" fill="#dbeafe" text-anchor="middle">“Book it</text><text x="76" y="87" font-size="12" fill="#dbeafe" text-anchor="middle">Tuesday”</text><path d="M132 72h26" stroke="#7dd3fc" stroke-width="3"/><rect x="162" y="38" width="108" height="68" rx="10" fill="#0a173a" stroke="#38bdf8" stroke-width="2"/><text x="174" y="60" font-family="monospace" font-size="11" fill="#7dd3fc">{ "tool":</text><text x="174" y="76" font-family="monospace" font-size="11" fill="#fbbf24">"calendar",</text><text x="174" y="92" font-family="monospace" font-size="11" fill="#7dd3fc">  "day":"Tue" }</text><path d="M274 72h24" stroke="#7dd3fc" stroke-width="3"/><circle cx="330" cy="72" r="24" fill="#2563eb"/><path d="M330 56v6M330 82v6M314 72h6M340 72h6M319 61l4 4M341 83l-4-4M341 61l-4 4M319 83l4-4" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></span>
+      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><rect x="24" y="46" width="104" height="52" rx="12" fill="#1e3a8a"/><text x="76" y="70" font-size="12" fill="#dbeafe" text-anchor="middle">“Book it</text><text x="76" y="87" font-size="12" fill="#dbeafe" text-anchor="middle">Tuesday”</text><path d="M132 72h26" stroke="#7dd3fc" stroke-width="3"/><rect x="162" y="38" width="108" height="68" rx="10" fill="#0a173a" stroke="#38bdf8" stroke-width="2"/><text x="174" y="60" font-family="monospace" font-size="11" fill="#7dd3fc">{ "tool":</text><text x="174" y="76" font-family="monospace" font-size="11" fill="#fbbf24">"calendar",</text><text x="174" y="92" font-family="monospace" font-size="11" fill="#7dd3fc">  "day":"Tue" }</text><path d="M274 72h24" stroke="#7dd3fc" stroke-width="3"/><circle class="fx-pkt" cx="0" cy="72" r="5.5" fill="#fbbf24"/><circle cx="330" cy="72" r="24" fill="#2563eb"/><path class="fx-gear" d="M330 56v6M330 82v6M314 72h6M340 72h6M319 61l4 4M341 83l-4-4M341 61l-4 4M319 83l4-4" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></span>
       <span class="tile-body"><span class="tile-kicker">Module 2</span><h3>Agents vs Workflows · Function Calling</h3><p>Fixed paths vs. a model that chooses — then run a live tool-call simulator.</p><span class="tile-foot"><span class="chip" data-status="2">Not started</span><span class="go">Start →</span></span></span>
     </button>
     <!-- M3 -->
     <button class="tile" data-goto="3">
-      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><circle cx="200" cy="75" r="46" fill="none" stroke="#1d4ed8" stroke-width="10" stroke-dasharray="70 24" stroke-linecap="round"/><path d="M246 38l4 16-16-3z" fill="#7dd3fc"/><circle cx="200" cy="29" r="17" fill="#2563eb"/><text x="200" y="34" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">T</text><circle cx="244" cy="100" r="17" fill="#2563eb"/><text x="244" y="105" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">A</text><circle cx="156" cy="100" r="17" fill="#2563eb"/><text x="156" y="105" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">O</text><text x="200" y="141" font-size="11" fill="#9db4d8" text-anchor="middle">THOUGHT → ACTION → OBSERVATION</text></svg></span>
+      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><circle class="fx-ring" cx="200" cy="75" r="46" fill="none" stroke="#1d4ed8" stroke-width="10" stroke-dasharray="70 24" stroke-linecap="round"/><path class="fx-ring2" d="M246 38l4 16-16-3z" fill="#7dd3fc"/><circle class="fx-node" cx="200" cy="29" r="17" fill="#2563eb"/><text x="200" y="34" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">T</text><circle class="fx-node" style="animation-delay:.55s" cx="244" cy="100" r="17" fill="#2563eb"/><text x="244" y="105" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">A</text><circle class="fx-node" style="animation-delay:1.1s" cx="156" cy="100" r="17" fill="#2563eb"/><text x="156" y="105" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">O</text><text x="200" y="141" font-size="11" fill="#9db4d8" text-anchor="middle">THOUGHT → ACTION → OBSERVATION</text></svg></span>
       <span class="tile-body"><span class="tile-kicker">Module 3</span><h3>The ReAct Loop</h3><p>Think, act, observe, repeat. Step through a loop — then try to break one and watch guardrails stop it.</p><span class="tile-foot"><span class="chip" data-status="3">Not started</span><span class="go">Start →</span></span></span>
     </button>
     <!-- M4 -->
     <button class="tile" data-goto="4">
-      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><rect x="34" y="34" width="140" height="86" rx="12" fill="#1e3a8a"/><path d="M104 48l-12 24h10l-6 20 22-28h-11l8-16z" fill="#fbbf24"/><text x="104" y="112" font-size="11" fill="#dbeafe" text-anchor="middle">SHORT-TERM</text><rect x="226" y="34" width="140" height="86" rx="12" fill="#172554" stroke="#38bdf8" stroke-width="2"/><rect x="276" y="56" width="40" height="30" rx="5" fill="#2563eb"/><circle cx="296" cy="71" r="6" fill="#0a173a"/><path d="M296 65v-6" stroke="#7dd3fc" stroke-width="3"/><text x="296" y="112" font-size="11" fill="#dbeafe" text-anchor="middle">LONG-TERM VAULT</text></svg></span>
+      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><rect x="34" y="34" width="140" height="86" rx="12" fill="#1e3a8a"/><path class="fx-bolt" d="M104 48l-12 24h10l-6 20 22-28h-11l8-16z" fill="#fbbf24"/><text x="104" y="112" font-size="11" fill="#dbeafe" text-anchor="middle">SHORT-TERM</text><rect x="226" y="34" width="140" height="86" rx="12" fill="#172554" stroke="#38bdf8" stroke-width="2"/><rect x="276" y="56" width="40" height="30" rx="5" fill="#2563eb"/><circle cx="296" cy="71" r="6" fill="#0a173a"/><path d="M296 65v-6" stroke="#7dd3fc" stroke-width="3"/><text x="296" y="112" font-size="11" fill="#dbeafe" text-anchor="middle">LONG-TERM VAULT</text><rect class="fx-card" x="0" y="50" width="26" height="18" rx="4" fill="#7dd3fc"/><rect class="fx-card d2" x="0" y="86" width="26" height="18" rx="4" fill="#38bdf8"/></svg></span>
       <span class="tile-body"><span class="tile-kicker">Module 4</span><h3>Memory</h3><p>What lives only in this task vs. what gets stored for next time. Sort ten facts into the right memory.</p><span class="tile-foot"><span class="chip" data-status="4">Not started</span><span class="go">Start →</span></span></span>
     </button>
     <!-- M5 -->
     <button class="tile" data-goto="5">
-      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><g><rect x="46" y="30" width="86" height="104" rx="6" fill="#dbeafe"/><rect x="60" y="46" width="58" height="6" fill="#3b82f6"/><rect x="60" y="60" width="58" height="6" fill="#93c5fd"/><rect x="60" y="74" width="58" height="6" fill="#93c5fd"/><rect x="60" y="88" width="40" height="6" fill="#93c5fd"/></g><g transform="rotate(-8 250 90)"><rect x="180" y="26" width="86" height="104" rx="6" fill="#bfdbfe"/><rect x="194" y="42" width="58" height="6" fill="#3b82f6"/><rect x="194" y="56" width="58" height="6" fill="#60a5fa"/><rect x="194" y="70" width="44" height="6" fill="#60a5fa"/></g><circle cx="300" cy="66" r="27" fill="none" stroke="#7dd3fc" stroke-width="6"/><path d="M320 86l26 26" stroke="#7dd3fc" stroke-width="8" stroke-linecap="round"/></svg></span>
+      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><g><rect x="46" y="30" width="86" height="104" rx="6" fill="#dbeafe"/><rect x="60" y="46" width="58" height="6" fill="#3b82f6"/><rect x="60" y="60" width="58" height="6" fill="#93c5fd"/><rect x="60" y="74" width="58" height="6" fill="#93c5fd"/><rect x="60" y="88" width="40" height="6" fill="#93c5fd"/></g><g transform="rotate(-8 250 90)"><rect x="180" y="26" width="86" height="104" rx="6" fill="#bfdbfe"/><rect x="194" y="42" width="58" height="6" fill="#3b82f6"/><rect x="194" y="56" width="58" height="6" fill="#60a5fa"/><rect x="194" y="70" width="44" height="6" fill="#60a5fa"/></g><circle class="fx-mag" cx="300" cy="66" r="27" fill="none" stroke="#7dd3fc" stroke-width="6"/><path class="fx-mag" d="M320 86l26 26" stroke="#7dd3fc" stroke-width="8" stroke-linecap="round"/></svg></span>
       <span class="tile-body"><span class="tile-kicker">Module 5</span><h3>RAG — Answers With Receipts</h3><p>Retrieve the documents first, then answer from them. See a guess and a grounded answer side by side.</p><span class="tile-foot"><span class="chip" data-status="5">Not started</span><span class="go">Start →</span></span></span>
     </button>
     <!-- M6 -->
     <button class="tile" data-goto="6">
-      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><path d="M200 18l64 20v42c0 34-28 48-64 58-36-10-64-24-64-58V38z" fill="#1d4ed8"/><path d="M200 30l50 16v36c0 26-22 38-50 46-28-8-50-20-50-46V46z" fill="#2563eb"/><path d="M178 76l16 16 30-34" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="298" y="58" width="26" height="18" rx="4" fill="#7dd3fc"/><path d="M306 76v14M316 76v14" stroke="#7dd3fc" stroke-width="4"/><path d="M292 104h38" stroke="#7dd3fc" stroke-width="5" stroke-linecap="round"/><text x="86" y="86" font-size="13" fill="#9db4d8" text-anchor="middle">MCP</text><path d="M104 80h28" stroke="#7dd3fc" stroke-width="3" stroke-dasharray="5 5"/></svg></span>
+      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><path d="M200 18l64 20v42c0 34-28 48-64 58-36-10-64-24-64-58V38z" fill="#1d4ed8"/><path d="M200 30l50 16v36c0 26-22 38-50 46-28-8-50-20-50-46V46z" fill="#2563eb"/><path class="fx-draw" d="M178 76l16 16 30-34" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect class="fx-plug" x="298" y="58" width="26" height="18" rx="4" fill="#7dd3fc"/><path d="M306 76v14M316 76v14" stroke="#7dd3fc" stroke-width="4"/><path d="M292 104h38" stroke="#7dd3fc" stroke-width="5" stroke-linecap="round"/><text x="86" y="86" font-size="13" fill="#9db4d8" text-anchor="middle">MCP</text><path d="M104 80h28" stroke="#7dd3fc" stroke-width="3" stroke-dasharray="5 5"/></svg></span>
       <span class="tile-body"><span class="tile-kicker">Module 6</span><h3>MCP, Evals &amp; Safety</h3><p>The universal plug for tools, how to grade an agent, and how to spot a prompt injection hiding in data.</p><span class="tile-foot"><span class="chip" data-status="6">Not started</span><span class="go">Start →</span></span></span>
     </button>
     <!-- M7 -->
     <button class="tile" data-goto="7">
-      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><path d="M200 52L96 104M200 52l104 52M200 52v44" stroke="#38bdf8" stroke-width="3"/><g><rect x="168" y="22" width="64" height="46" rx="12" fill="#2563eb"/><circle cx="188" cy="45" r="5" fill="#fff"/><circle cx="212" cy="45" r="5" fill="#fff"/></g><g><rect x="56" y="96" width="64" height="46" rx="12" fill="#1d4ed8"/><circle cx="76" cy="119" r="5" fill="#fff"/><circle cx="100" cy="119" r="5" fill="#fff"/></g><g><rect x="280" y="96" width="64" height="46" rx="12" fill="#1d4ed8"/><circle cx="300" cy="119" r="5" fill="#fff"/><circle cx="324" cy="119" r="5" fill="#fff"/></g><rect x="168" y="96" width="64" height="46" rx="12" fill="#1e40af"/><circle cx="188" cy="119" r="5" fill="#fff"/><circle cx="212" cy="119" r="5" fill="#fff"/></svg></span>
+      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><path class="fx-flow" d="M200 52L96 104M200 52l104 52M200 52v44" stroke="#38bdf8" stroke-width="3" fill="none"/><g><rect class="fx-node" x="168" y="22" width="64" height="46" rx="12" fill="#2563eb"/><circle cx="188" cy="45" r="5" fill="#fff"/><circle cx="212" cy="45" r="5" fill="#fff"/></g><g><rect class="fx-node" style="animation-delay:.45s" x="56" y="96" width="64" height="46" rx="12" fill="#1d4ed8"/><circle cx="76" cy="119" r="5" fill="#fff"/><circle cx="100" cy="119" r="5" fill="#fff"/></g><g><rect class="fx-node" style="animation-delay:.9s" x="280" y="96" width="64" height="46" rx="12" fill="#1d4ed8"/><circle cx="300" cy="119" r="5" fill="#fff"/><circle cx="324" cy="119" r="5" fill="#fff"/></g><rect class="fx-node" style="animation-delay:1.35s" x="168" y="96" width="64" height="46" rx="12" fill="#1e40af"/><circle cx="188" cy="119" r="5" fill="#fff"/><circle cx="212" cy="119" r="5" fill="#fff"/></svg></span>
       <span class="tile-body"><span class="tile-kicker">Module 7</span><h3>One Agent or a Team?</h3><p>Multi-agent systems are power tools — sometimes essential, often overkill. Call five real scenarios.</p><span class="tile-foot"><span class="chip" data-status="7">Not started</span><span class="go">Start →</span></span></span>
     </button>
     <!-- M8 -->
     <button class="tile" data-goto="8">
-      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><path d="M28 122C110 122 110 44 190 62s96 44 182-30" fill="none" stroke="#38bdf8" stroke-width="4" stroke-dasharray="9 7" stroke-linecap="round"/><g fill="#2563eb" stroke="#7dd3fc" stroke-width="2"><circle cx="34" cy="122" r="9"/><circle cx="112" cy="98" r="9"/><circle cx="192" cy="63" r="9"/><circle cx="272" cy="74" r="9"/></g><path d="M352 18v34M352 18h30l-8 9 8 9h-30" fill="#fbbf24" stroke="#fbbf24" stroke-width="2"/><text x="200" y="142" font-size="11" fill="#9db4d8" text-anchor="middle">ROADMAP → FINAL EXAM</text></svg></span>
+      <span class="tile-art"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet"><rect width="400" height="150" fill="#0d2050"/><path class="fx-flow2" d="M28 122C110 122 110 44 190 62s96 44 182-30" fill="none" stroke="#38bdf8" stroke-width="4" stroke-dasharray="9 7" stroke-linecap="round"/><g class="fx-nodes" fill="#2563eb" stroke="#7dd3fc" stroke-width="2"><circle cx="34" cy="122" r="9"/><circle cx="112" cy="98" r="9"/><circle cx="192" cy="63" r="9"/><circle cx="272" cy="74" r="9"/></g><path class="fx-flag" d="M352 18v34M352 18h30l-8 9 8 9h-30" fill="#fbbf24" stroke="#fbbf24" stroke-width="2"/><text x="200" y="142" font-size="11" fill="#9db4d8" text-anchor="middle">ROADMAP → FINAL EXAM</text></svg></span>
       <span class="tile-body"><span class="tile-kicker">Module 8</span><h3>Roadmap + Final Check</h3><p>The 7-step learning path from the sheet — then the 10 interview questions, for real this time.</p><span class="tile-foot"><span class="chip" data-status="8">Not started</span><span class="go">Start →</span></span></span>
     </button>
   </section>
 
   <footer class="site">
-    <p><b>More courses:</b> <a href="#" data-sister-course-link>Data Analytics — the sister course to this one</a> · This course pairs with it: agents that can work, and the data sense to aim them.</p>
+    <p><b>More courses:</b> <a href="https://madisonshalom72.github.io/ucc-talk24-toolkit/data-analytics-course.html" data-sister-course-link>Data Analytics</a> · <a href="https://madisonshalom72.github.io/ucc-talk24-toolkit/networking-course.html" data-sister-course-link>Computer Networking for Beginners</a> · Sister courses in one collection: agents that can work, the data sense to aim them, and the networks they run on.</p>
     <p>Interactive course built from study notes by Ali Data Analytics (alidataanalytics.com). All explanations, examples, and exercises were written for this course in plain English. Educational material — practice projects beat passive reading.</p>
   </footer>
 </main>
@@ -1297,6 +1372,29 @@ const Coach = (function(){
   return { onModule, react, open };
 })();
 window.Coach = Coach;
+</script>
+
+<script data-motion>
+(function(){try{
+  var RM = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var tiles = Array.prototype.slice.call(document.querySelectorAll(".tile"));
+  tiles.forEach(function(t,i){ if(t.style.setProperty){ t.style.setProperty("--d", (i*0.07)+"s"); } });
+  if("IntersectionObserver" in window && !RM){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){
+      e.target.classList.toggle("mv-in", e.isIntersecting);
+      e.target.classList.toggle("mv-off", !e.isIntersecting);
+      if(e.target.querySelectorAll){ e.target.querySelectorAll("svg").forEach(function(sv){
+        if(sv.pauseAnimations && sv.unpauseAnimations){ e.isIntersecting ? sv.unpauseAnimations() : sv.pauseAnimations(); }
+      }); }
+    }); }, { threshold: .1 });
+    tiles.forEach(function(t){ io.observe(t); });
+  } else { tiles.forEach(function(t){ t.classList.add("mv-in"); }); }
+  var tg = document.getElementById("mcToggle"), mn = document.getElementById("mcMenu");
+  if(tg && mn){
+    tg.addEventListener("click", function(ev){ ev.preventDefault(); var o = mn.classList.toggle("open"); tg.setAttribute("aria-expanded", o ? "true" : "false"); });
+    document.addEventListener("click", function(ev){ if(ev.target && ev.target.closest && !ev.target.closest(".mc-wrap")){ mn.classList.remove("open"); tg.setAttribute("aria-expanded","false"); } });
+  }
+}catch(e){ document.querySelectorAll(".tile").forEach(function(t){ t.classList.add("mv-in"); }); }})();
 </script>
 </body>
 </html>
