@@ -165,6 +165,7 @@ body.doclocked{overflow:hidden}
   <section id="docview" hidden>
     <div class="builderbar noprint">
       <button class="goldbtn" id="btnprint">Print / Save as PDF</button>
+      <button class="goldbtn" id="btndownload">Download</button>
       <button class="ghostbtn" id="btnedit">&larr; Edit the answers</button>
       <button class="ghostbtn" id="btnnew">Start another document</button>
     </div>
@@ -638,6 +639,30 @@ function generate(){
 }
 document.getElementById("docform").addEventListener("submit", function(ev){ ev.preventDefault(); generate(); });
 document.getElementById("btnprint").addEventListener("click", function(){ window.print(); });
+document.getElementById("btndownload").addEventListener("click", function(){
+  var paper = document.getElementById("paper");
+  if (!paper || !paper.innerHTML) return;
+  var css = "";
+  var styleEls = document.querySelectorAll("style");
+  for (var i = 0; i < styleEls.length; i++) css += styleEls[i].textContent + "\n";
+  var base = (currentTpl && (currentTpl.name || currentTpl.title)) || "document";
+  var slug = String(base).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "document";
+  var fname = slug + "-" + todayISO() + ".html";
+  var standalone = "<!DOCTYPE html>\n<html lang=\"en\"><head><meta charset=\"UTF-8\">" +
+    "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+    "<title>" + fname.slice(0, -5) + "</title><style>" + css + "</style>" +
+    "<style>body{background:#fff !important;margin:0}.paper{box-shadow:none;border-radius:0;padding:10px 6px}</style></head><body>" +
+    paper.outerHTML + "</body></html>";
+  var blob = new Blob([standalone], { type: "text/html" });
+  var dlurl = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = dlurl;
+  a.download = fname;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(dlurl); }, 1000);
+});
 document.getElementById("btnedit").addEventListener("click", function(){
   document.getElementById("docview").hidden = true;
   document.getElementById("builder").hidden = false;
