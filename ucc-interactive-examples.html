@@ -1,0 +1,1470 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>UCC Interactive Examples</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        --bg:#eef1f9;
+        --bg2:#e3e9f7;
+        --card:#ffffff;
+        --card2:#f6f8ff;
+        --ink:#181b30;
+        --ink-soft:#3c4160;
+        --line:#181b30;
+        --shadow:rgba(24,27,48,.18);
+        --teal:#0b8f8a;   --teal-soft:#d7f3f1;
+        --coral:#e0521f;  --coral-soft:#fde3d8;
+        --royal:#2456d6;  --royal-soft:#dde7fd;
+        --gold:#b97a06;   --gold-soft:#fbeecd;
+        --green:#178a3c;  --green-soft:#dcf4e2;
+        --rose:#c22577;   --rose-soft:#fadcf0;
+        --grape:#8338a8;  --grape-soft:#f0e2fa;
+        --good:#178a3c;
+        --bad:#c92f1d;
+        --radius:20px;
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --bg:#0c0f22;
+          --bg2:#12162f;
+          --card:#181d3a;
+          --card2:#1f2547;
+          --ink:#eef0ff;
+          --ink-soft:#b9bee0;
+          --line:#454c7d;
+          --shadow:rgba(0,0,0,.5);
+          --teal:#2fd3cb;   --teal-soft:#123c3e;
+          --coral:#ff8a5c;  --coral-soft:#46220f;
+          --royal:#7ea4ff;  --royal-soft:#1d2c57;
+          --gold:#f2b63c;   --gold-soft:#453310;
+          --green:#4ed07c;  --green-soft:#143a22;
+          --rose:#f27cbc;   --rose-soft:#471a33;
+          --grape:#d3a1ff;  --grape-soft:#33184d;
+          --good:#4ed07c;
+          --bad:#ff7a66;
+        }
+      }
+      *{ box-sizing:border-box; }
+      html{ scroll-behavior:smooth; }
+      body{
+        margin:0;
+        background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+        color:var(--ink);
+        font-family:"Atkinson Hyperlegible",system-ui,sans-serif;
+        font-size:1.0625rem;
+        line-height:1.55;
+      }
+      button,[role="button"],select,summary,input:not([type="checkbox"],[type="radio"]){ min-height:2.75rem; }
+      button{ font:inherit; cursor:pointer; }
+      :focus-visible{ outline:3px solid var(--royal); outline-offset:2px; border-radius:6px; }
+      .wrap{ max-width:1060px; margin:0 auto; padding:0 18px 72px; }
+      h1,h2,h3{ font-family:"Bricolage Grotesque","Atkinson Hyperlegible",sans-serif; line-height:1.08; margin:0; }
+      .mono{ font-family:"Space Mono",monospace; }
+
+      /* ---------- HERO ---------- */
+      .hero{ padding:34px 0 8px; }
+      .hero-scene{
+        border:2.5px solid var(--line); border-radius:26px; overflow:hidden;
+        box-shadow:8px 8px 0 var(--shadow);
+        background:linear-gradient(180deg,#8fd8ff 0%,#cdeffd 46%,#a8e063 46.2%,#7cc24a 100%);
+      }
+      .hero-scene svg{ display:block; width:100%; height:auto; }
+      .hero h1{ font-size:clamp(2.3rem,6.2vw,4rem); font-weight:800; letter-spacing:-.01em; margin:26px 0 10px; }
+      .hero h1 .hl{ background:linear-gradient(transparent 62%, #ffd94d 62%, #ffd94d 94%, transparent 94%); padding:0 .08em; }
+      @media (prefers-color-scheme: dark){ .hero h1 .hl{ background:linear-gradient(transparent 62%, #7a5b00 62%, #7a5b00 94%, transparent 94%); } }
+      .hero .lede{ font-size:clamp(1.08rem,2.4vw,1.3rem); color:var(--ink-soft); max-width:46em; margin:0 0 20px; }
+      .jump{ display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 4px; }
+      .jump a{
+        display:inline-flex; align-items:center; gap:8px; min-height:2.75rem;
+        padding:8px 16px; border:2px solid var(--line); border-radius:999px;
+        background:var(--card); color:var(--ink); text-decoration:none; font-weight:700;
+        box-shadow:3px 3px 0 var(--shadow);
+      }
+      .jump a:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--shadow); }
+      .jump .dot{ width:14px; height:14px; border-radius:50%; border:2px solid var(--line); flex:none; }
+
+      /* ---------- EXAMPLE SECTIONS ---------- */
+      .ex{
+        --acc:var(--teal); --acc-soft:var(--teal-soft);
+        margin-top:56px; border:2.5px solid var(--line); border-radius:26px;
+        background:var(--card); box-shadow:8px 8px 0 var(--shadow); overflow:hidden;
+      }
+      .ex-head{ padding:26px 26px 6px; }
+      .ex-kicker{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:12px; }
+      .sec-badge{
+        font-family:"Space Mono",monospace; font-weight:700; font-size:.95rem;
+        background:var(--acc); color:#fff; border:2px solid var(--line);
+        padding:5px 12px; border-radius:10px; box-shadow:3px 3px 0 var(--shadow);
+      }
+      @media (prefers-color-scheme: dark){ .sec-badge{ color:#10122b; } }
+      .ex-num{ font-family:"Space Mono",monospace; color:var(--ink-soft); font-size:.9rem; }
+      .ex h2{ font-size:clamp(1.65rem,4.4vw,2.4rem); font-weight:800; }
+      .ex .story{ color:var(--ink-soft); font-size:1.08rem; max-width:44em; margin:10px 0 4px; }
+      .ex .story strong{ color:var(--ink); }
+      .ex-body{ padding:14px 26px 26px; }
+      .scene{
+        border:2px solid var(--line); border-radius:var(--radius);
+        background:var(--acc-soft); padding:18px; position:relative; overflow:hidden;
+      }
+      .law{
+        margin-top:18px; border:2px solid var(--line); border-radius:var(--radius);
+        background:var(--card2); padding:18px 20px;
+      }
+      .law h3{ font-size:1.05rem; margin-bottom:6px; }
+      .law p{ margin:6px 0; }
+      .law blockquote{
+        margin:10px 0; padding:12px 16px; border-left:6px solid var(--acc);
+        background:var(--card); border-radius:0 12px 12px 0; font-style:italic;
+      }
+      .law a{ color:var(--acc); font-weight:700; }
+      .takeaway{
+        margin-top:14px; display:flex; gap:12px; align-items:flex-start;
+        background:var(--acc); color:#fff; border:2px solid var(--line);
+        border-radius:var(--radius); padding:14px 18px; font-weight:700;
+        box-shadow:4px 4px 0 var(--shadow);
+      }
+      @media (prefers-color-scheme: dark){ .takeaway{ color:#10122b; } }
+      .takeaway .t-ico{ font-size:1.4rem; line-height:1.2; flex:none; }
+
+      /* ---------- CONTROLS ---------- */
+      .controls{ display:flex; flex-wrap:wrap; gap:12px; margin-top:16px; }
+      .ctl{
+        display:inline-flex; align-items:center; gap:10px; text-align:left;
+        border:2px solid var(--line); border-radius:14px; background:var(--card);
+        color:var(--ink); padding:10px 16px; font-weight:700; min-height:3rem;
+        box-shadow:3px 3px 0 var(--shadow);
+      }
+      .ctl:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--shadow); }
+      .ctl .sw{
+        width:46px; height:26px; border-radius:999px; border:2px solid var(--line);
+        background:var(--card2); position:relative; flex:none;
+      }
+      .ctl .sw::after{
+        content:""; position:absolute; top:2px; left:2px; width:18px; height:18px;
+        border-radius:50%; background:var(--ink-soft); transition:left .18s ease, background .18s ease;
+      }
+      .ctl[aria-pressed="true"] .sw{ background:var(--acc); }
+      .ctl[aria-pressed="true"] .sw::after{ left:22px; background:#fff; }
+      .ctl[aria-pressed="true"]{ background:var(--acc-soft); }
+      .btn{
+        border:2px solid var(--line); border-radius:14px; background:var(--acc); color:#fff;
+        padding:10px 20px; font-weight:800; min-height:3rem; box-shadow:3px 3px 0 var(--shadow);
+      }
+      @media (prefers-color-scheme: dark){ .btn{ color:#10122b; } }
+      .btn:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--shadow); }
+      .btn[disabled]{ opacity:.45; cursor:not-allowed; transform:none; }
+      .btn.ghost{ background:var(--card); color:var(--ink); }
+      .verdict{
+        margin-top:16px; border:2.5px solid var(--line); border-radius:var(--radius);
+        padding:16px 20px; font-size:1.08rem; background:var(--card);
+      }
+      .verdict .v-head{ font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:1.3rem; display:flex; align-items:center; gap:10px; }
+      .verdict.good{ background:var(--green-soft); }
+      .verdict.bad{ background:var(--coral-soft); }
+      .verdict p{ margin:8px 0 0; }
+
+      /* stamps */
+      .stamp{
+        display:inline-block; font-family:"Space Mono",monospace; font-weight:700;
+        border:3.5px solid currentColor; border-radius:8px; padding:2px 12px;
+        transform:rotate(-8deg); letter-spacing:.06em; text-transform:uppercase;
+        background:rgba(255,254,248,.88);
+      }
+      .stamp.pop{ animation:stampIn .45s cubic-bezier(.2,2.2,.4,1) both; }
+      @keyframes stampIn{ 0%{ transform:rotate(-8deg) scale(2.4); opacity:0; } 100%{ transform:rotate(-8deg) scale(1); opacity:1; } }
+
+      /* floating / flowing motion */
+      @keyframes bob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-9px); } }
+      @keyframes drift{ 0%{ transform:translateX(0); } 100%{ transform:translateX(-46px); } }
+      @keyframes dashflow{ to{ stroke-dashoffset:-28; } }
+      .flowline{ stroke-dasharray:7 7; animation:dashflow 1.2s linear infinite; }
+      @media (prefers-reduced-motion: reduce){
+        *,*::before,*::after{ animation-duration:.001s !important; animation-iteration-count:1 !important; transition-duration:.001s !important; }
+        html{ scroll-behavior:auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- ================= HERO ================= -->
+      <header class="hero">
+        <div class="hero-scene" role="img" aria-label="Animated illustration: a paper check and gold coins travel along a winding river past green hills under a bright sun.">
+          <svg viewBox="0 0 1200 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <path id="riverPath" d="M-20,330 C200,290 330,385 560,345 C790,305 900,380 1220,320" fill="none"/>
+            </defs>
+            <!-- sun -->
+            <g style="animation:bob 7s ease-in-out infinite">
+              <circle cx="1050" cy="78" r="42" fill="#ffd94d" stroke="#181b30" stroke-width="3"/>
+              <g stroke="#181b30" stroke-width="4" stroke-linecap="round">
+                <line x1="1050" y1="12" x2="1050" y2="26"/><line x1="1050" y1="130" x2="1050" y2="144"/>
+                <line x1="984" y1="78" x2="998" y2="78"/><line x1="1102" y1="78" x2="1116" y2="78"/>
+                <line x1="1003" y1="31" x2="1013" y2="41"/><line x1="1087" y1="115" x2="1097" y2="125"/>
+                <line x1="1097" y1="31" x2="1087" y2="41"/><line x1="1013" y1="115" x2="1003" y2="125"/>
+              </g>
+            </g>
+            <!-- clouds -->
+            <g fill="#ffffff" stroke="#181b30" stroke-width="3" style="animation:drift 9s ease-in-out infinite alternate">
+              <ellipse cx="220" cy="70" rx="62" ry="24"/><ellipse cx="262" cy="56" rx="42" ry="20"/><ellipse cx="180" cy="56" rx="36" ry="17"/>
+            </g>
+            <g fill="#ffffff" stroke="#181b30" stroke-width="3" opacity=".9" style="animation:drift 12s ease-in-out infinite alternate-reverse">
+              <ellipse cx="640" cy="52" rx="52" ry="20"/><ellipse cx="676" cy="40" rx="34" ry="16"/>
+            </g>
+            <!-- hills -->
+            <path d="M0,300 C180,225 340,265 520,240 C760,208 900,262 1200,215 L1200,420 L0,420 Z" fill="#8fd06a" stroke="#181b30" stroke-width="3"/>
+            <path d="M0,345 C260,300 480,350 720,318 C940,290 1060,330 1200,305 L1200,420 L0,420 Z" fill="#5da83e" stroke="#181b30" stroke-width="3"/>
+            <!-- river -->
+            <path d="M-20,330 C200,290 330,385 560,345 C790,305 900,380 1220,320" fill="none" stroke="#2f7fd0" stroke-width="30" stroke-linecap="round" opacity=".85"/>
+            <path class="flowline" d="M-20,330 C200,290 330,385 560,345 C790,305 900,380 1220,320" fill="none" stroke="#bfe6ff" stroke-width="4" stroke-linecap="round"/>
+            <!-- traveling check -->
+            <g>
+              <animateMotion dur="11s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#riverPath"/>
+              </animateMotion>
+              <g transform="translate(-52,-30)">
+                <rect x="0" y="0" width="104" height="60" rx="8" fill="#fff8e6" stroke="#181b30" stroke-width="3"/>
+                <line x1="12" y1="20" x2="72" y2="20" stroke="#181b30" stroke-width="3"/>
+                <rect x="76" y="10" width="20" height="16" fill="none" stroke="#181b30" stroke-width="2.5"/>
+                <line x1="12" y1="38" x2="92" y2="38" stroke="#181b30" stroke-width="3"/>
+                <text x="12" y="54" font-family="Space Mono, monospace" font-size="10" fill="#181b30">⑆ 0210 ⑈ 4471</text>
+              </g>
+            </g>
+            <!-- coins -->
+            <g style="animation:bob 4s ease-in-out infinite">
+              <circle cx="150" cy="255" r="24" fill="#ffd94d" stroke="#181b30" stroke-width="3"/>
+              <text x="150" y="265" text-anchor="middle" font-size="26" font-weight="bold" fill="#181b30">$</text>
+            </g>
+            <g style="animation:bob 5s ease-in-out .8s infinite">
+              <circle cx="880" cy="215" r="19" fill="#ffd94d" stroke="#181b30" stroke-width="3"/>
+              <text x="880" y="223" text-anchor="middle" font-size="21" font-weight="bold" fill="#181b30">$</text>
+            </g>
+            <g style="animation:bob 4.6s ease-in-out .4s infinite">
+              <circle cx="430" cy="205" r="15" fill="#ffd94d" stroke="#181b30" stroke-width="3"/>
+              <text x="430" y="212" text-anchor="middle" font-size="16" font-weight="bold" fill="#181b30">$</text>
+            </g>
+            <!-- big check on the hill -->
+            <g transform="rotate(-5 250 160)">
+              <rect x="120" y="105" width="260" height="118" rx="10" fill="#ffffff" stroke="#181b30" stroke-width="3.5"/>
+              <text x="138" y="132" font-family="Space Mono, monospace" font-size="13" font-weight="bold" fill="#181b30">FIRST RIVER BANK</text>
+              <text x="138" y="160" font-size="13" fill="#181b30">Pay to the order of</text>
+              <line x1="248" y1="162" x2="362" y2="162" stroke="#181b30" stroke-width="2"/>
+              <rect x="300" y="172" width="62" height="24" fill="#d7f3f1" stroke="#181b30" stroke-width="2"/>
+              <text x="308" y="190" font-family="Space Mono, monospace" font-size="14" font-weight="bold" fill="#181b30">$500</text>
+              <text x="138" y="212" font-family="Caveat, cursive" font-size="24" fill="#2456d6">M. Hoskins</text>
+            </g>
+            <!-- UCC-1 form on the right hill -->
+            <g transform="rotate(4 1010 190)">
+              <rect x="950" y="130" width="130" height="120" rx="8" fill="#ffffff" stroke="#181b30" stroke-width="3.5"/>
+              <text x="1015" y="158" text-anchor="middle" font-family="Space Mono, monospace" font-weight="bold" font-size="17" fill="#181b30">UCC-1</text>
+              <line x1="966" y1="176" x2="1064" y2="176" stroke="#181b30" stroke-width="2.5"/>
+              <line x1="966" y1="196" x2="1064" y2="196" stroke="#181b30" stroke-width="2.5"/>
+              <line x1="966" y1="216" x2="1030" y2="216" stroke="#181b30" stroke-width="2.5"/>
+              <text x="1015" y="240" text-anchor="middle" font-family="Space Mono, monospace" font-size="10.5" font-weight="bold" fill="#c22577">★ FILED ★</text>
+            </g>
+          </svg>
+        </div>
+
+        <h1>The UCC, <span class="hl">in living color</span></h1>
+        <p class="lede">The Uniform Commercial Code runs on paper — checks, drafts, and filings. These seven hands-on examples take the sections from the UCC books and let you push the buttons yourself: cash the check, sign the form, file the UCC-1, and watch what the law does. Every verdict below comes straight from the section cited.</p>
+        <nav class="jump" aria-label="Jump to an example">
+          <a href="#ex1"><span class="dot" style="background:var(--teal)"></span>§3-104 · Anatomy of a check</a>
+          <a href="#ex2"><span class="dot" style="background:var(--coral)"></span>§3-311 · “Paid in full”</a>
+          <a href="#ex3"><span class="dot" style="background:var(--royal)"></span>§1-308 · Reserve your rights</a>
+          <a href="#ex4"><span class="dot" style="background:var(--gold)"></span>§§3-501 / 3-409 · Life of a draft</a>
+          <a href="#ex5"><span class="dot" style="background:var(--green)"></span>Article 9 · The tractor loan</a>
+          <a href="#ex6"><span class="dot" style="background:var(--rose)"></span>§1-103 · Two rivers</a>
+          <a href="#ex7"><span class="dot" style="background:var(--grape)"></span>§§3-415 · 3-419 · 3-402 · Words you sign</a>
+          <a href="#quiz"><span class="dot" style="background:var(--ink)"></span>You be the judge</a>
+        </nav>
+      </header>
+
+      <style>
+        /* ===== Example 1: check anatomy ===== */
+        .checkwrap{ position:relative; max-width:780px; margin:4px auto 0; }
+        .check{
+          position:relative; border:2.5px solid var(--line); border-radius:14px;
+          background:
+            repeating-linear-gradient(45deg, rgba(11,143,138,.05) 0 14px, transparent 14px 28px),
+            #fffef8;
+          color:#181b30; padding:20px 22px 16px; box-shadow:5px 5px 0 var(--shadow);
+          font-size:.95rem;
+        }
+        @media (prefers-color-scheme: dark){ .check{ background:#f4f1e4; } }
+        .check .bankrow{ display:flex; justify-content:space-between; gap:10px; align-items:flex-start; }
+        .check .bankname{ font-family:"Space Mono",monospace; font-weight:700; letter-spacing:.04em; }
+        .check .banksub{ font-size:.75rem; color:#4a4a55; }
+        .check .checkno{ font-family:"Space Mono",monospace; font-weight:700; }
+        .check .daterow{ display:flex; justify-content:flex-end; margin-top:8px; font-size:.85rem; }
+        .check .uline{ border-bottom:2px solid #181b30; padding:0 8px; min-width:90px; display:inline-block; }
+        .check .payrow{ display:flex; align-items:flex-end; gap:10px; margin-top:14px; flex-wrap:wrap; }
+        .check .paylabel{ font-size:.85rem; white-space:nowrap; }
+        .check .payline{ flex:1 1 200px; border-bottom:2px solid #181b30; font-family:"Caveat",cursive; font-size:1.55rem; color:#2456d6; padding:0 8px; min-height:2rem; }
+        .check .amtbox{ border:2.5px solid #181b30; border-radius:6px; padding:4px 12px; font-family:"Space Mono",monospace; font-weight:700; font-size:1.1rem; background:#fff; white-space:nowrap; }
+        .check .wordsrow{ margin-top:12px; border-bottom:2px solid #181b30; font-family:"Caveat",cursive; font-size:1.4rem; color:#2456d6; padding:0 8px; min-height:2rem; }
+        .check .bottomrow{ display:flex; justify-content:space-between; gap:14px; margin-top:16px; align-items:flex-end; flex-wrap:wrap; }
+        .check .memo{ font-size:.85rem; }
+        .check .memo .uline{ min-width:170px; font-family:"Caveat",cursive; font-size:1.2rem; color:#2456d6; }
+        .check .sig{ text-align:right; }
+        .check .sig .sigline{ border-bottom:2px solid #181b30; min-width:190px; display:inline-block; font-family:"Caveat",cursive; font-size:1.6rem; color:#2456d6; padding:0 10px; }
+        .check .routing{ margin-top:12px; font-family:"Space Mono",monospace; font-size:.85rem; letter-spacing:.14em; color:#333; }
+        .check .condflag{ display:none; color:#c92f1d; font-weight:700; font-size:.9rem; }
+        .checkwrap.b-cond .condflag{ display:inline; }
+        .check .nonneg{
+          display:none; position:absolute; top:44%; left:50%; z-index:3;
+          transform:translate(-50%,-50%) rotate(-9deg);
+          font-family:"Space Mono",monospace; font-weight:700; font-size:clamp(1.1rem,4.5vw,1.7rem);
+          color:#c92f1d; border:4px solid #c92f1d; border-radius:10px; padding:4px 16px;
+          background:rgba(255,255,255,.82); letter-spacing:.05em; white-space:nowrap;
+        }
+        .checkwrap.b-stamp .nonneg{ display:block; }
+        .hotspot{
+          position:absolute; z-index:4; width:42px; height:42px; border-radius:50%;
+          border:2.5px solid var(--line); background:var(--teal); color:#fff;
+          font-family:"Space Mono",monospace; font-weight:700; font-size:1rem;
+          display:flex; align-items:center; justify-content:center;
+          box-shadow:2.5px 2.5px 0 var(--shadow); padding:0;
+        }
+        @media (prefers-color-scheme: dark){ .hotspot{ color:#10122b; } }
+        .hotspot.active{ background:#ffd94d; color:#181b30; transform:scale(1.14); }
+        .anatomy-panel{
+          margin:16px auto 0; max-width:780px; border:2px solid var(--line); border-radius:14px;
+          background:var(--card); padding:14px 18px;
+        }
+        .anatomy-panel h3{ font-size:1.15rem; margin-bottom:4px; }
+        .anatomy-panel p{ margin:0; color:var(--ink-soft); }
+        .anatomy-panel p strong{ color:var(--ink); }
+        .reqs{ list-style:none; margin:16px 0 0; padding:0; display:grid; gap:8px; }
+        .reqs li{
+          display:flex; gap:10px; align-items:flex-start; border:2px solid var(--line);
+          border-radius:12px; padding:9px 14px; background:var(--card); font-weight:600;
+        }
+        .reqs .mark{ font-family:"Space Mono",monospace; font-weight:700; flex:none; }
+        .reqs li.ok .mark{ color:var(--good); }
+        .reqs li.fail{ background:var(--coral-soft); }
+        .reqs li.fail .mark{ color:var(--bad); }
+        .subhead{ font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:1.25rem; margin:24px 0 2px; }
+        .subnote{ color:var(--ink-soft); margin:0; }
+      </style>
+
+      <!-- ================= EXAMPLE 1 · §3-104 ================= -->
+      <section class="ex" id="ex1" style="--acc:var(--teal); --acc-soft:var(--teal-soft)">
+        <div class="ex-head">
+          <div class="ex-kicker"><span class="sec-badge">UCC § 3-104</span><span class="ex-num">EXAMPLE 1 · ARTICLE 3 — NEGOTIABLE INSTRUMENTS</span></div>
+          <h2>Anatomy of a negotiable instrument</h2>
+          <p class="story">A check is not just a check. Under Article 3 it is a <strong>draft</strong> — an order to a bank to pay — and it only earns the special powers of a <strong>negotiable instrument</strong> if every part does its job. Tap the numbered parts of the check to see what each one is, then try to break it.</p>
+        </div>
+        <div class="ex-body">
+          <div class="scene">
+            <div class="checkwrap" id="checkAnatomy">
+              <div class="check" aria-label="Illustrated check">
+                <div class="bankrow">
+                  <div>
+                    <div class="bankname">FIRST RIVER BANK</div>
+                    <div class="banksub">Drawee — the bank ordered to pay</div>
+                  </div>
+                  <div class="checkno">No. 4471</div>
+                </div>
+                <div class="daterow"><span>Date&nbsp;<span class="uline">Nov 15, 2026</span></span></div>
+                <div class="payrow">
+                  <span class="paylabel">Pay to the<br/>order of</span>
+                  <span class="payline">Luis Ortega</span>
+                  <span class="amtbox" id="amtBox">$ 500.00</span>
+                </div>
+                <div class="wordsrow" id="wordsLine">Five hundred and 00/100 — — — — — — — — Dollars</div>
+                <div class="condflag" id="condFlag">⚠ “…but only if the tractor runs!” — a condition just snuck in.</div>
+                <div class="bottomrow">
+                  <div class="memo">Memo&nbsp;<span class="uline">Tractor repair</span></div>
+                  <div class="sig"><span class="sigline">Maria Delgado</span><div style="font-size:.75rem;color:#4a4a55">Drawer — the person who signs and orders payment</div></div>
+                </div>
+                <div class="routing">⑆021000447⑆ ⑈4471⑈ 009155</div>
+                <div class="nonneg">NOT NEGOTIABLE</div>
+              </div>
+              <button class="hotspot" style="top:6%; left:4%" data-part="drawee" aria-label="Part 1: the drawee bank">1</button>
+              <button class="hotspot" style="top:4%; right:16%" data-part="date" aria-label="Part 2: the date">2</button>
+              <button class="hotspot" style="top:36%; left:26%" data-part="payee" aria-label="Part 3: pay to the order of, the payee">3</button>
+              <button class="hotspot" style="top:34%; right:3%" data-part="amount" aria-label="Part 4: the amount">4</button>
+              <button class="hotspot" style="bottom:26%; left:6%" data-part="memo" aria-label="Part 5: the memo line">5</button>
+              <button class="hotspot" style="bottom:12%; right:8%" data-part="signature" aria-label="Part 6: the drawer's signature">6</button>
+            </div>
+            <div class="anatomy-panel" aria-live="polite">
+              <h3 id="anatomyTitle">1 · The drawee — First River Bank</h3>
+              <p id="anatomyText">A check is an <strong>order</strong>, and an order needs someone to order around. The drawee is the bank told to pay. A draft drawn on a bank and payable on demand is exactly what §3-104(f) calls a <strong>check</strong>.</p>
+            </div>
+          </div>
+
+          <h3 class="subhead">Now try to break it</h3>
+          <p class="subnote">§3-104(a) sets the recipe. Flip a switch to sabotage the check and watch which requirement falls — and what happens to the verdict.</p>
+          <div class="controls">
+            <button class="ctl" data-break="cond" aria-pressed="false"><span class="sw"></span>Add a condition: “only if the tractor runs”</button>
+            <button class="ctl" data-break="wheat" aria-pressed="false"><span class="sw"></span>Pay in wheat instead of dollars</button>
+            <button class="ctl" data-break="vague" aria-pressed="false"><span class="sw"></span>Make it payable “sometime, maybe”</button>
+            <button class="ctl" data-break="stamp" aria-pressed="false"><span class="sw"></span>Stamp it NOT NEGOTIABLE</button>
+          </div>
+          <ul class="reqs" id="reqList">
+            <li class="ok" data-req="promise"><span class="mark">✓</span><span><strong>An unconditional promise or order</strong> — nothing the payment waits on.</span></li>
+            <li class="ok" data-req="money"><span class="mark">✓</span><span><strong>A fixed amount of money</strong> — $500.00, in figures and in words.</span></li>
+            <li class="ok" data-req="order"><span class="mark">✓</span><span><strong>Payable to bearer or to order</strong> — “pay to the order of Luis Ortega” lets it travel hand to hand.</span></li>
+            <li class="ok" data-req="time"><span class="mark">✓</span><span><strong>Payable on demand or at a definite time</strong> — a check is payable on demand.</span></li>
+            <li class="ok" data-req="extra"><span class="mark">✓</span><span><strong>No extra undertakings</strong> — the paper orders payment of money, and nothing else.</span></li>
+            <li class="ok" data-req="stamp"><span class="mark">✓</span><span><strong>Not stamped out of Article 3</strong> — no conspicuous “not negotiable” statement killing it under §3-104(d).</span></li>
+          </ul>
+          <div class="verdict good" id="ex1Verdict" aria-live="polite">
+            <div class="v-head"><span>✔</span><span>NEGOTIABLE — Article 3 governs this paper</span></div>
+            <p>Every requirement in §3-104(a) is met, so this check can be negotiated — transferred to a new holder who can enforce it in their own name.</p>
+          </div>
+
+          <div class="law">
+            <h3>The law — §3-104(a)</h3>
+            <blockquote>“‘Negotiable instrument’ means an unconditional promise or order to pay a fixed amount of money … if it: (1) is payable to bearer or to order at the time it is issued …; (2) is payable on demand or at a definite time; and (3) does not state any other undertaking or instruction … to do any act in addition to the payment of money.”</blockquote>
+            <p>And §3-104(d): a promise or order (other than a check) that carries a conspicuous statement that it is <em>not</em> negotiable is not an instrument under Article 3 at all.</p>
+            <p><a href="https://www.law.cornell.edu/ucc/3/3-104" target="_blank" rel="noopener">Read §3-104 in full at Cornell LII →</a></p>
+          </div>
+          <div class="takeaway"><span class="t-ico">★</span><span>Negotiable = the paper itself carries the right to be paid. Break one ingredient and it drops back to being an ordinary contract.</span></div>
+        </div>
+      </section>
+
+      <style>
+        /* ===== Example 2: paid in full ===== */
+        .meter{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:16px; }
+        .meter .cell{ border:2px solid var(--line); border-radius:12px; background:var(--card); padding:10px 12px; text-align:center; }
+        .meter .cell .lbl{ font-size:.8rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft); }
+        .meter .cell .val{ font-family:"Space Mono",monospace; font-weight:700; font-size:clamp(1.15rem,3.6vw,1.6rem); }
+        .meter .cell.balance.owed{ background:var(--coral-soft); }
+        .meter .cell.balance.gone{ background:var(--green-soft); }
+        .pif-big{ font-family:"Space Mono",monospace; font-weight:700; color:#c92f1d; letter-spacing:.05em; }
+        .pif-tiny{ font-family:"Caveat",cursive; font-size:1rem; color:#666; }
+        .check .stampzone{ position:absolute; right:18px; top:38%; display:flex; flex-direction:column; gap:8px; align-items:flex-end; z-index:3; }
+        .stamp.cashed{ color:#2456d6; }
+        .stamp.discharged{ color:#c92f1d; font-size:1.15rem; }
+        .stamp.hidden{ display:none; }
+        /* ===== Example 3: signature ===== */
+        .doc{
+          max-width:680px; margin:0 auto; border:2.5px solid var(--line); border-radius:14px;
+          background:#fffef8; color:#181b30; padding:22px 24px; box-shadow:5px 5px 0 var(--shadow);
+        }
+        @media (prefers-color-scheme: dark){ .doc{ background:#f4f1e4; } }
+        .doc h4{ margin:0 0 4px; font-family:"Space Mono",monospace; font-size:.95rem; letter-spacing:.05em; }
+        .doc .dline{ border-bottom:1.5px solid #9a9aa5; height:1.7rem; }
+        .doc .dline.short{ width:62%; }
+        .doc .terms{ font-size:.88rem; color:#3c3c46; margin:12px 0; }
+        .doc .terms .newterm{ background:#ffe9a8; padding:0 4px; border-radius:4px; font-weight:700; }
+        .reserve-line{
+          display:none; font-family:"Caveat",cursive; font-size:1.45rem; color:#c92f1d;
+          transform:rotate(-1.2deg); margin-top:14px;
+        }
+        .doc.reserved .reserve-line{ display:block; }
+        .sig-zone{ margin-top:6px; border-bottom:2.5px solid #181b30; min-height:3rem; display:flex; align-items:flex-end; padding:0 8px; }
+        .sig-text{ font-family:"Caveat",cursive; font-size:2.1rem; color:#2456d6; white-space:nowrap; overflow:hidden; max-width:0; }
+        .sig-text.written{ max-width:100%; transition:max-width 1.1s ease; }
+        .sig-x{ font-family:"Space Mono",monospace; color:#888; margin-right:8px; }
+        .name-input{
+          font:inherit; padding:10px 14px; border:2px solid var(--line); border-radius:12px;
+          background:var(--card); color:var(--ink); min-height:3rem; width:min(300px,100%);
+        }
+      </style>
+
+      <!-- ================= EXAMPLE 2 · §3-311 ================= -->
+      <section class="ex" id="ex2" style="--acc:var(--coral); --acc-soft:var(--coral-soft)">
+        <div class="ex-head">
+          <div class="ex-kicker"><span class="sec-badge">UCC § 3-311</span><span class="ex-num">EXAMPLE 2 · ARTICLE 3 — ACCORD &amp; SATISFACTION</span></div>
+          <h2>The “paid in full” check</h2>
+          <p class="story">Rosa's Roofing billed Dan <strong>$2,400</strong> for a roof repair. Dan swears the flashing leaked from day one and the job was worth <strong>$1,800</strong>. He mails Rosa a check for $1,800. What Rosa does next decides whether the last $600 lives or dies. <strong>You run the scenario</strong> — flip the switches and cash the check (or don't).</p>
+        </div>
+        <div class="ex-body">
+          <div class="scene">
+            <div class="meter" aria-hidden="true">
+              <div class="cell"><div class="lbl">Rosa's bill</div><div class="val">$2,400</div></div>
+              <div class="cell"><div class="lbl">Dan's check</div><div class="val">$1,800</div></div>
+              <div class="cell balance owed" id="balanceCell"><div class="lbl">Balance at stake</div><div class="val" id="balanceVal">$600</div></div>
+            </div>
+            <div class="checkwrap">
+              <div class="check" aria-label="Illustrated check from Dan to Rosa's Roofing for 1,800 dollars">
+                <div class="bankrow">
+                  <div>
+                    <div class="bankname">FIRST RIVER BANK</div>
+                    <div class="banksub">Payable on demand</div>
+                  </div>
+                  <div class="checkno">No. 0921</div>
+                </div>
+                <div class="daterow"><span>Date&nbsp;<span class="uline">Nov 10, 2026</span></span></div>
+                <div class="payrow">
+                  <span class="paylabel">Pay to the<br/>order of</span>
+                  <span class="payline">Rosa's Roofing LLC</span>
+                  <span class="amtbox">$ 1,800.00</span>
+                </div>
+                <div class="wordsrow">One thousand eight hundred and 00/100 — — — — Dollars</div>
+                <div class="bottomrow">
+                  <div class="memo">Memo&nbsp;<span class="uline" id="pifLine"><span class="pif-big">PAID IN FULL — FULL SATISFACTION</span></span></div>
+                  <div class="sig"><span class="sigline">Dan Whitaker</span></div>
+                </div>
+                <div class="routing">⑆021000447⑆ ⑈0921⑈ 771204</div>
+                <div class="stampzone">
+                  <span class="stamp cashed hidden" id="stampCashed">Cashed</span>
+                  <span class="stamp discharged hidden" id="stampDischarged">Claim discharged</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="controls" role="group" aria-label="Scenario switches for the paid in full check">
+            <button class="ctl" data-s311="dispute" aria-pressed="true"><span class="sw"></span>The $600 is genuinely disputed</button>
+            <button class="ctl" data-s311="conspic" aria-pressed="true"><span class="sw"></span>“PAID IN FULL” printed big and clear</button>
+            <button class="ctl" data-s311="cashed" aria-pressed="false"><span class="sw"></span>Rosa cashes the check</button>
+            <button class="ctl" data-s311="crossout" aria-pressed="false"><span class="sw"></span>Rosa crosses out “paid in full” first</button>
+            <button class="ctl" data-s311="repay" aria-pressed="false"><span class="sw"></span>Rosa returns the $1,800 within 90 days</button>
+          </div>
+          <div class="verdict" id="ex2Verdict" aria-live="polite">
+            <div class="v-head"><span>✉</span><span>The check is in Rosa's hands — nothing is settled yet</span></div>
+            <p>An uncashed check discharges nothing. §3-311 only bites when the claimant <strong>obtains payment</strong> of the instrument. Rosa is holding Dan's offer: take $1,800 as the whole story, or hold out for $2,400. Flip the “Rosa cashes the check” switch to see what the law does with her choice.</p>
+          </div>
+
+          <div class="law">
+            <h3>The law — §3-311(a) &amp; (b)</h3>
+            <blockquote>“If a person against whom a claim is asserted proves that (i) that person in good faith tendered an instrument to the claimant as full satisfaction of the claim, (ii) the amount of the claim was unliquidated or subject to a bona fide dispute, and (iii) the claimant obtained payment of the instrument … the claim is discharged if … the instrument or an accompanying written communication contained a conspicuous statement to the effect that the instrument was tendered as full satisfaction of the claim.”</blockquote>
+            <p>Two escape hatches for the claimant live in §3-311(c): a business that told debtors in advance to send disputed-debt mail to a designated office isn't bound when the check lands elsewhere — and <strong>any claimant who tenders repayment of the check amount within 90 days after payment undoes the discharge</strong>. And note §3-311(d): if the claimant actually <em>knew</em> the check was tendered in full satisfaction, the claim is discharged even without the conspicuous statement.</p>
+            <p><a href="https://www.law.cornell.edu/ucc/3/3-311" target="_blank" rel="noopener">Read §3-311 in full at Cornell LII →</a></p>
+          </div>
+          <div class="takeaway"><span class="t-ico">★</span><span>Cashing is the signature. On a genuinely disputed bill, depositing a conspicuously marked “paid in full” check settles the whole claim — crossing out the words doesn't save the balance.</span></div>
+        </div>
+      </section>
+
+      <!-- ================= EXAMPLE 3 · §1-308 ================= -->
+      <section class="ex" id="ex3" style="--acc:var(--royal); --acc-soft:var(--royal-soft)">
+        <div class="ex-head">
+          <div class="ex-kicker"><span class="sec-badge">UCC § 1-308</span><span class="ex-num">EXAMPLE 3 · ARTICLE 1 — RESERVATION OF RIGHTS</span></div>
+          <h2>Sign it — without giving your rights away</h2>
+          <p class="story">Keystone Auto Parts just delivered your shop's order, but the invoice in the box adds a <strong>$180 “handling fee”</strong> and new return terms you never agreed to. The driver needs your signature on the delivery acceptance before he unloads. You need the parts <em>today</em>. Sign below — with or without the reservation line — and see what §1-308 does with each choice.</p>
+        </div>
+        <div class="ex-body">
+          <div class="scene">
+            <div class="doc" id="signDoc">
+              <h4>KEYSTONE AUTO PARTS — DELIVERY ACCEPTANCE</h4>
+              <div class="dline"></div>
+              <div class="dline short"></div>
+              <p class="terms">Received: 40 brake rotors, 12 alternators, shop supplies as listed. Invoice total includes <span class="newterm">a $180 handling fee</span> and is subject to <span class="newterm">Keystone's revised return terms (Rev. 11/2026)</span>, which the receiver accepts by signing below.</p>
+              <div class="reserve-line" id="reserveLine">Without prejudice — UCC §1-308 — all rights reserved, under protest ✕</div>
+              <div class="sig-zone"><span class="sig-x">✕</span><span class="sig-text" id="sigText">Your Name</span></div>
+              <div style="font-size:.75rem;color:#4a4a55;margin-top:4px">Receiver's signature — performance / acceptance of delivery</div>
+            </div>
+          </div>
+          <div class="controls" style="align-items:center">
+            <label style="font-weight:700">Sign as
+              <input class="name-input" id="signerName" type="text" value="Madison Hoskins" maxlength="28" autocomplete="name" style="margin-left:8px" />
+            </label>
+            <button class="ctl" id="reserveToggle" aria-pressed="false"><span class="sw"></span>Add the reservation line above my signature</button>
+            <button class="btn" id="signBtn">Sign the acceptance</button>
+            <button class="btn ghost" id="signReset">Start over</button>
+          </div>
+          <div class="verdict" id="ex3Verdict" aria-live="polite">
+            <div class="v-head"><span>✎</span><span>The pen is in your hand</span></div>
+            <p>Try it both ways: sign once plain, start over, then sign with the reservation line. The signature is the same — the legal footprint isn't.</p>
+          </div>
+
+          <div class="law">
+            <h3>The law — §1-308(a)</h3>
+            <blockquote>“A party that with explicit reservation of rights performs or promises performance or assents to performance in a manner demanded or offered by the other party does not thereby prejudice the rights reserved. Such words as ‘without prejudice,’ ‘under protest,’ or the like are sufficient.”</blockquote>
+            <p><strong>The exception that matters — §1-308(b):</strong> “Subsection (a) does not apply to an accord and satisfaction.” That is why the reservation trick fails on the “paid in full” check in Example 2: cashing it is governed by §3-311, and no “without prejudice” scrawled on the check revives the balance.</p>
+            <p><a href="https://www.law.cornell.edu/ucc/1/1-308" target="_blank" rel="noopener">Read §1-308 in full at Cornell LII →</a></p>
+          </div>
+          <div class="takeaway"><span class="t-ico">★</span><span>Performing under an explicit reservation lets you keep the deal moving <em>and</em> keep your dispute alive. No reservation, and your performance can be read as agreement.</span></div>
+        </div>
+      </section>
+
+      <style>
+        /* ===== Example 4: draft journey ===== */
+        .stations{ display:flex; gap:10px; margin-top:138px; }
+        @media (max-width:560px){ .stations{ margin-top:196px; } }
+        .station{
+          flex:1; border:2px solid var(--line); border-radius:14px; background:var(--card);
+          padding:12px 10px; text-align:center; transition:box-shadow .3s ease, transform .3s ease;
+        }
+        .station .s-ico{ font-size:2rem; line-height:1.1; }
+        .station .s-name{ font-weight:800; font-family:"Bricolage Grotesque",sans-serif; }
+        .station .s-role{ font-size:.82rem; color:var(--ink-soft); }
+        .station.lit{ box-shadow:0 0 0 4px var(--gold); transform:translateY(-4px); }
+        .draftpaper{
+          position:absolute; top:6px; left:18%; width:min(172px,46%); z-index:5;
+          transform:translateX(-50%);
+          background:#fffef8; color:#181b30; border:2.5px solid var(--line); border-radius:10px;
+          padding:8px 10px; font-size:.72rem; box-shadow:4px 4px 0 var(--shadow);
+          transition:left .8s cubic-bezier(.5,0,.2,1), transform .8s ease;
+        }
+        @media (prefers-color-scheme: dark){ .draftpaper{ background:#f4f1e4; } }
+        .draftpaper .dp-title{ font-family:"Space Mono",monospace; font-weight:700; font-size:.78rem; }
+        .draftpaper .dp-line{ border-bottom:1.5px solid #9a9aa5; height:.95rem; }
+        .draftpaper .dp-sig{ font-family:"Caveat",cursive; font-size:1.05rem; color:#2456d6; }
+        .draftpaper .dp-stamp{ display:none; margin-top:4px; font-size:.8rem; }
+        .draftpaper .dp-stamp.show{ display:inline-block; }
+        .draftpaper .dp-bank{ display:none; font-family:"Caveat",cursive; font-size:1rem; color:#178a3c; }
+        .draftpaper .dp-bank.show{ display:block; }
+        .daybadge{
+          position:absolute; top:8px; right:12px; z-index:5; display:none;
+          font-family:"Space Mono",monospace; font-weight:700; background:var(--gold); color:#fff;
+          border:2px solid var(--line); border-radius:10px; padding:4px 12px;
+        }
+        @media (prefers-color-scheme: dark){ .daybadge{ color:#10122b; } }
+        .daybadge.show{ display:block; }
+        .stepdots{ display:flex; gap:8px; }
+        .stepdots button{
+          width:44px; height:44px; border-radius:50%; border:2px solid var(--line);
+          background:var(--card); color:var(--ink); font-family:"Space Mono",monospace; font-weight:700; padding:0;
+        }
+        .stepdots button.now{ background:var(--gold); color:#fff; }
+        @media (prefers-color-scheme: dark){ .stepdots button.now{ color:#10122b; } }
+        .stepdots button.done{ background:var(--gold-soft); }
+        /* ===== Example 5: tractor loan ===== */
+        .gates{ display:grid; gap:10px; margin-top:14px; }
+        @media (min-width:720px){ .gates{ grid-template-columns:repeat(3,1fr); } }
+        .gate{
+          border:2px solid var(--line); border-radius:14px; background:var(--card); color:var(--ink);
+          padding:14px; text-align:left; box-shadow:3px 3px 0 var(--shadow); min-height:3rem;
+        }
+        .gate .g-head{ font-weight:800; font-family:"Bricolage Grotesque",sans-serif; font-size:1.05rem; display:flex; justify-content:space-between; gap:8px; }
+        .gate .g-check{ font-family:"Space Mono",monospace; font-weight:700; color:var(--ink-soft); }
+        .gate p{ margin:6px 0 0; font-size:.92rem; color:var(--ink-soft); }
+        .gate.done{ background:var(--green-soft); }
+        .gate.done .g-check{ color:var(--good); }
+        .filefly{
+          display:none; margin-top:14px; align-items:center; gap:14px; flex-wrap:wrap;
+        }
+        .filefly.show{ display:flex; }
+        .ucc1{
+          width:150px; background:#fffef8; color:#181b30; border:2.5px solid var(--line); border-radius:10px;
+          padding:10px 12px; font-size:.75rem; box-shadow:4px 4px 0 var(--shadow);
+        }
+        @media (prefers-color-scheme: dark){ .ucc1{ background:#f4f1e4; } }
+        .ucc1 .u-title{ font-family:"Space Mono",monospace; font-weight:700; font-size:.9rem; text-align:center; }
+        .ucc1 .u-line{ border-bottom:1.5px solid #9a9aa5; height:1rem; }
+        .filearrow{ font-size:1.8rem; animation:bob 1.6s ease-in-out infinite; }
+        .sos{
+          border:2px solid var(--line); border-radius:14px; background:var(--card); padding:12px 16px; text-align:center;
+        }
+        .sos .sos-name{ font-weight:800; font-family:"Bricolage Grotesque",sans-serif; }
+        /* ===== Example 6: two rivers ===== */
+        .rivers{ display:grid; gap:14px; }
+        @media (min-width:760px){ .rivers{ grid-template-columns:1fr 1fr; } }
+        .stream{ border:2px solid var(--line); border-radius:14px; background:var(--card); padding:14px 16px; }
+        .stream h4{ margin:0 0 10px; font-family:"Bricolage Grotesque",sans-serif; font-size:1.05rem; }
+        .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+        .chip{
+          border:2px solid var(--line); border-radius:999px; padding:5px 13px; font-weight:700; font-size:.9rem;
+          background:var(--rose-soft);
+        }
+        .chip.code{ background:var(--card2); }
+        .stream.dammed .chip:not(.code){ opacity:.38; text-decoration:line-through; }
+        .pool{
+          margin-top:14px; border:2.5px solid var(--line); border-radius:14px; padding:14px 18px;
+          background:var(--rose-soft); font-weight:700; text-align:center; font-size:1.05rem;
+        }
+      </style>
+
+      <!-- ================= EXAMPLE 4 · §§3-501 / 3-409 ================= -->
+      <section class="ex" id="ex4" style="--acc:var(--gold); --acc-soft:var(--gold-soft)">
+        <div class="ex-head">
+          <div class="ex-kicker"><span class="sec-badge">UCC §§ 3-501 · 3-409</span><span class="ex-num">EXAMPLE 4 · ARTICLE 3 — PRESENTMENT &amp; ACCEPTANCE</span></div>
+          <h2>The life of a draft</h2>
+          <p class="story">Maria's Export Co. sold Luis a shipment of coffee, payable in 30 days. Instead of a promise, Maria wrote an <strong>order</strong>: a draft commanding First River Bank to pay Luis. Walk the paper through its life — <strong>presentment</strong> is how Luis knocks on the bank's door, and <strong>acceptance</strong> is the moment the bank itself becomes bound to pay.</p>
+        </div>
+        <div class="ex-body">
+          <div class="scene" id="draftScene">
+            <div class="draftpaper" id="draftPaper">
+              <div class="dp-title">DRAFT — $4,000</div>
+              <div class="dp-line"></div>
+              <div>“30 days after sight, pay Luis Ortega”</div>
+              <div class="dp-sig">Maria Delgado, Drawer</div>
+              <div class="dp-bank" id="dpBankSig">First River Bank ✕</div>
+              <span class="stamp dp-stamp" id="dpAccepted" style="color:#178a3c">Accepted</span>
+              <span class="stamp dp-stamp" id="dpPaid" style="color:#c92f1d">Paid</span>
+            </div>
+            <div class="daybadge" id="dayBadge">DAY 30 — MATURITY</div>
+            <div class="stations">
+              <div class="station" id="stDrawer">
+                <div class="s-ico" aria-hidden="true">✍️</div>
+                <div class="s-name">Maria</div>
+                <div class="s-role">DRAWER — writes &amp; signs the order</div>
+              </div>
+              <div class="station" id="stBank">
+                <div class="s-ico" aria-hidden="true">🏦</div>
+                <div class="s-name">First River Bank</div>
+                <div class="s-role">DRAWEE — the one ordered to pay</div>
+              </div>
+              <div class="station" id="stHolder">
+                <div class="s-ico" aria-hidden="true">🤝</div>
+                <div class="s-name">Luis</div>
+                <div class="s-role">PAYEE &amp; HOLDER — entitled to enforce it</div>
+              </div>
+            </div>
+          </div>
+          <div class="verdict" style="margin-top:16px" aria-live="polite">
+            <div class="v-head"><span id="draftStepNo">Step 1 of 5</span><span id="draftStepTitle">Maria writes the draft</span></div>
+            <p id="draftStepText">Maria signs a written order: “30 days after sight, pay to the order of Luis Ortega $4,000,” addressed to First River Bank. Because it is an <strong>order</strong> rather than a promise, §3-104(e) calls it a <strong>draft</strong>. Right now the bank owes nothing on it — nobody has even asked it to pay.</p>
+          </div>
+          <div class="controls" style="align-items:center">
+            <button class="btn ghost" id="draftPrev">← Back</button>
+            <div class="stepdots" role="group" aria-label="Draft journey steps">
+              <button data-step="1" class="now" aria-label="Step 1">1</button>
+              <button data-step="2" aria-label="Step 2">2</button>
+              <button data-step="3" aria-label="Step 3">3</button>
+              <button data-step="4" aria-label="Step 4">4</button>
+              <button data-step="5" aria-label="Step 5">5</button>
+            </div>
+            <button class="btn" id="draftNext">Next step →</button>
+          </div>
+
+          <div class="law">
+            <h3>The law — §3-501(a) &amp; §3-409(a)</h3>
+            <blockquote>“‘Presentment’ means a demand made by or on behalf of a person entitled to enforce an instrument (i) to pay the instrument made to the drawee or a party obliged to pay the instrument … or (ii) to accept a draft made to the drawee.” — §3-501(a)</blockquote>
+            <blockquote>“‘Acceptance’ means the drawee's signed agreement to pay a draft as presented. It must be written on the draft and may consist of the drawee's signature alone.” — §3-409(a)</blockquote>
+            <p>Until acceptance, the drawee is not liable on the instrument at all (§3-408). The signature on the paper is what turns an order into the bank's own obligation — which is why a check a bank accepts becomes a <strong>certified check</strong> (§3-409(d)).</p>
+            <p><a href="https://www.gtrisk.com/UCC3.html" target="_blank" rel="noopener">Read the full text of Article 3 (§§3-409, 3-501) →</a></p>
+          </div>
+          <div class="takeaway"><span class="t-ico">★</span><span>Presentment is the knock. Acceptance is the drawee signing its own name to the debt. No signature on the draft, no obligation for the bank.</span></div>
+        </div>
+      </section>
+
+      <!-- ================= EXAMPLE 5 · ARTICLE 9 ================= -->
+      <section class="ex" id="ex5" style="--acc:var(--green); --acc-soft:var(--green-soft)">
+        <div class="ex-head">
+          <div class="ex-kicker"><span class="sec-badge">UCC §§ 9-203 · 9-310 · 9-501 · 9-509</span><span class="ex-num">EXAMPLE 5 · ARTICLE 9 — SECURED TRANSACTIONS</span></div>
+          <h2>The tractor loan: attach it, then perfect it</h2>
+          <p class="story">Farmer June needs a <strong>$60,000 tractor</strong>. Heartland Bank will lend the money — if it can lock in a <strong>security interest</strong> in the tractor. Article 9 runs in two acts: first the interest must <strong>attach</strong> (§9-203), then it must be <strong>perfected</strong> by filing (§9-310) so it beats the rest of the world. Work the gates in any order.</p>
+        </div>
+        <div class="ex-body">
+          <div class="scene" style="text-align:center">
+            <svg viewBox="0 0 640 170" style="max-width:640px;width:100%;height:auto" role="img" aria-label="Illustration of a green tractor with big rear wheels under a sun.">
+              <circle cx="560" cy="34" r="22" fill="#ffd94d" stroke="#181b30" stroke-width="3"/>
+              <g style="animation:bob 5s ease-in-out infinite">
+                <rect x="238" y="46" width="86" height="58" rx="8" fill="#178a3c" stroke="#181b30" stroke-width="3.5"/>
+                <rect x="252" y="56" width="34" height="26" fill="#bfe6ff" stroke="#181b30" stroke-width="3"/>
+                <path d="M180,104 L238,104 L238,66 L300,66 L324,104 L392,104 L392,122 L180,122 Z" fill="#22a355" stroke="#181b30" stroke-width="3.5"/>
+                <circle cx="228" cy="126" r="30" fill="#181b30"/><circle cx="228" cy="126" r="13" fill="#ffd94d" stroke="#181b30" stroke-width="3"/>
+                <circle cx="352" cy="134" r="21" fill="#181b30"/><circle cx="352" cy="134" r="9" fill="#ffd94d" stroke="#181b30" stroke-width="3"/>
+                <rect x="392" y="86" width="12" height="26" fill="#181b30"/>
+              </g>
+              <line x1="20" y1="158" x2="620" y2="158" stroke="#181b30" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M40,158 q10,-14 20,0 M90,158 q10,-14 20,0 M470,158 q10,-14 20,0 M540,158 q10,-14 20,0" fill="none" stroke="#178a3c" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+            <div class="mono" style="font-weight:700">ATTACHMENT: <span id="attachCount">0 / 3 gates</span></div>
+          </div>
+
+          <div class="gates" role="group" aria-label="Attachment gates">
+            <button class="gate" data-gate="value" aria-pressed="false">
+              <span class="g-head">Gate 1 · Value given <span class="g-check">○</span></span>
+              <p>Heartland actually hands June the $60,000 loan. No value, no interest — §9-203(b)(1).</p>
+            </button>
+            <button class="gate" data-gate="rights" aria-pressed="false">
+              <span class="g-head">Gate 2 · Rights in the collateral <span class="g-check">○</span></span>
+              <p>June buys the tractor, so she owns it — or at least has power to transfer rights in it — §9-203(b)(2).</p>
+            </button>
+            <button class="gate" data-gate="agree" aria-pressed="false">
+              <span class="g-head">Gate 3 · Signed security agreement <span class="g-check">○</span></span>
+              <p>June authenticates a security agreement describing the tractor — §9-203(b)(3)(A). Her signature on it also authorizes the filing (§9-509(b)).</p>
+            </button>
+          </div>
+          <div class="verdict" id="attachVerdict" aria-live="polite">
+            <div class="v-head"><span>🔓</span><span>Not attached yet</span></div>
+            <p>Until all three gates swing open at the same time, Heartland has a loan — but no enforceable security interest in the tractor.</p>
+          </div>
+
+          <div class="filefly" id="fileFly">
+            <div class="ucc1" aria-label="Illustrated UCC-1 financing statement">
+              <div class="u-title">UCC-1 FINANCING STATEMENT</div>
+              <div class="u-line"></div><div class="u-line"></div><div class="u-line"></div>
+              <div style="margin-top:5px">Debtor: June Alvarez · Secured party: Heartland Bank · Collateral: 2026 tractor</div>
+              <div id="filedStamp" style="margin-top:6px;text-align:center"></div>
+            </div>
+            <div class="filearrow" aria-hidden="true">➜</div>
+            <div class="sos">
+              <div style="font-size:1.7rem" aria-hidden="true">🏛️</div>
+              <div class="sos-name">Secretary of State</div>
+              <div style="font-size:.85rem;color:var(--ink-soft)">Central filing office — §9-501(a)(2)</div>
+            </div>
+          </div>
+          <div class="controls">
+            <button class="btn" id="fileBtn" disabled>File the UCC-1</button>
+            <button class="btn" id="twistBtn" disabled>Then: June defaults, and a second lender appears</button>
+            <button class="btn ghost" id="ex5Reset">Start over</button>
+          </div>
+          <div class="verdict" id="perfectVerdict" aria-live="polite" style="display:none">
+            <div class="v-head"><span id="perfectIcon">📋</span><span id="perfectTitle"></span></div>
+            <p id="perfectText"></p>
+          </div>
+
+          <div class="law">
+            <h3>The law — §§9-203, 9-310, 9-501, 9-509</h3>
+            <blockquote>“A security interest is enforceable against the debtor and third parties with respect to the collateral only if: (1) value has been given; (2) the debtor has rights in the collateral or the power to transfer rights in the collateral to a secured party; and (3) … the debtor has authenticated a security agreement that provides a description of the collateral.” — §9-203(b)</blockquote>
+            <blockquote>“Except as otherwise provided … a financing statement must be filed to perfect all security interests and agricultural liens.” — §9-310(a)</blockquote>
+            <p>For most collateral the financing statement goes to the state's <strong>central filing office</strong> — the Secretary of State (§9-501(a)(2)); land-related collateral like fixtures goes to the local real-property records instead. And nobody may file without the debtor's authorization — which the signed security agreement itself supplies (§9-509(a)–(b)). An unauthorized filing isn't just ineffective: §9-625(e)(3) backs it with statutory damages.</p>
+            <p><a href="https://www.law.cornell.edu/ucc/9/9-310" target="_blank" rel="noopener">Read §9-310 at Cornell LII →</a> · <a href="https://www.law.cornell.edu/ucc/9/9-509" target="_blank" rel="noopener">Read §9-509 at Cornell LII →</a> · <a href="https://legalclarity.org/what-are-secured-transactions-under-the-ucc/" target="_blank" rel="noopener">Article 9 explained (§§9-203, 9-501) →</a></p>
+          </div>
+          <div class="takeaway"><span class="t-ico">★</span><span>Attachment makes the interest real between lender and borrower. Perfection — the public filing — is what makes it real against everyone else.</span></div>
+        </div>
+      </section>
+
+      <!-- ================= EXAMPLE 6 · §1-103 ================= -->
+      <section class="ex" id="ex6" style="--acc:var(--rose); --acc-soft:var(--rose-soft)">
+        <div class="ex-head">
+          <div class="ex-kicker"><span class="sec-badge">UCC § 1-103</span><span class="ex-num">EXAMPLE 6 · ARTICLE 1 — THE CODE + THE COMMON LAW</span></div>
+          <h2>Two rivers, one law</h2>
+          <p class="story">The UCC was never meant to be the whole river. §1-103(b) says the older principles of law and equity <strong>supplement</strong> the Code — they flow alongside it and fill its gaps — <em>unless</em> a specific provision of the Code displaces them. Toggle the dam and watch which stream decides the case.</p>
+        </div>
+        <div class="ex-body">
+          <div class="scene">
+            <svg viewBox="0 0 700 120" style="width:100%;height:auto" role="img" aria-label="Two rivers flowing together into one.">
+              <path class="flowline" d="M10,25 C200,25 300,60 690,60" fill="none" stroke="#2456d6" stroke-width="7" stroke-linecap="round"/>
+              <path class="flowline" d="M10,95 C200,95 300,60 690,60" fill="none" stroke="#c22577" stroke-width="7" stroke-linecap="round"/>
+              <text x="14" y="16" font-family="Space Mono, monospace" font-size="13" font-weight="bold" fill="var(--ink)">THE CODE</text>
+              <text x="14" y="116" font-family="Space Mono, monospace" font-size="13" font-weight="bold" fill="var(--ink)">LAW &amp; EQUITY</text>
+            </svg>
+            <div class="rivers" style="margin-top:12px">
+              <div class="stream">
+                <h4>The Code itself</h4>
+                <div class="chips">
+                  <span class="chip code">Art. 1 · General</span><span class="chip code">Art. 2 · Sales</span>
+                  <span class="chip code">Art. 3 · Instruments</span><span class="chip code">Art. 4 · Bank deposits</span>
+                  <span class="chip code">Art. 9 · Secured deals</span>
+                </div>
+              </div>
+              <div class="stream" id="prinStream">
+                <h4>The supplemental principles — §1-103(b)'s own list</h4>
+                <div class="chips">
+                  <span class="chip">Law merchant</span><span class="chip">Fraud</span><span class="chip">Duress</span>
+                  <span class="chip">Coercion</span><span class="chip">Mistake</span><span class="chip">Misrepresentation</span>
+                  <span class="chip">Estoppel</span><span class="chip">Principal &amp; agent</span>
+                  <span class="chip">Capacity to contract</span><span class="chip">Bankruptcy</span>
+                </div>
+              </div>
+            </div>
+            <div class="pool" id="poolText">Both streams reach the case: the Code rules where it speaks, and the principles fill the gaps it leaves.</div>
+          </div>
+          <div class="controls">
+            <button class="ctl" id="damToggle" aria-pressed="false"><span class="sw"></span>A specific UCC section answers this exact question</button>
+          </div>
+          <div class="verdict" id="ex6Verdict" aria-live="polite">
+            <div class="v-head"><span>🌊</span><span>Supplement — not supplant</span></div>
+            <p>Say a buyer signed a deal because the seller <strong>lied</strong> about the goods. Article 2 governs the sale, but nothing in it has to reinvent fraud — §1-103(b) lets the common-law fraud principle flow in and do its work beside the Code.</p>
+          </div>
+
+          <div class="law">
+            <h3>The law — §1-103</h3>
+            <blockquote>“(a) The Uniform Commercial Code must be liberally construed and applied to promote its underlying purposes and policies, which are: (1) to simplify, clarify, and modernize the law governing commercial transactions; (2) to permit the continued expansion of commercial practices through custom, usage, and agreement of the parties; and (3) to make uniform the law among the various jurisdictions. (b) Unless displaced by the particular provisions of the Uniform Commercial Code, the principles of law and equity, including the law merchant and the law relative to capacity to contract, principal and agent, estoppel, fraud, misrepresentation, duress, coercion, mistake, bankruptcy, and other validating or invalidating cause supplement its provisions.”</blockquote>
+            <p><a href="https://www.law.cornell.edu/ucc/1/1-103" target="_blank" rel="noopener">Read §1-103 in full at Cornell LII →</a></p>
+          </div>
+          <div class="takeaway"><span class="t-ico">★</span><span>The Code is the main channel, not the whole watershed. Where it speaks, it controls; where it's silent, centuries of law and equity flow in behind it.</span></div>
+        </div>
+      </section>
+
+      <style>
+        /* ===== Example 7: signature words ===== */
+        .sigback{
+          max-width:680px; margin:0 auto; border:2.5px solid var(--line); border-radius:14px;
+          background:
+            repeating-linear-gradient(0deg, rgba(131,56,168,.05) 0 26px, transparent 26px 52px),
+            #fffef8;
+          color:#181b30; padding:20px 24px 16px; box-shadow:5px 5px 0 var(--shadow);
+        }
+        @media (prefers-color-scheme: dark){ .sigback{ background:#f4f1e4; } }
+        .sigback .sb-head{ font-family:"Space Mono",monospace; font-weight:700; font-size:.8rem; letter-spacing:.14em; color:#4a4a55; }
+        .sigback .sb-qual{
+          font-family:"Caveat",cursive; font-size:1.6rem; color:#c92f1d; min-height:2.2rem;
+          transform:rotate(-1deg); margin-top:16px;
+        }
+        .sigback .sb-sig{ font-family:"Caveat",cursive; font-size:2.2rem; color:#2456d6; line-height:1.15; min-height:2.6rem; }
+        .sigback .sb-sig.small{ font-size:1.45rem; padding-top:.55rem; }
+        .sigback .sb-line{ border-bottom:2.5px solid #181b30; }
+        .sigback .sb-note{ font-size:.78rem; color:#4a4a55; margin-top:6px; }
+        .termgrid{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+        .term-btn{
+          border:2px solid var(--line); border-radius:999px; background:var(--card); color:var(--ink);
+          padding:8px 16px; font-weight:700; min-height:2.75rem; box-shadow:3px 3px 0 var(--shadow);
+        }
+        .term-btn:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--shadow); }
+        .term-btn[aria-pressed="true"]{ background:var(--grape); color:#fff; }
+        @media (prefers-color-scheme: dark){ .term-btn[aria-pressed="true"]{ color:#10122b; } }
+        .term-panel{
+          margin:16px auto 0; max-width:780px; border:2px solid var(--line); border-radius:14px;
+          background:var(--card); padding:14px 18px;
+        }
+        .term-panel h3{ font-size:1.15rem; margin-bottom:4px; }
+        .term-panel p{ margin:6px 0; color:var(--ink-soft); }
+        .term-panel p strong{ color:var(--ink); }
+      </style>
+
+      <!-- ================= EXAMPLE 7 · SIGNATURE WORDS ================= -->
+      <section class="ex" id="ex7" style="--acc:var(--grape); --acc-soft:var(--grape-soft)">
+        <div class="ex-head">
+          <div class="ex-kicker"><span class="sec-badge">UCC §§ 3-415 · 3-419 · 3-416 · 3-402 · 3-206 · 2-316</span><span class="ex-num">EXAMPLE 7 · THE WORDS BESIDE YOUR NAME</span></div>
+          <h2>Signature words: small print, big teeth</h2>
+          <p class="story">People rarely sign with just a name. They add words — <strong>without recourse</strong>, <strong>guarantor</strong>, <strong>under duress</strong>, <strong>no warranty, express or implied</strong> — hoping the words change what the signature does. Sometimes they do, exactly. Sometimes the Code ignores them completely. Luis is about to indorse the back of a note: <strong>tap a phrase to write it beside his name</strong> and read what the law does with each one.</p>
+        </div>
+        <div class="ex-body">
+          <div class="scene">
+            <div class="sigback" aria-label="Illustrated back of an instrument with an indorsement signature">
+              <div class="sb-head">BACK OF INSTRUMENT — INDORSE HERE</div>
+              <div class="sb-qual" id="termQual"></div>
+              <div class="sb-sig" id="termSig">Luis Ortega</div>
+              <div class="sb-line"></div>
+              <div class="sb-note">✕ Sign your name exactly as it appears on the face of the instrument</div>
+            </div>
+            <div class="term-panel" aria-live="polite">
+              <h3 id="termTitle">Just the name — the full indorser's promise</h3>
+              <p id="termText">Signing alone makes Luis an <strong>indorser</strong>, and §3-415(a) attaches the standard obligation: if the instrument is dishonored, the indorser must pay the amount due to the person entitled to enforce it. No words added, no liability subtracted. Every phrase below is measured against this baseline.</p>
+            </div>
+          </div>
+
+          <div class="termgrid" role="group" aria-label="Signing phrases">
+            <button class="term-btn" data-term="plain" aria-pressed="true">Just my name</button>
+            <button class="term-btn" data-term="recourse" aria-pressed="false">Without recourse</button>
+            <button class="term-btn" data-term="payguar" aria-pressed="false">Guarantor — “payment guaranteed”</button>
+            <button class="term-btn" data-term="colguar" aria-pressed="false">Guarantor — “collection guaranteed”</button>
+            <button class="term-btn" data-term="nowarranty" aria-pressed="false">No warranty, express or implied</button>
+            <button class="term-btn" data-term="duress" aria-pressed="false">Under duress</button>
+            <button class="term-btn" data-term="agent" aria-pressed="false">By: ___, agent for ___</button>
+            <button class="term-btn" data-term="deposit" aria-pressed="false">For deposit only</button>
+            <button class="term-btn" data-term="prejudice" aria-pressed="false">Without prejudice — §1-308</button>
+          </div>
+
+          <div class="verdict" id="termVerdict" aria-live="polite">
+            <div class="v-head"><span>✎</span><span>Baseline: fully liable as indorser</span></div>
+            <p>A bare signature is the whole standard package — §3-415(a) obligation included.</p>
+          </div>
+
+          <div class="law">
+            <h3>The law — the sections behind the phrases</h3>
+            <blockquote>“If an indorsement states that it is made ‘without recourse’ or otherwise disclaims liability of the indorser, the indorser is not liable under subsection (a) to pay the instrument.” — §3-415(b)</blockquote>
+            <blockquote>“If the signature of a party to an instrument is accompanied by words indicating that the party guarantees payment … the signer is obliged to pay the amount due on the instrument to a person entitled to enforce the instrument in the same circumstances as the accommodated party would be obliged, without prior resort to the accommodated party…” — §3-419(e)</blockquote>
+            <blockquote>“The warranties stated in subsection (a) cannot be disclaimed with respect to checks.” — §3-416(c)</blockquote>
+            <p>And on signatures for someone else, §3-402(b)(1): if the form of the signature “shows unambiguously that the signature is made on behalf of the represented person who is identified in the instrument, the representative is not liable on the instrument.” Leave that clarity off, and §3-402(b)(2) can make the signer personally liable to a holder in due course.</p>
+            <p><a href="https://www.law.cornell.edu/ucc/3/3-415" target="_blank" rel="noopener">§3-415 at Cornell LII →</a> · <a href="https://www.law.cornell.edu/ucc/3/3-419" target="_blank" rel="noopener">§3-419 →</a> · <a href="https://www.law.cornell.edu/ucc/3/3-416" target="_blank" rel="noopener">§3-416 →</a> · <a href="https://www.law.cornell.edu/ucc/3/3-402" target="_blank" rel="noopener">§3-402 →</a> · <a href="https://www.law.cornell.edu/ucc/3/3-206" target="_blank" rel="noopener">§3-206 →</a> · <a href="https://www.law.cornell.edu/ucc/2/2-316" target="_blank" rel="noopener">§2-316 →</a></p>
+          </div>
+          <div class="takeaway"><span class="t-ico">★</span><span>The Code reads the words beside your name literally — each phrase is a switch wired to a specific section. Know which switch you're flipping before the ink dries: some cut your liability, one doubles it, and a couple aren't wired to anything at all.</span></div>
+        </div>
+      </section>
+
+      <style>
+        /* ===== Quiz ===== */
+        .quiz-q{ border:2px solid var(--line); border-radius:var(--radius); background:var(--card); padding:18px 20px; margin-top:16px; }
+        .quiz-q h3{ font-size:1.15rem; margin-bottom:4px; }
+        .quiz-q .q-scenario{ color:var(--ink-soft); margin:0 0 12px; }
+        .q-opts{ display:grid; gap:9px; }
+        .q-opt{
+          text-align:left; border:2px solid var(--line); border-radius:12px; background:var(--card2);
+          color:var(--ink); padding:11px 15px; font-weight:600; min-height:3rem;
+        }
+        .q-opt.right{ background:var(--green-soft); border-color:var(--good); }
+        .q-opt.wrong{ background:var(--coral-soft); border-color:var(--bad); }
+        .q-opt[disabled]{ cursor:default; opacity:.92; }
+        .q-fb{ display:none; margin-top:12px; border-radius:12px; padding:11px 15px; font-weight:600; }
+        .q-fb.show{ display:block; }
+        .q-fb.right{ background:var(--green-soft); }
+        .q-fb.wrong{ background:var(--coral-soft); }
+        footer{ margin-top:56px; border-top:2.5px solid var(--line); padding-top:22px; color:var(--ink-soft); }
+        footer h2{ color:var(--ink); font-size:1.3rem; margin-bottom:8px; }
+        footer ul{ margin:8px 0; padding-left:20px; }
+        footer a{ color:var(--royal); font-weight:700; }
+      </style>
+
+      <!-- ================= QUIZ ================= -->
+      <section class="ex" id="quiz" style="--acc:var(--ink); --acc-soft:var(--card2)">
+        <div class="ex-head">
+          <div class="ex-kicker"><span class="sec-badge" style="background:var(--ink)">QUIZ</span><span class="ex-num">ALL SEVEN EXAMPLES · FIVE RULINGS</span></div>
+          <h2>You be the judge</h2>
+          <p class="story">Five short cases, all built from the sections above. Rule on each one — the statute gives the verdict instantly.</p>
+        </div>
+        <div class="ex-body">
+          <div class="quiz-q" data-fb="Right. Under §3-311 the claim was discharged the moment Rosa obtained payment — and §1-308(b) says reservation of rights does not apply to an accord and satisfaction, so her crossing-out (and any “under protest” note) changes nothing. Her only real escape was §3-311(c)(2): hand the $1,800 back within 90 days.">
+            <h3>Case 1 · The crossed-out check</h3>
+            <p class="q-scenario">A debt is genuinely disputed. The debtor sends a check for less than the bill, marked conspicuously “PAID IN FULL.” The creditor crosses out the words, writes “under protest,” and cashes it. How much of the balance can the creditor still collect?</p>
+            <div class="q-opts">
+              <button class="q-opt">All of it — crossing out the words preserved the claim</button>
+              <button class="q-opt" data-correct="1">None of it — cashing the check discharged the whole claim</button>
+              <button class="q-opt">All of it — but only if the creditor sues within 90 days</button>
+            </div>
+            <div class="q-fb" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz-q" data-fb="Right. The check is an unconditional order to pay a fixed amount of money, payable to order and on demand — every §3-104(a) box ticked. The IOU fails twice (it's conditional, and a derby result is not a definite time), and the firewood note orders something besides money.">
+            <h3>Case 2 · Pick the negotiable paper</h3>
+            <p class="q-scenario">Three documents land on your desk. Only one is a negotiable instrument under §3-104. Which one?</p>
+            <div class="q-opts">
+              <button class="q-opt">“IOU — I'll pay Ana $500 if my horse wins the derby.”</button>
+              <button class="q-opt" data-correct="1">A check: “Pay to the order of Ana — $500,” payable on demand, drawn on First River Bank, signed by the drawer.</button>
+              <button class="q-opt">A note: “I'll pay Ana $500 and deliver one cord of firewood.”</button>
+            </div>
+            <div class="q-fb" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz-q" data-fb="Right. Acceptance under §3-409(a) is the drawee's signed agreement to pay the draft as presented, written on the draft itself. From that signature, the bank is the acceptor and is obliged to pay according to the draft's terms (§3-413). Before it signed, §3-408 kept it off the hook entirely.">
+            <h3>Case 3 · The bank signs</h3>
+            <p class="q-scenario">A holder presents a time draft to the drawee bank for acceptance. The bank writes its signature across the face of the draft and hands it back. What is the bank now?</p>
+            <div class="q-opts">
+              <button class="q-opt">Still a stranger to the paper — it owes nothing until the due date arrives</button>
+              <button class="q-opt" data-correct="1">The acceptor — bound by its signature to pay the draft as presented</button>
+              <button class="q-opt">The drawer — it has taken over the drawer's role</button>
+            </div>
+            <div class="q-fb" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz-q" data-fb="Right. Attachment (§9-203) made Heartland's interest enforceable against June — but perfection is the step that protects it against other creditors, and §9-310(a) makes filing the general rule. Unperfected loses to perfected, even when the unperfected deal came first. First to file is the race that counts.">
+            <h3>Case 4 · The race to the filing office</h3>
+            <p class="q-scenario">Heartland Bank lent June $60,000 against her tractor and took a signed security agreement — but never filed a UCC-1. A month later Valley Credit lent against the same tractor and filed immediately. June defaults. Whose claim on the tractor stands first?</p>
+            <div class="q-opts">
+              <button class="q-opt">Heartland — its deal was signed first</button>
+              <button class="q-opt" data-correct="1">Valley Credit — it perfected by filing; Heartland never did</button>
+              <button class="q-opt">Whoever repossesses the tractor first</button>
+            </div>
+            <div class="q-fb" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz-q" data-fb="Right. Under §3-415(b), an indorsement made “without recourse” disclaims the indorser's liability to pay the instrument — Ana took the paper on exactly those terms. The one thread still tied to Luis is his §3-416 transfer warranties: if, say, a signature on the note turned out to be forged, a warranty claim could still reach him — and on a check, §3-416(c) says those warranties can't be disclaimed at all.">
+            <h3>Case 5 · The “without recourse” indorsement</h3>
+            <p class="q-scenario">Luis indorses a note “without recourse” and sells it to Ana. The maker defaults and the note is dishonored. Can Ana collect the amount of the note from Luis as indorser?</p>
+            <div class="q-opts">
+              <button class="q-opt">Yes — an indorser always stands behind the paper he signs</button>
+              <button class="q-opt" data-correct="1">No — “without recourse” disclaimed his liability to pay it</button>
+              <button class="q-opt">Yes — but only half, since the words cut his liability in half</button>
+            </div>
+            <div class="q-fb" aria-live="polite"></div>
+          </div>
+
+          <div class="verdict" id="quizScore" style="display:none">
+            <div class="v-head"><span>⚖</span><span id="quizScoreText"></span></div>
+            <p id="quizScoreNote"></p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <h2>Sources — read the law itself</h2>
+        <p>Every example above is built on the model text of the Uniform Commercial Code as published by Cornell's Legal Information Institute:</p>
+        <ul>
+          <li><a href="https://www.law.cornell.edu/ucc/1/1-103" target="_blank" rel="noopener">§1-103 — Construction; supplemental principles of law</a></li>
+          <li><a href="https://www.law.cornell.edu/ucc/1/1-308" target="_blank" rel="noopener">§1-308 — Performance or acceptance under reservation of rights</a></li>
+          <li><a href="https://www.law.cornell.edu/ucc/3/3-104" target="_blank" rel="noopener">§3-104 — Negotiable instrument</a></li>
+          <li><a href="https://www.law.cornell.edu/ucc/3/3-311" target="_blank" rel="noopener">§3-311 — Accord and satisfaction by use of instrument</a></li>
+          <li><a href="https://www.law.cornell.edu/ucc/3/3-402" target="_blank" rel="noopener">§3-402 — Signature by representative</a></li>
+          <li><a href="https://www.law.cornell.edu/ucc/3/3-415" target="_blank" rel="noopener">§3-415 — Obligation of indorser (“without recourse”)</a></li>
+          <li><a href="https://www.law.cornell.edu/ucc/3/3-416" target="_blank" rel="noopener">§3-416 — Transfer warranties</a></li>
+          <li><a href="https://www.law.cornell.edu/ucc/3/3-419" target="_blank" rel="noopener">§3-419 — Instruments signed for accommodation (guarantors)</a></li>
+          <li><a href="https://www.law.cornell.edu/ucc/3/3-206" target="_blank" rel="noopener">§3-206 — Restrictive indorsement (“for deposit only”)</a></li>
+          <li><a href="https://www.law.cornell.edu/ucc/2/2-316" target="_blank" rel="noopener">§2-316 — Exclusion or modification of warranties (goods)</a></li>
+          <li><a href="https://www.gtrisk.com/UCC3.html" target="_blank" rel="noopener">Article 3 full text — including §3-409 (acceptance) and §3-501 (presentment)</a></li>
+          <li><a href="https://www.law.cornell.edu/ucc/9/9-310" target="_blank" rel="noopener">§9-310 — When filing required to perfect</a></li>
+          <li><a href="https://www.law.cornell.edu/ucc/9/9-509" target="_blank" rel="noopener">§9-509 — Persons entitled to file a record</a></li>
+          <li><a href="https://legalclarity.org/what-are-secured-transactions-under-the-ucc/" target="_blank" rel="noopener">Article 9 explained — including §9-203 (attachment) and §9-501 (filing office)</a></li>
+        </ul>
+        <p>These are teaching illustrations of the UCC's model text. States enact the Code with local variations, and real disputes turn on their own facts — this page teaches the concepts and is not legal advice.</p>
+      </footer>
+    </div>
+
+    <script>
+      (function(){
+        "use strict";
+        var $ = function(s, c){ return (c||document).querySelector(s); };
+        var $$ = function(s, c){ return Array.prototype.slice.call((c||document).querySelectorAll(s)); };
+        function setPressed(btn, on){ btn.setAttribute("aria-pressed", on ? "true" : "false"); }
+
+        /* ---------- EXAMPLE 1 · §3-104 anatomy + break it ---------- */
+        var anatomy = {
+          drawee:   { t:"1 · The drawee — First River Bank", x:"A check is an <strong>order</strong>, and an order needs someone to order around. The drawee is the bank told to pay. A draft drawn on a bank and payable on demand is exactly what §3-104(f) calls a <strong>check</strong>." },
+          date:     { t:"2 · The date", x:"The date anchors the paper in time. A check is payable <strong>on demand</strong>, so the holder can present it for payment when they choose — the timing requirement in §3-104(a)(2) is satisfied." },
+          payee:    { t:"3 · “Pay to the order of” — the payee", x:"These are the magic words of negotiability. “Pay to the <strong>order of</strong> Luis Ortega” means Luis can transfer the paper by indorsing it, and the next holder can enforce it. That is §3-104(a)(1): payable to bearer or to order." },
+          amount:   { t:"4 · The amount — figures and words", x:"A <strong>fixed amount of money</strong>: $500.00 in the box, “five hundred” spelled out on the line below. If the two ever disagree, §3-114 says the words control over the numbers." },
+          memo:     { t:"5 · The memo line", x:"The memo is a courtesy note — “tractor repair” — not a legal term of the instrument. It cannot condition payment, and ordinary memo writing doesn't affect negotiability one way or the other. (A conspicuous full-satisfaction statement is a different story — see Example 2.)" },
+          signature:{ t:"6 · The drawer's signature", x:"Maria's signature is what makes this <em>her</em> order. Under §3-401, a person is not liable on an instrument unless they signed it — and the drawer's signature is what sets the whole machine in motion." }
+        };
+        var hotspots = $$("#checkAnatomy .hotspot");
+        hotspots.forEach(function(btn){
+          btn.addEventListener("click", function(){
+            hotspots.forEach(function(b){ b.classList.remove("active"); });
+            btn.classList.add("active");
+            var d = anatomy[btn.getAttribute("data-part")];
+            $("#anatomyTitle").textContent = d.t;
+            $("#anatomyText").innerHTML = d.x;
+          });
+        });
+        $("#checkAnatomy .hotspot").classList.add("active");
+
+        var breaks = { cond:false, wheat:false, vague:false, stamp:false };
+        var breakReasons = {
+          cond:  { req:"promise", msg:"The condition kills it: §3-104(a) demands an <strong>unconditional</strong> order. “Pay only if the tractor runs” makes payment wait on an outside event, so the paper is not a negotiable instrument." },
+          wheat: { req:"money",   msg:"Wheat isn't money. §3-104(a) requires a fixed amount of <strong>money</strong> — a promise to deliver bushels is an ordinary contract, not an instrument." },
+          vague: { req:"time",    msg:"“Sometime, maybe” is neither <strong>on demand</strong> nor at a <strong>definite time</strong> — §3-104(a)(2) fails, and with it negotiability." },
+          stamp: { req:"stamp",   msg:"§3-104(d): a conspicuous statement that the paper is <strong>not negotiable</strong> takes it out of Article 3 altogether. It may still work as a plain contract between the original parties — but it cannot travel as an instrument." }
+        };
+        var amtBox = $("#amtBox"), wordsLine = $("#wordsLine");
+        function renderEx1(){
+          $("#checkAnatomy").classList.toggle("b-cond", breaks.cond);
+          $("#checkAnatomy").classList.toggle("b-stamp", breaks.stamp);
+          amtBox.textContent = breaks.wheat ? "40 bushels" : "$ 500.00";
+          wordsLine.textContent = breaks.wheat ? "Forty bushels of wheat — — — — — — — —" : "Five hundred and 00/100 — — — — — — — — Dollars";
+          var dateUline = $("#ex1 .check .daterow .uline");
+          dateUline.textContent = breaks.vague ? "payable sometime, maybe" : "Nov 15, 2026";
+          var failed = [];
+          Object.keys(breaks).forEach(function(k){ if(breaks[k]) failed.push(k); });
+          $$("#reqList li").forEach(function(li){
+            var req = li.getAttribute("data-req");
+            var isFail = failed.some(function(k){ return breakReasons[k].req === req; });
+            li.classList.toggle("fail", isFail);
+            li.classList.toggle("ok", !isFail);
+            li.querySelector(".mark").textContent = isFail ? "✗" : "✓";
+          });
+          var v = $("#ex1Verdict");
+          if(!failed.length){
+            v.className = "verdict good";
+            v.innerHTML = '<div class="v-head"><span>✔</span><span>NEGOTIABLE — Article 3 governs this paper</span></div><p>Every requirement in §3-104(a) is met, so this check can be negotiated — transferred to a new holder who can enforce it in their own name.</p>';
+          } else {
+            v.className = "verdict bad";
+            var msgs = failed.map(function(k){ return breakReasons[k].msg; });
+            v.innerHTML = '<div class="v-head"><span>✘</span><span>NOT NEGOTIABLE — it drops back to an ordinary contract</span></div><p>' + msgs.join(" ") + "</p>";
+          }
+        }
+        $$("[data-break]").forEach(function(btn){
+          btn.addEventListener("click", function(){
+            var k = btn.getAttribute("data-break");
+            breaks[k] = !breaks[k];
+            setPressed(btn, breaks[k]);
+            renderEx1();
+          });
+        });
+
+        /* ---------- EXAMPLE 2 · §3-311 paid in full ---------- */
+        var s311 = { dispute:true, conspic:true, cashed:false, crossout:false, repay:false };
+        function popStamp(el){
+          el.classList.remove("hidden","pop"); void el.offsetWidth; el.classList.add("pop");
+        }
+        function renderEx2(){
+          $("#pifLine").innerHTML = s311.conspic
+            ? '<span class="pif-big">PAID IN FULL — FULL SATISFACTION</span>'
+            : '<span class="pif-tiny">pmt on acct 921</span>';
+          var discharged = s311.cashed && s311.dispute && s311.conspic && !s311.repay;
+          var undone = s311.cashed && s311.dispute && s311.conspic && s311.repay;
+          var stampC = $("#stampCashed"), stampD = $("#stampDischarged");
+          if(s311.cashed){ if(stampC.classList.contains("hidden")) popStamp(stampC); } else { stampC.classList.add("hidden"); }
+          if(discharged){ if(stampD.classList.contains("hidden")) popStamp(stampD); } else { stampD.classList.add("hidden"); }
+          var cell = $("#balanceCell"), val = $("#balanceVal");
+          var v = $("#ex2Verdict"), head, body, cls = "verdict";
+          if(!s311.cashed){
+            val.textContent = "$600"; cell.className = "cell balance owed";
+            head = "✉ The check is in Rosa's hands — nothing is settled yet";
+            body = "An uncashed check discharges nothing. §3-311 only bites when the claimant <strong>obtains payment</strong> of the instrument. Rosa is holding Dan's offer: take $1,800 as the whole story, or hold out for $2,400. Flip the “Rosa cashes the check” switch to see what the law does with her choice.";
+          } else if(!s311.dispute){
+            val.textContent = "$600"; cell.className = "cell balance owed"; cls += " bad";
+            head = "✘ NOT discharged — there was no real dispute";
+            body = "§3-311(a)(ii) requires the amount to be <strong>unliquidated or subject to a bona fide dispute</strong>. If Rosa's $2,400 bill was never genuinely contested, Dan's check is just a partial payment: the $600 balance survives, “paid in full” or not." + (s311.repay ? " (Returning the $1,800 changes nothing here — there was no discharge to undo.)" : "");
+          } else if(!s311.conspic){
+            val.textContent = "$600"; cell.className = "cell balance owed"; cls += " bad";
+            head = "✘ NOT discharged — the statement wasn't conspicuous";
+            body = "§3-311(b) discharges the claim only if the instrument or an accompanying writing contained a <strong>conspicuous statement</strong> that it was tendered as full satisfaction. A quiet “pmt on acct” scribble doesn't do it, so the $600 survives. (One trap: under §3-311(d), if Rosa actually <em>knew</em> the check was offered as full satisfaction, the claim can be discharged anyway.)" + (s311.repay ? " (Returning the $1,800 changes nothing here — there was no discharge to undo.)" : "");
+          } else if(undone){
+            val.textContent = "$600"; cell.className = "cell balance owed"; cls += " good";
+            head = "↩ Discharge undone — the claim is alive again";
+            body = "Rosa used §3-311(c)(2): a claimant who <strong>tenders repayment of the amount of the instrument within 90 days after payment</strong> defeats the discharge. She hands back the $1,800, and the full $2,400 claim — including the disputed $600 — is back on the table.";
+          } else {
+            val.textContent = "$0"; cell.className = "cell balance gone"; cls += " good";
+            head = "✔ DISCHARGED — the $600 is gone";
+            body = "All three §3-311(a) proofs line up: Dan tendered the check <strong>in good faith</strong> as full satisfaction, the amount was under a <strong>bona fide dispute</strong>, and Rosa <strong>obtained payment</strong> — with a conspicuous full-satisfaction statement on the check (§3-311(b)). The claim is discharged in full." +
+              (s311.crossout ? " And her crossing out “paid in full”? It changed nothing: §1-308(b) provides that reservation of rights <strong>does not apply to an accord and satisfaction</strong>." : "");
+          }
+          v.className = cls;
+          v.innerHTML = '<div class="v-head"><span>' + head.split(" ")[0] + '</span><span>' + head.substring(head.indexOf(" ") + 1) + '</span></div><p>' + body + "</p>";
+        }
+        $$("[data-s311]").forEach(function(btn){
+          btn.addEventListener("click", function(){
+            var k = btn.getAttribute("data-s311");
+            s311[k] = !s311[k];
+            setPressed(btn, s311[k]);
+            renderEx2();
+          });
+        });
+        renderEx2();
+
+        /* ---------- EXAMPLE 3 · §1-308 signature ---------- */
+        var signed = false;
+        $("#reserveToggle").addEventListener("click", function(){
+          var on = this.getAttribute("aria-pressed") !== "true";
+          setPressed(this, on);
+          $("#signDoc").classList.toggle("reserved", on);
+          if(signed) renderEx3Verdict(on);
+        });
+        function renderEx3Verdict(reserved){
+          var v = $("#ex3Verdict");
+          if(reserved){
+            v.className = "verdict good";
+            v.innerHTML = '<div class="v-head"><span>✔</span><span>Signed — and your rights came through it intact</span></div><p>You performed (accepted the delivery) <strong>with explicit reservation of rights</strong>, so §1-308(a) says the performance “does not thereby prejudice the rights reserved.” The parts are on your shelf today, and the $180 fee and the new return terms are still yours to fight about tomorrow. “Without prejudice” and “under protest” are the statute\'s own examples of words that are sufficient.</p>';
+          } else {
+            v.className = "verdict bad";
+            v.innerHTML = '<div class="v-head"><span>⚠</span><span>Signed — with nothing held back</span></div><p>The form says the receiver “accepts” the revised terms by signing, and you signed clean. Without an explicit reservation, your acceptance can be read as assent to the performance Keystone demanded — the new fee and terms included. Start over and sign again with the reservation line to feel the difference §1-308 makes.</p>';
+          }
+        }
+        $("#signBtn").addEventListener("click", function(){
+          var name = $("#signerName").value.trim() || "Your Name";
+          var sig = $("#sigText");
+          sig.textContent = name;
+          sig.classList.remove("written"); void sig.offsetWidth; sig.classList.add("written");
+          signed = true;
+          renderEx3Verdict($("#signDoc").classList.contains("reserved"));
+        });
+        $("#signReset").addEventListener("click", function(){
+          signed = false;
+          $("#sigText").classList.remove("written");
+          var v = $("#ex3Verdict");
+          v.className = "verdict";
+          v.innerHTML = '<div class="v-head"><span>✎</span><span>The pen is in your hand</span></div><p>Try it both ways: sign once plain, start over, then sign with the reservation line. The signature is the same — the legal footprint isn\'t.</p>';
+        });
+
+        /* ---------- EXAMPLE 4 · draft journey ---------- */
+        var draftSteps = [
+          { n:"Step 1 of 5", t:"Maria writes the draft",
+            x:"Maria signs a written order: “30 days after sight, pay to the order of Luis Ortega $4,000,” addressed to First River Bank. Because it is an <strong>order</strong> rather than a promise, §3-104(e) calls it a <strong>draft</strong>. Right now the bank owes nothing on it — nobody has even asked it to pay.",
+            left:"18%", lit:["stDrawer"], bank:false, acc:false, paid:false, day:false },
+          { n:"Step 2 of 5", t:"Luis presents it for acceptance — §3-501",
+            x:"Luis, the holder, takes the draft to First River Bank and demands that the bank accept it. That demand is <strong>presentment</strong> (§3-501(a)(ii)): a demand to accept a draft, made to the drawee by a person entitled to enforce the instrument. The bank may examine the paper — but the choice in front of it is sign, or don't.",
+            left:"50%", lit:["stBank","stHolder"], bank:false, acc:false, paid:false, day:false },
+          { n:"Step 3 of 5", t:"The bank accepts — §3-409",
+            x:"The bank writes its signature across the face of the draft. That is <strong>acceptance</strong> (§3-409(a)): “the drawee's signed agreement to pay a draft as presented,” which “may consist of the drawee's signature alone.” The drawee has become the <strong>acceptor</strong> — the bank itself is now bound to pay at maturity.",
+            left:"50%", lit:["stBank"], bank:true, acc:true, paid:false, day:false },
+          { n:"Step 4 of 5", t:"Thirty days pass — presentment for payment",
+            x:"The draft was payable 30 days after sight, and sight was the acceptance. At maturity Luis presents the draft a second time — now a demand <strong>to pay</strong> the instrument under §3-501(a)(i), made to the party obliged to pay it: the acceptor bank.",
+            left:"50%", lit:["stBank","stHolder"], bank:true, acc:true, paid:false, day:true },
+          { n:"Step 5 of 5", t:"The bank pays — the draft's work is done",
+            x:"First River Bank pays Luis the $4,000, honoring its acceptance. Payment by the acceptor discharges the instrument, and the paper's journey — drawer to drawee to holder, order to obligation to payment — is complete.",
+            left:"81%", lit:["stHolder"], bank:true, acc:true, paid:true, day:false }
+        ];
+        var dStep = 0;
+        function renderDraft(){
+          var s = draftSteps[dStep];
+          $("#draftStepNo").textContent = s.n;
+          $("#draftStepTitle").textContent = s.t;
+          $("#draftStepText").innerHTML = s.x;
+          var paper = $("#draftPaper");
+          paper.style.left = s.left;
+          paper.style.transform = "translateX(-50%) rotate(" + (dStep % 2 ? "1.5deg" : "-1.5deg") + ")";
+          $("#dpBankSig").classList.toggle("show", s.bank);
+          var acc = $("#dpAccepted"), paid = $("#dpPaid");
+          if(s.acc && !acc.classList.contains("show")){ acc.classList.add("show"); popStamp(acc); }
+          if(!s.acc) acc.classList.remove("show");
+          if(s.paid && !paid.classList.contains("show")){ paid.classList.add("show"); popStamp(paid); }
+          if(!s.paid) paid.classList.remove("show");
+          $("#dayBadge").classList.toggle("show", s.day);
+          ["stDrawer","stBank","stHolder"].forEach(function(id){
+            $("#" + id).classList.toggle("lit", s.lit.indexOf(id) !== -1);
+          });
+          $$(".stepdots button").forEach(function(b, i){
+            b.classList.toggle("now", i === dStep);
+            b.classList.toggle("done", i < dStep);
+          });
+          $("#draftPrev").disabled = dStep === 0;
+          $("#draftNext").disabled = dStep === draftSteps.length - 1;
+        }
+        $("#draftNext").addEventListener("click", function(){ if(dStep < draftSteps.length - 1){ dStep++; renderDraft(); } });
+        $("#draftPrev").addEventListener("click", function(){ if(dStep > 0){ dStep--; renderDraft(); } });
+        $$(".stepdots button").forEach(function(b){
+          b.addEventListener("click", function(){ dStep = parseInt(b.getAttribute("data-step"), 10) - 1; renderDraft(); });
+        });
+        renderDraft();
+
+        /* ---------- EXAMPLE 5 · Article 9 tractor loan ---------- */
+        var gates = { value:false, rights:false, agree:false };
+        var filed = false;
+        function gateCount(){ return Object.keys(gates).filter(function(k){ return gates[k]; }).length; }
+        function renderEx5(){
+          var n = gateCount();
+          $("#attachCount").textContent = n + " / 3 gates";
+          var attached = n === 3;
+          var av = $("#attachVerdict");
+          if(attached){
+            av.className = "verdict good";
+            av.innerHTML = '<div class="v-head"><span>🔒</span><span>ATTACHED — the interest is alive (§9-203)</span></div><p>Value given, rights in the collateral, and an authenticated security agreement describing it — all three §9-203(b) conditions exist at once, so Heartland\'s security interest has <strong>attached</strong> and is enforceable against June. But attachment alone only binds June. To beat other creditors, Heartland must <strong>perfect</strong> — file the UCC-1 below.</p>';
+          } else {
+            av.className = "verdict";
+            av.innerHTML = '<div class="v-head"><span>🔓</span><span>Not attached yet — ' + n + ' of 3 gates open</span></div><p>Until all three gates swing open at the same time, Heartland has a loan — but no enforceable security interest in the tractor.</p>';
+          }
+          if(!attached && filed){ filed = false; $("#filedStamp").innerHTML = ""; }
+          $("#fileFly").classList.toggle("show", attached);
+          $("#fileBtn").disabled = !attached || filed;
+          $("#fileBtn").textContent = filed ? "UCC-1 filed ✓" : "File the UCC-1";
+          $("#twistBtn").disabled = !filed;
+          if(!filed) $("#perfectVerdict").style.display = "none";
+        }
+        $$("[data-gate]").forEach(function(btn){
+          btn.addEventListener("click", function(){
+            var k = btn.getAttribute("data-gate");
+            gates[k] = !gates[k];
+            setPressed(btn, gates[k]);
+            btn.classList.toggle("done", gates[k]);
+            btn.querySelector(".g-check").textContent = gates[k] ? "✓" : "○";
+            renderEx5();
+          });
+        });
+        $("#fileBtn").addEventListener("click", function(){
+          filed = true;
+          $("#filedStamp").innerHTML = '<span class="stamp pop" style="color:#c22577">★ Filed · Perfected ★</span>';
+          var pv = $("#perfectVerdict");
+          pv.style.display = "block"; pv.className = "verdict good";
+          $("#perfectIcon").textContent = "📋";
+          $("#perfectTitle").textContent = "PERFECTED — good against the whole world (§9-310)";
+          $("#perfectText").innerHTML = "The financing statement is on record at the Secretary of State's central filing office (§9-501(a)(2)) — and June authorized it by signing the security agreement (§9-509(b)). Anyone thinking of lending against June's equipment can now discover Heartland's claim before they lend. That public notice is what perfection <em>is</em>.";
+          renderEx5();
+        });
+        $("#twistBtn").addEventListener("click", function(){
+          var pv = $("#perfectVerdict");
+          pv.style.display = "block"; pv.className = "verdict good";
+          $("#perfectIcon").textContent = "⚖";
+          $("#perfectTitle").textContent = "June defaults — Heartland stands first in line";
+          $("#perfectText").innerHTML = "Valley Credit shows up waving a loan it made <em>after</em> Heartland's — but Valley searched the filing office first and saw Heartland's UCC-1, so it lent with its eyes open. Because Heartland perfected, its claim on the tractor comes first. <strong>Run the counterfactual:</strong> had Heartland skipped the filing, its interest would have stayed unperfected — and a later lender who filed could have jumped ahead of it, signed agreement or not.";
+        });
+        $("#ex5Reset").addEventListener("click", function(){
+          Object.keys(gates).forEach(function(k){ gates[k] = false; });
+          filed = false;
+          $$("[data-gate]").forEach(function(btn){
+            setPressed(btn, false); btn.classList.remove("done");
+            btn.querySelector(".g-check").textContent = "○";
+          });
+          $("#filedStamp").innerHTML = "";
+          renderEx5();
+        });
+        renderEx5();
+
+        /* ---------- EXAMPLE 6 · §1-103 two rivers ---------- */
+        $("#damToggle").addEventListener("click", function(){
+          var on = this.getAttribute("aria-pressed") !== "true";
+          setPressed(this, on);
+          $("#prinStream").classList.toggle("dammed", on);
+          var v = $("#ex6Verdict");
+          if(on){
+            $("#poolText").textContent = "The dam is down: on this exact question, the Code's own provision controls — the supplemental principles are displaced.";
+            v.className = "verdict bad";
+            v.innerHTML = '<div class="v-head"><span>🚧</span><span>Displaced — the Code\'s own words govern</span></div><p>§1-103(b) opens with the limit: “<strong>Unless displaced</strong> by the particular provisions of the Uniform Commercial Code…” Where a section answers the question directly — the way §3-311 answers the “paid in full” check — the older principle cannot be used to override it. That is exactly why “under protest” fails in Example 2: §1-308(b) and §3-311 leave no gap for it to fill.</p>';
+          } else {
+            $("#poolText").textContent = "Both streams reach the case: the Code rules where it speaks, and the principles fill the gaps it leaves.";
+            v.className = "verdict";
+            v.innerHTML = '<div class="v-head"><span>🌊</span><span>Supplement — not supplant</span></div><p>Say a buyer signed a deal because the seller <strong>lied</strong> about the goods. Article 2 governs the sale, but nothing in it has to reinvent fraud — §1-103(b) lets the common-law fraud principle flow in and do its work beside the Code.</p>';
+          }
+        });
+
+        /* ---------- EXAMPLE 7 · signature words ---------- */
+        var terms = {
+          plain: {
+            qual:"", sig:"Luis Ortega", small:false,
+            t:"Just the name — the full indorser's promise",
+            x:"Signing alone makes Luis an <strong>indorser</strong>, and §3-415(a) attaches the standard obligation: if the instrument is dishonored, the indorser must pay the amount due to the person entitled to enforce it. No words added, no liability subtracted. Every phrase below is measured against this baseline.",
+            vcls:"verdict", vhead:"✎ Baseline: fully liable as indorser",
+            vbody:"A bare signature is the whole standard package — §3-415(a) obligation included."
+          },
+          recourse: {
+            qual:"Without recourse", sig:"Luis Ortega", small:false,
+            t:"“Without recourse” — passing the paper without guaranteeing it",
+            x:"This is the indorser's own escape hatch, written into §3-415(b): an indorsement made <strong>“without recourse”</strong> means the indorser is <em>not</em> liable to pay the instrument if it is dishonored. Luis passes the paper along; if the maker never pays, the loss does not come back to him as indorser. <strong>The catch:</strong> it cuts only the §3-415 payment liability. The <strong>transfer warranties</strong> of §3-416 still ride with the paper — Luis still warrants that all signatures are authentic and the instrument is unaltered — and on a check those warranties cannot be disclaimed at all (§3-416(c)). A drawer gets even less: §3-414(e) makes a “without recourse” disclaimer flatly ineffective on a check.",
+            vcls:"verdict good", vhead:"✔ It works — indorser's payment liability disclaimed (§3-415(b))",
+            vbody:"The paper can still bounce — it just can't bounce back to Luis as indorser. His §3-416 warranties travel with it regardless."
+          },
+          payguar: {
+            qual:"Payment guaranteed", sig:"Luis Ortega", small:false,
+            t:"“Payment guaranteed” — signing as guarantor, the strongest backing there is",
+            x:"Words showing the signer acts as <strong>surety or guarantor</strong> for another party make Luis an <strong>accommodation party</strong> under §3-419(c) — he signed to lend his credit to someone else's obligation, without receiving the value himself. And because his words guarantee <strong>payment</strong>, §3-419(e) puts him on the hook <strong>in the same circumstances as the person he backed, with no prior resort</strong>: the holder does not have to chase the maker first, sue, or wait — at default, Luis pays. If he pays, §3-419(f) gives him reimbursement rights against the party he accommodated.",
+            vcls:"verdict bad", vhead:"⚠ Maximum exposure — liable immediately at default (§3-419(e))",
+            vbody:"Of every phrase on this page, this one adds the most liability. A guarantor of payment is not a backup plan — to the holder, he is a second maker."
+          },
+          colguar: {
+            qual:"Collection guaranteed", sig:"Luis Ortega", small:false,
+            t:"“Collection guaranteed” — the guarantor with a shield",
+            x:"One word changes everything. Under §3-419(d), words <strong>unambiguously</strong> guaranteeing <em>collection</em> rather than payment mean Luis is obliged to pay <strong>only if</strong> the holder first comes up empty against the main party: a judgment against them returned unsatisfied, the party is insolvent or in an insolvency proceeding, they cannot be served with process, or it is otherwise apparent payment cannot be obtained from them. The holder must exhaust the maker before touching Luis.",
+            vcls:"verdict", vhead:"🛡 Backstop only — the holder must exhaust the maker first (§3-419(d))",
+            vbody:"“Payment” vs. “collection” is a two-word difference worth the whole debt. Guarantors who mean the weaker promise must say so unambiguously."
+          },
+          nowarranty: {
+            qual:"No warranty, express or implied", sig:"Luis Ortega", small:false,
+            t:"“No warranty, express or implied” — the phrase that usually isn't wired to anything",
+            x:"On an <strong>instrument</strong>, this phrase runs into §3-416: anyone who transfers an instrument for consideration automatically makes transfer warranties — entitled to enforce, signatures authentic, no alteration, no defense good against them. §3-416(c) is blunt: those warranties <strong>“cannot be disclaimed with respect to checks.”</strong> On a check, the phrase is a dead letter. On a <strong>contract for goods</strong>, Article 2 sets its own test in §2-316(2): to exclude the implied warranty of <em>merchantability</em>, the writing must actually <strong>mention “merchantability”</strong> and be conspicuous — the generic “no warranty, express or implied” mentions neither, so courts routinely hold it fails. The language that does work on goods is “<strong>as is</strong>” (§2-316(3)(a)), which in common understanding excludes all implied warranties.",
+            vcls:"verdict bad", vhead:"✘ Mostly a dead letter — as usually written, it disclaims nothing",
+            vbody:"Warranty law has its own magic words, and these aren't them: checks can't shed §3-416 warranties at all, and goods need “merchantability” named — or an honest “as is.”"
+          },
+          duress: {
+            qual:"Under duress", sig:"Luis Ortega", small:false,
+            t:"“Under duress” — a claim about the facts, not a spell in the ink",
+            x:"Duress reaches this page through §1-103(b): it is one of the supplemental principles of law and equity that flow in beside the Code (you met it in the two rivers of Example 6). <strong>Real</strong> duress — a wrongful threat that leaves the signer no reasonable alternative — is serious law: it can make an obligation voidable, and §3-305(a)(1) treats duress that nullifies the obligation as a defense even against a holder in due course. <strong>The catch:</strong> the words don't create the duress. A court examines what actually happened — the threat, the pressure, the alternatives — and a signer who writes “under duress” on a routine document, with no coercion behind it, has repeatedly been given no effect. The phrase is, at most, a marker that a claim exists; the facts have to prove it.",
+            vcls:"verdict", vhead:"⚠ The words alone do nothing — duress lives in the facts (§1-103(b))",
+            vbody:"If you were genuinely coerced, that is a real defense with real teeth (§3-305). If you weren't, writing it changes nothing."
+          },
+          agent: {
+            qual:"", sig:"By: Luis Ortega, agent for Maria Delgado", small:true,
+            t:"“By: ___, agent for ___” — signing so the debt lands on the right person",
+            x:"This is the representative's signature, governed by §3-402. Because the form of the signature <strong>unambiguously</strong> shows Luis signs on behalf of Maria — and Maria is identified right there in the signature — §3-402(b)(1) says <strong>Luis is not personally liable</strong> on the instrument; Maria, the represented person, is the one bound (§3-402(a)). <strong>The catch:</strong> the clarity is doing all the work. Sign just “Luis Ortega” on Maria's paper, or leave the agency ambiguous, and §3-402(b)(2) flips the result — the signer is personally liable to a holder in due course who took the paper without notice.",
+            vcls:"verdict good", vhead:"✔ It works — the represented person is bound, not the signer (§3-402(b)(1))",
+            vbody:"“By:” plus the principal's name is the cheapest liability shield in commercial paper — and it vanishes the moment the signature gets sloppy."
+          },
+          deposit: {
+            qual:"For deposit only", sig:"Luis Ortega", small:false,
+            t:"“For deposit only” — a restrictive indorsement with real teeth",
+            x:"Written above the signature on the back of a check, these words make a <strong>restrictive indorsement</strong> under §3-206(c): the paper is indorsed for deposit and collection into Luis's account. Its power is conversion liability — a depositary bank (or a person who buys the check) that takes it but does <strong>not</strong> apply the proceeds consistently with the indorsement <strong>converts the instrument</strong>, which is why a stolen “for deposit only” check is so hard to cash. <strong>The catch:</strong> it guards the money's path, not the paper's travels — §3-206(a) says an indorsement purporting to prohibit further transfer doesn't stop negotiation.",
+            vcls:"verdict good", vhead:"✔ It works — proceeds must reach the indorser's account (§3-206(c))",
+            vbody:"Three small words turn anyone who diverts the money into a converter of the instrument. Banks stamp it on deposits for exactly this reason."
+          },
+          prejudice: {
+            qual:"Without prejudice — UCC §1-308 — all rights reserved", sig:"Luis Ortega", small:false,
+            t:"“Without prejudice” — the reservation you worked in Example 3",
+            x:"You already ran this switch live in Example 3: under §1-308(a), a party that performs or assents to performance <strong>with explicit reservation of rights</strong> “does not thereby prejudice the rights reserved” — and “without prejudice” and “under protest” are the statute's own examples of sufficient words. It keeps a deal moving while keeping your dispute alive. <strong>The catch</strong> is the one from Example 2: §1-308(b) — the reservation <strong>does not apply to an accord and satisfaction</strong>, so it cannot rescue the balance on a cashed “paid in full” check.",
+            vcls:"verdict good", vhead:"✔ It works — rights reserved while you perform (§1-308(a))",
+            vbody:"Scroll back to Example 3 to sign with it yourself — and to Example 2 for the one battlefield where it loses."
+          }
+        };
+        function renderTerm(key){
+          var d = terms[key];
+          $("#termQual").textContent = d.qual;
+          var sig = $("#termSig");
+          sig.textContent = d.sig;
+          sig.classList.toggle("small", !!d.small);
+          $("#termTitle").textContent = d.t;
+          $("#termText").innerHTML = d.x;
+          var v = $("#termVerdict");
+          v.className = d.vcls;
+          v.innerHTML = '<div class="v-head"><span>' + d.vhead.split(" ")[0] + '</span><span>' + d.vhead.substring(d.vhead.indexOf(" ") + 1) + '</span></div><p>' + d.vbody + "</p>";
+          $$(".term-btn").forEach(function(b){ setPressed(b, b.getAttribute("data-term") === key); });
+        }
+        $$(".term-btn").forEach(function(btn){
+          btn.addEventListener("click", function(){ renderTerm(btn.getAttribute("data-term")); });
+        });
+
+        /* ---------- QUIZ ---------- */
+        var answered = 0, score = 0, totalQ = $$(".quiz-q").length;
+        $$(".quiz-q").forEach(function(q){
+          var fb = $(".q-fb", q);
+          $$(".q-opt", q).forEach(function(opt){
+            opt.addEventListener("click", function(){
+              if(q.getAttribute("data-done")) return;
+              q.setAttribute("data-done", "1");
+              var correct = opt.hasAttribute("data-correct");
+              $$(".q-opt", q).forEach(function(o){
+                o.disabled = true;
+                if(o.hasAttribute("data-correct")) o.classList.add("right");
+              });
+              if(!correct) opt.classList.add("wrong");
+              if(correct) score++;
+              answered++;
+              fb.className = "q-fb show " + (correct ? "right" : "wrong");
+              fb.innerHTML = (correct ? "<strong>Correct ruling.</strong> " : "<strong>Overruled.</strong> ") + q.getAttribute("data-fb");
+              if(answered === totalQ){
+                var box = $("#quizScore");
+                box.style.display = "block";
+                box.className = "verdict " + (score === totalQ ? "good" : "");
+                $("#quizScoreText").textContent = "Final score: " + score + " of " + totalQ;
+                $("#quizScoreNote").textContent =
+                  score === totalQ ? "A clean sweep — every ruling straight from the statute. The sections: §3-311 with §1-308(b), §3-104, §3-409, §§9-203 / 9-310, and §3-415(b)." :
+                  score >= 2 ? "Solid judging. Re-run the examples behind the ones that got away — each verdict above names its section." :
+                  "The bench suggests a second pass through the examples — every answer above is worked, step by step, in the sections they cite.";
+              }
+            });
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
