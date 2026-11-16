@@ -159,7 +159,7 @@
       }
       @media (prefers-color-scheme: dark){ .btn{ color:#10122b; } }
       .btn:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--shadow); }
-      .btn[disabled]{ opacity:.45; cursor:not-allowed; transform:none; }
+      .btn[disabled]{ opacity:.55; filter:grayscale(.85) brightness(.95); cursor:not-allowed; transform:none; box-shadow:1px 1px 0 var(--shadow); border-style:dashed; }
       .btn.ghost{ background:var(--card); color:var(--ink); }
       .verdict{
         margin-top:16px; border:2.5px solid var(--line); border-radius:var(--radius);
@@ -272,7 +272,7 @@
         </div>
 
         <h1>The UCC, <span class="hl">in living color</span></h1>
-        <p class="lede">The Uniform Commercial Code runs on paper — checks, drafts, and filings. These twelve hands-on examples take the sections from the UCC books and let you push the buttons yourself: cash the check, sign the form, file the UCC-1, race the stop order, and watch what the law does. Every verdict below comes straight from the section cited.</p>
+        <p class="lede">The Uniform Commercial Code runs on paper — checks, drafts, and filings. These fifteen hands-on examples take the sections from the UCC books and let you push the buttons yourself: cash the check, sign the form, file the UCC-1, race the stop order, and watch what the law does. Every verdict below comes straight from the section cited.</p>
         <nav class="jump" aria-label="Jump to an example">
           <a href="#ex1"><span class="dot" style="background:var(--teal)"></span>§3-104 · Anatomy of a check</a>
           <a href="#ex2"><span class="dot" style="background:var(--coral)"></span>§3-311 · “Paid in full”</a>
@@ -286,6 +286,9 @@
           <a href="#ex10"><span class="dot" style="background:var(--teal)"></span>§4-403 · The stop-payment race</a>
           <a href="#ex11"><span class="dot" style="background:var(--green)"></span>§9-324 · PMSI priority race</a>
           <a href="#ex12"><span class="dot" style="background:var(--grape)"></span>Which court? · Law, equity, admiralty</a>
+          <a href="#ex13"><span class="dot" style="background:var(--gold)"></span>Wholesale · Sell the contract</a>
+          <a href="#ex14"><span class="dot" style="background:var(--teal)"></span>Subject-to · The deed moves, the loan stays</a>
+          <a href="#ex15"><span class="dot" style="background:var(--royal)"></span>Syndicate · The waterfall</a>
           <a href="#quiz"><span class="dot" style="background:var(--ink)"></span>You be the judge</a>
         </nav>
       </header>
@@ -637,7 +640,18 @@
         .gate.done{ background:var(--green-soft); }
         .gate.done .g-check{ color:var(--good); }
         .gate, .btn{ touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
-        .gate{ cursor:pointer; }
+        .gate{ cursor:pointer; transition:transform .12s ease, background .2s ease; }
+        .gate:hover{ transform:translateY(-1px); }
+        .gate:active{ transform:translate(1px,1px); }
+        .gate .g-tap{
+          display:inline-block; margin-top:9px; font-family:"Space Mono",monospace; font-size:.68rem; font-weight:700;
+          letter-spacing:.06em; color:var(--ink-soft); border:1.5px dashed var(--ink-soft); border-radius:999px; padding:2px 9px;
+        }
+        .gate.done .g-tap{ display:none; }
+        .ex5-hint{
+          margin-top:14px; font-weight:700; font-size:1rem; color:var(--ink);
+          background:var(--acc-soft); border:2px dashed var(--line); border-radius:12px; padding:9px 14px;
+        }
         .gate.pop{ animation:gatePop .3s ease; }
         @keyframes gatePop{ 0%{ transform:scale(.96); } 60%{ transform:scale(1.025); } 100%{ transform:scale(1); } }
         .btn.ready{ animation:readyPulse 1.1s ease-in-out infinite; }
@@ -774,14 +788,17 @@
             <button type="button" class="gate" data-gate="value" aria-pressed="false">
               <span class="g-head">Gate 1 · Value given <span class="g-check">○</span></span>
               <p>Heartland actually hands June the $60,000 loan. No value, no interest — §9-203(b)(1).</p>
+              <span class="g-tap">👆 TAP TO OPEN</span>
             </button>
             <button type="button" class="gate" data-gate="rights" aria-pressed="false">
               <span class="g-head">Gate 2 · Rights in the collateral <span class="g-check">○</span></span>
               <p>June buys the tractor, so she owns it — or at least has power to transfer rights in it — §9-203(b)(2).</p>
+              <span class="g-tap">👆 TAP TO OPEN</span>
             </button>
             <button type="button" class="gate" data-gate="agree" aria-pressed="false">
               <span class="g-head">Gate 3 · Signed security agreement <span class="g-check">○</span></span>
               <p>June authenticates a security agreement describing the tractor — §9-203(b)(3)(A). Her signature on it also authorizes the filing (§9-509(b)).</p>
+              <span class="g-tap">👆 TAP TO OPEN</span>
             </button>
           </div>
           <div class="verdict" id="attachVerdict" aria-live="polite">
@@ -804,9 +821,10 @@
               <div id="sosStamp" style="margin-top:6px;text-align:center"></div>
             </div>
           </div>
+          <div class="ex5-hint" id="ex5Hint" aria-live="polite">🔒 Filing is locked — tap the Gate 1, Gate 2 and Gate 3 cards above to open all 3 gates first.</div>
           <div class="controls">
-            <button type="button" class="btn" id="fileBtn" disabled>File the UCC-1</button>
-            <button type="button" class="btn" id="twistBtn" disabled>Then: June defaults, and a second lender appears</button>
+            <button type="button" class="btn" id="fileBtn" disabled>🔒 File the UCC-1 — open all 3 gates first</button>
+            <button type="button" class="btn" id="twistBtn" disabled>🔒 Then: June defaults, and a second lender appears — file the UCC-1 first</button>
             <button type="button" class="btn ghost" id="ex5Reset">Start over</button>
           </div>
           <div class="verdict" id="perfectVerdict" aria-live="polite" style="display:none">
@@ -1024,16 +1042,22 @@
         .lender.winner .crown{ background:var(--green); color:#fff; }
         @media (prefers-color-scheme: dark){ .lender.winner .crown{ color:#10122b; } }
         .timeline{
-          position:relative; height:64px; border:2px solid var(--line); border-radius:12px; background:var(--card);
+          position:relative; height:92px; border:2px solid var(--line); border-radius:12px; background:var(--card);
           margin-top:14px; overflow:hidden;
         }
-        .timeline .tl-line{ position:absolute; left:4%; right:4%; top:50%; height:3px; background:var(--line); }
+        .timeline .tl-line{ position:absolute; left:4%; right:4%; top:55%; height:3px; background:var(--line); }
+        .timeline .tl-tick{
+          position:absolute; top:55%; width:3px; height:14px; background:var(--line);
+          transform:translate(-50%,-50%); z-index:1;
+        }
         .timeline .tl-delivery{
-          position:absolute; top:6px; transform:translateX(-50%); text-align:center;
+          position:absolute; top:5px; transform:translateX(-12%); text-align:center; z-index:3;
           font-size:.72rem; font-weight:800; font-family:"Space Mono",monospace; white-space:nowrap;
+          background:var(--card); padding:1px 6px; border-radius:6px;
         }
         .timeline .tl-file{
-          position:absolute; bottom:4px; transform:translateX(-50%); font-size:1.15rem; white-space:nowrap;
+          position:absolute; bottom:5px; transform:translateX(-50%); font-size:1.15rem; white-space:nowrap; z-index:2;
+          background:var(--card); padding:0 5px; border-radius:6px;
         }
         /* ===== Example 12: which court ===== */
         .court-btns{ display:grid; gap:10px; margin-top:14px; }
@@ -1048,6 +1072,8 @@
         .court-btn.right{ background:var(--green-soft); border-color:var(--good); }
         .court-btn.wrong{ background:var(--coral-soft); border-color:var(--bad); }
         .court-btn[disabled]{ cursor:default; opacity:.92; }
+        #courtTally.tally-flash{ animation:tallyFlash 1.6s ease; }
+        @keyframes tallyFlash{ 0%,55%{ box-shadow:0 0 0 5px var(--grape); } 100%{ box-shadow:0 0 0 0 rgba(0,0,0,0); } }
         .case-card{
           border:2.5px solid var(--line); border-radius:14px; background:var(--card);
           padding:16px 18px; font-size:1.08rem; box-shadow:4px 4px 0 var(--shadow);
@@ -1208,7 +1234,7 @@
           </div>
           <div class="controls">
             <button class="btn" id="raceStart">Start the race — mail the check</button>
-            <button class="btn" id="stopBtn" disabled style="background:var(--coral)">📞 Call the bank — STOP PAYMENT!</button>
+            <button class="btn" id="stopBtn" disabled style="background:var(--coral)">🔒 Call the bank — start the race first</button>
             <button class="btn ghost" id="raceReset">Reset</button>
           </div>
           <div class="verdict" id="ex10Verdict" aria-live="polite">
@@ -1248,6 +1274,7 @@
             </div>
             <div class="timeline" aria-hidden="true">
               <div class="tl-line"></div>
+              <div class="tl-tick" id="tlTick"></div>
               <div class="tl-delivery" id="tlDelivery">🚚 DAY 0 — kayaks delivered<br/>Riverbend takes possession</div>
               <div class="tl-file" id="tlFile">📋</div>
             </div>
@@ -1297,8 +1324,12 @@
             <p>Read the case, ask what the person actually wants — money, an order to act or stop, or a ruling about the sea — and tap that court.</p>
           </div>
           <div class="controls">
-            <button class="btn" id="caseNext" disabled>Next case →</button>
+            <button class="btn" id="caseNext" disabled>🔒 Next case — pick a court first</button>
             <button class="btn ghost" id="courtReset">Restart the docket</button>
+          </div>
+          <div class="verdict" id="courtTally" aria-live="polite" style="display:none">
+            <div class="v-head"><span>⚖</span><span id="courtTallyTitle"></span></div>
+            <p id="courtTallyText"></p>
           </div>
 
           <div class="law">
@@ -1310,7 +1341,233 @@
         </div>
       </section>
 
-      <style>
+            <style>
+        /* ===== Examples 13–15: the funding plays ===== */
+        .steps-strip{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+        .ws-step{
+          border:2px solid var(--line); border-radius:999px; background:var(--card);
+          padding:6px 14px; font-weight:700; font-size:.92rem; opacity:.45;
+        }
+        .ws-step.lit{ opacity:1; background:var(--acc-soft); }
+        .ws-step .arr{ opacity:.6; font-weight:400; }
+        .splitbar{ display:flex; height:38px; border:2px solid var(--line); border-radius:10px; overflow:hidden; margin-top:14px; }
+        .splitbar div{ transition:width .35s ease; }
+        .payrows{ display:grid; gap:8px; margin-top:12px; }
+        .payrow{
+          display:flex; justify-content:space-between; gap:12px; align-items:center;
+          border:2px solid var(--line); border-radius:12px; background:var(--card); padding:9px 14px; font-weight:600;
+        }
+        .payrow .amt{ font-family:"Space Mono",monospace; font-weight:700; font-size:1.1rem; white-space:nowrap; }
+        .payrow.total{ background:var(--acc-soft); }
+        /* subject-to scenarios */
+        .scn-card{
+          border:2.5px solid var(--line); border-radius:14px; background:var(--card);
+          padding:16px 18px; font-size:1.08rem; box-shadow:4px 4px 0 var(--shadow);
+        }
+        .scn-card .cc-tag{ font-family:"Space Mono",monospace; font-weight:700; font-size:.8rem; color:var(--ink-soft); letter-spacing:.05em; }
+        .scn-btns{ display:grid; gap:10px; margin-top:14px; }
+        .scn-btn{
+          border:2px solid var(--line); border-radius:14px; background:var(--card); color:var(--ink);
+          padding:12px 14px; text-align:left; box-shadow:3px 3px 0 var(--shadow); min-height:3rem; font-weight:600;
+        }
+        .scn-btn:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--shadow); }
+        .scn-btn.right{ background:var(--green-soft); border-color:var(--good); }
+        .scn-btn.wrong{ background:var(--coral-soft); border-color:var(--bad); }
+        .scn-btn[disabled]{ cursor:default; opacity:.92; }
+        /* syndicate waterfall */
+        .wf-bar{ display:flex; height:42px; border:2px solid var(--line); border-radius:10px; overflow:hidden; margin-top:14px; background:var(--card2); }
+        .wf-bar div{ transition:width .35s ease; min-width:0; }
+        .wf-legend{ display:flex; flex-wrap:wrap; gap:16px; margin-top:8px; font-size:.92rem; font-weight:600; }
+        .wf-legend .swatch{ display:inline-block; width:14px; height:14px; border:2px solid var(--line); border-radius:4px; vertical-align:-2px; margin-right:6px; }
+        .sol-btns{ display:grid; gap:10px; margin-top:14px; }
+        @media (min-width:720px){ .sol-btns{ grid-template-columns:repeat(3,1fr); } }
+        .sol-btn{
+          border:2px solid var(--line); border-radius:14px; background:var(--card); color:var(--ink);
+          padding:12px 14px; text-align:left; box-shadow:3px 3px 0 var(--shadow); min-height:3rem;
+        }
+        .sol-btn:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--shadow); }
+        .sol-btn .cb-name{ font-weight:800; font-family:"Bricolage Grotesque",sans-serif; font-size:1.05rem; display:block; }
+        .sol-btn .cb-desc{ font-size:.85rem; color:var(--ink-soft); }
+        .sol-btn.right{ background:var(--green-soft); border-color:var(--good); }
+        .sol-btn.wrong{ background:var(--coral-soft); border-color:var(--bad); }
+        .sol-btn[disabled]{ cursor:default; opacity:.92; }
+      </style>
+
+      <!-- ================= EXAMPLE 13 · THE WHOLESALE PLAY ================= -->
+      <section class="ex" id="ex13" style="--acc:var(--gold); --acc-soft:var(--gold-soft)">
+        <div class="ex-head">
+          <div class="ex-kicker"><span class="sec-badge">ASSIGNMENT OF CONTRACT · PA ACT 52 OF 2024</span><span class="ex-num">EXAMPLE 13 · FUNDING PLAYS — WHOLESALING</span></div>
+          <h2>The wholesale play: sell the contract, not the house</h2>
+          <p class="story">A tired landlord will sell his rental for <strong>$100,000</strong> — well under what a rehabber would pay fixed up. You don't have the cash to buy it, and you don't want to. What you <em>can</em> do is get the house <strong>under contract</strong>, then <strong>assign your contract rights</strong> to an end buyer for a fee. You never take title, never swing a hammer. Run the deal: slide the numbers, flip the switches, and watch where every dollar at closing actually comes from.</p>
+        </div>
+        <div class="ex-body">
+          <div class="scene">
+            <div class="steps-strip" aria-label="The four steps of a wholesale deal">
+              <span class="ws-step lit">1 · Get it under contract</span>
+              <span class="ws-step lit">2 · Find an end buyer</span>
+              <span class="ws-step lit">3 · Assign the contract</span>
+              <span class="ws-step lit">4 · Buyer closes, you collect the fee</span>
+            </div>
+            <div class="slider-row" style="margin-top:18px">
+              <label for="wsPrice" style="font-weight:700">Your contract price with the seller:</label>
+              <input type="range" id="wsPrice" min="40000" max="200000" step="5000" value="100000" style="accent-color:var(--gold)" aria-describedby="wsPriceVal" />
+              <span class="slider-val" id="wsPriceVal">$100,000</span>
+            </div>
+            <div class="slider-row">
+              <label for="wsFee" style="font-weight:700">Your assignment fee:</label>
+              <input type="range" id="wsFee" min="1000" max="30000" step="500" value="10000" style="accent-color:var(--gold)" aria-describedby="wsFeeVal" />
+              <span class="slider-val" id="wsFeeVal">$10,000</span>
+            </div>
+            <div class="slider-row">
+              <label for="wsEm" style="font-weight:700">Your earnest money down with the seller:</label>
+              <input type="range" id="wsEm" min="100" max="5000" step="100" value="500" style="accent-color:var(--gold)" aria-describedby="wsEmVal" />
+              <span class="slider-val" id="wsEmVal">$500</span>
+            </div>
+            <div class="splitbar" aria-hidden="true">
+              <div id="wsSegSeller" style="background:var(--green); width:91%"></div>
+              <div id="wsSegFee" style="background:var(--gold); width:9%"></div>
+            </div>
+            <div class="payrows">
+              <div class="payrow"><span>🏠 The seller receives (the contract price — his deal was with you)</span><span class="amt" id="wsSellerAmt">$100,000</span></div>
+              <div class="payrow"><span>📋 You receive (the assignment fee — paid for your contract rights, out of the closing)</span><span class="amt" id="wsFeeAmt">$10,000</span></div>
+              <div class="payrow total"><span>🔑 The end buyer pays in total (contract price + your fee)</span><span class="amt" id="wsBuyerAmt">$110,000</span></div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="ctl" id="wsAssignToggle" aria-pressed="true"><span class="sw"></span>The contract allows assignment (“and/or assigns,” no anti-assignment clause)</button>
+          </div>
+          <div class="controls">
+            <button class="ctl" id="wsMarketToggle" aria-pressed="false"><span class="sw"></span>Advertise the house itself to the public, as if it were yours to sell</button>
+          </div>
+          <div class="verdict" id="ex13Verdict" aria-live="polite"></div>
+
+          <div class="law">
+            <h3>The law — assignment, and the state rules that now surround it</h3>
+            <p>The engine of the whole play is one sentence of contract law: <strong>contract rights are assignable unless the contract forbids it</strong> or the assignment would materially change the other party's burden. (The UCC states the same rule for goods contracts at §2-210; land contracts follow the common-law rule.) That is why the assignment clause is the whole game: with an anti-assignment clause — or no assignable contract at all — there is nothing to sell. What you sell is never the house. It is your <strong>equitable interest in the contract</strong>: the right to buy at the contract price.</p>
+            <p><strong>Pennsylvania rewrote this play in 2024.</strong> Act 52 of 2024 (effective January 2025) amended the Real Estate Licensing and Registration Act to define a “wholesale transaction” as:</p>
+            <blockquote>“…undertaking to promote the sale, exchange or purchase of an equitable interest or other interest in residential property with the intent to assign, sell or otherwise transfer the interest for a fee, commission or other valuable monetary consideration without having taken title as the owner of record.” — 63 P.S. § 455.201</blockquote>
+            <p>Act 52 folds wholesale transactions into the Act's <strong>broker and salesperson definitions</strong> — wholesaling 1-to-4-unit homes is licensed activity in Pennsylvania — and every wholesale contract must carry four written disclosures (63 P.S. § 455.610): that the deal <em>is</em> a wholesale transaction, that the seller may get an independent appraisal and consult an unaffiliated licensee or a lawyer, that the seller has a <strong>30-day right to cancel</strong> (until midnight of the 30th day after signing, or until the property is conveyed, whichever comes first), and that all money paid is <strong>refunded within ten business days</strong> of a cancellation. The cancellation right <strong>cannot be waived</strong> — and if the disclosures are missing, the seller can cancel at any time before conveyance. Philadelphia adds its own city Residential Property Wholesaler License on top (in force since January 2021).</p>
+            <p>Other states draw their own lines: in <strong>Illinois</strong>, more than one wholesale deal in a 12-month period requires a broker's license (225 ILCS 454); <strong>Oklahoma</strong> has required a license since 2021 to publicly market an equitable interest in a contract. And everywhere, the same trap waits: marketing a property you don't own <em>as though you were its seller or the seller's agent</em> is the conduct licensing laws were written against — the lawful pitch is the contract rights, disclosed as exactly that. <em>State rules checked November 2026; this area of law is moving fast, so verify your state's current rule before you sign.</em></p>
+            <p><a href="https://wholesalinglaws.com/pennsylvania" target="_blank" rel="noopener">Pennsylvania's Act 52 rules, section by section →</a> · <a href="https://legalclarity.org/is-wholesaling-real-estate-legal-state-laws-explained-2/" target="_blank" rel="noopener">Wholesaling rules state by state →</a></p>
+          </div>
+          <div class="takeaway"><span class="t-ico">★</span><span>No assignable contract, no play. You are selling paper — your rights under a contract — and in Pennsylvania that paper now comes with a license, four disclosures, and a seller who can cancel for 30 days.</span></div>
+        </div>
+      </section>
+
+      <!-- ================= EXAMPLE 14 · THE SUBJECT-TO PLAY ================= -->
+      <section class="ex" id="ex14" style="--acc:var(--teal); --acc-soft:var(--teal-soft)">
+        <div class="ex-head">
+          <div class="ex-kicker"><span class="sec-badge">12 U.S.C. § 1701j-3 · GARN-ST GERMAIN ACT</span><span class="ex-num">EXAMPLE 14 · FUNDING PLAYS — SUBJECT-TO</span></div>
+          <h2>The subject-to play: the deed moves, the loan stays</h2>
+          <p class="story">A seller is behind on a mortgage she can no longer carry — a 3% loan from cheaper days. You offer the classic <strong>subject-to</strong> deal: the <strong>deed transfers to you</strong>, but her <strong>loan stays in her name</strong>, and you step in and make her payments. Nobody asks the bank. Three moments in this deal decide whether it was a rescue or a wreck — rule on each one.</p>
+        </div>
+        <div class="ex-body">
+          <div class="scene">
+            <div class="scn-card">
+              <div class="cc-tag" id="subTag">MOMENT 1 OF 3 · SCORE 0</div>
+              <p id="subText" style="margin:6px 0 0"></p>
+            </div>
+            <div class="scn-btns" id="subBtns" role="group" aria-label="Choose how to handle this moment"></div>
+          </div>
+          <div class="verdict" id="ex14Verdict" aria-live="polite">
+            <div class="v-head"><span>🏠</span><span>The deed is on the table</span></div>
+            <p>In a subject-to deal the seller keeps the debt and you keep the payments. Every danger in the structure flows from that split — choose like you understand it.</p>
+          </div>
+          <div class="controls">
+            <button class="btn" id="subNext" disabled>Next moment →</button>
+            <button class="btn ghost" id="subReset">Start the deal over</button>
+          </div>
+
+          <div class="law">
+            <h3>The law — the due-on-sale clause, 12 U.S.C. § 1701j-3</h3>
+            <blockquote>“[A] ‘due-on-sale clause’ means a contract provision which authorizes a lender, at its option, to declare due and payable sums secured by the lender's security instrument if all or any part of the property, or an interest therein, securing the real property loan is sold or transferred without the lender's prior written consent…” — 12 U.S.C. § 1701j-3(a)(1)</blockquote>
+            <p>And §1701j-3(b)(1) gives that clause federal teeth: a lender may <strong>enter into or enforce</strong> a due-on-sale clause <em>notwithstanding any state law to the contrary</em>. Read that plainly: when the deed moves to an investor, the lender <strong>can call the entire loan due</strong>. Whether a given lender discovers a transfer, and whether it chooses to act, is the lender's business decision — it is not a legal protection you hold. Anyone who tells you “the Garn-St Germain Act stops them” has it backwards: the Act is the reason the clause works.</p>
+            <p>The Act does protect a short, closed list of transfers on homes with fewer than five units (§1701j-3(d)) — transfers on a borrower's death, to a spouse or children, in a divorce settlement, or into a living trust where the borrower stays a beneficiary. An investor's subject-to purchase is <strong>not on the list</strong>.</p>
+            <p>The working parts that protect real people in a real deal: the seller signs a <strong>written disclosure</strong> stating that the loan stays in her name, that late payments land on <em>her</em> credit, and that the lender may call the loan; a <strong>performance deed of trust</strong> (or equivalent security) lets her take the property back if you default; payments run through a <strong>third-party servicer</strong> so every payment is documented to both sides; and insurance and tax/insurance escrows are re-papered so coverage doesn't silently lapse when the deed moves. A <strong>mirror wrap</strong> — where the seller wraps her loan inside a new note from you on the same terms — is a genuine alternative structure some investors use, but it does not switch off the due-on-sale clause either. The paper that protects both sides is disclosure, not disguise.</p>
+            <p><a href="https://www.govinfo.gov/content/pkg/USCODE-2024-title12/html/USCODE-2024-title12-chap13-sec1701j-3.htm" target="_blank" rel="noopener">Read §1701j-3 in full at govinfo →</a></p>
+          </div>
+          <div class="takeaway"><span class="t-ico">★</span><span>Subject-to splits the deed from the debt: you hold the house, the seller holds the loan. Do it with signed disclosure and a way for the seller to take the house back — and never pretend the due-on-sale clause isn't loaded.</span></div>
+        </div>
+      </section>
+
+      <!-- ================= EXAMPLE 15 · THE SYNDICATE PLAY ================= -->
+      <section class="ex" id="ex15" style="--acc:var(--royal); --acc-soft:var(--royal-soft)">
+        <div class="ex-head">
+          <div class="ex-kicker"><span class="sec-badge">SECURITIES ACT · HOWEY · REG D RULE 506</span><span class="ex-num">EXAMPLE 15 · FUNDING PLAYS — SYNDICATION</span></div>
+          <h2>The syndicate play: other people's money, the regulated door</h2>
+          <p class="story">The deal is too big for one buyer: a small apartment building that needs a <strong>syndicate</strong> — a <strong>sponsor</strong> (the general partner, who finds and runs the deal) and <strong>passive investors</strong> (limited partners, who put up the money and nothing else). The split is governed by a <strong>waterfall</strong>: investors first get a <strong>preferred return</strong> on their money, and only then is what's left divided. Build the waterfall, run a good year and a bad one — then decide how you're allowed to find those investors in the first place.</p>
+        </div>
+        <div class="ex-body">
+          <div class="scene">
+            <div class="slider-row">
+              <label for="syRaise" style="font-weight:700">Investors put in (the raise):</label>
+              <input type="range" id="syRaise" min="100000" max="2000000" step="50000" value="500000" style="accent-color:var(--royal)" aria-describedby="syRaiseVal" />
+              <span class="slider-val" id="syRaiseVal">$500,000</span>
+            </div>
+            <div class="slider-row">
+              <label for="syPref" style="font-weight:700">Preferred return promised to investors:</label>
+              <input type="range" id="syPref" min="0" max="12" step="0.5" value="8" style="accent-color:var(--royal)" aria-describedby="syPrefVal" />
+              <span class="slider-val" id="syPrefVal">8%</span>
+            </div>
+            <div class="slider-row">
+              <label for="sySplit" style="font-weight:700">After the pref, investors keep this share of the rest:</label>
+              <input type="range" id="sySplit" min="50" max="90" step="5" value="70" style="accent-color:var(--royal)" aria-describedby="sySplitVal" />
+              <span class="slider-val" id="sySplitVal">70%</span>
+            </div>
+            <div class="slider-row">
+              <label for="syCash" style="font-weight:700">Cash the property throws off this year:</label>
+              <input type="range" id="syCash" min="-20000" max="200000" step="5000" value="80000" style="accent-color:var(--royal)" aria-describedby="syCashVal" />
+              <span class="slider-val" id="syCashVal">$80,000</span>
+            </div>
+            <div class="controls" style="margin-top:10px">
+              <button type="button" class="btn" id="syGood">Run a good year ($120,000)</button>
+              <button type="button" class="btn" id="syBad" style="background:var(--coral)">Run a bad year ($15,000)</button>
+            </div>
+            <div class="wf-bar" aria-hidden="true">
+              <div id="sySegPref" style="background:var(--green)"></div>
+              <div id="sySegLp" style="background:var(--royal)"></div>
+              <div id="sySegGp" style="background:var(--gold)"></div>
+            </div>
+            <div class="wf-legend">
+              <span><span class="swatch" style="background:var(--green)"></span><span id="syPrefLbl">Investors' pref: $40,000</span></span>
+              <span><span class="swatch" style="background:var(--royal)"></span><span id="syLpLbl">Investors' share of the rest: $28,000</span></span>
+              <span><span class="swatch" style="background:var(--gold)"></span><span id="syGpLbl">Sponsor's share: $12,000</span></span>
+            </div>
+            <div class="payrows">
+              <div class="payrow"><span>👥 Investors receive in total</span><span class="amt" id="syLpTotal">$68,000</span></div>
+              <div class="payrow"><span>🧭 The sponsor receives (the “promote”)</span><span class="amt" id="syGpTotal">$12,000</span></div>
+            </div>
+          </div>
+          <div class="verdict" id="ex15Verdict" aria-live="polite"></div>
+
+          <h3 class="subhead">Now the door you walk through to raise it</h3>
+          <p class="subnote">The waterfall is arithmetic. This part is law — and it decides whether the raise was legal at all. How do you find your investors?</p>
+          <div class="sol-btns" role="group" aria-label="Choose how to find investors">
+            <button class="sol-btn" data-sol="post"><span class="cb-name">📣 Post it publicly</span><span class="cb-desc">“Now accepting investors!” — social media, ads, a public web page</span></button>
+            <button class="sol-btn" data-sol="known"><span class="cb-name">🤝 People you already know</span><span class="cb-desc">No advertising at all — investors from your existing relationships</span></button>
+            <button class="sol-btn" data-sol="verify"><span class="cb-name">📣+🔎 Advertise — and verify</span><span class="cb-desc">Public marketing, but every buyer is checked and proven accredited</span></button>
+          </div>
+          <div class="verdict" id="ex15SolVerdict" aria-live="polite">
+            <div class="v-head"><span>🚪</span><span>Pick a door</span></div>
+            <p>Each route above is a real legal path — but each belongs to a different rule, and mixing them up is how offerings get unwound. Tap one and read the ruling.</p>
+          </div>
+
+          <div class="law">
+            <h3>The law — Howey, and Regulation D Rule 506</h3>
+            <p>Why is any of this the SEC's business? Because a passive investor's interest in a syndicate is a <strong>security</strong>. The Supreme Court's test, from <em>SEC v. W.J. Howey Co.</em>, 328 U.S. 293 (1946):</p>
+            <blockquote>“…a contract, transaction or scheme whereby a person invests his money in a common enterprise and is led to expect profits solely from the efforts of the promoter or a third party…” — 328 U.S. at 298–299</blockquote>
+            <p>Money in, common enterprise, profits expected from <em>someone else's</em> work — a syndicate share fits all three, whatever the paperwork calls it. Securities must be <strong>registered</strong> with the SEC unless an exemption applies, and the exemption nearly every real-estate syndicate uses is <strong>Regulation D, Rule 506</strong>, which comes in two flavors:</p>
+            <p><strong>Rule 506(b) — the quiet door.</strong> Raise an unlimited amount from an unlimited number of <strong>accredited investors</strong> (plus up to 35 non-accredited investors who are sophisticated, with extra disclosure duties) — but <strong>no general solicitation or advertising</strong>, ever. The offering stays private because the marketing stays private.</p>
+            <p><strong>Rule 506(c) — the loud door.</strong> General solicitation <em>is</em> allowed — ads, posts, public pages — but then <strong>every</strong> purchaser must be an accredited investor, and the issuer must take <strong>reasonable steps to verify</strong> that status: tax forms, brokerage statements, or a written confirmation from a CPA, attorney, or registered adviser. A checkbox where the investor simply claims “I'm accredited” is not verification.</p>
+            <p>Either way, the rights live in the paper: the <strong>PPM</strong> (private placement memorandum) discloses the deal and its risks, the <strong>operating agreement</strong> fixes the waterfall you just built, and the <strong>subscription documents</strong> are how each investor actually buys in. A Form D notice goes to the SEC within 15 days of the first sale. And the sponsor who takes the money takes on real duties with it — full disclosure, no misleading statements (the antifraud rules apply to <em>every</em> offering, exempt or not), and an obligation to run the deal as the documents promised. There is no version of this play where you “raise money from anybody with a post.” The post chooses the rule; the rule chooses who may buy.</p>
+            <p><a href="https://www.sec.gov/fast-answers/answers-rule506htm.html" target="_blank" rel="noopener">Rule 506 of Regulation D — the SEC's own summary →</a> · <a href="https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/private-placements-under-regulation-d-updated-investor-bulletin" target="_blank" rel="noopener">SEC Investor Bulletin: Private Placements under Regulation D →</a> · <a href="https://www.govinfo.gov/content/pkg/USREPORTS-328/pdf/USREPORTS-328-293.pdf" target="_blank" rel="noopener">SEC v. W.J. Howey Co., 328 U.S. 293 (PDF) →</a></p>
+          </div>
+          <div class="takeaway"><span class="t-ico">★</span><span>The waterfall pays investors first because the law treats them as buyers of a security, not as partners in your hustle. Paper creates the rights, the rule picks the door, and the sponsor's duties start the day the first dollar lands.</span></div>
+        </div>
+      </section>
+
+<style>
         /* ===== Quiz ===== */
         .quiz-q{ border:2px solid var(--line); border-radius:var(--radius); background:var(--card); padding:18px 20px; margin-top:16px; }
         .quiz-q h3{ font-size:1.15rem; margin-bottom:4px; }
@@ -1336,12 +1593,12 @@
       <!-- ================= QUIZ ================= -->
       <section class="ex" id="quiz" style="--acc:var(--ink); --acc-soft:var(--card2)">
         <div class="ex-head">
-          <div class="ex-kicker"><span class="sec-badge" style="background:var(--ink)">QUIZ</span><span class="ex-num">ALL TWELVE EXAMPLES · SIX RULINGS</span></div>
+          <div class="ex-kicker"><span class="sec-badge" style="background:var(--ink)">QUIZ</span><span class="ex-num">ALL FIFTEEN EXAMPLES · NINE RULINGS</span></div>
           <h2>You be the judge</h2>
-          <p class="story">Six short cases, all built from the sections above. Rule on each one — the statute gives the verdict instantly.</p>
+          <p class="story">Nine short cases, all built from the law above. Rule on each one — the statute gives the verdict instantly.</p>
         </div>
         <div class="ex-body">
-          <div class="quiz-q" data-fb="Right. Under §3-311 the claim was discharged the moment Rosa obtained payment — and §1-308(b) says reservation of rights does not apply to an accord and satisfaction, so her crossing-out (and any “under protest” note) changes nothing. Her only real escape was §3-311(c)(2): hand the $1,800 back within 90 days.">
+          <div class="quiz-q" data-fb="Under §3-311 the claim was discharged the moment Rosa obtained payment — and §1-308(b) says reservation of rights does not apply to an accord and satisfaction, so her crossing-out (and any “under protest” note) changes nothing. Her only real escape was §3-311(c)(2): hand the $1,800 back within 90 days.">
             <h3>Case 1 · The crossed-out check</h3>
             <p class="q-scenario">A debt is genuinely disputed. The debtor sends a check for less than the bill, marked conspicuously “PAID IN FULL.” The creditor crosses out the words, writes “under protest,” and cashes it. How much of the balance can the creditor still collect?</p>
             <div class="q-opts">
@@ -1352,7 +1609,7 @@
             <div class="q-fb" aria-live="polite"></div>
           </div>
 
-          <div class="quiz-q" data-fb="Right. The check is an unconditional order to pay a fixed amount of money, payable to order and on demand — every §3-104(a) box ticked. The IOU fails twice (it's conditional, and a derby result is not a definite time), and the firewood note orders something besides money.">
+          <div class="quiz-q" data-fb="The check is an unconditional order to pay a fixed amount of money, payable to order and on demand — every §3-104(a) box ticked. The IOU fails twice (it's conditional, and a derby result is not a definite time), and the firewood note orders something besides money.">
             <h3>Case 2 · Pick the negotiable paper</h3>
             <p class="q-scenario">Three documents land on your desk. Only one is a negotiable instrument under §3-104. Which one?</p>
             <div class="q-opts">
@@ -1363,7 +1620,7 @@
             <div class="q-fb" aria-live="polite"></div>
           </div>
 
-          <div class="quiz-q" data-fb="Right. Acceptance under §3-409(a) is the drawee's signed agreement to pay the draft as presented, written on the draft itself. From that signature, the bank is the acceptor and is obliged to pay according to the draft's terms (§3-413). Before it signed, §3-408 kept it off the hook entirely.">
+          <div class="quiz-q" data-fb="Acceptance under §3-409(a) is the drawee's signed agreement to pay the draft as presented, written on the draft itself. From that signature, the bank is the acceptor and is obliged to pay according to the draft's terms (§3-413). Before it signed, §3-408 kept it off the hook entirely.">
             <h3>Case 3 · The bank signs</h3>
             <p class="q-scenario">A holder presents a time draft to the drawee bank for acceptance. The bank writes its signature across the face of the draft and hands it back. What is the bank now?</p>
             <div class="q-opts">
@@ -1374,7 +1631,7 @@
             <div class="q-fb" aria-live="polite"></div>
           </div>
 
-          <div class="quiz-q" data-fb="Right. Attachment (§9-203) made Heartland's interest enforceable against June — but perfection is the step that protects it against other creditors, and §9-310(a) makes filing the general rule. Unperfected loses to perfected, even when the unperfected deal came first. First to file is the race that counts.">
+          <div class="quiz-q" data-fb="Attachment (§9-203) made Heartland's interest enforceable against June — but perfection is the step that protects it against other creditors, and §9-310(a) makes filing the general rule. Unperfected loses to perfected, even when the unperfected deal came first. First to file is the race that counts.">
             <h3>Case 4 · The race to the filing office</h3>
             <p class="q-scenario">Heartland Bank lent June $60,000 against her tractor and took a signed security agreement — but never filed a UCC-1. A month later Valley Credit lent against the same tractor and filed immediately. June defaults. Whose claim on the tractor stands first?</p>
             <div class="q-opts">
@@ -1385,7 +1642,7 @@
             <div class="q-fb" aria-live="polite"></div>
           </div>
 
-          <div class="quiz-q" data-fb="Right. Under §3-415(b), an indorsement made “without recourse” disclaims the indorser's liability to pay the instrument — Ana took the paper on exactly those terms. The one thread still tied to Luis is his §3-416 transfer warranties: if, say, a signature on the note turned out to be forged, a warranty claim could still reach him — and on a check, §3-416(c) says those warranties can't be disclaimed at all.">
+          <div class="quiz-q" data-fb="Under §3-415(b), an indorsement made “without recourse” disclaims the indorser's liability to pay the instrument — Ana took the paper on exactly those terms. The one thread still tied to Luis is his §3-416 transfer warranties: if, say, a signature on the note turned out to be forged, a warranty claim could still reach him — and on a check, §3-416(c) says those warranties can't be disclaimed at all.">
             <h3>Case 5 · The “without recourse” indorsement</h3>
             <p class="q-scenario">Luis indorses a note “without recourse” and sells it to Ana. The maker defaults and the note is dishonored. Can Ana collect the amount of the note from Luis as indorser?</p>
             <div class="q-opts">
@@ -1396,13 +1653,46 @@
             <div class="q-fb" aria-live="polite"></div>
           </div>
 
-          <div class="quiz-q" data-fb="Right. Under §3-407(c), a payor bank that pays a fraudulently altered instrument in good faith and without notice may enforce it according to its original terms — so the account bears the $100 check Marta actually wrote, and no more. The $1,000 raise is the bank's loss to chase from the alterer — unless Marta's own negligence substantially contributed to the alteration, which is where §3-406 could preclude her from asserting it.">
+          <div class="quiz-q" data-fb="Under §3-407(c), a payor bank that pays a fraudulently altered instrument in good faith and without notice may enforce it according to its original terms — so the account bears the $100 check Marta actually wrote, and no more. The $1,000 raise is the bank's loss to chase from the alterer — unless Marta's own negligence substantially contributed to the alteration, which is where §3-406 could preclude her from asserting it.">
             <h3>Case 6 · The raised check</h3>
             <p class="q-scenario">Marta writes a check for $100. The payee raises it to $1,100, and the bank pays the full $1,100 in good faith, without noticing the alteration. How much of that may the bank charge to Marta's account?</p>
             <div class="q-opts">
               <button class="q-opt">$1,100 — the bank paid it, so the account bears it</button>
               <button class="q-opt" data-correct="1">$100 — the instrument is enforced according to its original terms</button>
               <button class="q-opt">$0 — a fraudulent alteration wipes the check out entirely</button>
+            </div>
+            <div class="q-fb" aria-live="polite"></div>
+          </div>
+
+                    <div class="quiz-q" data-fb="Under Act 52 of 2024, a Pennsylvania wholesale contract must prominently carry four disclosures (63 P.S. § 455.610) — including the seller's right to cancel until midnight of the 30th day after signing or until the property is conveyed, whichever comes first. The right cannot be waived, and when the disclosures were never given, the cancellation window stays open all the way to conveyance, with every dollar refunded within ten business days.">
+            <h3>Case 7 · The 30-day door</h3>
+            <p class="q-scenario">In Pennsylvania, a wholesaler signs a seller to a wholesale contract — but leaves the Act 52 disclosures out of the agreement entirely. The seller signs anyway. Two weeks later, she wants out. Can she cancel?</p>
+            <div class="q-opts">
+              <button class="q-opt">No — she signed the contract, and a signed contract is a signed contract</button>
+              <button class="q-opt" data-correct="1">Yes — and because the disclosures were missing, she can cancel any time before the property is conveyed</button>
+              <button class="q-opt">Only if the wholesaler agrees in writing to let her out</button>
+            </div>
+            <div class="q-fb" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz-q" data-fb="The Garn-St Germain Act is what makes the due-on-sale clause enforceable: §1701j-3(b)(1) lets a lender enforce it notwithstanding state law. The protected transfers in §1701j-3(d) are a short, closed list — death, divorce, transfers to a spouse or children, a living trust — and an investor's subject-to purchase is not on it. The lender may never bother to act, but that is the lender's choice, not the investor's right.">
+            <h3>Case 8 · The called loan</h3>
+            <p class="q-scenario">An investor takes a deed subject to the seller's old 3% mortgage, back when rates are now 8%. The lender discovers the transfer and accelerates the loan under its due-on-sale clause. The investor protests that federal law bans due-on-sale enforcement. Who has the law right?</p>
+            <div class="q-opts">
+              <button class="q-opt">The investor — federal law protects anyone who keeps the payments current</button>
+              <button class="q-opt" data-correct="1">The lender — §1701j-3 lets it enforce the clause, and an investor purchase is not among the protected transfers</button>
+              <button class="q-opt">Neither — the clause is void the moment the deed transfers</button>
+            </div>
+            <div class="q-fb" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz-q" data-fb="Rule 506(b) is a private offering precisely because there is no general solicitation — a public “now accepting investors” post is general solicitation, and it can blow the exemption the whole raise depends on. Public advertising belongs to Rule 506(c), where every purchaser must be an accredited investor and the issuer must take reasonable steps to verify it. The post chooses the rule; the rule chooses who may buy.">
+            <h3>Case 9 · The public post</h3>
+            <p class="q-scenario">A sponsor is raising a real-estate syndicate under Rule 506(b). To speed things up, she posts the deal on social media: “Now accepting investors — 8% pref, message me!” What is the legal problem?</p>
+            <div class="q-opts">
+              <button class="q-opt">None — 506(b) offerings can be advertised like any other business opportunity</button>
+              <button class="q-opt">Only that she forgot to file Form D before posting</button>
+              <button class="q-opt" data-correct="1">Rule 506(b) bans general solicitation — the post can blow the exemption; public ads belong to 506(c), with verified accredited investors only</button>
             </div>
             <div class="q-fb" aria-live="polite"></div>
           </div>
@@ -1416,7 +1706,7 @@
 
       <footer>
         <h2>Sources — read the law itself</h2>
-        <p>Every example above is built on the model text of the Uniform Commercial Code as published by Cornell's Legal Information Institute:</p>
+        <p>The UCC examples above are built on the model text of the Uniform Commercial Code as published by Cornell's Legal Information Institute; the three funding plays rest on the federal and state sources listed with them:</p>
         <ul>
           <li><a href="https://www.law.cornell.edu/ucc/1/1-103" target="_blank" rel="noopener">§1-103 — Construction; supplemental principles of law</a></li>
           <li><a href="https://www.law.cornell.edu/ucc/1/1-308" target="_blank" rel="noopener">§1-308 — Performance or acceptance under reservation of rights</a></li>
@@ -1436,6 +1726,12 @@
           <li><a href="https://www.law.cornell.edu/ucc/9/9-324" target="_blank" rel="noopener">§9-324 — Priority of purchase-money security interests</a></li>
           <li><a href="https://www.law.cornell.edu/ucc/9/9-509" target="_blank" rel="noopener">§9-509 — Persons entitled to file a record</a></li>
           <li><a href="https://legalclarity.org/what-are-secured-transactions-under-the-ucc/" target="_blank" rel="noopener">Article 9 explained — including §9-203 (attachment) and §9-501 (filing office)</a></li>
+          <li><a href="https://www.govinfo.gov/content/pkg/USCODE-2024-title12/html/USCODE-2024-title12-chap13-sec1701j-3.htm" target="_blank" rel="noopener">12 U.S.C. § 1701j-3 — Garn-St Germain Act: due-on-sale clauses and the exempt transfers</a></li>
+          <li><a href="https://wholesalinglaws.com/pennsylvania" target="_blank" rel="noopener">Pennsylvania Act 52 of 2024 — wholesale transactions under RELRA (63 P.S. §§ 455.201, 455.610)</a></li>
+          <li><a href="https://legalclarity.org/is-wholesaling-real-estate-legal-state-laws-explained-2/" target="_blank" rel="noopener">Wholesaling rules state by state — licensing, disclosure, and cancellation laws</a></li>
+          <li><a href="https://www.sec.gov/fast-answers/answers-rule506htm.html" target="_blank" rel="noopener">Rule 506 of Regulation D — the SEC's own summary of Rules 506(b) and 506(c)</a></li>
+          <li><a href="https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/private-placements-under-regulation-d-updated-investor-bulletin" target="_blank" rel="noopener">SEC Investor Bulletin — Private Placements under Regulation D</a></li>
+          <li><a href="https://www.govinfo.gov/content/pkg/USREPORTS-328/pdf/USREPORTS-328-293.pdf" target="_blank" rel="noopener">SEC v. W.J. Howey Co., 328 U.S. 293 (1946) — the investment-contract test</a></li>
         </ul>
         <p>These are teaching illustrations of the UCC's model text. States enact the Code with local variations, and real disputes turn on their own facts — this page teaches the concepts and is not legal advice.</p>
       </footer>
@@ -1639,7 +1935,9 @@
             b.classList.toggle("done", i < dStep);
           });
           $("#draftPrev").disabled = dStep === 0;
+          $("#draftPrev").title = dStep === 0 ? "You're on the first step — nothing before it" : "";
           $("#draftNext").disabled = dStep === draftSteps.length - 1;
+          $("#draftNext").title = dStep === draftSteps.length - 1 ? "You're on the last step — nothing after it" : "";
         }
         $("#draftNext").addEventListener("click", function(){ if(dStep < draftSteps.length - 1){ dStep++; renderDraft(); } });
         $("#draftPrev").addEventListener("click", function(){ if(dStep > 0){ dStep--; renderDraft(); } });
@@ -1651,6 +1949,7 @@
         /* ---------- EXAMPLE 5 · Article 9 tractor loan ---------- */
         var gates = { value:false, rights:false, agree:false };
         var gateNames = { value:"Gate 1 · Value given", rights:"Gate 2 · Rights in the collateral", agree:"Gate 3 · Signed security agreement" };
+        var gateShort = { value:"Gate 1", rights:"Gate 2", agree:"Gate 3" };
         var filed = false;
         var filing = false;
         function gateCount(){ return Object.keys(gates).filter(function(k){ return gates[k]; }).length; }
@@ -1671,9 +1970,23 @@
           $("#fileFly").classList.toggle("show", attached);
           var fb = $("#fileBtn");
           fb.disabled = !attached || filed || filing;
-          fb.textContent = filing ? "Filing…" : (filed ? "UCC-1 filed ✓" : "File the UCC-1");
+          fb.textContent = filing ? "Filing… ⏳" : (filed ? "UCC-1 filed ✓" : (attached ? "File the UCC-1" : "🔒 File the UCC-1 — open all 3 gates first"));
           fb.classList.toggle("ready", attached && !filed && !filing);
-          $("#twistBtn").disabled = !filed;
+          var tb = $("#twistBtn");
+          tb.disabled = !filed;
+          tb.textContent = filed ? "Then: June defaults, and a second lender appears" : "🔒 Then: June defaults, and a second lender appears — file the UCC-1 first";
+          var hint = $("#ex5Hint");
+          if(filing){
+            hint.textContent = "Filing the UCC-1 with the Secretary of State… ⏳";
+          } else if(filed){
+            hint.textContent = "UCC-1 filed ✓ — Heartland is perfected. Now tap the June-defaults button to see why it matters.";
+          } else if(attached){
+            hint.textContent = "All gates open — file the UCC-1.";
+          } else {
+            var miss = Object.keys(gates).filter(function(k){ return !gates[k]; }).map(function(k){ return gateShort[k]; });
+            var list = miss.length > 1 ? miss.slice(0, -1).join(", ") + " and " + miss[miss.length - 1] : miss[0];
+            hint.textContent = "Gate " + n + " of 3 open — tap the " + list + " card" + (miss.length > 1 ? "s" : "") + " above to unlock filing.";
+          }
           if(!filed) $("#perfectVerdict").style.display = "none";
         }
         $$("[data-gate]").forEach(function(btn){
@@ -1934,7 +2247,7 @@
 
         /* ---------- EXAMPLE 10 · §4-403 stop-payment race ---------- */
         var raceTimer = null, racePos = 0, raceState = "idle", stopAt = null, oralOn = false;
-        var RACE_MS = 3600;
+        var RACE_MS = 8000;
         function raceVerdict(won){
           var v = $("#ex10Verdict");
           if(won){
@@ -1951,7 +2264,9 @@
           clearInterval(raceTimer); raceTimer = null;
           raceState = "done";
           $("#stopBtn").disabled = true;
+          $("#stopBtn").textContent = won ? "✔ Stop order in — race over" : "🔒 Too late — the check was already paid";
           $("#raceStart").disabled = false;
+          $("#raceStart").textContent = "Start the race — mail the check";
           if(won){
             $("#raceStatus").textContent = "⛔ Stop order received — the bank froze the item with the check at " + Math.round(racePos) + "% of the way in.";
           } else {
@@ -1968,7 +2283,9 @@
           $("#racePaid").textContent = "";
           $("#raceStopStamp").classList.remove("show");
           $("#stopBtn").disabled = true;
+          $("#stopBtn").textContent = "🔒 Call the bank — start the race first";
           $("#raceStart").disabled = false;
+          $("#raceStart").textContent = "Start the race — mail the check";
           $("#raceStatus").textContent = "The check is sitting in the mailbag. Start the race when you're ready.";
           var v = $("#ex10Verdict");
           v.className = "verdict";
@@ -1979,7 +2296,9 @@
           resetRace();
           raceState = "running";
           $("#raceStart").disabled = true;
+          $("#raceStart").textContent = "🏃 Racing…";
           $("#stopBtn").disabled = false;
+          $("#stopBtn").textContent = "📞 Call the bank — STOP PAYMENT!";
           $("#raceStatus").textContent = "🏃 The check is in transit… call the bank before it reaches the counter!";
           var started = Date.now();
           raceTimer = setInterval(function(){
@@ -2007,10 +2326,11 @@
         function renderEx11(){
           var day = parseInt($("#pmsiSlider").value, 10);
           $("#pmsiVal").textContent = day === 0 ? "Day 0" : (day > 0 ? "Day +" + day : "Day " + day);
-          var pct = 4 + (day + 5) / 30 * 92;
+          var pct = Math.max(10, Math.min(90, 4 + (day + 5) / 30 * 92));
           $("#tlFile").style.left = pct + "%";
           $("#tlFile").textContent = day <= 0 ? "📋 filed" : "📋 filed late";
           $("#tlDelivery").style.left = (4 + 5 / 30 * 92) + "%";
+          $("#tlTick").style.left = (4 + 5 / 30 * 92) + "%";
           var supplierWins = day <= 0 && noticeOn;
           $("#lenderBank").classList.toggle("winner", !supplierWins);
           $("#lenderSupplier").classList.toggle("winner", supplierWins);
@@ -2064,7 +2384,10 @@
           $("#caseText").textContent = cases[caseIdx].t;
           $$(".court-btn").forEach(function(b){ b.disabled = false; b.classList.remove("right","wrong"); });
           $("#caseNext").disabled = true;
-          $("#caseNext").textContent = caseIdx === cases.length - 1 ? "See the final tally →" : "Next case →";
+          $("#caseNext").textContent = caseIdx === cases.length - 1 ? "🔒 See the final tally — pick a court first" : "🔒 Next case — pick a court first";
+          var tally0 = $("#courtTally");
+          tally0.style.display = "none";
+          tally0.classList.remove("tally-flash");
           var v = $("#courtVerdict");
           v.className = "verdict";
           v.innerHTML = '<div class="v-head"><span>🏛</span><span>Case ' + (caseIdx + 1) + ' — which court takes it?</span></div><p>Ask what the person actually wants: money for a past harm, an order to act or stop, or a ruling about the sea.</p>';
@@ -2087,17 +2410,26 @@
             v.className = "verdict " + (correct ? "good" : "bad");
             v.innerHTML = '<div class="v-head"><span>' + (correct ? "✔" : "✘") + '</span><span>' + (correct ? "Correctly filed — " : "Wrong courthouse — ") + courtNames[right] + '</span></div><p>' + cases[caseIdx].x + "</p>";
             $("#caseNext").disabled = false;
+            $("#caseNext").textContent = caseIdx === cases.length - 1 ? "See the final tally →" : "Next case →";
           });
         });
         $("#caseNext").addEventListener("click", function(){
           if(caseIdx < cases.length - 1){ caseIdx++; renderCase(); return; }
-          var v = $("#courtVerdict");
-          v.className = "verdict " + (courtScore === cases.length ? "good" : "");
-          v.innerHTML = '<div class="v-head"><span>⚖</span><span>Docket cleared — ' + courtScore + ' of ' + cases.length + ' cases routed correctly</span></div><p>' +
+          var tally = $("#courtTally");
+          tally.className = "verdict " + (courtScore === cases.length ? "good" : "");
+          $("#courtTallyTitle").textContent = "Docket cleared — " + courtScore + " of " + cases.length + " cases routed correctly";
+          $("#courtTallyText").innerHTML =
             (courtScore === cases.length ? "A flawless docket. Money for past harms goes to law, orders to act or stop go to equity, and everything of the sea goes to admiralty — you sorted by remedy and subject, which is how the system itself sorts." :
              courtScore >= 3 ? "A working docket. The pattern to keep: follow the remedy — dollars mean law, an order means equity — and follow the water: ships, cargo, and seamen mean admiralty." :
-             "The clerk suggests another pass: ask of each case what the person wants — money, an order, or a sea ruling — and the court names itself. Restart the docket to try again.") + "</p>";
+             "The clerk suggests another pass: ask of each case what the person wants — money, an order, or a sea ruling — and the court names itself. Restart the docket to try again.");
+          tally.style.display = "block";
+          tally.classList.remove("tally-flash"); void tally.offsetWidth; tally.classList.add("tally-flash");
+          if(tally.scrollIntoView){
+            try { tally.scrollIntoView({ behavior:"smooth", block:"center" }); }
+            catch(e){ tally.scrollIntoView(); }
+          }
           $("#caseNext").disabled = true;
+          $("#caseNext").textContent = "✔ Docket complete";
           $$(".court-btn").forEach(function(b){ b.disabled = true; });
         });
         $("#courtReset").addEventListener("click", function(){
@@ -2105,6 +2437,232 @@
           renderCase();
         });
         renderCase();
+
+        /* ---------- EXAMPLE 13 · the wholesale play ---------- */
+        var wsAssign = true, wsMarketHouse = false;
+        function renderEx13(){
+          var cp = parseInt($("#wsPrice").value, 10);
+          var fee = parseInt($("#wsFee").value, 10);
+          var em = parseInt($("#wsEm").value, 10);
+          $("#wsPriceVal").textContent = money(cp);
+          $("#wsFeeVal").textContent = money(fee);
+          $("#wsEmVal").textContent = money(em);
+          var total = cp + fee;
+          $("#wsSellerAmt").textContent = money(cp);
+          $("#wsFeeAmt").textContent = money(fee);
+          $("#wsBuyerAmt").textContent = money(total);
+          $("#wsSegSeller").style.width = (cp / total * 100) + "%";
+          $("#wsSegFee").style.width = (fee / total * 100) + "%";
+          $$(".ws-step").forEach(function(s){ s.classList.toggle("lit", wsAssign); });
+          var v = $("#ex13Verdict"), head, body, cls = "verdict";
+          if(!wsAssign){
+            cls += " bad";
+            head = "✘ NO ASSIGNABLE CONTRACT — no play";
+            body = "This contract either forbids assignment or never grants the right, so there is <strong>nothing to sell</strong>: your only asset was the right to assign, and the paper doesn't give it. The fixes happen <em>before</em> signing — negotiate an assignment clause (“buyer and/or assigns”) into the contract. The honest alternative is a <strong>double closing</strong>: you actually buy the house yourself (your own money or short-term transactional funding, with two closings and two sets of costs) and then resell it as the owner. Notice what that costs — the “no money” version of this play just left the room. And your <strong>" + money(em) + " earnest money</strong> sits with the seller the whole time you hunt for a buyer; if no buyer closes, that money — and your name with every seller and buyer who watched the deal die — is what you lose.";
+          } else if(wsMarketHouse){
+            cls += " bad";
+            head = "✘ YOU'RE MARKETING A HOUSE YOU DON'T OWN — that's the regulated act";
+            body = "The deal math still works — but the <em>advertising</em> just crossed the line every licensing law watches. You hold rights under a contract, not title to a house; presenting the house itself to the public as yours to sell is the conduct state broker laws are written against. In <strong>Pennsylvania</strong> it is exactly what Act 52 of 2024 regulates: wholesaling 1-to-4-unit homes is licensed activity, the contract needs the four statutory disclosures, and the seller holds a non-waivable 30-day right to cancel (63 P.S. §§ 455.201, 455.610). The lawful pitch markets <strong>your contract position</strong>, disclosed as a contract position, to buyers who understand they are taking an assignment. Flip the advertising switch off and market the paper.";
+          } else {
+            cls += " good";
+            head = "✔ THE PLAY RUNS — on paper, disclosed, and assignable";
+            body = "At closing the end buyer pays <strong>" + money(total) + "</strong>: <strong>" + money(cp) + "</strong> satisfies your contract with the seller, and <strong>" + money(fee) + "</strong> is your assignment fee — paid for the <em>contract rights</em>, never for the house, which was never yours to sell. Two honest footnotes the gurus skip. First, your <strong>" + money(em) + " earnest money</strong> is at risk from the day you sign until the day your buyer closes; no buyer, no fee, and the deposit is gone. Second, where you run this matters: in Pennsylvania, Act 52 of 2024 makes wholesaling licensed activity with mandatory seller disclosures and a 30-day cancellation right — the seller can unwind this deal for a month, so a Pennsylvania wholesaler prices that window into every timeline.";
+          }
+          v.className = cls;
+          v.innerHTML = '<div class="v-head"><span>' + head.split(" ")[0] + '</span><span>' + head.substring(head.indexOf(" ") + 1) + '</span></div><p>' + body + "</p>";
+        }
+        ["wsPrice", "wsFee", "wsEm"].forEach(function(id){
+          $("#" + id).addEventListener("input", renderEx13);
+        });
+        $("#wsAssignToggle").addEventListener("click", function(){
+          wsAssign = this.getAttribute("aria-pressed") !== "true";
+          setPressed(this, wsAssign);
+          renderEx13();
+        });
+        $("#wsMarketToggle").addEventListener("click", function(){
+          wsMarketHouse = this.getAttribute("aria-pressed") !== "true";
+          setPressed(this, wsMarketHouse);
+          renderEx13();
+        });
+        renderEx13();
+
+        /* ---------- EXAMPLE 14 · the subject-to play ---------- */
+        var subCases = [
+          { q:"Closing day. The seller is ready to sign the deed over to you while her 3% loan stays in her name. How do you paper this deal?",
+            opts:[
+              { label:"A handshake and a promise — too much paper scares sellers off", ok:false,
+                fb:"A handshake leaves the seller holding a loan for a house she no longer owns, with nothing in writing that says she agreed to that, understood it, or can undo it. When anything goes wrong — a late payment, an insurance lapse, a lender letter — the first question every lawyer and regulator asks is “where is the disclosure she signed?” If the answer is “there isn't one,” the rescue starts looking like a taking." },
+              { label:"Full written disclosure she signs — the loan stays in her name, late payments hit her credit, the lender may call the loan — plus a performance deed of trust that lets her take the house back if you stop paying", ok:true,
+                fb:"That is the paper that protects both sides. The disclosure proves she walked in with her eyes open — the loan stays hers, the credit risk stays hers, the due-on-sale risk is real. The performance deed of trust is her security: if you stop performing, she has a recorded way to take the property back instead of watching a foreclosure happen in her name. Add a third-party servicer so every payment is documented, and the deal can survive scrutiny." },
+              { label:"A “mirror wrap” that keeps the whole transfer quiet — what the lender doesn't know won't hurt anyone", ok:false,
+                fb:"A wrap mortgage is a real structure — the seller wraps her existing loan inside a new note from the buyer on mirrored terms — but notice what it does <em>not</em> do: the deed still transferred, so the due-on-sale clause is still triggered, and the wrap adds a layer without removing the risk. Worse is the motive stated out loud: concealment. Paper built to hide a transfer from the lender is how an aggressive deal becomes a fraud allegation. Disclosure protects; disguise exposes." }
+            ],
+            rule:"The rule: the seller keeps the debt, so the seller gets the truth in writing — disclosure signed, performance secured, payments serviced by a neutral third party." },
+          { q:"Eight months in, your tenant moves out and the rent stops. You miss two payments on the seller's loan. The loan, the late marks, and any foreclosure would all land in the seller's name. What's the honest move?",
+            opts:[
+              { label:"Stay quiet and catch up when you can — she'll never see the notices", ok:false,
+                fb:"She will see them — the loan is in her name, so the late notices, the credit damage, and eventually the foreclosure complaint all carry her name, not yours. Silence converts a business failure into a betrayal: she trusted you with her credit, the one asset she kept in this deal. Every month of quiet makes the eventual conversation — and any courtroom version of it — worse." },
+              { label:"Tell the seller immediately, cure the arrears if you possibly can — and if you can't perform, deed the property back under the performance deed of trust before real damage lands", ok:true,
+                fb:"Exactly what the structure was built for. The performance deed of trust exists so a failing deal unwinds in an orderly way: she gets the house back, the loan gets performed or the property gets sold, and her credit takes a bruise instead of a foreclosure. The sponsor's duty in a subject-to deal is not “never fail” — deals fail. The duty is that your failure never lands silently on the person whose name is on the debt." },
+              { label:"Stop paying and let the bank take it — once the deed moved, it's the bank's problem", ok:false,
+                fb:"It is not the bank's problem, and it is not yours on paper — it is <em>hers</em>. The deed moved to you; the debt never did. Foreclosure would proceed against the property while the credit destruction and any deficiency claim follow the borrower: the seller. “Subject-to” means you took the property subject to her loan — walking away leaves her holding every consequence of a loan she stopped controlling the day she trusted you." }
+            ],
+            rule:"The rule: in a subject-to deal, missed payments are the seller's wounds, not yours — which is why performing, communicating, and unwinding cleanly are the buyer's core duties." },
+          { q:"Two years in, rates have risen from 3% to 8%. The loan servicer spots the transfer in the tax records and sends an acceleration letter: the full balance is due in 30 days under the due-on-sale clause, or foreclosure follows. Your move?",
+            opts:[
+              { label:"Ignore it — lenders never actually enforce due-on-sale clauses", ok:false,
+                fb:"Some lenders look the other way while payments arrive — that is a business decision they can revisit at any time, and this letter is the sound of them revisiting it. An acceleration letter ignored becomes a foreclosure filed. The clause was never asleep; it was unenforced, and those are different things." },
+              { label:"Write back that the Garn-St Germain Act protects your transfer and the clause is unenforceable", ok:false,
+                fb:"You have the Act exactly backwards. The Garn-St Germain Act, 12 U.S.C. § 1701j-3(b)(1), is what <em>lets</em> the lender enforce the clause notwithstanding state law. Its protected list, §1701j-3(d), covers transfers on death, to a spouse or children, in divorce, or into the borrower's own living trust — an investor's purchase is not on it. Citing the statute that authorizes your opponent is a bad letter to send." },
+              { label:"Treat it as real: negotiate an assumption or a refinance, or sell the property and pay the loan off inside the window", ok:true,
+                fb:"The only honest reading of the letter. The lender holds a contractual option the federal statute backs; your counters are performance and negotiation — apply to assume the loan formally, refinance it into your own name, or sell and satisfy the balance before the deadline. This is the risk the seller's signed disclosure described on day one, and it is why subject-to paper always plans the exit before it needs one." }
+            ],
+            rule:"The rule: 12 U.S.C. § 1701j-3 — the lender <em>may</em> call the loan on transfer; the §1701j-3(d) exemptions are a closed list and an investor purchase is not on it." }
+        ];
+        var subIdx = 0, subScore = 0, subDone = false;
+        function renderSub(){
+          subDone = false;
+          var c = subCases[subIdx];
+          $("#subTag").textContent = "MOMENT " + (subIdx + 1) + " OF " + subCases.length + " · SCORE " + subScore;
+          $("#subText").textContent = c.q;
+          var box = $("#subBtns");
+          box.innerHTML = "";
+          c.opts.forEach(function(o){
+            var b = document.createElement("button");
+            b.className = "scn-btn";
+            b.textContent = o.label;
+            b.addEventListener("click", function(){ pickSub(o, b); });
+            box.appendChild(b);
+          });
+          $("#subNext").disabled = true;
+          $("#subNext").textContent = subIdx === subCases.length - 1 ? "🔒 See the final ruling — rule on this moment first" : "🔒 Next moment — rule on this moment first";
+          var v = $("#ex14Verdict");
+          v.className = "verdict";
+          v.innerHTML = '<div class="v-head"><span>🏠</span><span>Moment ' + (subIdx + 1) + ' — how do you handle it?</span></div><p>' + c.rule + "</p>";
+        }
+        function pickSub(o, btn){
+          if(subDone) return;
+          subDone = true;
+          if(o.ok) subScore++;
+          $$(".scn-btn", $("#subBtns")).forEach(function(b){
+            b.disabled = true;
+          });
+          subCases[subIdx].opts.forEach(function(oo, i){
+            if(oo.ok) $$(".scn-btn", $("#subBtns"))[i].classList.add("right");
+          });
+          if(!o.ok) btn.classList.add("wrong");
+          $("#subTag").textContent = "MOMENT " + (subIdx + 1) + " OF " + subCases.length + " · SCORE " + subScore;
+          var v = $("#ex14Verdict");
+          v.className = "verdict " + (o.ok ? "good" : "bad");
+          v.innerHTML = '<div class="v-head"><span>' + (o.ok ? "✔" : "✘") + '</span><span>' + (o.ok ? "Handled the way the structure demands" : "That move breaks the deal — or the seller") + '</span></div><p>' + o.fb + "</p><p><strong>" + subCases[subIdx].rule + "</strong></p>";
+          $("#subNext").disabled = false;
+          $("#subNext").textContent = subIdx === subCases.length - 1 ? "See the final ruling →" : "Next moment →";
+        }
+        $("#subNext").addEventListener("click", function(){
+          if(subIdx < subCases.length - 1){ subIdx++; renderSub(); return; }
+          var v = $("#ex14Verdict");
+          v.className = "verdict " + (subScore === subCases.length ? "good" : "");
+          v.innerHTML = '<div class="v-head"><span>⚖</span><span>Deal closed — ' + subScore + ' of ' + subCases.length + ' moments handled right</span></div><p>' +
+            (subScore === subCases.length ? "Every danger in this structure comes from one split: the deed moved, the debt didn't. You papered it with disclosure, protected the seller's credit like it was the collateral — because it is — and read the due-on-sale clause as the live round it is. That is the whole subject-to play, done honestly." :
+             subScore >= 1 ? "The structure to remember: the seller keeps the debt, so disclosure, performance security, and a planned exit are not paperwork niceties — they are the deal. Re-run the moments you missed; each ruling names its rule." :
+             "Start the deal over and watch the pattern: every wrong move treated the seller's name on that loan as somebody else's problem. In a subject-to deal it is the whole problem — and the whole duty.") + "</p>";
+          $("#subNext").disabled = true;
+          $("#subNext").textContent = "✔ Deal closed";
+          $$(".scn-btn", $("#subBtns")).forEach(function(b){ b.disabled = true; });
+        });
+        $("#subReset").addEventListener("click", function(){
+          subIdx = 0; subScore = 0;
+          renderSub();
+        });
+        renderSub();
+
+        /* ---------- EXAMPLE 15 · the syndicate play ---------- */
+        function renderEx15(){
+          var raise = parseInt($("#syRaise").value, 10);
+          var prefPct = parseFloat($("#syPref").value);
+          var lpSplit = parseInt($("#sySplit").value, 10);
+          var cash = parseInt($("#syCash").value, 10);
+          $("#syRaiseVal").textContent = money(raise);
+          $("#syPrefVal").textContent = prefPct + "%";
+          $("#sySplitVal").textContent = lpSplit + "%";
+          $("#syCashVal").textContent = money(cash);
+          var prefDue = Math.round(raise * prefPct / 100);
+          var avail = Math.max(cash, 0);
+          var prefPaid = Math.min(avail, prefDue);
+          var rest = Math.max(avail - prefDue, 0);
+          var lpRest = Math.round(rest * lpSplit / 100);
+          var gpRest = rest - lpRest;
+          var lpTotal = prefPaid + lpRest;
+          var denom = Math.max(avail, 1);
+          $("#sySegPref").style.width = (prefPaid / denom * 100) + "%";
+          $("#sySegLp").style.width = (lpRest / denom * 100) + "%";
+          $("#sySegGp").style.width = (gpRest / denom * 100) + "%";
+          $("#syPrefLbl").textContent = "Investors' pref: " + money(prefPaid) + (prefPaid < prefDue ? " of " + money(prefDue) + " promised" : "");
+          $("#syLpLbl").textContent = "Investors' share of the rest: " + money(lpRest);
+          $("#syGpLbl").textContent = "Sponsor's share: " + money(gpRest);
+          $("#syLpTotal").textContent = money(lpTotal);
+          $("#syGpTotal").textContent = money(gpRest);
+          var v = $("#ex15Verdict"), head, body, cls = "verdict";
+          if(cash <= 0){
+            cls += " bad";
+            head = "✘ NOTHING TO DISTRIBUTE — the waterfall runs dry";
+            body = "The property threw off no cash this year, so the waterfall pays <strong>nobody</strong>: no pref, no split, no promote. The investors' promised pref of <strong>" + money(prefDue) + "</strong> went unpaid — whether it piles up (accrues) for next year or simply dies is decided by the operating agreement, which is why that document, not the pitch deck, is the deal. And notice: the sponsor's duties don't pause in a dry year. Reporting honestly to investors when there is nothing to send them is the job.";
+          } else if(cash < prefDue){
+            cls += " bad";
+            head = "✘ SHORTFALL — investors take everything, and it's still not the whole pref";
+            body = "The year's <strong>" + money(cash) + "</strong> all flows to the investors as pref — and it still leaves them <strong>" + money(prefDue - cash) + "</strong> short of the <strong>" + money(prefDue) + "</strong> they were promised. The sponsor's promote is <strong>$0</strong>: the waterfall pays the sponsor only out of what remains <em>after</em> the pref, and nothing remains. This is the alignment the structure is famous for — in a bad year the sponsor works for free before the investors lose a dime of return. (Their capital is a different question — a bad enough deal can eat principal, which is what the PPM's risk disclosures are for.)";
+          } else {
+            cls += " good";
+            head = "✔ THE WATERFALL RUNS FULL — pref first, then the split";
+            body = "Investors first collect their whole pref: <strong>" + money(prefDue) + "</strong> (" + prefPct + "% on " + money(raise) + "). The remaining <strong>" + money(rest) + "</strong> splits <strong>" + lpSplit + "/" + (100 - lpSplit) + "</strong> — <strong>" + money(lpRest) + "</strong> more to the investors, <strong>" + money(gpRest) + "</strong> to the sponsor as the promote. Investors end with <strong>" + money(lpTotal) + "</strong> on " + money(raise) + " — a " + (lpTotal / raise * 100).toFixed(1) + "% cash return for the year — and the sponsor earns only because the investors were paid in full first. Slide the year's cash below the pref line and watch the sponsor's share vanish: that ordering is the entire ethics of the structure, written as arithmetic.";
+          }
+          v.className = cls;
+          v.innerHTML = '<div class="v-head"><span>' + head.split(" ")[0] + '</span><span>' + head.substring(head.indexOf(" ") + 1) + '</span></div><p>' + body + "</p>";
+        }
+        ["syRaise", "syPref", "sySplit", "syCash"].forEach(function(id){
+          $("#" + id).addEventListener("input", renderEx15);
+        });
+        $("#syGood").addEventListener("click", function(){
+          $("#syCash").value = 120000;
+          renderEx15();
+        });
+        $("#syBad").addEventListener("click", function(){
+          $("#syCash").value = 15000;
+          renderEx15();
+        });
+        renderEx15();
+
+        var solRulings = {
+          post:{ ok:false, head:"✘ THAT POST JUST CHOSE THE OTHER RULE — OR BROKE YOURS",
+            body:"A public “now accepting investors” post is <strong>general solicitation</strong>. Under <strong>Rule 506(b)</strong> general solicitation is flatly prohibited — the offering is private because the marketing is private — so the post can destroy the exemption the entire raise depends on, with rescission exposure to every investor who bought. Public marketing is legal in this world, but only through the other door: <strong>Rule 506(c)</strong>, where every purchaser must be accredited <em>and verified</em>. You cannot run a 506(b) raise with 506(c) marketing." },
+          known:{ ok:true, head:"✔ THE QUIET DOOR — RULE 506(b) AS IT WAS DESIGNED",
+            body:"No advertising, no public posts — investors come from pre-existing relationships, and the offering stays what <strong>Rule 506(b)</strong> requires: private. You may take an unlimited number of <strong>accredited investors</strong>, plus up to 35 non-accredited investors who are sophisticated (with heavier disclosure duties if you do). The sponsor still owes every investor complete honesty — the antifraud rules apply to exempt offerings too — and a Form D goes to the SEC within 15 days of the first sale. Quiet does not mean casual; it means private <em>and</em> papered." },
+          verify:{ ok:true, head:"✔ THE LOUD DOOR — RULE 506(c), ADVERTISE AND VERIFY",
+            body:"Under <strong>Rule 506(c)</strong> you may advertise as loudly as you like — posts, ads, public pages — and the price of the megaphone is verification: <strong>every</strong> purchaser must be an accredited investor, and you must take <strong>reasonable steps to verify</strong> it — reviewing tax forms or brokerage statements, or getting a written confirmation from a CPA, attorney, or registered adviser. A self-checked box (“yes, I'm accredited”) is not verification. One non-accredited buyer, or one unverified one, and the exemption fails for the whole offering." }
+        };
+        $$(".sol-btn").forEach(function(btn){
+          btn.addEventListener("click", function(){
+            var r = solRulings[btn.getAttribute("data-sol")];
+            $$(".sol-btn").forEach(function(b){
+              b.disabled = true;
+              b.classList.remove("right", "wrong");
+            });
+            btn.classList.add(r.ok ? "right" : "wrong");
+            var v = $("#ex15SolVerdict");
+            v.className = "verdict " + (r.ok ? "good" : "bad");
+            v.innerHTML = '<div class="v-head"><span>' + r.head.split(" ")[0] + '</span><span>' + r.head.substring(r.head.indexOf(" ") + 1) + '</span></div><p>' + r.body + '</p><p style="margin-top:10px"><button type="button" class="btn ghost" id="solAgain">Try another door</button></p>';
+            $("#solAgain").addEventListener("click", function(){
+              $$(".sol-btn").forEach(function(b){
+                b.disabled = false;
+                b.classList.remove("right", "wrong");
+              });
+              var vv = $("#ex15SolVerdict");
+              vv.className = "verdict";
+              vv.innerHTML = '<div class="v-head"><span>🚪</span><span>Pick a door</span></div><p>Each route is a real legal path — but each belongs to a different rule, and mixing them up is how offerings get unwound. Tap one and read the ruling.</p>';
+            });
+          });
+        });
+
 
         /* ---------- QUIZ ---------- */
         var answered = 0, score = 0, totalQ = $$(".quiz-q").length;
@@ -2130,7 +2688,7 @@
                 box.className = "verdict " + (score === totalQ ? "good" : "");
                 $("#quizScoreText").textContent = "Final score: " + score + " of " + totalQ;
                 $("#quizScoreNote").textContent =
-                  score === totalQ ? "A clean sweep — every ruling straight from the statute. The sections: §3-311 with §1-308(b), §3-104, §3-409, §§9-203 / 9-310, §3-415(b), and §3-407." :
+                  score === totalQ ? "A clean sweep — every ruling straight from the statute. The sections: §3-311 with §1-308(b), §3-104, §3-409, §§9-203 / 9-310, §3-415(b), §3-407, Act 52 of 2024, 12 U.S.C. §1701j-3, and Rule 506." :
                   score >= 2 ? "Solid judging. Re-run the examples behind the ones that got away — each verdict above names its section." :
                   "The bench suggests a second pass through the examples — every answer above is worked, step by step, in the sections they cite.";
               }
@@ -2141,4 +2699,3 @@
     </script>
   </body>
 </html>
-
